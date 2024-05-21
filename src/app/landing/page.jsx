@@ -5,6 +5,8 @@ import {
 	Hero,
 	Insights,
 } from "/home/sauce/universe_frontend/src/app/landing";
+import Footer from "@/components/ui/MyComponents/Footer";
+
 
 const LandingPage = () => {
 	return (
@@ -14,6 +16,7 @@ const LandingPage = () => {
 				<Hero />
 				<About />
 				<Insights />
+				<Footer />
 			</div>
 	);
 };

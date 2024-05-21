@@ -102,6 +102,16 @@
 		line-height: 2.25rem; /* 112.5% */
 		letter-spacing: -0.002rem;
 	}
+	/* sub-heading-3 */
+	.sub-heading-3 {
+		font-family: Poppins;
+		font-size: 1.5rem;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 2.25rem; /* 150% */
+		letter-spacing: -0.0015rem;
+		text-transform: capitalize;
+	}
 
 	/* body-text */
 	.body-text {
@@ -122,7 +132,16 @@
 		line-height: 1.875rem; /* 187.5% */
 		letter-spacing: -0.001rem;
 	}
-
+	/* body-underlined */
+	.body-underline {
+		font-family: Poppins;
+		font-size: 1.25rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.875rem; /* 150% */
+		letter-spacing: -0.00125rem;
+		text-decoration-line: underline;
+	}
 	/* heading-2 */
 	.heading-2 {
 		font-family: Poppins;
@@ -133,12 +152,15 @@
 		letter-spacing: -0.03rem;
 		text-transform: capitalize;
 	}
-	.about-card-shadow {
-		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	}
 
 	.active {
 		color: hsl(174 100% 26%);
 		@apply underline font-bold;
+	}
+
+	@media (max-width: 450px) {
+		html body {
+			font-size: 10px;
+		}
 	}
 }

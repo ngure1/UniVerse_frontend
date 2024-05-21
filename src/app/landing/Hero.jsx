@@ -1,13 +1,13 @@
-'use client'
-import React from 'react'
-import { Button } from '@/components/ui/button';
-import { Element } from 'react-scroll';
+"use client";
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { Element } from "react-scroll";
 
 const Hero = () => {
-  return (
+	return (
 		<Element
 			name="Home"
-			className="inline-flex items-center gap-[6.875rem] mx-[9.75rem] h-screen"
+			className="inline-flex items-center gap-[6.875rem] lg:mx-[9.75rem] md:mx-[6.75rem] sm:mx-0 h-screen "
 		>
 			<div className="flex flex-col justify-center items-start gap-[1.875rem]">
 				<h1 className="heading-1 w-[40.625rem]">
@@ -29,6 +29,6 @@ const Hero = () => {
 			<div className="w-[35rem] h-[32.875rem] bg-slate-700"></div>
 		</Element>
 	);
-}
+};
 
-export default Hero
+export default Hero;
