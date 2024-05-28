@@ -4,7 +4,7 @@ import {
 	Header,
 	Hero,
 	Insights,
-} from "/home/sauce/universe_frontend/src/app/landing";
+} from "@/app/landing/index";
 import Footer from "@/components/ui/MyComponents/Footer";
 
 
