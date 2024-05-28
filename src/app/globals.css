@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 @layer base {
 	:root {
 		--background: 0 0% 100%;
@@ -79,7 +78,7 @@
 	}
 	body {
 		@apply bg-background text-foreground;
-		font-family: Poppins;
+		/* font-family: Poppins; */
 		box-sizing: border-box;
 		margin: 0;
 		padding: 0;
@@ -94,6 +93,25 @@
 		letter-spacing: -0.004rem;
 	}
 
+	.heading-2 {
+		font-size: 3rem;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 3.25rem; /* 108.333% */
+		letter-spacing: -0.03rem;
+		text-transform: capitalize;
+	}
+
+	/* sub-heading-1 */
+	.sub-heading-1 {
+		font-size: 2.25rem;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 2.75rem; /* 122.222% */
+		letter-spacing: -0.00225rem;
+		text-transform: capitalize;
+	}
+
 	/* sub-heading-2 */
 	.sub-heading-2 {
 		font-size: 2rem;
@@ -104,18 +122,24 @@
 	}
 	/* sub-heading-3 */
 	.sub-heading-3 {
-		font-family: Poppins;
 		font-size: 1.5rem;
 		font-style: normal;
 		font-weight: 500;
-		line-height: 2.25rem; /* 150% */
-		letter-spacing: -0.0015rem;
+		line-height: 1.75rem; /* 116.667% */
+		letter-spacing: -0.015rem;
 		text-transform: capitalize;
+	}
+	/* sub-heading-4 */
+	.sub-heading-4 {
+		font-size: 1.5rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.75rem; /* 116.667% */
+		letter-spacing: -0.0015rem;
 	}
 
 	/* body-text */
 	.body-text {
-		font-family: Poppins;
 		font-size: 1.25rem;
 		font-style: normal;
 		font-weight: 400;
@@ -125,7 +149,6 @@
 
 	/* body-md */
 	.body-md {
-		font-family: Poppins;
 		font-size: 1rem;
 		font-style: normal;
 		font-weight: 400;
@@ -134,7 +157,6 @@
 	}
 	/* body-underlined */
 	.body-underline {
-		font-family: Poppins;
 		font-size: 1.25rem;
 		font-style: normal;
 		font-weight: 400;
@@ -143,24 +165,21 @@
 		text-decoration-line: underline;
 	}
 	/* heading-2 */
-	.heading-2 {
-		font-family: Poppins;
-		font-size: 3rem;
-		font-style: normal;
-		font-weight: 600;
-		line-height: 3.75rem; /* 125% */
-		letter-spacing: -0.03rem;
-		text-transform: capitalize;
+	.muted {
+		color: #5d5d5d;
 	}
 
 	.active {
 		color: hsl(174 100% 26%);
 		@apply underline font-bold;
 	}
-
-	@media (max-width: 450px) {
-		html body {
-			font-size: 10px;
-		}
+	.bg-footer {
+		background-color: #11294d;
+		color: #ffffff;
+	}
+}
+@media (max-width: 640px) {
+	* {
+		font-size: 14px;
 	}
 }

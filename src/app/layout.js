@@ -1,6 +1,10 @@
-import Head from "next/head";
+import { Rubik } from "next/font/google"
 import "./globals.css";
 import { MyThemeProvider } from "@/components/ui/MyComponents/ThemeProvider";
+
+const rubik = Rubik({
+	subsets:["latin"]
+})
 
 export const metadata = {
 	title: "UniVerse",
@@ -10,10 +14,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<Head>
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-			</Head>
-			<body>
+			<body className={rubik.className}>
 				<MyThemeProvider attribute="class" defaultTheme="system">
 					{children}
 				</MyThemeProvider>
