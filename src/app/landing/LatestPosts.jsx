@@ -1,12 +1,15 @@
+"use client"
 import React from "react";
 import PostCard from "./PostCard";
 import Card1 from "@/../public/images/Card1.png";
 import Card2 from "@/../public/images/Card2.png";
 import Card3 from "@/../public/images/Card3.png";
 import Card4 from "@/../public/images/Card4.png";
-
+import { Element } from "react-scroll";
 const LatestPosts = () => {
 	return (
+		<Element name="latestPosts">
+
 		<div className="flex flex-col py-[1.5rem] items-center justify-center gap-[2.25rem] w-full">
 			<div className="flex flex-col justify-center items-center gap-[0.25rem]">
 				<h2 className="heading-2">Latest Posts</h2>
@@ -43,6 +46,7 @@ const LatestPosts = () => {
 				</div>
 			</div>
 		</div>
+		</Element>
 	);
 };
 

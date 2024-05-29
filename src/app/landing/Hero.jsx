@@ -7,7 +7,7 @@ const Hero = () => {
   return (
     <Element
       name="Home"
-      className="relative flex flex-col justify-center items-center w-[90rem] h-[44.25rem] py-[3.25rem] px-0 gap-[3.25rem] shrink-0"
+      className="relative flex flex-col justify-center items-center w-full h-[44.25rem] py-[3.25rem] px-0 gap-[3.25rem] shrink-0"
     >
       
         <video
@@ -16,16 +16,16 @@ const Hero = () => {
           autoPlay
           muted
           loop
-          className="absolute inset-0 w-[90rem] h-[44.25rem] object-cover"
+          className="absolute inset-0 w-full h-[44.25rem] object-cover"
         >
           Your browser does not support the video tag.
         </video>
         <div className="absolute heading-1 text-white text-center">
-          <h1 className="heading-1 w-[50.625rem] text-center self-stretch text-[#00BD9D] font-nico-moji">
+          <h1 className="heading-1  text-center self-stretch text-[#00BD9D] font-nico-moji">
             UniVerse
           </h1>
 
-          <div className="w-[50rem] text-center">
+          <div className="text-center">
             <p className="sub-heading-2">Welcome to JKUAT alumni connect.</p>
             <p className="sub-heading-2">
               Your hub for networking collaboration and career growth.
