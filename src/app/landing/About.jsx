@@ -4,34 +4,36 @@ import { Element } from "react-scroll";
 
 const About = () => {
 	return (
-		<Element className="h-screen pt-[9rem]" name="About">
-			<h2 className="heading-2 text-center">Why Join Us</h2>
-			<p>
+		<Element className="flex flex-col justify-center items-center py-[1.5rem] px-0 gap-[2.25rem]" name="About">
+			<div className="flex flex-col justify-center items-center gap-[0.25rem]">
+			<h2 className=" text-[#222] heading-2 text-center">Why Join Us</h2>
+			<p className="text-[#5D5D5D] text-center body-text">
 				Bridging the gap between fellow alumni and current students in the
 				computing department
 			</p>
-			<div className="flex pt-[4rem] px-[5rem] justify-between">
-				<div className="flex flex-col px-[1rem] py-[1.125rem] flex-com items-center gap-[1rem] self-stretch rounded-[0.375rem] bg-white drop-shadow-xl">
+			</div>
+			<div className="flex w-[90rem] py-0 px-[2.5rem] justify-center items-center gap-[4.75rem]">
+				<div className="w-[31.5rem] flex flex-col px-[2.125rem] py-[1.125rem] items-center gap-[1rem] rounded-[0.5rem] border border-solid border-[#00B595] bg-white shadow-custom">
 					<div className="flex flex-col gap-[0.5rem] self-stretch items-center">
-						<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
+						<svg xmlns="http://www.w3.org/2000/svg" width="3.125rem" height="3.125rem" viewBox="0 0 50 50" fill="none">
 							<path d="M12.2917 50C8.95833 50 5.83333 48.75 3.54167 46.4584C1.25 44.1667 0 41.0417 0 37.7084C0 34.375 1.25 31.25 3.54167 28.9584L11.4583 21.0417L15.625 25.2084L21.4583 19.375L24.375 22.2917L18.5417 28.125L21.875 31.4584L27.7083 25.625L30.625 28.5417L24.7917 34.375L28.9583 38.5417L21.25 46.4584C18.75 48.5417 15.625 50 12.2917 50ZM11.4583 26.875L6.66667 31.6667C5 33.3334 4.16667 35.4167 4.16667 37.5C4.16667 39.5834 5 41.6667 6.66667 43.3334C9.79167 46.4584 15.2083 46.4584 18.3333 43.3334L23.125 38.3334L11.4583 26.875ZM38.5417 28.9584L21.0417 11.4584L28.75 3.5417C31.0417 1.25003 34.375 3.05176e-05 37.5 3.05176e-05C40.625 3.05176e-05 43.75 1.25003 46.25 3.5417C48.75 5.83336 50 8.95836 50 12.2917C50 15.625 48.75 18.75 46.4583 21.0417L38.5417 28.9584ZM27.0833 11.4584L38.5417 22.9167L43.3333 18.125C45 16.4584 45.8333 14.5834 45.8333 12.2917C45.8333 10.2084 45 8.12503 43.3333 6.45836C40.2083 3.33336 35 3.33336 31.6667 6.45836L27.0833 11.4584Z" fill="#F45D01" />
 						</svg>
 						<p className="sub-heading-2">Share and Engage</p>
 					</div>
-					<p className="body-md text-center w-[18.75rem]">
+					<p className="text-[#5D5D5D] body-text text-center">
 						Post insights, experiences, and multimedia content.
 					</p>
-					<p>
-						<a href="">Share now </a>
+					<p className="text-[#5D5D5D] body-underline">
+						<a href="./login">Share now  &#x3E; </a>
 					</p>
 				</div>
 
-				<div className="flex flex-col px-[1rem] py-[1.125rem] flex-com items-center gap-[1rem] self-stretch rounded-[0.375rem] bg-white drop-shadow-xl">
+				<div className="flex flex-col w-[31.5rem] px-[2.125rem] py-[1.125rem] items-center gap-[1rem] rounded-[0.5rem] border border-solid border-[#00B595] bg-white shadow-custom">
 					<div className="flex flex-col gap-[0.5rem] self-stretch items-center">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
-							width="46"
-							height="50"
+							width="2.8rem"
+							height="3.125rem"
 							viewBox="0 0 46 50"
 							fill="none"
 						>
@@ -58,19 +60,19 @@ const About = () => {
 						</svg>
 						<p className="sub-heading-2">Career Opportunities</p>
 					</div>
-					<p className="body-md text-center w-[18.75rem]">
+					<p className="text-[#5D5D5D] text-center body-text">
 						Explore job postings curated specifically for you.
 					</p>
-					<p>
-						<a href="">Explore now</a>
+					<p className="text-[#5D5D5D] body-underline">
+						<a href="./login">Explore now  &#x3E;</a>
 					</p>
 				</div>
-				<div className="flex flex-col px-[1rem] py-[1.125rem] flex-com items-center gap-[1rem] self-stretch rounded-[0.375rem] bg-white drop-shadow-xl">
+				<div className="flex flex-col w-[31.5rem] px-[2.125rem] py-[1.125rem] items-center gap-[1rem] rounded-[0.5rem] border border-solid border-[#00B595] bg-white shadow-custom">
 					<div className="flex flex-col gap-[0.5rem] self-stretch items-center">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
-							width="52"
-							height="53"
+							width="3rem"
+							height="3rem"
 							viewBox="0 0 52 53"
 							fill="none"
 						>
@@ -99,13 +101,13 @@ const About = () => {
 								stroke-miterlimit="10"
 							/>
 						</svg>
-						<p className="sub-heading-2">Give Back</p>
+						<p className="sub-heading-2">Support</p>
 					</div>
-					<p className="body-md text-center w-[18.75rem]">
+					<p className="text-[#5D5D5D] body-text text-center">
 						Contribute to departmental initiatives.
 					</p>
-					<p>
-						<a href="">Join now</a>
+					<p className="text-[#5D5D5D] body-underline" >
+						<a href="./login">Join now  &#x3E;</a>
 					</p>
 				</div>
 			</div>
