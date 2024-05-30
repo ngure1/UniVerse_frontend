@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-scroll";
 import { Button } from "@/components/ui/button";
 import HeaderDropdown from "@/components/ui/MyComponents/HeaderDropdown";
+import { MainMenu } from "@/components/ui/MyComponents/MainMenu";
 import { ButtonsAlertDialog } from "@/components/ui/MyComponents/ButtonsAlertDialog";
 
 const Header = () => {
@@ -82,7 +83,7 @@ const Header = () => {
 
 				</ButtonsAlertDialog>
 				</div>
-				<HeaderDropdown className="absolute bottom-[0.8125rem] "/>
+				<MainMenu/>
 			</nav>
 		</header>
 	);
