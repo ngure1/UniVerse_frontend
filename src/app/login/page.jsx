@@ -28,7 +28,7 @@ export default function Login(){
     }
     
     return (
-        <div className="inline-flex pt-[14.0625rem] pr-[0.625rem] pb-[0.01rem] pl-[0.625rem] flex-col justify-end items-center gap-[18.375rem] ">
+        <div className="inline-flex w-full pt-[14.0625rem] pr-[0.625rem] pb-[0.01rem] pl-[0.625rem] flex-col justify-end items-center gap-[18.375rem] ">
             <div className="flex flex-col items-start gap-[2.375rem]">
                 <div className="flex flex-col items-center gap-[1.5rem]">
                 <p className = "text-black sub-heading-3">LOGIN</p>
