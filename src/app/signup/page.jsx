@@ -61,7 +61,7 @@ export default function SignUp(){
     }
     
     return(
-        <div className="inline-flex flex-col pt-[9.09375rem] pr-[0.625rem] pb-[0.01rem] pl-[0.625rem] justify-end items-center gap-[7.71875rem]">
+        <div className="inline-flex w-full flex-col pt-[9.09375rem] pr-[0.625rem] pb-[0.01rem] pl-[0.625rem] justify-end items-center gap-[7.71875rem]">
             
         <div className="flex flex-col justify-center items-start w-[28.75rem] p-[1.25rem] gap-[2.25rem]">
            <div className="flex flex-col justify-center items-center gap-[2rem] self-stretch">
