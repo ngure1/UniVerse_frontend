@@ -1,6 +1,7 @@
 import { Rubik } from "next/font/google"
 import "./globals.css";
 import { MyThemeProvider } from "@/components/ui/MyComponents/ThemeProvider";
+import { MainMenu } from "@/components/ui/MyComponents/MainMenu";
 
 const rubik = Rubik({
 	subsets:["latin"]
@@ -18,7 +19,9 @@ export default function RootLayout({ children }) {
 				<MyThemeProvider attribute="class" defaultTheme="system">
 					{children}
 				</MyThemeProvider>
+				<MainMenu />
 			</body>
+
 		</html>
 	);
 }
