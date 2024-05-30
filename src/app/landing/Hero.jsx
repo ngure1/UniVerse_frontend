@@ -2,6 +2,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Element } from "react-scroll";
+import {ButtonsAlertDialog} from "@/components/ui/MyComponents/ButtonsAlertDialog";
 
 const Hero = () => {
   return (
@@ -16,7 +17,7 @@ const Hero = () => {
           autoPlay
           muted
           loop
-          className="absolute inset-0 w-full h-[44.25rem] object-cover"
+          className="absolute inset-0 w-full h-screen object-cover"
         >
           Your browser does not support the video tag.
         </video>
@@ -32,7 +33,8 @@ const Hero = () => {
             </p>
           </div>
         </div>
-        <div className="flex gap-[3.125rem] absolute bottom-[10rem]">
+        
+        <ButtonsAlertDialog className="flex gap-[3.125rem] absolute bottom-[10rem]">
           <Button
             variant="outline"
             className="flex py-[0.625rem] px-[0.75rem] justify-center items-center gap-[0.5rem] rounded-[0.625rem] border border-solid border-radius-[0.625rem] border-primary-subtle-bg bg-transparent "
@@ -44,7 +46,7 @@ const Hero = () => {
             />
             <span className="text-white body-text normal-case">Continue with Google</span>
           </Button>
-        </div>
+        </ButtonsAlertDialog>
     </Element>
   );
 };

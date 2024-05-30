@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-scroll";
 import { Button } from "@/components/ui/button";
 import HeaderDropdown from "@/components/ui/MyComponents/HeaderDropdown";
+import { ButtonsAlertDialog } from "@/components/ui/MyComponents/ButtonsAlertDialog";
 
 const Header = () => {
 	return (
@@ -73,8 +74,13 @@ const Header = () => {
 					
 				</div>
 				<div className="flex justify-end items-center gap-[1.8125rem]">
-				<Button className="bg-white flex py-[0.375rem] px-[1.75rem] justify-center items-center gap[0.625rem] rounded-[0.25rem] border border-solid border-[#00AB8B] max-sm:hidden"><span className="text-black primary-btn-text">Login</span></Button>
+				<ButtonsAlertDialog>
+				<Button className="bg-white flex py-[0.375rem] px-[1.75rem] justify-center items-center gap[0.625rem] rounded-[0.25rem] border border-solid border-[#00AB8B] max-sm:hidden"><span className="text-black primary-btn-text">Login</span></Button>	
+				</ButtonsAlertDialog>
+				<ButtonsAlertDialog>
 				<Button className="flex py-[0.375rem] px-[1.75rem] justify-center items-center gap[0.625rem] rounded-[0.25rem] border border-solid border-[#00AB8B] max-sm:hidden"><span className="primary-btn-text">Signup</span></Button>
+
+				</ButtonsAlertDialog>
 				</div>
 				<HeaderDropdown className="absolute bottom-[0.8125rem] "/>
 			</nav>
