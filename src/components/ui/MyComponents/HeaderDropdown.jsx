@@ -12,6 +12,32 @@ import { MenuIcon } from "lucide-react";
 import { Link } from "react-scroll";
 
 const HeaderDropdown = ({ className }) => {
+	const menuLinks = [
+		{
+			to: "Home",
+			text: "Home",
+		},
+		{
+			to: "whyJoinUs",
+			text: "Why Join Us",
+		},
+		{
+			to: "community",
+			text: "Community",
+		},
+		{
+			to: "latestPosts",
+			text: "Latest Posts",
+		},
+		{
+			to: "theTeam",
+			text: "The Team",
+		},
+		{
+			to: "partners",
+			text: "Partners",
+		},
+	];
 	return (
 		<div className={`${className}`}>
 			<DropdownMenu>
@@ -21,81 +47,28 @@ const HeaderDropdown = ({ className }) => {
 					</div>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent>
-					<DropdownMenuItem>
-						<Link
-							activeClass="active"
-							to="Home"
-							spy={true}
-							smooth={true}
-							className="cursor-pointer body-md"
-							duration={600}>
-							Home
-						</Link>
-					</DropdownMenuItem>
-					<DropdownMenuItem>
-						<Link
-							activeClass="active"
-							to="whyJoinUs"
-							spy={true}
-							smooth={true}
-							className="cursor-pointer body-md"
-							duration={600}>
-							Why Join Us
-						</Link>
-					</DropdownMenuItem>
-					<DropdownMenuItem>
-						<Link
-							activeClass="active"
-							to="community"
-							spy={true}
-							smooth={true}
-							className="cursor-pointer body-md"
-							duration={600}>
-							Community
-						</Link>
-					</DropdownMenuItem>
-					<DropdownMenuItem>
-						<Link
-							activeClass="active"
-							to="latestPosts"
-							spy={true}
-							smooth={true}
-							className="cursor-pointer body-md"
-							duration={600}>
-							Latest posts
-						</Link>
-					</DropdownMenuItem>
-					<DropdownMenuItem>
-						<Link
-							activeClass="active"
-							to="theTeam"
-							spy={true}
-							smooth={true}
-							className="cursor-pointer body-md"
-							duration={600}>
-							The Team
-						</Link>
-					</DropdownMenuItem>
-					<DropdownMenuItem>
-						<Link
-							activeClass="active"
-							to="partners"
-							spy={true}
-							smooth={true}
-							className="cursor-pointer body-md"
-							duration={600}>
-							Partners
-						</Link>
-					</DropdownMenuItem>
+					{menuLinks.map((link, index) => {
+						return (
+							<DropdownMenuItem key={index}>
+								<Link
+									to={link.to}
+									spy={true}
+									smooth={true}
+									className="cursor-pointer body-md"
+									duration={600}>
+									{link.text}
+								</Link>
+							</DropdownMenuItem>
+						);
+					})}
 					<DropdownMenuSeparator />
-					<DropdownMenuLabel>Actions</DropdownMenuLabel>
 					<DropdownMenuItem>
-						<ButtonsAlertDialog>Login</ButtonsAlertDialog>
+						<ButtonsAlertDialog variant="outline">
+							Login
+						</ButtonsAlertDialog>
 					</DropdownMenuItem>
 					<DropdownMenuItem>
-						<ButtonsAlertDialog>
-							<button>SignUp</button>
-						</ButtonsAlertDialog>
+						<ButtonsAlertDialog>Signup</ButtonsAlertDialog>
 					</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>

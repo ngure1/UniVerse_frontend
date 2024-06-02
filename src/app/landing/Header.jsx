@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
 import { Link } from "react-scroll";
-import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
 import HeaderDropdown from "@/components/ui/MyComponents/HeaderDropdown";
 import { ButtonsAlertDialog } from "@/components/ui/MyComponents/ButtonsAlertDialog";
 import Image from "next/image";
@@ -10,7 +11,7 @@ import Logo from "@/../public/images/logo.png";
 
 const Header = () => {
 	return (
-		<header className="flex justify-between items-center w-full h-[7.25rem] py-[1.75rem] px-[1.25rem] shrink-0 fixed bg-white z-20 shadow-md pb-3 ">
+		<header className="flex justify-between items-center w-full h-[7.25rem] py-[1.75rem] px-[1.25rem] shrink-0 fixed bg-white dark:bg-zinc-500 z-20 shadow-md pb-3 ">
 			<NextLink href="">
 				<Image
 					src={Logo}
@@ -75,17 +76,9 @@ const Header = () => {
 					Partners
 				</Link>
 			</nav>
-			<div className="flex justify-end items-center gap-[1.8125rem]">
-				<ButtonsAlertDialog>
-					<Button className="bg-white flex py-[0.375rem] px-[1.75rem] justify-center items-center gap[0.625rem] rounded-[0.25rem] border border-solid border-[#00AB8B] max-sm:hidden">
-						<span className="primary-btn-text">Login</span>
-					</Button>
-				</ButtonsAlertDialog>
-				<ButtonsAlertDialog>
-					<Button className="flex py-[0.375rem] px-[1.75rem] justify-center items-center gap[0.625rem] rounded-[0.25rem] border border-solid border-[#00AB8B] max-sm:hidden">
-						<span className="primary-btn-text">Signup</span>
-					</Button>
-				</ButtonsAlertDialog>
+			<div className="flex justify-end items-center gap-[1.8125rem] max-sm:hidden">
+				<ButtonsAlertDialog variant="outline">Login</ButtonsAlertDialog>
+				<ButtonsAlertDialog>Signup</ButtonsAlertDialog>
 			</div>
 			<HeaderDropdown className="sm:hidden" />
 		</header>

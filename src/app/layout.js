@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
 			<body className={rubik.className}>
 				<MyThemeProvider
 					attribute="class"
-					defaultTheme="system">
+					defaultTheme="light">
 					{children}
 				</MyThemeProvider>
 			</body>

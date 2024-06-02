@@ -21,9 +21,8 @@ const TeamCard = ({
 					/>
 				</div>
 				<div
-					className="flex items-start justify-center gap-[0.75rem] py-[1.625rem] w-[8.2375rem] h-[8.2375rem] rounded-[6.25rem] bg-white absolute top-[6.25rem] left-[0.325rem]
-                "
-				>
+					className="flex items-start justify-center gap-[0.75rem] py-[1.625rem] w-[8.2375rem] h-[8.2375rem] rounded-[6.25rem] bg-white dark:bg-black absolute top-[6.25rem] left-[0.325rem]
+                ">
 					<Link href={linkedInLink}>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -31,8 +30,7 @@ const TeamCard = ({
 							height="28"
 							viewBox="0 0 29 28"
 							fill="none"
-							className="hover:w-8 hover:h-7 transition-width transition-height duration-200"
-						>
+							className="hover:w-8 hover:h-7 transition-width transition-height duration-200">
 							<path
 								fillRule="evenodd"
 								clipRule="evenodd"
@@ -48,8 +46,7 @@ const TeamCard = ({
 							height="28"
 							viewBox="0 0 29 28"
 							fill="none"
-							className="hover:w-8 hover:h-7 transition-width transition-height duration-200"
-						>
+							className="hover:w-8 hover:h-7 transition-width transition-height duration-200">
 							<path
 								d="M14.4497 0C6.71818 0 0.449707 6.26847 0.449707 14C0.449707 21.7324 6.71818 28 14.4497 28C22.1812 28 28.4497 21.7324 28.4497 14C28.4496 6.26847 22.1811 0 14.4497 0ZM18.3714 24.6653C18.2908 23.5698 18.2008 22.2127 18.1955 21.6632C18.1605 21.2414 18.1149 20.1687 17.0965 19.4836C21.1398 19.145 23.0639 16.9102 23.2023 13.9571C23.3178 12.2754 22.6492 10.7966 21.4619 9.60316C21.5223 8.32657 21.4234 6.81363 21.3412 6.14872C20.4295 5.88623 18.3032 7.00884 17.709 7.48922C16.456 7.00269 13.3892 6.83209 11.5254 7.48922C10.2041 6.55999 8.70006 5.98599 7.8802 6.14612C7.1233 7.82351 7.60983 9.40901 7.75766 9.59797C6.78287 10.4888 5.42314 11.5851 5.79241 13.882C6.38476 17.2498 8.75426 19.0664 12.5692 19.5108C11.7555 19.6771 11.6181 20.2843 11.5498 20.5477C8.98782 21.6047 8.25553 19.895 7.93172 19.4496C6.85639 18.1187 5.89121 18.5046 5.83172 18.5255C5.77395 18.5465 5.73022 18.6305 5.73637 18.6708C5.79058 18.9578 6.37601 19.2492 6.40485 19.2727C7.19846 19.8642 7.49248 20.9326 7.67356 21.2371C8.81193 23.1087 11.458 22.3326 11.4833 22.3484C11.4851 22.512 11.465 23.8893 11.4492 24.9612C6.62457 23.6433 3.07468 19.2421 3.07468 14C3.07468 7.71749 8.1672 2.62507 14.4496 2.62507C20.732 2.62507 25.8246 7.71749 25.8246 14C25.8246 18.9026 22.7184 23.0666 18.3714 24.6653Z"
 								fill="#2B414D"

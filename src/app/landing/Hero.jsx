@@ -33,20 +33,16 @@ const Hero = () => {
 				</div>
 			</div>
 
-			<ButtonsAlertDialog className="z-[1]">
-				<Button
-					variant="outline"
-					size="lg"
-					className="flex justify-center items-center gap-[0.5rem] rounded-[0.625rem] bg-transparent ">
-					<img
-						src="./images/googleLogo.png"
-						alt="Google Logo"
-						className="w-[1.875rem] h-[1.875rem]"
-					/>
-					<span className="text-white body-text">
-						Continue with Google
-					</span>
-				</Button>
+			<ButtonsAlertDialog
+				className="z-[1] flex justify-center items-center gap-[0.5rem] bg-transparent"
+				variant="outline"
+				size="lg">
+				<img
+					src="./images/googleLogo.png"
+					alt="Google Logo"
+					className="w-[1.875rem] h-[1.875rem]"
+				/>
+				<span className="muted">Continue with Google</span>
 			</ButtonsAlertDialog>
 		</Element>
 	);
