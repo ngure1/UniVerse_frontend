@@ -23,7 +23,7 @@ const Community = () => {
 						<div className="flex flex-col items-start">
 							<p className="body-text text-center">Jane Doe</p>
 							<p className="body-text text-center muted">
-								Alumni class of '05
+								Alumni class of &#39;05
 							</p>
 						</div>
 

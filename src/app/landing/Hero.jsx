@@ -1,8 +1,9 @@
 "use client";
 import React from "react";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import { Element } from "react-scroll";
 import { ButtonsAlertDialog } from "@/components/ui/MyComponents/ButtonsAlertDialog";
+import googleImage from "@/../public/images/googleLogo.png";
 
 const Hero = () => {
 	return (
@@ -37,8 +38,8 @@ const Hero = () => {
 				className="z-[1] flex justify-center items-center gap-[0.5rem] bg-transparent"
 				variant="outline"
 				size="lg">
-				<img
-					src="./images/googleLogo.png"
+				<Image
+					src={googleImage}
 					alt="Google Logo"
 					className="w-[1.875rem] h-[1.875rem]"
 				/>
