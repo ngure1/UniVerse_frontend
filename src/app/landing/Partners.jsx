@@ -10,15 +10,21 @@ const Partners = () => {
 	return (
 		<Element
 			name="partners"
-		>
+			className="py-[8.75rem]">
 			<div className="flex flex-col px-2.25rem items-center justify-center">
 				<p className="sub-heading-1 muted">In partnership with</p>
 				<div className="flex items-center justify-center gap-[4.75rem] px-[2.5rem]">
 					<Link href={"https://jhubafrica.com/"}>
-						<Image alt="Jhub logo" src={Jhub} />
+						<Image
+							alt="Jhub logo"
+							src={Jhub}
+						/>
 					</Link>
 					<Link href={"https://www.jkuat.ac.ke/"}>
-						<Image alt="Jkuat logo" src={Jkuat} />
+						<Image
+							alt="Jkuat logo"
+							src={Jkuat}
+						/>
 					</Link>
 				</div>
 			</div>
