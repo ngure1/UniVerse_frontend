@@ -1,50 +1,40 @@
-"use client"
-import React from "react"
+"use client";
+import React from "react";
+import { useState, useEffect } from "react";
 import {
-    Drawer,
-    DrawerClose,
-    DrawerContent,
-    DrawerDescription,
-    DrawerFooter,
-    DrawerHeader,
-    DrawerTitle,
-    DrawerTrigger,
-  } from "@/components/ui/drawer"
-import { useMediaQuery } from "@/hooks/use-media-query"
-import { MenuIcon } from "lucide-react"
+	Drawer,
+	DrawerContent,
+	DrawerDescription,
+	DrawerTitle,
+	DrawerTrigger,
+} from "@/components/ui/drawer";
+import { Button } from "../button";
 
-  
-  export const MainMenu = () => {
-    const isDesktop = useMediaQuery("min-width:768px")
-    return isDesktop ? (<div>Desktop</div>):( 
-    <div>
-        <Drawer direction="right">
-            <DrawerTrigger>
-                <MenuIcon/>
-                
-            </DrawerTrigger>
-            <DrawerContent>
-                Our Main-Menu
-            </DrawerContent>
-        </Drawer>
-    </div>) 
-{/*         
-    //     <Drawer>
-    //     <DrawerTrigger>Open</DrawerTrigger>
-    //     <DrawerContent>
-    //       <DrawerHeader>
-    //         <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-    //         <DrawerDescription>This action cannot be undone.</DrawerDescription>
-    //       </DrawerHeader>
-    //       <DrawerFooter>
-    //         <Button>Submit</Button>
-    //         <DrawerClose>
-    //           <Button variant="outline">Cancel</Button>
-    //         </DrawerClose>
-    //       </DrawerFooter>
-    //     </DrawerContent>
-    //   </Drawer> */}
-      
-    
-  }
-  
+const MainMenu = () => {
+	const [isClient, setIsClient] = useState(false);
+
+	useEffect(() => {
+		setIsClient(true);
+	}, []);
+
+	if (!isClient) {
+		// Return the same content that was server-rendered here
+		return null; // Or return a loading spinner, placeholder, etc.
+	}
+
+	return (
+		// Your original MainMenu component code here
+		<Drawer>
+			<DrawerTrigger>Open</DrawerTrigger>
+			<DrawerContent>
+				<DrawerTitle>Are you absolutely sure?</DrawerTitle>
+				<DrawerDescription>
+					This action cannot be undone.
+				</DrawerDescription>
+				<Button>Action</Button>
+			</DrawerContent>
+		</Drawer>
+	);
+};
+
+export default MainMenu;

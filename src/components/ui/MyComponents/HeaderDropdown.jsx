@@ -1,45 +1,106 @@
-import React from 'react'
+import React from "react";
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-  } from "@/components/ui/dropdown-menu"
-  import { Button } from "@/components/ui/button";
-  import { Link } from "react-scroll";
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ButtonsAlertDialog } from "./ButtonsAlertDialog";
+import { MenuIcon } from "lucide-react";
+import { Link } from "react-scroll";
 
+const HeaderDropdown = ({ className }) => {
+	return (
+		<div className={`${className}`}>
+			<DropdownMenu>
+				<DropdownMenuTrigger>
+					<div>
+						<MenuIcon />
+					</div>
+				</DropdownMenuTrigger>
+				<DropdownMenuContent>
+					<DropdownMenuItem>
+						<Link
+							activeClass="active"
+							to="Home"
+							spy={true}
+							smooth={true}
+							className="cursor-pointer body-md"
+							duration={600}>
+							Home
+						</Link>
+					</DropdownMenuItem>
+					<DropdownMenuItem>
+						<Link
+							activeClass="active"
+							to="whyJoinUs"
+							spy={true}
+							smooth={true}
+							className="cursor-pointer body-md"
+							duration={600}>
+							Why Join Us
+						</Link>
+					</DropdownMenuItem>
+					<DropdownMenuItem>
+						<Link
+							activeClass="active"
+							to="community"
+							spy={true}
+							smooth={true}
+							className="cursor-pointer body-md"
+							duration={600}>
+							Community
+						</Link>
+					</DropdownMenuItem>
+					<DropdownMenuItem>
+						<Link
+							activeClass="active"
+							to="latestPosts"
+							spy={true}
+							smooth={true}
+							className="cursor-pointer body-md"
+							duration={600}>
+							Latest posts
+						</Link>
+					</DropdownMenuItem>
+					<DropdownMenuItem>
+						<Link
+							activeClass="active"
+							to="theTeam"
+							spy={true}
+							smooth={true}
+							className="cursor-pointer body-md"
+							duration={600}>
+							The Team
+						</Link>
+					</DropdownMenuItem>
+					<DropdownMenuItem>
+						<Link
+							activeClass="active"
+							to="partners"
+							spy={true}
+							smooth={true}
+							className="cursor-pointer body-md"
+							duration={600}>
+							Partners
+						</Link>
+					</DropdownMenuItem>
+					<DropdownMenuSeparator />
+					<DropdownMenuLabel>Actions</DropdownMenuLabel>
+					<DropdownMenuItem>
+						<ButtonsAlertDialog>Login</ButtonsAlertDialog>
+					</DropdownMenuItem>
+					<DropdownMenuItem>
+						<ButtonsAlertDialog>
+							<button>SignUp</button>
+						</ButtonsAlertDialog>
+					</DropdownMenuItem>
+				</DropdownMenuContent>
+			</DropdownMenu>
+		</div>
+	);
+};
 
-
-const HeaderDropdown = (
-    className
-) => {
-  return (
-    <div className={`${className}`}>
-        <DropdownMenu>
-                <DropdownMenuTrigger>
-                    <div>
-                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 12.85L1 12.85L1 14.15L14 14.15L14 12.85ZM14 8.85002L1 8.85002L1 10.15L14 10.15L14 8.85002ZM1 4.85003L14 4.85003L14 6.15003L1 6.15002L1 4.85003ZM14 0.850025L1 0.850025L1 2.15002L14 2.15002L14 0.850025Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-                    </div>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                    <DropdownMenuItem>Home</DropdownMenuItem>
-                    <DropdownMenuItem>Why join us</DropdownMenuItem>
-                    <DropdownMenuItem>Our community</DropdownMenuItem>
-                    <DropdownMenuItem>Latest Posts</DropdownMenuItem>
-                    <DropdownMenuItem>The Team</DropdownMenuItem>
-                    <DropdownMenuItem>Partners</DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuItem>Login</DropdownMenuItem>
-                    <DropdownMenuItem>Signup</DropdownMenuItem>
-                </DropdownMenuContent>
-        </DropdownMenu>
-    </div>
- 
-
-  )
-}
-
-export default HeaderDropdown
+export default HeaderDropdown;
