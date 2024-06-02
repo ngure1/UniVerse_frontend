@@ -1,54 +1,52 @@
 "use client";
 import React from "react";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import { Element } from "react-scroll";
-import {ButtonsAlertDialog} from "@/components/ui/MyComponents/ButtonsAlertDialog";
+import { ButtonsAlertDialog } from "@/components/ui/MyComponents/ButtonsAlertDialog";
+import googleImage from "@/../public/images/googleLogo.png";
 
 const Hero = () => {
-  return (
-    <Element
-      name="Home"
-      className="relative flex flex-col justify-center items-center w-full h-[44.25rem] py-[3.25rem] px-0 gap-[3.25rem] shrink-0"
-    >
-      
-        <video
-          src="./videoBg.mp4"
-          type="video/mp4"
-          autoPlay
-          muted
-          loop
-          className="absolute inset-0 w-full h-screen object-cover"
-        >
-          Your browser does not support the video tag.
-        </video>
-        <div className="absolute heading-1 text-white text-center">
-          <h1 className="heading-1  text-center self-stretch text-[#00BD9D] font-nico-moji">
-            UniVerse
-          </h1>
+	return (
+		<Element
+			name="Home"
+			className="relative flex flex-col justify-center items-center w-full h-[47.25rem] py-[3.25rem] pt-[8.75rem] px-0 gap-[3.25rem] border border-black shrink-0">
+			<video
+				src="./videoBg.mp4"
+				type="video/mp4"
+				autoPlay
+				muted
+				loop
+				className="absolute inset-0 w-full h-full object-cover">
+				Your browser does not support the video tag.
+			</video>
+			<div className="z-[1] heading-1 text-white text-center">
+				<h1 className="heading-1  text-center self-stretch text-[#00BD9D] font-nico-moji">
+					UniVerse
+				</h1>
 
-          <div className="text-center">
-            <p className="sub-heading-2">Welcome to JKUAT alumni connect.</p>
-            <p className="sub-heading-2">
-              Your hub for networking collaboration and career growth.
-            </p>
-          </div>
-        </div>
-        
-        <ButtonsAlertDialog className="flex gap-[3.125rem] absolute bottom-[10rem]">
-          <Button
-            variant="outline"
-            className="flex py-[0.625rem] px-[0.75rem] justify-center items-center gap-[0.5rem] rounded-[0.625rem] border border-solid border-radius-[0.625rem] border-primary-subtle-bg bg-transparent "
-          >
-            <img
-              src="./images/googleLogo.png"
-              alt="Google Logo"
-              className="w-[1.875rem] h-[1.875rem]"
-            />
-            <span className="text-white body-text normal-case">Continue with Google</span>
-          </Button>
-        </ButtonsAlertDialog>
-    </Element>
-  );
+				<div className="text-center">
+					<p className="sub-heading-2">
+						Welcome to JKUAT alumni connect.
+					</p>
+					<p className="sub-heading-2">
+						Your hub for networking collaboration and career growth.
+					</p>
+				</div>
+			</div>
+
+			<ButtonsAlertDialog
+				className="z-[1] flex justify-center items-center gap-[0.5rem] bg-transparent"
+				variant="outline"
+				size="lg">
+				<Image
+					src={googleImage}
+					alt="Google Logo"
+					className="w-[1.875rem] h-[1.875rem]"
+				/>
+				<span className="muted">Continue with Google</span>
+			</ButtonsAlertDialog>
+		</Element>
+	);
 };
 
 export default Hero;

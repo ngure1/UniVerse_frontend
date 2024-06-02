@@ -2,8 +2,6 @@ import { createApi } from "@reduxjs/toolkit/query";
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { setAuth, logout } from "./authSlice";
 import { Mutex } from "async-mutex";
-import { tokenReceived, loggedOut } from "./authSlice";
-import { Mutex } from "async-mutex";
 
 // defining the base url
 const baseUrl = "http://localhost:8000";
