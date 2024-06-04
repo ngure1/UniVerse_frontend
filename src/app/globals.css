@@ -182,6 +182,12 @@
 		background-color: #11294d;
 		color: #ffffff;
 	}
+	.required:after {
+		content: " *";
+		color: red;
+		font-size: 1.4rem;
+		font-weight: normal;
+	}
 }
 @media (max-width: 640px) {
 	* {

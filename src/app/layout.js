@@ -1,6 +1,7 @@
 import { Rubik } from "next/font/google";
 import "./globals.css";
 import { MyThemeProvider } from "@/components/ui/MyComponents/ThemeProvider";
+import { CustomProvider } from "@/redux/Provider";
 
 const rubik = Rubik({
 	subsets: ["latin"],
@@ -17,11 +18,13 @@ export default function RootLayout({ children }) {
 			lang="en"
 			suppressHydrationWarning>
 			<body className={rubik.className}>
-				<MyThemeProvider
-					attribute="class"
-					defaultTheme="light">
-					{children}
-				</MyThemeProvider>
+				<CustomProvider>
+					<MyThemeProvider
+						attribute="class"
+						defaultTheme="light">
+						{children}
+					</MyThemeProvider>
+				</CustomProvider>
 			</body>
 		</html>
 	);
