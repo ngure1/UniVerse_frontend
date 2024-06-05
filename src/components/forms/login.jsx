@@ -12,12 +12,15 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
+import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Eye, EyeOff } from "lucide-react";
 import { useJwtCreateMutation } from "@/redux/features/auth/authApiSlice";
 
 const LoginPage = () => {
 	const [showPassword, setShowPassword] = useState(false);
+
+	const router = useRouter();
 
 	const form = useForm({
 		resolver: zodResolver(loginFormSchema),
@@ -39,7 +42,7 @@ const LoginPage = () => {
 			.then(() => {
 				//redirect logic,
 				//toast
-				setSuccess(true);
+				router.push("/");
 			});
 		// 	fetch("http://localhost:8000/auth/jwt/create/", {
 		// 		method: "POST",
