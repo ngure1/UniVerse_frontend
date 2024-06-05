@@ -9,6 +9,8 @@ import {
 } from "./landing/index";
 import Footer from "@/components/ui/MyComponents/Footer";
 import LoginForm from "@/components/forms/login";
+import SignUpForm from "@/components/forms/signUp";
+import NavBar from "./(core)/home/NavBar";
 export default function Home() {
 	return (
 		<main>
@@ -20,8 +22,10 @@ export default function Home() {
 			<Team />
 			<Partners />
 		*/}
-			<LoginForm />
+			{/* <LoginForm /> */}
+			{/* <SignUpForm /> */}
 			{/* <Footer /> */}
+			<NavBar />
 		</main>
 	);
 }
