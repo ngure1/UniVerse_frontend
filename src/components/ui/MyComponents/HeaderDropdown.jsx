@@ -6,7 +6,7 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/shadcnComponents/dropdown-menu";
 import { ButtonsAlertDialog } from "./ButtonsAlertDialog";
 import { MenuIcon } from "lucide-react";
 import { Link } from "react-scroll";

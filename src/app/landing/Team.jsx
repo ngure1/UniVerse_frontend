@@ -10,6 +10,50 @@ import Boni from "@/../public/images/profiles/Boni.jpeg";
 import { Element } from "react-scroll";
 
 const Team = () => {
+	const teamMembers = [
+		{
+			memberName: "Dr. Lawrence Nderu",
+			memberImage: Nderu,
+			memberRole: "Project PI",
+			linkedInLink: "",
+			githubLink: "https://www.github.com/",
+		},
+		{
+			memberName: "Joseph Ngure",
+			memberImage: Jose,
+			memberRole: "Team Lead",
+			linkedInLink: "",
+			githubLink: "https://www.github.com/ngure1",
+		},
+		{
+			memberName: "Maurice Maina",
+			memberImage: Maurice,
+			memberRole: "Full stack developer",
+			linkedInLink: "",
+			githubLink: "https://www.github.com/Macharia-Maurice",
+		},
+		{
+			memberName: "Hilda Mwangi",
+			memberImage: Hilda,
+			memberRole: "Frontend developer",
+			linkedInLink: "",
+			githubLink: "https://www.github.com/mwangi-hilda",
+		},
+		{
+			memberName: "Florence King'ori",
+			memberImage: Florence,
+			memberRole: "Frontend developer",
+			linkedInLink: "",
+			githubLink: "https://www.github.com/kingoriwangechi",
+		},
+		{
+			memberName: "Bonface Theuri",
+			memberImage: Boni,
+			memberRole: "Backend developer",
+			linkedInLink: "",
+			githubLink: "https://www.github.com/theurikarue",
+		},
+	];
 	return (
 		<Element
 			name="theTeam"
@@ -22,55 +66,17 @@ const Team = () => {
 					</p>
 				</div>
 				<div className="flex items-center justify-center flex-col gap-[1rem] py-[0.75rem] w-full">
-					<div className="flex px-[2.5rem] items-center justify-center gap-[1.75rem] max-sm:flex-col">
-						<TeamCard
-							memberImage={Nderu}
-							memberName={"Dr. Nderu"}
-							memberRole={"Project PI"}
-							linkedInLink={""}
-							githubLink={"https://www.github.com/"}
-						/>
-						<TeamCard
-							memberImage={Jose}
-							memberName={"Joseph Ngure"}
-							memberRole={"Team Lead"}
-							linkedInLink={""}
-							githubLink={"https://www.github.com/ngure1"}
-						/>
-						<TeamCard
-							memberImage={Maurice}
-							memberName={"Maurice Maina"}
-							memberRole={"Full stack developer"}
-							linkedInLink={""}
-							githubLink={
-								"https://www.github.com/Macharia-Maurice"
-							}
-						/>
-						<TeamCard
-							memberImage={Hilda}
-							memberName={"Hilda Mwangi"}
-							memberRole={"Frontend developer"}
-							linkedInLink={""}
-							githubLink={"https://www.github.com/mwangi-hilda"}
-						/>
-					</div>
-					<div className="flex items-start gap-[1.75rem] max-sm:flex-col">
-						<TeamCard
-							memberImage={Florence}
-							memberName={"Florence King'ori"}
-							memberRole={"Frontend developer"}
-							linkedInLink={""}
-							githubLink={
-								"https://www.github.com/kingoriwangechi"
-							}
-						/>
-						<TeamCard
-							memberImage={Boni}
-							memberName={"Bonface Theuri"}
-							memberRole={"Backend developer"}
-							linkedInLink={""}
-							githubLink={"https://www.github.com/theurikarue"}
-						/>
+					<div className="flex px-[2.5rem] flex-wrap items-center justify-center gap-[1.75rem] max-sm:flex-col">
+						{teamMembers.map((member, index) => (
+							<TeamCard
+								key={index}
+								memberImage={member.memberImage}
+								memberName={member.memberName}
+								memberRole={member.memberRole}
+								linkedInLink={member.linkedInLink}
+								githubLink={member.githubLink}
+							/>
+						))}
 					</div>
 				</div>
 			</div>

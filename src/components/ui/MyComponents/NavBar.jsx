@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Logo from "@/../public/images/logo.png";
 import { Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/components/ui/shadcnComponents/input";
 import ProfilePic from "./ProfilePic";
 
 const SearchBar = ({ placeholder, onSearch }) => {
@@ -26,13 +26,14 @@ const SearchBar = ({ placeholder, onSearch }) => {
 	);
 };
 
-const NavBar = () => {
+const NavBar = ({ className }) => {
 	const handleSearch = (query) => {
 		console.log("Search query:", query);
 	};
 
 	return (
-		<div className="flex justify-between items-center w-full pt-[1.75rem] pr-[1.25rem] pb-[0.5rem] pl-[1.25rem]">
+		<div
+			className={`flex justify-between items-center w-full pt-[1.75rem] pr-[1.25rem] h-[6rem] pb-[0.5rem] pl-[1.25rem] ${className}`}>
 			<Image
 				src={Logo}
 				alt="Universe Logo"

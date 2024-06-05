@@ -12,7 +12,7 @@ import {
 	LogOut,
 } from "lucide-react";
 
-const SideBar = () => {
+const SideBar = ({ className }) => {
 	const links = [
 		{ Icon: Home, text: "Home" },
 		{ Icon: CalendarFold, text: "Events" },
@@ -35,7 +35,7 @@ const SideBar = () => {
 			href={"#"}
 			className="flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem]">
 			<link.Icon size={18} />
-			<p className="body-text">{link.text}</p>
+			<p className="body-md">{link.text}</p>
 		</Link>
 	));
 
@@ -46,12 +46,13 @@ const SideBar = () => {
 			href={"#"}
 			className="flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem]">
 			<link.Icon size={18} />
-			<p className="body-text">{link.text}</p>
+			<p className="body-md">{link.text}</p>
 		</Link>
 	));
 
 	return (
-		<div className="relative inline-flex flex-col h-[80vh] pt-[1.25rem] pr-[0] pb-[0.75rem] pl-[1.25rem] justify-between items-start shrink-0 gap-[4rem] ">
+		<div
+			className={`inline-flex flex-col pt-[1.25rem] pr-[0] pb-[0.75rem] pl-[1.25rem] justify-between items-start shrink-0 gap-[4rem] ${className}`}>
 			<div>{topLinks}</div>
 			<div>{bottomLinks}</div>
 		</div>

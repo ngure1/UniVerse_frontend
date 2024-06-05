@@ -8,7 +8,7 @@ import {
 	DrawerTitle,
 	DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Button } from "../button";
+import { Button } from "../shadcnComponents/button";
 
 const MainMenu = () => {
 	const [isClient, setIsClient] = useState(false);

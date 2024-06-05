@@ -1,16 +1,13 @@
 import React from "react";
-import NavBar from "./home/NavBar";
-import Sidebar from "./home/SideBar";
-import Post from "./home/Post";
+import NavBar from "../../components/ui/MyComponents/NavBar";
+import Sidebar from "../../components/ui/MyComponents/SideBar";
 
 const layout = ({ children }) => {
 	return (
-		<div>
-			{/* <NavBar/> */}
-			<Sidebar />
-			{/* <Post/> */}
-
-			{/* {children} */}
+		<div className="relative w-full border h-screen bg-gray-200">
+			<NavBar className="fixed top-0 bg-muted" />
+			<Sidebar className="fixed top-[6rem] bottom-0 bg-muted" />
+			<div className="mt-[8rem] ml-[20rem]">{children}</div>
 		</div>
 	);
 };

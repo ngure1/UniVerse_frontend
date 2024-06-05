@@ -3,7 +3,7 @@ import { useState } from "react";
 import { loginFormSchema } from "@/schema/loginShema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/shadcnComponents/button";
 import {
 	Form,
 	FormControl,
@@ -11,9 +11,9 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from "@/components/ui/form";
+} from "@/components/ui/shadcnComponents/form";
 import { useRouter } from "next/navigation";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/components/ui/shadcnComponents/input";
 import { Eye, EyeOff } from "lucide-react";
 import { useJwtCreateMutation } from "@/redux/features/auth/authApiSlice";
 

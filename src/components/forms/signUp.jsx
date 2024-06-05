@@ -3,7 +3,7 @@ import { useState } from "react";
 import SignUpFormSchema from "@/schema/signUpSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/shadcnComponents/button";
 import {
 	Form,
 	FormControl,
@@ -11,12 +11,12 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "@/components/ui/shadcnComponents/form";
+import { Input } from "@/components/ui/shadcnComponents/input";
 import { Eye, EyeOff } from "lucide-react";
 import { useUserCreateMutation } from "@/redux/features/auth/authApiSlice";
 
-const SignUpPage = () => {
+const SignUpForm = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const [showRePassword, setShowRePassword] = useState(false);
 
@@ -201,4 +201,4 @@ const SignUpPage = () => {
 	);
 };
 
-export default SignUpPage;
+export default SignUpForm;

@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
 import { Link } from "react-scroll";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
 import HeaderDropdown from "@/components/ui/MyComponents/HeaderDropdown";
 import { ButtonsAlertDialog } from "@/components/ui/MyComponents/ButtonsAlertDialog";
 import Image from "next/image";
