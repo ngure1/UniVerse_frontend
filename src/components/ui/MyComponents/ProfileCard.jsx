@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
-import { VerifiedIcon, MapPin, Mail } from "lucide-react";
+import { VerifiedIcon, MapPin, Mail, PencilLine } from "lucide-react";
+import Link from "next/link";
 
 const ProfileCard = () => {
 	return (
-		<>
-			<div className="flex gap-[6.25rem] items-center">
+		<div>
+			<div className="flex gap-[6.25rem] items-center border-black">
 				<div className="rounded-full w-[9.375rem] h-[9.375rem] bg-slate-800"></div>
 				<div className="flex flex-col w- items-start gap-[1.5rem]">
 					<div className="max-w-[31.25rem]">
@@ -54,7 +55,13 @@ const ProfileCard = () => {
 					</div>
 				</div>
 			</div>
-		</>
+			<Link
+				href={"#"}
+				className="flex gap-3">
+				<PencilLine size={18} />
+				<span className="text-sm">Edit Profile</span>
+			</Link>
+		</div>
 	);
 };
 
