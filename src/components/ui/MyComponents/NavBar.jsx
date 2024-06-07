@@ -4,7 +4,7 @@ import Image from "next/image";
 import Logo from "@/../public/images/logo.png";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/shadcnComponents/input";
-import ProfilePic from "./ProfilePic";
+import AvatarProfile from "./AvatarProfile";
 
 const SearchBar = ({ placeholder, onSearch }) => {
 	const [query, setQuery] = useState("");
@@ -43,7 +43,10 @@ const NavBar = ({ className }) => {
 				placeholder="What's on your mind, Jane?"
 				onSearch={handleSearch}
 			/>
-			<ProfilePic width={50} />
+			<AvatarProfile
+				size={10}
+				pfpImage={"https://github.com/shadcn.png"}
+			/>
 		</div>
 	);
 };

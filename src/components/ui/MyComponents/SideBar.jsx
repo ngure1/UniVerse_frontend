@@ -14,36 +14,33 @@ import {
 
 const SideBar = ({ className }) => {
 	const links = [
-		{ Icon: Home, text: "Home" },
-		{ Icon: CalendarFold, text: "Events" },
-		{ Icon: BriefcaseBusiness, text: "Jobs" },
-		{ Icon: Handshake, text: "Giving Back" },
-		{ Icon: Newspaper, text: "News & Announcements" },
-		{ Icon: CodeXml, text: "Department Stars" },
+		{ Icon: Home, text: "Home", href: "/home" },
+		{ Icon: CalendarFold, text: "Events", href: "/events" },
+		{ Icon: BriefcaseBusiness, text: "Jobs", href: "/jobs" },
+		{ Icon: Handshake, text: "Giving Back", href: "/support" },
+		{ Icon: Newspaper, text: "News & Announcements", href: "/news" },
+		{ Icon: CodeXml, text: "Department Stars", href: "/dpt-stars" },
 		{ Icon: CirclePlus, text: "New Post" },
 		{ Icon: Settings, text: "Settings" },
 		{ Icon: LogOut, text: "Logout" },
 	];
 
-	// Get the last two links
 	const lastTwoLinks = links.slice(-2);
 
-	// Map over the last two links to create Link components
-	const bottomLinks = lastTwoLinks.map((link, index) => (
+	const topLinks = links.slice(0, -2).map((link, index) => (
 		<Link
 			key={index}
-			href={"#"}
+			href={link.href || "#"}
 			className="flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem]">
 			<link.Icon size={18} />
 			<p className="body-md">{link.text}</p>
 		</Link>
 	));
 
-	// Map over the rest of the links to create Link components
-	const topLinks = links.slice(0, -2).map((link, index) => (
+	const bottomLinks = lastTwoLinks.map((link, index) => (
 		<Link
 			key={index}
-			href={"#"}
+			href={link.href || "#"}
 			className="flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem]">
 			<link.Icon size={18} />
 			<p className="body-md">{link.text}</p>
