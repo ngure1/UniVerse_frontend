@@ -16,7 +16,12 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/shadcnComponents/input";
 import { Eye, EyeOff } from "lucide-react";
 import { useJwtCreateMutation } from "@/redux/features/auth/authApiSlice";
-
+import {
+	Card,
+	CardContent,
+	CardHeader,
+} from "@/components/ui/shadcnComponents/card";
+import Link from "next/link";
 const LoginPage = () => {
 	const [showPassword, setShowPassword] = useState(false);
 
@@ -59,69 +64,89 @@ const LoginPage = () => {
 	};
 
 	return (
-		<div className="w-full h-screen flex justify-center pt-[6rem]">
-			<Form {...form}>
-				<form
-					onSubmit={form.handleSubmit(onSubmit)}
-					className="flex gap-[1rem] flex-col w-[400px]">
+		<div className="h-screen flex items-center justify-center">
+			<Card className="xl:w-1/4 md:w-1/2 shadow-md p-[2rem]">
+				<CardHeader>
 					<p className="sub-heading-3 text-center">LOGIN</p>
-					<FormField
-						control={form.control}
-						name="email"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Email</FormLabel>
-								<FormControl>
-									<Input
-										placeholder="example@gmail.com"
-										type="email"
-										{...field}
-									/>
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={form.control}
-						name="password"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Password</FormLabel>
-								<FormControl>
-									<Input
-										type={
-											showPassword ? "text" : "password"
-										}
-										suffix={
-											showPassword ? (
-												<Eye
-													onClick={handleClick}
-													color="#777777"
-												/>
-											) : (
-												<EyeOff
-													onClick={handleClick}
-													color="#777777"
-												/>
-											)
-										}
-										{...field}
-									/>
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
+				</CardHeader>
 
-					<Button
-						type="submit"
-						className="uppercase"
-						disabled={isLoading}>
-						Login
-					</Button>
-				</form>
-			</Form>
+				<Form {...form}>
+					<form
+						onSubmit={form.handleSubmit(onSubmit)}
+						className="space-y-6">
+						<div className="space-y-4">
+							<FormField
+								control={form.control}
+								name="email"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Email</FormLabel>
+										<FormControl>
+											<Input
+												placeholder="example@gmail.com"
+												type="email"
+												{...field}
+											/>
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="password"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Password</FormLabel>
+										<FormControl>
+											<Input
+												type={
+													showPassword
+														? "text"
+														: "password"
+												}
+												suffix={
+													showPassword ? (
+														<Eye
+															onClick={
+																handleClick
+															}
+															color="#777777"
+														/>
+													) : (
+														<EyeOff
+															onClick={
+																handleClick
+															}
+															color="#777777"
+														/>
+													)
+												}
+												{...field}
+											/>
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+						</div>
+
+						<Button
+							type="submit"
+							className="uppercase w-full"
+							disabled={isLoading}>
+							Login
+						</Button>
+						<p>
+							<Link href="#">Forgot Password</Link>
+						</p>
+						<p>
+							Don't have an account?{" "}
+							<Link href="/signup">Sign Up</Link>
+						</p>
+					</form>
+				</Form>
+			</Card>
 		</div>
 	);
 };

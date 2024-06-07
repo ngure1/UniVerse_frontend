@@ -4,8 +4,8 @@ import Sidebar from "../../components/ui/MyComponents/SideBar";
 
 const layout = ({ children }) => {
 	return (
-		<div className="relative w-full border h-screen bg-gray-200">
-			<NavBar className="fixed top-0 bg-muted" />
+		<div className="relative w-full border  bg-gray-200">
+			<NavBar className="fixed top-0 bg-muted z-30" />
 			<Sidebar className="fixed top-[6rem] bottom-0 bg-muted" />
 			<div className="mt-[8rem] ml-[17rem]">{children}</div>
 		</div>
