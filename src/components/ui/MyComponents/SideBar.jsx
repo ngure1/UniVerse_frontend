@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Link from "next/link";
 import {
 	Home,
@@ -11,6 +12,9 @@ import {
 	Settings,
 	LogOut,
 } from "lucide-react";
+import { Button } from "../shadcnComponents/button";
+import { ResponsiveDialog } from "./ResponsiveDialog";
+import PostForm from "@/components/forms/postForm";
 
 const SideBar = ({ className }) => {
 	const links = [
@@ -20,7 +24,6 @@ const SideBar = ({ className }) => {
 		{ Icon: Handshake, text: "Giving Back", href: "/support" },
 		{ Icon: Newspaper, text: "News & Announcements", href: "/news" },
 		{ Icon: CodeXml, text: "Department Stars", href: "/dpt-stars" },
-		{ Icon: CirclePlus, text: "New Post" },
 		{ Icon: Settings, text: "Settings" },
 		{ Icon: LogOut, text: "Logout" },
 	];
@@ -47,10 +50,28 @@ const SideBar = ({ className }) => {
 		</Link>
 	));
 
+	const [isNewPostDialogueOpen, setIsNewPostDialogueOpen] = useState(false);
+
 	return (
 		<div
 			className={`inline-flex flex-col pt-[1.25rem] pr-[0] pb-[0.75rem] pl-[1.25rem] justify-between items-start shrink-0 gap-[4rem] ${className}`}>
-			<div>{topLinks}</div>
+			<div>
+				{topLinks}
+				<Button
+					variant="ghost"
+					className="flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem]"
+					onClick={() => setIsNewPostDialogueOpen(true)}>
+					<CirclePlus size={18} />
+					<span className="body-md">New Post</span>
+				</Button>
+			</div>
+			<ResponsiveDialog
+				title={"Create New Post"}
+				className="w-[60rem]"
+				isOpen={isNewPostDialogueOpen}
+				setIsOpen={setIsNewPostDialogueOpen}>
+				<PostForm />
+			</ResponsiveDialog>
 			<div>{bottomLinks}</div>
 		</div>
 	);

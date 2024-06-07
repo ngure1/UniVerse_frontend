@@ -2,6 +2,7 @@
 import React from "react";
 import PostImage from "@/../public/images/postImage.png";
 import PostCard from "@/components/ui/MyComponents/PostCard";
+import PostSkeleton from "@/components/ui/MyComponents/Skeleton";
 import ProfilePic from "@/../public/images/ProfilePic.jpeg";
 
 const Home = () => {
@@ -24,6 +25,7 @@ const Home = () => {
 				content="Exploring the intersection of technology, design, and innovation, our blog offers insights, tips, and  .....Read More"
 				postImage={PostImage}
 			/>
+			<PostSkeleton />
 		</div>
 	);
 };
