@@ -47,7 +47,7 @@ const LoginPage = () => {
 			.then(() => {
 				//redirect logic,
 				//toast
-				router.push("/");
+				router.push("/home");
 			});
 		// 	fetch("http://localhost:8000/auth/jwt/create/", {
 		// 		method: "POST",

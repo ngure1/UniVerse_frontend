@@ -5,11 +5,12 @@ import { z } from "zod";
 const postFormSchema = z.object({
 	title: z.string().max(20),
 	content: z.string(),
-	file_input: z.instanceof(File).refine(
-		(file) => {
-			return file && file.type.startsWith("image/");
-		},
-		{ message: "Please upload a valid image file." },
-	),
+	media: z
+		.instanceof(File)
+		.optional()
+		.refine(
+			(file) => file == null || file?.length == 1,
+			"File is required.",
+		),
 });
 export default postFormSchema;

@@ -4,10 +4,10 @@ const postApiSlice = baseApi.injectEndpoints({
 	overrideExisting: true,
 	endpoints: (builder) => ({
 		postCreate: builder.mutation({
-			query: ({ title, content, file_input }) => ({
-				url: "/auth/post/listcreate/",
+			query: ({ title, content, media }) => ({
+				url: "/posts/listcreate/",
 				method: "POST",
-				body: { title, content, file_input },
+				body: { title, content, media },
 			}),
 		}),
 	}),
