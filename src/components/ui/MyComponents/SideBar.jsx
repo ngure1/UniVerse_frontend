@@ -24,7 +24,7 @@ const SideBar = ({ className }) => {
 		{ Icon: Handshake, text: "Giving Back", href: "/support" },
 		{ Icon: Newspaper, text: "News & Announcements", href: "/news" },
 		{ Icon: CodeXml, text: "Department Stars", href: "/dpt-stars" },
-		{ Icon: Settings, text: "Settings" },
+		{ Icon: Settings, text: "Settings", href: "/profile" },
 		{ Icon: LogOut, text: "Logout" },
 	];
 
