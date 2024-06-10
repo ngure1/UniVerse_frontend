@@ -33,6 +33,7 @@ export default function PostCard({
 	content,
 	postImage,
 	isVerified,
+	forProfile = false,
 	event_date,
 	isOnline,
 	address,
@@ -72,6 +73,7 @@ export default function PostCard({
 					</Button>
 				</div>
 			</CardHeader>
+
 			<CardContent>
 				<div className="flex flex-col items-start gap-[0.75rem] self-stretch">
 					{forEvents && (

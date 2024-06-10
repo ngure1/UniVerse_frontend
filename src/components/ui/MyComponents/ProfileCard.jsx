@@ -1,9 +1,20 @@
 "use client";
 import React from "react";
-import { VerifiedIcon, MapPin, Mail, PencilLine } from "lucide-react";
-import Link from "next/link";
+import {
+	VerifiedIcon,
+	MapPin,
+	Mail,
+	PencilLine,
+	PhoneIcon,
+} from "lucide-react";
+import { Button } from "../shadcnComponents/button";
+import { ResponsiveDialog } from "./ResponsiveDialog";
+import EditProfileForm from "@/components/forms/editProfile";
 
 const ProfileCard = () => {
+	const [isEditProfileDialogOpen, setIsEditProfileDialogOpen] =
+		React.useState(false);
+
 	return (
 		<div>
 			<div className="flex gap-[6.25rem] items-center border-black">
@@ -34,6 +45,13 @@ const ProfileCard = () => {
 							/>
 							<span>janedoe@gmail.com</span>
 						</p>
+						<p className="flex gap-2 items-center">
+							<PhoneIcon
+								size={18}
+								color="#777777"
+							/>
+							<span>0113021788</span>
+						</p>
 						<p>
 							Bio:Meet Aurora Wynter, a free-spirited artist with
 							a passion for painting and traveling.
@@ -55,12 +73,20 @@ const ProfileCard = () => {
 					</div>
 				</div>
 			</div>
-			<Link
-				href={"#"}
+			<Button
+				variant="ghost"
+				onClick={() => setIsEditProfileDialogOpen(true)}
 				className="flex gap-3">
 				<PencilLine size={18} />
 				<span className="text-sm">Edit Profile</span>
-			</Link>
+			</Button>
+			<ResponsiveDialog
+				title={"Edit Profile"}
+				description={"dit your profile"}
+				isOpen={isEditProfileDialogOpen}
+				setIsOpen={setIsEditProfileDialogOpen}>
+				<EditProfileForm />
+			</ResponsiveDialog>
 		</div>
 	);
 };
