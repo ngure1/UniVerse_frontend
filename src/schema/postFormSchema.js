@@ -5,11 +5,6 @@ import { z } from "zod";
 const postFormSchema = z.object({
 	title: z.string().max(20),
 	content: z.string(),
-	file_input: z.instanceof(File).refine(
-		(file) => {
-			return file && file.type.startsWith("image/");
-		},
-		{ message: "Please upload a valid image file." },
-	),
+	media: typeof window === "undefined" ? z.any() : z.instanceof(FileList),
 });
 export default postFormSchema;

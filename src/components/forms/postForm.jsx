@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/shadcnComponents/form";
 import { Input } from "@/components/ui/shadcnComponents/input";
 import { usePostCreateMutation } from "@/redux/features/posts/postsApiSlice";
+import FileInput from "../ui/MyComponents/FileInput";
 
 import React from "react";
 
@@ -23,24 +24,27 @@ const PostForm = () => {
 		defaultValues: {
 			title: "",
 			content: "",
+			media: undefined,
 		},
 	});
 
 	const [post, { isLoading }] = usePostCreateMutation();
-
+	// const fileRef = form.register("media");
 	const onSubmit = (data) => {
 		post(data)
 			.unwrap()
 			.then(() => {
-				setSuccess(true);
+				// setSuccess(true);
 			});
 	};
-
+	const mediaRef = form.register("media");
 	return (
 		<div className="">
 			<Form {...form}>
 				<form
+					onSubmit={form.handleSubmit(onSubmit)}
 					action=""
+					encType="multipart/form-data"
 					className="space-y-[1.5rem]">
 					<FormField
 						control={form.control}
@@ -76,22 +80,30 @@ const PostForm = () => {
 							</FormItem>
 						)}
 					/>
+
 					<FormField
 						control={form.control}
-						name="file_input"
+						name="media"
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel>Media Upload</FormLabel>
 								<FormControl>
 									<Input
 										type="file"
-										{...field}
+										{...mediaRef}
+										onChange={(event) => {
+											field.onChange(
+												event.target?.files?.[0] ??
+													undefined,
+											);
+										}}
 									/>
 								</FormControl>
 								<FormMessage />
 							</FormItem>
 						)}
 					/>
+
 					<Button
 						variant="secondary"
 						className="w-full"

@@ -22,6 +22,9 @@ import {
 	CardHeader,
 } from "@/components/ui/shadcnComponents/card";
 import Link from "next/link";
+import { setAuth } from "@/redux/features/auth/authSlice";
+import { useDispatch } from "react-redux";
+
 const LoginPage = () => {
 	const [showPassword, setShowPassword] = useState(false);
 
@@ -41,26 +44,19 @@ const LoginPage = () => {
 		setShowPassword(!showPassword);
 	};
 
+	const dispatch = useDispatch();
 	const onSubmit = (data) => {
 		login(data)
 			.unwrap()
 			.then(() => {
 				//redirect logic,
 				//toast
-				router.push("/");
+
+				//dispatch
+				dispatch(setAuth(true));
+				//redirect
+				router.push("/home");
 			});
-		// 	fetch("http://localhost:8000/auth/jwt/create/", {
-		// 		method: "POST",
-		// 		headers: {
-		// 			"Content-Type": "application/json",
-		// 			Accept: "application/json",
-		// 		},
-		// 		body: dataToSubmit,
-		// 	})
-		// 		.then((res) => {
-		// 			return res.json();
-		// 		})
-		// 		.then((data) => console.log(data));
 	};
 
 	return (
@@ -138,10 +134,14 @@ const LoginPage = () => {
 							Login
 						</Button>
 						<p>
-							<Link href="#">Forgot Password</Link>
+							<Link
+								href="#"
+								className="text-blue-500">
+								Forgot Password
+							</Link>
 						</p>
-						<p>
-							Don't have an account?{" "}
+						<p className="text-blue-500">
+							Don&#39;t have an account?{" "}
 							<Link href="/signup">Sign Up</Link>
 						</p>
 					</form>

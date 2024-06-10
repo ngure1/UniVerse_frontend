@@ -39,7 +39,7 @@ export default function PostCard({
 	forEvents,
 }) {
 	return (
-		<Card className="flex w-[37.5rem] min-w-[21.25rem] py-[0.5rem] px-[1.25rem] flex-col justify-center items-start gap-[0.75rem] rounded-[0.5rem] bg-white">
+		<Card className="flex w-[37.5rem] min-w-[21.25rem] py-[0.5rem] px-[1.25rem] flex-col justify-center items-start gap-[0.75rem] rounded-[0.5rem] bg-white dark:bg-muted">
 			<CardHeader>
 				<div className="flex items-center self-stretch gap-[0.75rem]  ">
 					<AvatarProfile
@@ -56,6 +56,7 @@ export default function PostCard({
 								<VerifiedIcon
 									fill="#00B595"
 									color="#ffff"
+									className="dark:filter dark:invert"
 									size={24}
 								/>
 							)}
