@@ -5,12 +5,6 @@ import { z } from "zod";
 const postFormSchema = z.object({
 	title: z.string().max(20),
 	content: z.string(),
-	media: z
-		.instanceof(File)
-		.optional()
-		.refine(
-			(file) => file == null || file?.length == 1,
-			"File is required.",
-		),
+	media: typeof window === "undefined" ? z.any() : z.instanceof(FileList),
 });
 export default postFormSchema;
