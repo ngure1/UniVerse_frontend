@@ -19,7 +19,7 @@ const ProfileCard = () => {
 							/>
 						</div>
 
-						<p>Alumni class of '05</p>
+						<p>Alumni class of &#39;05</p>
 						<p className="flex gap-2 items-center">
 							<MapPin
 								size={18}

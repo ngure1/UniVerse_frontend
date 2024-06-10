@@ -37,7 +37,7 @@ const NavBar = ({ className }) => {
 			<Image
 				src={Logo}
 				alt="Universe Logo"
-				className="cursor-pointer max-sm:w-[150px] sm:w-[250px]"
+				className="cursor-pointer max-sm:w-[150px] sm:w-[250px] dark:filter dark:invert"
 			/>
 			<SearchBar
 				placeholder="What's on your mind, Jane?"
