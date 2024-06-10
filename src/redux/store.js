@@ -34,14 +34,14 @@ const makeStore = () =>
 		middleware: (getDefaultMiddleware) =>
 			getDefaultMiddleware({
 				serializableCheck: {
-					// Ignore these action types
 					ignoredActions: [
-						"persist/PERSIST",
-						"persist/REHYDRATE",
-						"persist/REGISTER",
+						FLUSH,
+						REHYDRATE,
+						PAUSE,
+						PERSIST,
+						PURGE,
+						REGISTER,
 					],
-					// Optionally, ignore these paths in the state as well
-					ignoredPaths: ["_persist"],
 				},
 			}).concat(baseApi.middleware),
 	});
