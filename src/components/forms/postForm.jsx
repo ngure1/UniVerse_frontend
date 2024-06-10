@@ -13,6 +13,7 @@ import {
 	FormMessage,
 } from "@/components/ui/shadcnComponents/form";
 import { Input } from "@/components/ui/shadcnComponents/input";
+import { usePostCreateMutation } from "@/redux/features/posts/postsApiSlice";
 
 import React from "react";
 
@@ -24,6 +25,17 @@ const PostForm = () => {
 			content: "",
 		},
 	});
+
+	const [post, { isLoading }] = usePostCreateMutation();
+
+	const onSubmit = (data) => {
+		post(data)
+			.unwrap()
+			.then(() => {
+				setSuccess(true);
+			});
+	};
+
 	return (
 		<div className="">
 			<Form {...form}>
@@ -66,7 +78,7 @@ const PostForm = () => {
 					/>
 					<FormField
 						control={form.control}
-						name="fileInput"
+						name="file_input"
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel>Media Upload</FormLabel>
@@ -82,7 +94,8 @@ const PostForm = () => {
 					/>
 					<Button
 						variant="secondary"
-						className="w-full">
+						className="w-full"
+						disabled={isLoading}>
 						Post
 					</Button>
 				</form>
