@@ -17,7 +17,14 @@ const postApiSlice = baseApi.injectEndpoints({
 				};
 			},
 		}),
+
+		postList: builder.query({
+			query: ({}) => ({
+				url: "/posts/listcreate/",
+				method: "GET",
+			}),
+		}),
 	}),
 });
 
-export const { usePostCreateMutation } = postApiSlice;
+export const { usePostCreateMutation, usePostListQuery } = postApiSlice;

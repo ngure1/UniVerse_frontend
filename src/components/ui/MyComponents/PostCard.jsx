@@ -105,6 +105,8 @@ export default function PostCard({
 						<Image
 							src={postImage}
 							alt="Post Image"
+							width={560}
+							height={400}
 						/>
 					</div>
 					{forEvents && (
