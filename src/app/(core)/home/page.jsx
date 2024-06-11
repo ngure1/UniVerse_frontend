@@ -21,6 +21,7 @@ const Home = () => {
 						last_name={post.author.user.last_name}
 						pfpImage={post.author.profile_picture}
 						isVerified={post.author.is_verified}
+						isLiked={post.is_liked}
 						type="Student"
 						date="1 Month Ago"
 						content={post.content}

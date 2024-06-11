@@ -23,8 +23,9 @@ import {
 import Image from "next/image";
 import AvatarProfile from "./AvatarProfile";
 import { AvatarFallback } from "@radix-ui/react-avatar";
+import { useLike, useBookmark } from "@/hooks/postHooks";
 
-export default function PostCard({
+const PostCard = ({
 	pfpImage,
 	first_name,
 	last_name,
@@ -38,7 +39,10 @@ export default function PostCard({
 	isOnline,
 	address,
 	forEvents,
-}) {
+	isLiked,
+}) => {
+	const handleLike = useLike(1);
+	const handleBookmark = useBookmark(1);
 	return (
 		<Card className="flex w-[37.5rem] min-w-[21.25rem] py-[0.5rem] px-[1.25rem] flex-col justify-center items-start gap-[0.75rem] rounded-[0.5rem] bg-white dark:bg-muted">
 			{!forProfile && (
@@ -120,9 +124,17 @@ export default function PostCard({
 			</CardContent>
 			<CardFooter className="flex justify-between items-center self-stretch">
 				<Button
+					onClick={handleLike}
 					variant="ghost"
 					className="gap-1">
-					<ThumbsUp />
+					{isLiked ? (
+						<ThumbsUp
+							fill="#0000FF"
+							color="#0000FF"
+						/>
+					) : (
+						<ThumbsUp />
+					)}
 					Like
 				</Button>
 				<Button
@@ -138,6 +150,7 @@ export default function PostCard({
 					Share
 				</Button>
 				<Button
+					onClick={handleBookmark}
 					variant="ghost"
 					className="gap-1">
 					<Bookmark />
@@ -146,4 +159,6 @@ export default function PostCard({
 			</CardFooter>
 		</Card>
 	);
-}
+};
+
+export default PostCard;

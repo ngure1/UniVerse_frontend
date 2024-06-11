@@ -24,7 +24,30 @@ const postApiSlice = baseApi.injectEndpoints({
 				method: "GET",
 			}),
 		}),
+
+		// liking a post
+		postsLikesCreate: builder.mutation({
+			query: ({ post }) => ({
+				url: "/likes/create/",
+				method: "POST",
+				body: { post },
+			}),
+		}),
+
+		// saving/bookmarking a post
+		postBookmarkCreate: builder.mutation({
+			query: ({ post }) => ({
+				url: "/bookmarks/create/",
+				method: "POST",
+				body: { post },
+			}),
+		}),
 	}),
 });
 
-export const { usePostCreateMutation, usePostListQuery } = postApiSlice;
+export const {
+	usePostCreateMutation,
+	usePostListQuery,
+	usePostsLikesCreateMutation,
+	usePostBookmarkCreateMutation,
+} = postApiSlice;
