@@ -11,7 +11,7 @@ const postApiSlice = baseApi.injectEndpoints({
 				formData.append("media", media[0]);
 
 				return {
-					url: "/posts/listcreate/",
+					url: "/posts/",
 					method: "POST",
 					body: formData,
 				};
@@ -20,7 +20,7 @@ const postApiSlice = baseApi.injectEndpoints({
 
 		postList: builder.query({
 			query: ({}) => ({
-				url: "/posts/listcreate/",
+				url: "/posts/",
 				method: "GET",
 			}),
 		}),
@@ -28,18 +28,32 @@ const postApiSlice = baseApi.injectEndpoints({
 		// liking a post
 		postsLikesCreate: builder.mutation({
 			query: ({ post }) => ({
-				url: "/likes/create/",
+				url: `/posts/likes/${post}/`,
 				method: "POST",
-				body: { post },
+			}),
+		}),
+
+		// unliking a post
+		postsUnlikeCreate: builder.mutation({
+			query: ({ post }) => ({
+				url: `/posts/unlikes/${post}/`,
+				method: "DELETE",
 			}),
 		}),
 
 		// saving/bookmarking a post
 		postBookmarkCreate: builder.mutation({
 			query: ({ post }) => ({
-				url: "/bookmarks/create/",
+				url: `/posts/bookmarks/${post}/`,
 				method: "POST",
-				body: { post },
+			}),
+		}),
+
+		// unsaving/unbookmarking a post
+		postUnbookmarkCreate: builder.mutation({
+			query: ({ post }) => ({
+				url: `/posts/unbookmarks/${post}/`,
+				method: "DELETE",
 			}),
 		}),
 	}),
@@ -50,4 +64,6 @@ export const {
 	usePostListQuery,
 	usePostsLikesCreateMutation,
 	usePostBookmarkCreateMutation,
+	usePostsUnlikeCreateMutation,
+	usePostUnbookmarkCreateMutation,
 } = postApiSlice;

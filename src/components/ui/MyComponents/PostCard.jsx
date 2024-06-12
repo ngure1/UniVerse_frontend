@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/shadcnComponents/card";
 import { Button } from "../shadcnComponents/button";
 import {
-	ThumbsUp,
+	Heart,
 	Send,
 	MessageSquareMore,
 	Bookmark,
@@ -23,7 +23,13 @@ import {
 import Image from "next/image";
 import AvatarProfile from "./AvatarProfile";
 import { AvatarFallback } from "@radix-ui/react-avatar";
-import { useLike, useBookmark } from "@/hooks/postHooks";
+import {
+	useLike,
+	useBookmark,
+	useUnlike,
+	useUnbookmark,
+} from "@/hooks/postHooks";
+import { LikeSVG, UnLikeSVG } from "@/app/landing/SVGIcon";
 
 const PostCard = ({
 	pfpImage,
@@ -31,6 +37,7 @@ const PostCard = ({
 	last_name,
 	type,
 	date,
+	title,
 	content,
 	postImage,
 	isVerified,
@@ -40,14 +47,19 @@ const PostCard = ({
 	address,
 	forEvents,
 	isLiked,
+	isSaved,
+	likeCount,
+	bookmarkCount,
 }) => {
 	const handleLike = useLike(1);
+	const handleUnlike = useUnlike(1);
 	const handleBookmark = useBookmark(1);
+	const handleUnbookmark = useUnbookmark(1);
 	return (
 		<Card className="flex w-[37.5rem] min-w-[21.25rem] py-[0.5rem] px-[1.25rem] flex-col justify-center items-start gap-[0.75rem] rounded-[0.5rem] bg-white dark:bg-muted">
 			{!forProfile && (
 				<CardHeader className="w-full">
-					<div className="flex items-start justify-between">
+					<div className="flex items-start justify-between h-[3rem]">
 						<div className="flex items-center self-stretch gap-[0.75rem]">
 							<AvatarProfile
 								pfpImage={pfpImage}
@@ -84,7 +96,7 @@ const PostCard = ({
 			)}
 
 			<CardContent>
-				<div className="flex flex-col items-start gap-[0.75rem] self-stretch">
+				<div className="flex flex-col items-start gap-[0.75rem] self-stretch ">
 					{forEvents && (
 						<div className="">
 							<p className="inline-flex gap-1">
@@ -103,6 +115,7 @@ const PostCard = ({
 						</div>
 					)}
 					<div className="self-stretch ">
+						<p className="sub-heading-3 p-1">{title}</p>
 						<p className="body-md">{content}</p>
 					</div>
 					<div className="self-stretch rounded-[0.25rem]">
@@ -124,18 +137,11 @@ const PostCard = ({
 			</CardContent>
 			<CardFooter className="flex justify-between items-center self-stretch">
 				<Button
-					onClick={handleLike}
+					onClick={!isLiked ? handleLike : handleUnlike}
 					variant="ghost"
 					className="gap-1">
-					{isLiked ? (
-						<ThumbsUp
-							fill="#0000FF"
-							color="#0000FF"
-						/>
-					) : (
-						<ThumbsUp />
-					)}
-					Like
+					{isLiked ? <LikeSVG /> : <UnLikeSVG />}
+					{likeCount}
 				</Button>
 				<Button
 					variant="ghost"
@@ -150,12 +156,20 @@ const PostCard = ({
 					Share
 				</Button>
 				<Button
-					onClick={handleBookmark}
+					onClick={!isSaved ? handleBookmark : handleUnbookmark}
 					variant="ghost"
 					className="gap-1">
-					<Bookmark />
-					Save
+					{isSaved ? (
+						<Bookmark
+							fill="#00B595"
+							color="#00B595"
+						/>
+					) : (
+						<Bookmark />
+					)}
+					{bookmarkCount}
 				</Button>
+				<br />
 			</CardFooter>
 		</Card>
 	);
