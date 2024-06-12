@@ -15,6 +15,7 @@ const PostSkeleton = () => {
 			</div>
 			<div className="flex flex-col items-start gap-[1rem] self-stretch mb-[1.25rem] ">
 				<Skeleton className="h-[2rem] self-stretch" />
+				<Skeleton className="h-[2rem] self-stretch" />
 				<Skeleton className="h-[20rem]  self-stretch rounded-[0.25rem]" />
 			</div>
 

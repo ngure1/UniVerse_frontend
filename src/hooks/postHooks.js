@@ -1,6 +1,8 @@
 import {
 	usePostsLikesCreateMutation,
 	usePostBookmarkCreateMutation,
+	usePostsUnlikeCreateMutation,
+	usePostUnbookmarkCreateMutation,
 } from "@/redux/features/posts/postsApiSlice";
 
 export const useLike = (post) => {
@@ -15,16 +17,41 @@ export const useLike = (post) => {
 	};
 	return handleLike;
 };
+export const useUnlike = (post) => {
+	const [unlike, { isLoading, error }] = usePostsUnlikeCreateMutation();
+	const postId = post;
+	const handleUnlike = () => {
+		unlike({ post: postId })
+			.unwrap()
+			.then(() => {
+				console.log("success");
+			});
+	};
+	return handleUnlike;
+};
 
 export const useBookmark = (post) => {
 	const [bookmark, { isLoading, error }] = usePostBookmarkCreateMutation();
 	const postId = post;
-	const handlebookmark = () => {
+	const handleBookmark = () => {
 		bookmark({ post: postId })
 			.unwrap()
 			.then(() => {
 				console.log("success");
 			});
 	};
-	return handlebookmark;
+	return handleBookmark;
+};
+export const useUnbookmark = (post) => {
+	const [unbookmark, { isLoading, error }] =
+		usePostUnbookmarkCreateMutation();
+	const postId = post;
+	const handleUnbookmark = () => {
+		unbookmark({ post: postId })
+			.unwrap()
+			.then(() => {
+				console.log("success");
+			});
+	};
+	return handleUnbookmark;
 };

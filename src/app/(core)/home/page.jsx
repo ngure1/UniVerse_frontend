@@ -3,7 +3,7 @@ import React from "react";
 import PostImage from "@/../public/images/postImage.png";
 import PostCard from "@/components/ui/MyComponents/PostCard";
 import { usePostListQuery } from "@/redux/features/posts/postsApiSlice";
-
+import PostSkeleton from "@/components/ui/MyComponents/Skeleton";
 const Home = () => {
 	const { data, isLoading } = usePostListQuery(1);
 	console.log(data);
@@ -12,7 +12,7 @@ const Home = () => {
 	return (
 		<div className="flex flex-col gap-4">
 			{isLoading ? (
-				<p>Is Loading...</p>
+				<PostSkeleton />
 			) : (
 				data?.results?.map((post, index) => (
 					<PostCard
@@ -22,8 +22,12 @@ const Home = () => {
 						pfpImage={post.author.profile_picture}
 						isVerified={post.author.is_verified}
 						isLiked={post.is_liked}
+						likeCount={post.likes_count}
+						isSaved={post.is_bookmarked}
+						bookmarkCount={post.bookmarks_count}
 						type="Student"
 						date="1 Month Ago"
+						title={post.title}
 						content={post.content}
 						postImage={PostImage}
 						size="large"
