@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
 						attribute="class"
 						defaultTheme="light">
 						{children}
-						<ToastContainer />
+						<ToastContainer autoClose={10000} />
 					</MyThemeProvider>
 				</CustomProvider>
 			</body>
