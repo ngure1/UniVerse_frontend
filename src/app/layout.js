@@ -2,6 +2,8 @@ import { Rubik } from "next/font/google";
 import "./globals.css";
 import { MyThemeProvider } from "@/components/ui/MyComponents/ThemeProvider";
 import { CustomProvider } from "@/redux/Provider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const rubik = Rubik({
 	subsets: ["latin"],
@@ -23,6 +25,7 @@ export default function RootLayout({ children }) {
 						attribute="class"
 						defaultTheme="light">
 						{children}
+						<ToastContainer />
 					</MyThemeProvider>
 				</CustomProvider>
 			</body>
