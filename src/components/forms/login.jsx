@@ -24,6 +24,7 @@ import {
 import Link from "next/link";
 import { setAuth } from "@/redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -38,25 +39,46 @@ const LoginPage = () => {
 		},
 	});
 
-	const [login, { isLoading }] = useJwtCreateMutation();
+	const [login, { isLoading, error }] = useJwtCreateMutation();
 
 	const handleClick = () => {
 		setShowPassword(!showPassword);
 	};
 
 	const dispatch = useDispatch();
-	const onSubmit = (data) => {
-		login(data)
-			.unwrap()
-			.then(() => {
-				//redirect logic,
-				//toast
+	const onSubmit = async (data) => {
+		// * Show a loading toast when the login process starts
 
-				//dispatch
-				dispatch(setAuth(true));
-				//redirect
-				router.push("/home");
+		const toastId = toast.loading("Wait while logging you in...", {
+			theme: "colored",
+			autoClose: false,
+			position: "top-center",
+		});
+
+		try {
+			await login(data).unwrap();
+			// * Update the toast on successful login
+			toast.update(toastId, {
+				render: "Login successful! Redirecting you to the home page...",
+				type: "success",
+				isLoading: false,
+				autoClose: 5000,
+				position: "top-center",
 			});
+			dispatch(setAuth(true));
+
+			// * Redirect to home page or perform any other action on successful login
+			router.push("/home");
+		} catch (error) {
+			//* Update the toast on login failure
+			toast.update(toastId, {
+				render: "Failed to log in. Please check your credentials and try again.",
+				type: "error",
+				isLoading: false,
+				autoClose: 5000,
+				position: "top-center",
+			});
+		}
 	};
 
 	return (

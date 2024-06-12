@@ -15,14 +15,11 @@ import {
 import { Input } from "@/components/ui/shadcnComponents/input";
 import { Eye, EyeOff } from "lucide-react";
 import { useUserCreateMutation } from "@/redux/features/auth/authApiSlice";
-import {
-	Card,
-	CardContent,
-	CardHeader,
-} from "@/components/ui/shadcnComponents/card";
+import { Card, CardHeader } from "@/components/ui/shadcnComponents/card";
 import GoogleLogo from "@/../public/images/googleLogo.png";
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 const SignUpForm = () => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -46,25 +43,36 @@ const SignUpForm = () => {
 	};
 
 	const onSubmit = (data) => {
+		// * Show a loading toast when the signUp process starts
+		const toastId = toast.loading("Creating your account...", {
+			theme: "colored",
+			autoClose: false,
+			position: "top-center",
+		});
+
 		signUp(data)
 			.unwrap()
 			.then(() => {
-				//redirect logic,
-				//toast
-				setSuccess(true);
+				// * Update the toast on successful signUp
+				toast.update(toastId, {
+					render: "Account created! Check your email for an activation link.",
+					type: "success",
+					isLoading: false,
+					autoClose: 5000,
+					position: "top-center",
+				});
+				// Redirect logic or other actions after successful signUp
+			})
+			.catch((error) => {
+				// Update the toast on signUp failure
+				toast.update(toastId, {
+					render: "Failed to create account. Please try again.",
+					type: "error",
+					isLoading: false,
+					autoClose: 5000,
+					position: "top-center",
+				});
 			});
-		// 	fetch("http://localhost:8000/auth/jwt/create/", {
-		// 		method: "POST",
-		// 		headers: {
-		// 			"Content-Type": "application/json",
-		// 			Accept: "application/json",
-		// 		},
-		// 		body: dataToSubmit,
-		// 	})
-		// 		.then((res) => {
-		// 			return res.json();
-		// 		})
-		// 		.then((data) => console.log(data));
 	};
 
 	return (
