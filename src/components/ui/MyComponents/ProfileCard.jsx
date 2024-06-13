@@ -82,7 +82,7 @@ const ProfileCard = () => {
 			</Button>
 			<ResponsiveDialog
 				title={"Edit Profile"}
-				description={"dit your profile"}
+				description={"Edit your profile"}
 				isOpen={isEditProfileDialogOpen}
 				setIsOpen={setIsEditProfileDialogOpen}>
 				<EditProfileForm />
