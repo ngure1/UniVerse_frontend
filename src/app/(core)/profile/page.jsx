@@ -1,3 +1,4 @@
+import { ModeToggle } from "@/components/ui/MyComponents/ModeToggle";
 import ProfileCard from "@/components/ui/MyComponents/ProfileCard";
 import ProfileTabs from "@/components/ui/MyComponents/profile/ProfileTabs";
 
@@ -7,6 +8,7 @@ const ProfilePage = () => {
 			<div className="px-[2.5rem] py-[1.5rem] w-[80%] bg-white dark:bg-muted rounded-md flex flex-col gap-8">
 				<ProfileCard />
 			</div>
+			<ModeToggle />
 			<ProfileTabs />
 		</div>
 	);
