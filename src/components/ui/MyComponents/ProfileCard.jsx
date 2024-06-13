@@ -22,7 +22,12 @@ const ProfileCard = () => {
 		<div>
 			<div className="flex gap-[6.25rem] items-center border-black">
 				<div className="relative">
-					<AvatarProfile size={9.375} />
+					<AvatarProfile
+						first_name="jane"
+						last_name="doe"
+						pfpImage={"images/ProfilePic.jpeg"}
+						size={12}
+					/>
 					<Link
 						href=""
 						className="absolute right-0 bottom-1 rounded-full bg-white dark:bg-muted p-2">
