@@ -12,6 +12,7 @@ import { ResponsiveDialog } from "./ResponsiveDialog";
 import EditProfileForm from "@/components/forms/profileForm";
 import AvatarProfile from "./AvatarProfile";
 import Link from "next/link";
+import EditProfileTabs from "./profile/edit/EditProfileTabs";
 
 const ProfileCard = () => {
 	const [isEditProfileDialogOpen, setIsEditProfileDialogOpen] =
@@ -107,7 +108,8 @@ const ProfileCard = () => {
 				description={"Edit your profile"}
 				isOpen={isEditProfileDialogOpen}
 				setIsOpen={setIsEditProfileDialogOpen}>
-				<EditProfileForm />
+				{/* <EditProfileForm /> */}
+				<EditProfileTabs />
 			</ResponsiveDialog>
 		</div>
 	);
