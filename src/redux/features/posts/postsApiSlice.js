@@ -16,6 +16,7 @@ const postApiSlice = baseApi.injectEndpoints({
 					body: formData,
 				};
 			},
+			invalidatesTags: ["POSTS"],
 		}),
 
 		postList: builder.query({
@@ -23,6 +24,7 @@ const postApiSlice = baseApi.injectEndpoints({
 				url: "/posts/",
 				method: "GET",
 			}),
+			providesTags: ["POSTS"],
 		}),
 
 		// liking a post
@@ -31,6 +33,7 @@ const postApiSlice = baseApi.injectEndpoints({
 				url: `/posts/likes/${post}/`,
 				method: "POST",
 			}),
+			invalidatesTags: ["POSTS"],
 		}),
 
 		// unliking a post
@@ -39,6 +42,7 @@ const postApiSlice = baseApi.injectEndpoints({
 				url: `/posts/unlikes/${post}/`,
 				method: "DELETE",
 			}),
+			invalidatesTags: ["POSTS"],
 		}),
 
 		// saving/bookmarking a post
@@ -47,6 +51,7 @@ const postApiSlice = baseApi.injectEndpoints({
 				url: `/posts/bookmarks/${post}/`,
 				method: "POST",
 			}),
+			invalidatesTags: ["POSTS"],
 		}),
 
 		// unsaving/unbookmarking a post
@@ -55,6 +60,7 @@ const postApiSlice = baseApi.injectEndpoints({
 				url: `/posts/unbookmarks/${post}/`,
 				method: "DELETE",
 			}),
+			invalidatesTags: ["POSTS"],
 		}),
 	}),
 });

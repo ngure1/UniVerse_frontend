@@ -13,9 +13,9 @@ const AvatarProfile = ({
 	last_name = "n",
 }) => {
 	return (
-		<Avatar className="{w-${size} h-${size}}">
+		<Avatar className={`w-[${size}rem] h-[${size}rem] `}>
 			<AvatarImage src={pfpImage} />
-			<AvatarFallback className="{w-${size} h-${size}}">
+			<AvatarFallback>
 				{get_fallback_name(first_name, last_name)}
 			</AvatarFallback>
 		</Avatar>
