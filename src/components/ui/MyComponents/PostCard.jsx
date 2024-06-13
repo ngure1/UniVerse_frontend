@@ -66,6 +66,7 @@ const PostCard = ({
 								pfpImage={pfpImage}
 								first_name={first_name}
 								last_name={last_name}
+								size={4}
 							/>
 							<div className="flex flex-col justify-center items-start gap-[-0.75rem] w-full">
 								<div className="flex items-center gap-[0.75rem]">
