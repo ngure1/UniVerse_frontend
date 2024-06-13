@@ -26,7 +26,7 @@ const ProfileCard = () => {
 						first_name="jane"
 						last_name="doe"
 						pfpImage={"images/ProfilePic.jpeg"}
-						size={12}
+						className="w-[9rem] h-[9rem]"
 					/>
 					<Link
 						href=""
