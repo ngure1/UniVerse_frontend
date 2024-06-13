@@ -4,6 +4,7 @@ import {
 	usePostsUnlikeCreateMutation,
 	usePostUnbookmarkCreateMutation,
 } from "@/redux/features/posts/postsApiSlice";
+import { toast } from "react-toastify";
 
 export const useLike = (post) => {
 	const [like, { isLoading, error }] = usePostsLikesCreateMutation();
@@ -13,10 +14,16 @@ export const useLike = (post) => {
 			.unwrap()
 			.then(() => {
 				console.log("success");
+				toast.success("Post liked successfully!");
+			})
+			.catch((err) => {
+				console.error(err);
+				toast.error("Failed to like the post.");
 			});
 	};
 	return handleLike;
 };
+
 export const useUnlike = (post) => {
 	const [unlike, { isLoading, error }] = usePostsUnlikeCreateMutation();
 	const postId = post;
@@ -25,11 +32,15 @@ export const useUnlike = (post) => {
 			.unwrap()
 			.then(() => {
 				console.log("success");
+				toast.success("Post unliked successfully!");
+			})
+			.catch((err) => {
+				console.error(err);
+				toast.error("Failed to unlike the post.");
 			});
 	};
 	return handleUnlike;
 };
-
 export const useBookmark = (post) => {
 	const [bookmark, { isLoading, error }] = usePostBookmarkCreateMutation();
 	const postId = post;
@@ -37,11 +48,15 @@ export const useBookmark = (post) => {
 		bookmark({ post: postId })
 			.unwrap()
 			.then(() => {
-				console.log("success");
+				toast.success("Post bookmarked successfully!");
+			})
+			.catch((err) => {
+				toast.error("Failed to bookmark the post.");
 			});
 	};
 	return handleBookmark;
 };
+
 export const useUnbookmark = (post) => {
 	const [unbookmark, { isLoading, error }] =
 		usePostUnbookmarkCreateMutation();
@@ -50,7 +65,10 @@ export const useUnbookmark = (post) => {
 		unbookmark({ post: postId })
 			.unwrap()
 			.then(() => {
-				console.log("success");
+				toast.success("Post unbookmarked successfully!");
+			})
+			.catch((err) => {
+				toast.error("Failed to unbookmark the post.");
 			});
 	};
 	return handleUnbookmark;
