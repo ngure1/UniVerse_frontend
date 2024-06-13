@@ -44,7 +44,7 @@ const NavBar = ({ className }) => {
 				onSearch={handleSearch}
 			/>
 			<AvatarProfile
-				size={10}
+				size={3}
 				pfpImage={"https://github.com/shadcn.png"}
 			/>
 		</div>

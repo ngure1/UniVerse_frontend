@@ -10,6 +10,7 @@ import {
 import { Button } from "../shadcnComponents/button";
 import { ResponsiveDialog } from "./ResponsiveDialog";
 import EditProfileForm from "@/components/forms/editProfile";
+import AvatarProfile from "./AvatarProfile";
 
 const ProfileCard = () => {
 	const [isEditProfileDialogOpen, setIsEditProfileDialogOpen] =
@@ -18,7 +19,9 @@ const ProfileCard = () => {
 	return (
 		<div>
 			<div className="flex gap-[6.25rem] items-center border-black">
-				<div className="rounded-full w-[9.375rem] h-[9.375rem] bg-slate-800"></div>
+				<div className="rounded-full w-[9.375rem] h-[9.375rem]">
+					<AvatarProfile size={9.375} />
+				</div>
 				<div className="flex flex-col w- items-start gap-[1.5rem]">
 					<div className="max-w-[31.25rem]">
 						<div className="flex gap-[1.75rem] items-center">
