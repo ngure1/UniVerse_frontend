@@ -12,18 +12,17 @@ export const editProfileSchema = z.object({
 			message: "Invalid phone number",
 		})
 		.optional(),
-	address: z
-		.object({
-			country: z.string().optional(),
-			city: z.string().optional(),
-		})
-		.optional(),
 	linked_in_url: z
 		.string()
 		.refine((val) => val === "" || urlValidationFunction(val), {
 			message: "Invalid URL",
 		})
 		.optional(),
+});
+
+export const addressSchema = z.object({
+	country: z.string().optional(),
+	city: z.string().optional(),
 });
 
 // Ensure phoneNumberValidationFunction and urlValidationFunction correctly handle empty strings and validate non-empty inputs.

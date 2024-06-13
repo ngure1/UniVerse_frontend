@@ -11,21 +11,12 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/shadcnComponents/form";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/shadcnComponents/select";
 import { Input } from "@/components/ui/shadcnComponents/input";
 import { Textarea } from "../ui/shadcnComponents/textarea";
 import { Button } from "@/components/ui/shadcnComponents/button";
-import { Separator } from "../ui/shadcnComponents/separator";
 import { Checkbox } from "../ui/shadcnComponents/checkbox";
-import { countries } from "@/constats/countries";
 
-const EditProfileForm = () => {
+const ProfileForm = () => {
 	const form = useForm({
 		resolver: zodResolver(editProfileSchema),
 		defaultValues: {
@@ -34,10 +25,6 @@ const EditProfileForm = () => {
 			is_lecturer: false,
 			bio: "",
 			phone_number: "",
-			address: {
-				country: "",
-				city: "",
-			},
 			linked_in_url: "",
 		},
 	});
@@ -147,72 +134,6 @@ const EditProfileForm = () => {
 							</FormItem>
 						)}
 					/>
-					<div className="flex flex-col gap-1">
-						<p className="text-sm text-muted-foreground">Address</p>
-						<Separator />
-						<div className="space-y-4">
-							<FormField
-								control={form.control}
-								name="address.country"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Country</FormLabel>
-										<Select
-											onValueChange={field.onChange}
-											defaultValue={field.value}>
-											<FormControl>
-												<SelectTrigger>
-													<SelectValue placeholder="Select a Country" />
-												</SelectTrigger>
-											</FormControl>
-											<SelectContent>
-												{countries.map(
-													(country, index) => (
-														<SelectItem
-															value={
-																country.value
-															}
-															key={index}>
-															{country.label}
-														</SelectItem>
-													),
-												)}
-											</SelectContent>
-										</Select>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-							<FormField
-								control={form.control}
-								name="address.city"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>City</FormLabel>
-										<FormControl>
-											<Input {...field} />
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-							<FormField
-								control={form.control}
-								name="linked_in_url"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>
-											Link to your LinkedIn profile
-										</FormLabel>
-										<FormControl>
-											<Input {...field} />
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-						</div>
-					</div>
 				</div>
 
 				<Button
@@ -226,4 +147,4 @@ const EditProfileForm = () => {
 	);
 };
 
-export default EditProfileForm;
+export default ProfileForm;
