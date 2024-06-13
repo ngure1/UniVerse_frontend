@@ -32,6 +32,7 @@ import {
 import { LikeSVG, UnLikeSVG } from "@/app/landing/SVGIcon";
 
 const PostCard = ({
+	postId,
 	pfpImage,
 	first_name,
 	last_name,
@@ -51,10 +52,10 @@ const PostCard = ({
 	likeCount,
 	bookmarkCount,
 }) => {
-	const handleLike = useLike(1);
-	const handleUnlike = useUnlike(1);
-	const handleBookmark = useBookmark(1);
-	const handleUnbookmark = useUnbookmark(1);
+	const handleLike = useLike(postId);
+	const handleUnlike = useUnlike(postId);
+	const handleBookmark = useBookmark(postId);
+	const handleUnbookmark = useUnbookmark(postId);
 	return (
 		<Card className="flex w-[37.5rem] min-w-[21.25rem] py-[0.5rem] px-[1.25rem] flex-col justify-center items-start gap-[0.75rem] rounded-[0.5rem] bg-white dark:bg-muted">
 			{!forProfile && (
