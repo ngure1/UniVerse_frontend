@@ -188,6 +188,10 @@
 		font-size: 1.4rem;
 		font-weight: normal;
 	}
+
+	.active-sidebar {
+		@apply hover:bg-accent hover:text-accent-foreground focus:bg-blue-950 focus:rounded-2xl focus:text-gray-200;
+	}
 }
 @media (max-width: 640px) {
 	* {

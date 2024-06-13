@@ -7,13 +7,13 @@ import {
 import { get_fallback_name } from "@/lib/utils";
 
 const AvatarProfile = ({
-	size,
+	className,
 	pfpImage,
 	first_name = "c",
 	last_name = "n",
 }) => {
 	return (
-		<Avatar className={`w-[${size}rem] h-[${size}rem] `}>
+		<Avatar className={`${className}`}>
 			<AvatarImage src={pfpImage} />
 			<AvatarFallback>
 				{get_fallback_name(first_name, last_name)}
