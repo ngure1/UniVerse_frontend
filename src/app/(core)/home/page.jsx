@@ -17,6 +17,7 @@ const Home = () => {
 				data?.results?.map((post, index) => (
 					<PostCard
 						key={index}
+						postId={post.id}
 						first_name={post.author.user.first_name}
 						last_name={post.author.user.last_name}
 						pfpImage={post.author.profile_picture}
