@@ -15,6 +15,8 @@ import { Input } from "@/components/ui/shadcnComponents/input";
 import { Textarea } from "../ui/shadcnComponents/textarea";
 import { Button } from "@/components/ui/shadcnComponents/button";
 import { Checkbox } from "../ui/shadcnComponents/checkbox";
+import { useProfileCreateMutation } from "@/redux/features/profiles/profileApiSlice";
+import { toast } from "react-toastify";
 
 const ProfileForm = () => {
 	const form = useForm({
@@ -29,9 +31,36 @@ const ProfileForm = () => {
 		},
 	});
 
-	function onSubmit(data) {
-		console.log(data);
-	}
+	const [profile, { isLoading, error }] = useProfileCreateMutation();
+
+	const onSubmit = (data) => {
+		// * create promise toast for creating the profile
+		const toastId = toast.loading("Creating your profile", {
+			theme: "colored",
+			autoClose: false, // Disable autoClose to manually control the toast
+		});
+
+		profile(data)
+			.unwrap()
+			.then(() => {
+				// Update the toast on success
+				toast.update(toastId, {
+					render: "Profile created successfully",
+					type: "success",
+					isLoading: false,
+					autoClose: 5000, // Close after 5 seconds
+				});
+			})
+			.catch(() => {
+				// Update the toast on failure
+				toast.update(toastId, {
+					render: "Something went wrong with your post",
+					type: "error",
+					isLoading: false,
+					autoClose: 5000, // Close after 5 seconds
+				});
+			});
+	};
 
 	return (
 		<Form {...form}>
