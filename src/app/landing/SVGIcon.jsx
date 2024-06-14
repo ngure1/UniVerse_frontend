@@ -35,8 +35,8 @@ export const LikeSVG = () => {
 export const UnLikeSVG = () => {
 	return (
 		<svg
-			width="1.6rem"
-			height="1.6rem"
+			width="28px"
+			height="28px"
 			viewBox="0 0 24 24"
 			role="img"
 			xmlns="http://www.w3.org/2000/svg"
