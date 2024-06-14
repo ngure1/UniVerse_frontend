@@ -14,7 +14,16 @@ import AvatarProfile from "./AvatarProfile";
 import Link from "next/link";
 import EditProfileTabs from "./profile/edit/EditProfileTabs";
 
-const ProfileCard = () => {
+const ProfileCard = ({
+	first_name,
+	last_name,
+	is_student,
+	is_alumni,
+	is_lecturer,
+	bio,
+	phone_number,
+	linked_in_url,
+}) => {
 	const [isEditProfileDialogOpen, setIsEditProfileDialogOpen] =
 		React.useState(false);
 
@@ -23,8 +32,8 @@ const ProfileCard = () => {
 			<div className="flex gap-[6.25rem] items-center border-black">
 				<div className="relative">
 					<AvatarProfile
-						first_name="jane"
-						last_name="doe"
+						first_name={first_name}
+						last_name={last_name}
 						pfpImage={"images/ProfilePic.jpeg"}
 						className="w-[9rem] h-[9rem]"
 					/>
@@ -80,10 +89,7 @@ const ProfileCard = () => {
 							/>
 							<span>0113021788</span>
 						</p>
-						<p>
-							Bio:Meet Aurora Wynter, a free-spirited artist with
-							a passion for painting and traveling.
-						</p>
+						<p>{bio}</p>
 					</div>
 					<div className="flex items-center gap-[1.25rem]">
 						<p>

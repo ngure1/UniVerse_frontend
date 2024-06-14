@@ -30,7 +30,7 @@ const Home = () => {
 						date="1 Month Ago"
 						title={post.title}
 						content={post.content}
-						postImage={PostImage}
+						postImage={post.media}
 						size="large"
 					/>
 				))
