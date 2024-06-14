@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {
 	Card,
 	CardContent,
@@ -29,6 +29,8 @@ import {
 	useUnlike,
 	useUnbookmark,
 } from "@/hooks/postHooks";
+import thumbsUp from "./thumbs-up.json";
+import Lottie from "react-lottie-player";
 import { LikeSVG, UnLikeSVG } from "@/app/landing/SVGIcon";
 
 const PostCard = ({
@@ -52,10 +54,25 @@ const PostCard = ({
 	likeCount,
 	bookmarkCount,
 }) => {
+	const [isPlaying, setIsPlaying] = useState(false);
+
 	const handleLike = useLike(postId);
 	const handleUnlike = useUnlike(postId);
 	const handleBookmark = useBookmark(postId);
 	const handleUnbookmark = useUnbookmark(postId);
+
+	const handleThumbsUp = () => {
+		if (!isLiked) {
+			handleLike();
+		} else {
+			handleUnlike();
+		}
+		setIsPlaying(true);
+		setTimeout(() => {
+			setIsPlaying(false);
+		}, 1000); // Assuming the animation duration is 1 second
+	};
+
 	return (
 		<Card className="flex w-[37.5rem] min-w-[21.25rem] py-[0.5rem] px-[1.25rem] flex-col justify-center items-start gap-[0.75rem] rounded-[0.5rem] bg-white dark:bg-muted">
 			{!forProfile && (
@@ -138,13 +155,20 @@ const PostCard = ({
 				</div>
 			</CardContent>
 			<CardFooter className="flex justify-between items-center self-stretch">
-				<Button
-					onClick={!isLiked ? handleLike : handleUnlike}
-					variant="ghost"
-					className="gap-1">
-					{isLiked ? <LikeSVG /> : <UnLikeSVG />}
+				<div
+					className="relative"
+					onClick={handleThumbsUp}>
+					<Lottie
+						animationData={thumbsUp}
+						loop={false}
+						play={isPlaying}
+						className="absolute w-17 h-10 top-0 left-0"
+					/>
+					{/* <Button variant="ghost" className="relative z-10 gap-1"> */}
+					{isLiked ? <Lottie className="w-20 h-20" /> : <UnLikeSVG />}
 					{likeCount}
-				</Button>
+					{/* </Button> */}
+				</div>
 				<Button
 					variant="ghost"
 					className="gap-1">

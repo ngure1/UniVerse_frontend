@@ -10,15 +10,14 @@ const Hero = () => {
 		<Element
 			name="Home"
 			className="relative flex flex-col justify-center items-center w-full h-[46.25rem] py-[3.25rem] pt-[8.75rem] px-0 gap-[3.25rem] border border-black shrink-0">
-			<video
-				src="./videoBg.mp4"
-				type="video/mp4"
-				autoPlay
-				muted
-				loop
-				className="absolute inset-0 w-full h-full object-cover">
-				Your browser does not support the video tag.
-			</video>
+			<Image
+				src="/images/HeroBg.gif"
+				alt="Background Gif"
+				layout="fill"
+				priority={true}
+				className="absolute inset-0 w-full h-full object-cover"
+			/>
+
 			<div className="z-[1] heading-1 text-white text-center">
 				<h1 className="heading-1  text-center self-stretch text-[#00BD9D] font-nico-moji">
 					UniVerse
