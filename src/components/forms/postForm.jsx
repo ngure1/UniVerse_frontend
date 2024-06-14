@@ -16,6 +16,7 @@ import { usePostCreateMutation } from "@/redux/features/posts/postsApiSlice";
 import { toast } from "react-toastify";
 
 import React from "react";
+import Tiptap from "../ui/MyComponents/RichTextEditor/TipTap";
 
 const PostForm = () => {
 	// handling form default values and media upload
@@ -92,10 +93,14 @@ const PostForm = () => {
 							<FormItem>
 								<FormLabel>Content</FormLabel>
 								<FormControl>
-									<Input
+									{/* <Input
 										placeholder="Type here..."
 										type="text"
 										{...field}
+									/> */}
+									<Tiptap
+										onChange={field.onChange}
+										content={field.name}
 									/>
 								</FormControl>
 								<FormMessage />

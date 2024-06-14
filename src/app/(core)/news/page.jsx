@@ -1,13 +1,7 @@
 import React from "react";
-import Tiptap from "@/components/ui/MyComponents/TipTap";
 
 const News = () => {
-	return (
-		<div>
-			News
-			<Tiptap />
-		</div>
-	);
+	return <div>News</div>;
 };
 
 export default News;

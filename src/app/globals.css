@@ -80,6 +80,21 @@
 		padding: 0;
 	}
 
+	ul li {
+		@apply list-disc;
+	}
+
+	ol li {
+		@apply list-decimal;
+	}
+
+	h2 {
+		@apply text-2xl font-medium;
+	}
+
+	blockquote {
+		@apply border-l-4 border-gray-500 pl-4 py-1 my-4 text-gray-500 italic text-xl;
+	}
 	/* heading-1 */
 	.heading-1 {
 		font-size: 4rem;
