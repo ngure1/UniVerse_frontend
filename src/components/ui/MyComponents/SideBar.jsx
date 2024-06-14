@@ -34,7 +34,7 @@ const SideBar = ({ className }) => {
 		<Link
 			key={index}
 			href={link.href || "#"}
-			className="flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem]">
+			className="flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem] active-sidebar">
 			<link.Icon size={18} />
 			<p className="body-md">{link.text}</p>
 		</Link>
@@ -44,7 +44,7 @@ const SideBar = ({ className }) => {
 		<Link
 			key={index}
 			href={link.href || "#"}
-			className="flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem]">
+			className="flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem] active-sidebar">
 			<link.Icon size={18} />
 			<p className="body-md">{link.text}</p>
 		</Link>
@@ -72,7 +72,7 @@ const SideBar = ({ className }) => {
 				setIsOpen={setIsNewPostDialogueOpen}>
 				<PostForm />
 			</ResponsiveDialog>
-			<div>{bottomLinks}</div>
+			<div className="w-full">{bottomLinks}</div>
 		</div>
 	);
 };
