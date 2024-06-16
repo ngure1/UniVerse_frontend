@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { editProfileSchema } from "@/schema/editProfileSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,8 +17,13 @@ import { Button } from "@/components/ui/shadcnComponents/button";
 import { Checkbox } from "../ui/shadcnComponents/checkbox";
 import { useProfileCreateMutation } from "@/redux/features/profiles/profileApiSlice";
 import { toast } from "react-toastify";
+import { useProfileMeQuery } from "@/redux/features/profiles/profileApiSlice";
+import { useDialog } from "@/hooks/responsiveDialog";
 
 const ProfileForm = () => {
+	// * fetch profile details for the user and use them to prefill the form
+	const { data: profileData } = useProfileMeQuery(null);
+
 	const form = useForm({
 		resolver: zodResolver(editProfileSchema),
 		defaultValues: {
@@ -31,13 +36,31 @@ const ProfileForm = () => {
 		},
 	});
 
+	// * useEffect to prefill the form once profileData is available
+	useEffect(() => {
+		if (profileData) {
+			form.reset({
+				is_student: profileData.is_student,
+				is_alumni: profileData.is_alumni,
+				is_lecturer: profileData.is_lecturer,
+				bio: profileData.bio,
+				phone_number: profileData.phone_number,
+				linked_in_url: profileData.linked_in_url,
+			});
+		}
+	}, [profileData]);
+	// * initialise dialog close function on successful submition
+	const { handleCloseDialog: closeEditProfileDialog } =
+		useDialog("editProfile");
+
+	// * create profile mutation
 	const [profile, { isLoading, error }] = useProfileCreateMutation();
 
 	const onSubmit = (data) => {
-		// * create promise toast for creating the profile
-		const toastId = toast.loading("Creating your profile", {
+		// * create promise toast for updating the profile
+		const toastId = toast.loading("Updating your profile", {
 			theme: "colored",
-			autoClose: false, // Disable autoClose to manually control the toast
+			autoClose: false,
 		});
 
 		profile(data)
@@ -45,7 +68,7 @@ const ProfileForm = () => {
 			.then(() => {
 				// Update the toast on success
 				toast.update(toastId, {
-					render: "Profile created successfully",
+					render: "Profile updated successfully",
 					type: "success",
 					isLoading: false,
 					autoClose: 5000, // Close after 5 seconds
@@ -54,7 +77,7 @@ const ProfileForm = () => {
 			.catch(() => {
 				// Update the toast on failure
 				toast.update(toastId, {
-					render: "Something went wrong with your post",
+					render: "Something went wrong with your request",
 					type: "error",
 					isLoading: false,
 					autoClose: 5000, // Close after 5 seconds
@@ -139,7 +162,7 @@ const ProfileForm = () => {
 								<FormControl>
 									<Textarea
 										placeholder="Tell us a little bit about yourself"
-										className="resize-none"
+										className="resize-none min-w-fit text-[1rem] min-h-32"
 										{...field}
 									/>
 								</FormControl>
@@ -168,6 +191,7 @@ const ProfileForm = () => {
 				<Button
 					type="submit"
 					variant="secondary"
+					onClick={closeEditProfileDialog}
 					className="uppercase w-full">
 					Save
 				</Button>

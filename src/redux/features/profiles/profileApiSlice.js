@@ -26,18 +26,17 @@ const profileApiSlice = baseApi.injectEndpoints({
 					body: formData,
 				};
 			},
-			// invalidatesTags: ["PROFILE"],
+			invalidatesTags: ["PROFILE"],
 		}),
 
-		profileList: builder.query({
-			query: ({}) => ({
+		profileMe: builder.query({
+			query: () => ({
 				url: "/profile/",
 				method: "GET",
 			}),
-			// providesTags: ["POSTS"],
+			providesTags: ["PROFILE"],
 		}),
 	}),
 });
 
-export const { useProfileCreateMutation, useProfileListQuery } =
-	profileApiSlice;
+export const { useProfileCreateMutation, useProfileMeQuery } = profileApiSlice;

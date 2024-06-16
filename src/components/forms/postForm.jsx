@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import postFormSchema from "@/schema/postFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -14,9 +15,8 @@ import {
 import { Input } from "@/components/ui/shadcnComponents/input";
 import { usePostCreateMutation } from "@/redux/features/posts/postsApiSlice";
 import { toast } from "react-toastify";
-
-import React from "react";
 import Tiptap from "../ui/MyComponents/RichTextEditor/TipTap";
+import { useDialog } from "@/hooks/responsiveDialog";
 
 const PostForm = () => {
 	// handling form default values and media upload
@@ -61,6 +61,9 @@ const PostForm = () => {
 				});
 			});
 	};
+
+	const { handleCloseDialog: closePostDialog } = useDialog("post");
+
 	return (
 		<div className="">
 			<Form {...form}>
@@ -133,7 +136,9 @@ const PostForm = () => {
 
 					<Button
 						variant="secondary"
+						type="submit"
 						className="w-full"
+						onClick={closePostDialog}
 						disabled={isLoading}>
 						Post
 					</Button>

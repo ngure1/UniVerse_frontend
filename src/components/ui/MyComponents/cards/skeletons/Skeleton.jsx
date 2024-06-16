@@ -1,4 +1,4 @@
-import { Skeleton } from "../shadcnComponents/skeleton";
+import { Skeleton } from "../../../shadcnComponents/skeleton";
 
 import React from "react";
 

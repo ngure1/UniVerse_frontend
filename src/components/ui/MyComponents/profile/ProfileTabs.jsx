@@ -10,8 +10,8 @@ const ProfileTabs = () => {
 	return (
 		<Tabs
 			defaultValue="posts"
-			className="w-[100%]">
-			<TabsList className="gap-10">
+			className="w-[89%] min-h-screen">
+			<TabsList className="justify-between w-full">
 				<TabsTrigger value="posts">Posts</TabsTrigger>
 				<TabsTrigger value="work">Work</TabsTrigger>
 				<TabsTrigger value="education">Education</TabsTrigger>

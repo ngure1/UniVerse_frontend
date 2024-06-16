@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { baseApi } from "./baseApiSlice";
 import authReducer from "../redux/features/auth/authSlice";
+import dialogReducer from "@/redux/features/responsiveDialog/dialogSlice";
 import {
 	FLUSH,
 	REHYDRATE,
@@ -16,6 +17,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 
 const rootReducer = combineReducers({
 	auth: authReducer,
+	dialog: dialogReducer,
 	[baseApi.reducerPath]: baseApi.reducer,
 });
 

@@ -1,5 +1,5 @@
 import PostImage from "@/../public/images/postImage.png";
-import PostCard from "@/components/ui/MyComponents/PostCard";
+import PostCard from "@/components/ui/MyComponents/cards/PostCard";
 
 const SavedPosts = () => {
 	return (

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Logo from "@/../public/images/logo.png";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/shadcnComponents/input";
-import AvatarProfile from "./AvatarProfile";
+import AvatarProfile from "./profile/AvatarProfile";
 
 const SearchBar = ({ placeholder, onSearch }) => {
 	const [query, setQuery] = useState("");
