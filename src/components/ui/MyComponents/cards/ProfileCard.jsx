@@ -13,6 +13,7 @@ import EditProfileForm from "@/components/forms/profileForm";
 import AvatarProfile from "../profile/AvatarProfile";
 import Link from "next/link";
 import EditProfileTabs from "../profile/edit/EditProfileTabs";
+import { useDialog } from "@/hooks/responsiveDialog";
 
 const ProfileCard = ({
 	first_name,
@@ -30,8 +31,14 @@ const ProfileCard = ({
 	follower_count,
 	linked_in_url,
 }) => {
-	const [isEditProfileDialogOpen, setIsEditProfileDialogOpen] =
-		React.useState(false);
+	// const [isEditProfileDialogOpen, setIsEditProfileDialogOpen] =
+	// 	React.useState(false);
+
+	const {
+		isDialogOpen: isEditProfileDialogOpen,
+		handleOpenDialog: openEditProfileDialog,
+		handleCloseDialog: closeEditProfileDialogOpen,
+	} = useDialog();
 
 	return (
 		<div>
@@ -131,7 +138,7 @@ const ProfileCard = ({
 			</div>
 			<Button
 				variant="ghost"
-				onClick={() => setIsEditProfileDialogOpen(true)}
+				onClick={openEditProfileDialog}
 				className="flex gap-3">
 				<PencilLine size={18} />
 				<span className="text-sm">Edit Profile</span>
@@ -140,7 +147,7 @@ const ProfileCard = ({
 				title={"Edit Profile"}
 				description={"Edit your profile"}
 				isOpen={isEditProfileDialogOpen}
-				setIsOpen={setIsEditProfileDialogOpen}>
+				setIsOpen={closeEditProfileDialogOpen}>
 				{/* <EditProfileForm /> */}
 				<EditProfileTabs />
 			</ResponsiveDialog>
