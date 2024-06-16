@@ -13,12 +13,26 @@ import {
 	Undo,
 	Redo,
 	Code,
+	Image,
 } from "lucide-react";
 
 const Toolbar = ({ editor }) => {
 	if (!editor) {
 		return null;
 	}
+
+	const insertImage = (event) => {
+		const files = event.target.files;
+		if (files.length === 0) {
+			return; // No file selected
+		}
+		const reader = new FileReader();
+		reader.onload = (e) => {
+			editor.chain().focus().setImage({ src: e.target.result }).run();
+		};
+		reader.readAsDataURL(files[0]);
+	};
+
 	return (
 		<div
 			className="px-4 py-3 rounded-tl-md rounded-tr-md flex justify-between items-start
@@ -161,6 +175,21 @@ const Toolbar = ({ editor }) => {
 					}>
 					<Redo className="w-5 h-5" />
 				</button>
+				<button
+					type="button"
+					onClick={() =>
+						document.getElementById("imageUpload").click()
+					}
+					className="text-sky-400 hover:bg-sky-700 hover:text-white p-1 hover:rounded-lg">
+					<Image className="w-5 h-5" />
+				</button>
+				<input
+					type="file"
+					id="imageUpload"
+					style={{ display: "none" }}
+					accept="image/*"
+					onChange={insertImage}
+				/>
 			</div>
 		</div>
 	);
