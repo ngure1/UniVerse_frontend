@@ -23,7 +23,7 @@ const ProfilePage = () => {
 
 	return (
 		<div className="flex flex-col gap-4 w-[100%]">
-			<div className="px-[2.5rem] py-[1.5rem] w-[80%] bg-white dark:bg-muted rounded-md flex flex-col gap-8">
+			<div className="px-[2.5rem] py-[1.5rem] w-[89%] bg-white dark:bg-muted rounded-md flex flex-col gap-8 border">
 				{profileData && (
 					<ProfileCard
 						first_name={profileData.user.first_name}

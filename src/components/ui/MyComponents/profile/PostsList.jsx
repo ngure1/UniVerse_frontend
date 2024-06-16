@@ -1,10 +1,9 @@
 import PostImage from "@/../public/images/postImage.png";
 import PostCard from "@/components/ui/MyComponents/cards/PostCard";
-import { useInfiniteQuery } from "@reduxjs/toolkit/query/react";
 
 const PostsList = () => {
 	return (
-		<div className="grid grid-cols-2 gap-2 w-full">
+		<div className="grid grid-cols-2 w-full gap-y-2">
 			<PostCard
 				forProfile
 				date="1 Month Ago"
