@@ -29,7 +29,13 @@ const Home = () => {
 						type="Student"
 						date="1 Month Ago"
 						title={post.title}
-						content={post.content}
+						content={
+							<div
+								dangerouslySetInnerHTML={{
+									__html: post.content,
+								}}
+							/>
+						}
 						postImage={post.media}
 						size="large"
 					/>
