@@ -92,7 +92,9 @@
 	ol li {
 		@apply list-decimal;
 	}
-
+	code {
+		@apply bg-gray-200 p-3 rounded-md dark:bg-gray-800 my-4 block;
+	}
 	h2 {
 		@apply text-2xl font-medium;
 	}
