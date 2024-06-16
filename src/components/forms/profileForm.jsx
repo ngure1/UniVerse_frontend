@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { editProfileSchema } from "@/schema/editProfileSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,8 +17,12 @@ import { Button } from "@/components/ui/shadcnComponents/button";
 import { Checkbox } from "../ui/shadcnComponents/checkbox";
 import { useProfileCreateMutation } from "@/redux/features/profiles/profileApiSlice";
 import { toast } from "react-toastify";
+import { useProfileMeQuery } from "@/redux/features/profiles/profileApiSlice";
 
 const ProfileForm = () => {
+	// * fetch profile details for the user and use them to prefill the form
+	const { data: profileData } = useProfileMeQuery(null);
+
 	const form = useForm({
 		resolver: zodResolver(editProfileSchema),
 		defaultValues: {
@@ -30,6 +34,20 @@ const ProfileForm = () => {
 			linked_in_url: "",
 		},
 	});
+
+	// * useEffect to prefill the form once profileData is available
+	useEffect(() => {
+		if (profileData) {
+			form.reset({
+				is_student: profileData.is_student,
+				is_alumni: profileData.is_alumni,
+				is_lecturer: profileData.is_lecturer,
+				bio: profileData.bio,
+				phone_number: profileData.phone_number,
+				linked_in_url: profileData.linked_in_url,
+			});
+		}
+	}, [profileData]);
 
 	const [profile, { isLoading, error }] = useProfileCreateMutation();
 
@@ -139,7 +157,7 @@ const ProfileForm = () => {
 								<FormControl>
 									<Textarea
 										placeholder="Tell us a little bit about yourself"
-										className="resize-none"
+										className="resize-none min-w-fit text-[1rem] min-h-32"
 										{...field}
 									/>
 								</FormControl>
