@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import JobCard from "@/components/ui/MyComponents/JobCard";
+import JobCard from "@/components/ui/MyComponents/cards/JobCard";
 import Logo from "@/../public/images/logo.png";
 
 const Jobs = () => {

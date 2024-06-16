@@ -1,6 +1,6 @@
 "use client";
 import { ModeToggle } from "@/components/ui/MyComponents/ModeToggle";
-import ProfileCard from "@/components/ui/MyComponents/ProfileCard";
+import ProfileCard from "@/components/ui/MyComponents/cards/ProfileCard";
 import ProfileTabs from "@/components/ui/MyComponents/profile/ProfileTabs";
 import { useProfileListQuery } from "@/redux/features/profiles/profileApiSlice";
 

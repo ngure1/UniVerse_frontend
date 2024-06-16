@@ -8,7 +8,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/shadcnComponents/card";
-import { Button } from "../shadcnComponents/button";
+import { Button } from "../../shadcnComponents/button";
 import Image from "next/image";
 import {
 	Bookmark,

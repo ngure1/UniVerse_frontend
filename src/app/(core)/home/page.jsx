@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import PostImage from "@/../public/images/postImage.png";
-import PostCard from "@/components/ui/MyComponents/PostCard";
+import PostCard from "@/components/ui/MyComponents/cards/PostCard";
 import { usePostListQuery } from "@/redux/features/posts/postsApiSlice";
-import PostSkeleton from "@/components/ui/MyComponents/Skeleton";
+import PostSkeleton from "@/components/ui/MyComponents/cards/skeletons/Skeleton";
 const Home = () => {
 	const { data, isLoading } = usePostListQuery(1);
 	console.log(data);

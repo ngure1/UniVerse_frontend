@@ -7,12 +7,12 @@ import {
 	PencilLine,
 	PhoneIcon,
 } from "lucide-react";
-import { Button } from "../shadcnComponents/button";
-import { ResponsiveDialog } from "./ResponsiveDialog";
+import { Button } from "../../shadcnComponents/button";
+import { ResponsiveDialog } from "../ResponsiveDialog";
 import EditProfileForm from "@/components/forms/profileForm";
-import AvatarProfile from "./AvatarProfile";
+import AvatarProfile from "../profile/AvatarProfile";
 import Link from "next/link";
-import EditProfileTabs from "./profile/edit/EditProfileTabs";
+import EditProfileTabs from "../profile/edit/EditProfileTabs";
 
 const ProfileCard = ({
 	first_name,

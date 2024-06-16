@@ -8,7 +8,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/shadcnComponents/card";
-import { Button } from "../shadcnComponents/button";
+import { Button } from "../../shadcnComponents/button";
 import {
 	Heart,
 	Send,
@@ -21,7 +21,7 @@ import {
 	UserRoundPlus,
 } from "lucide-react";
 import Image from "next/image";
-import AvatarProfile from "./AvatarProfile";
+import AvatarProfile from "../profile/AvatarProfile";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 import {
 	useLike,

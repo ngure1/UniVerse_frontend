@@ -1,5 +1,5 @@
 import React from "react";
-import PostCard from "@/components/ui/MyComponents/PostCard";
+import PostCard from "@/components/ui/MyComponents/cards/PostCard";
 import PostImage from "@/../public/images/postImage.png";
 const Events = () => {
 	return (
