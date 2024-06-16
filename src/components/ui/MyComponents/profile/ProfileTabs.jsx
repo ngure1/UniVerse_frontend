@@ -10,7 +10,7 @@ const ProfileTabs = () => {
 	return (
 		<Tabs
 			defaultValue="posts"
-			className="w-[89%]">
+			className="w-[89%] min-h-screen">
 			<TabsList className="justify-between w-full">
 				<TabsTrigger value="posts">Posts</TabsTrigger>
 				<TabsTrigger value="work">Work</TabsTrigger>
