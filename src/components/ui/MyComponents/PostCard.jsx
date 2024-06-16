@@ -154,21 +154,25 @@ const PostCard = ({
 					)}
 				</div>
 			</CardContent>
-			<CardFooter className="flex justify-between items-center self-stretch">
-				<div
-					className="relative"
+			<CardFooter className="flex justify-between items-center self-stretch ">
+				<Button
+					className="flex items-center gap-1 cursor-pointer"
+					variant="ghost"
 					onClick={handleThumbsUp}>
-					<Lottie
-						animationData={thumbsUp}
-						loop={false}
-						play={isPlaying}
-						className="absolute w-17 h-10 top-0 left-0"
-					/>
 					{/* <Button variant="ghost" className="relative z-10 gap-1"> */}
-					{isLiked ? <Lottie className="w-20 h-20" /> : <UnLikeSVG />}
+					{isLiked ? (
+						<Lottie
+							animationData={thumbsUp}
+							loop={false}
+							play={isPlaying}
+							className="w-[2.5rem] h-[2.5rem] relative bottom-1"
+						/>
+					) : (
+						<UnLikeSVG />
+					)}
 					{likeCount}
 					{/* </Button> */}
-				</div>
+				</Button>
 				<Button
 					variant="ghost"
 					className="gap-1">
