@@ -80,6 +80,11 @@
 		padding: 0;
 	}
 
+	ul,
+	ol {
+		@apply pl-10;
+	}
+
 	ul li {
 		@apply list-disc;
 	}
