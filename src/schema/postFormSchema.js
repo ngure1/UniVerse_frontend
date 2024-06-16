@@ -3,7 +3,7 @@
 import { z } from "zod";
 
 const postFormSchema = z.object({
-	title: z.string().max(20),
+	title: z.string(),
 	content: z.string(),
 	media: typeof window === "undefined" ? z.any() : z.instanceof(FileList),
 });
