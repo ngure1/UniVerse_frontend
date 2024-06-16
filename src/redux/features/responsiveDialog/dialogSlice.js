@@ -1,18 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	isDialogOpen: false,
+	isDialogOpen: {
+		editProfile: false,
+		post: false,
+	},
 };
 
 const dialogSlice = createSlice({
 	name: "dialogSlice",
 	initialState,
 	reducers: {
-		openDialog: (state) => {
-			state.isDialogOpen = true;
+		openDialog: (state, action) => {
+			const dialogName = action.payload;
+			if (state.isDialogOpen.hasOwnProperty(dialogName)) {
+				state.isDialogOpen[dialogName] = true;
+			}
 		},
-		closeDialog: (state) => {
-			state.isDialogOpen = false;
+		closeDialog: (state, action) => {
+			const dialogName = action.payload;
+			if (state.isDialogOpen.hasOwnProperty(dialogName)) {
+				state.isDialogOpen[dialogName] = false;
+			}
 		},
 	},
 });

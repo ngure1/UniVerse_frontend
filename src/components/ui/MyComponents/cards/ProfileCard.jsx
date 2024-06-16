@@ -38,7 +38,7 @@ const ProfileCard = ({
 		isDialogOpen: isEditProfileDialogOpen,
 		handleOpenDialog: openEditProfileDialog,
 		handleCloseDialog: closeEditProfileDialogOpen,
-	} = useDialog();
+	} = useDialog("editProfile");
 
 	return (
 		<div>

@@ -18,6 +18,7 @@ import { Checkbox } from "../ui/shadcnComponents/checkbox";
 import { useProfileCreateMutation } from "@/redux/features/profiles/profileApiSlice";
 import { toast } from "react-toastify";
 import { useProfileMeQuery } from "@/redux/features/profiles/profileApiSlice";
+import { useDialog } from "@/hooks/responsiveDialog";
 
 const ProfileForm = () => {
 	// * fetch profile details for the user and use them to prefill the form
@@ -48,14 +49,18 @@ const ProfileForm = () => {
 			});
 		}
 	}, [profileData]);
+	// * initialise dialog close function on successful submition
+	const { handleCloseDialog: closeEditProfileDialog } =
+		useDialog("editProfile");
 
+	// * create profile mutation
 	const [profile, { isLoading, error }] = useProfileCreateMutation();
 
 	const onSubmit = (data) => {
-		// * create promise toast for creating the profile
-		const toastId = toast.loading("Creating your profile", {
+		// * create promise toast for updating the profile
+		const toastId = toast.loading("Updating your profile", {
 			theme: "colored",
-			autoClose: false, // Disable autoClose to manually control the toast
+			autoClose: false,
 		});
 
 		profile(data)
@@ -63,7 +68,7 @@ const ProfileForm = () => {
 			.then(() => {
 				// Update the toast on success
 				toast.update(toastId, {
-					render: "Profile created successfully",
+					render: "Profile updated successfully",
 					type: "success",
 					isLoading: false,
 					autoClose: 5000, // Close after 5 seconds
@@ -72,7 +77,7 @@ const ProfileForm = () => {
 			.catch(() => {
 				// Update the toast on failure
 				toast.update(toastId, {
-					render: "Something went wrong with your post",
+					render: "Something went wrong with your request",
 					type: "error",
 					isLoading: false,
 					autoClose: 5000, // Close after 5 seconds
@@ -186,6 +191,7 @@ const ProfileForm = () => {
 				<Button
 					type="submit"
 					variant="secondary"
+					onClick={closeEditProfileDialog}
 					className="uppercase w-full">
 					Save
 				</Button>

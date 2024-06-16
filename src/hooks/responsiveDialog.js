@@ -5,15 +5,17 @@ import {
 	closeDialog,
 } from "@/redux/features/responsiveDialog/dialogSlice";
 
-export const useDialog = () => {
+export const useDialog = (dialogName) => {
 	const dispatch = useDispatch();
 	//read the isDialog open state form redux
-	const { isDialogOpen } = useSelector((state) => state.dialog);
+	const isDialogOpen = useSelector(
+		(state) => state.dialog.isDialogOpen[dialogName],
+	);
 	function handleOpenDialog() {
-		dispatch(openDialog());
+		dispatch(openDialog(dialogName));
 	}
 	function handleCloseDialog() {
-		dispatch(closeDialog());
+		dispatch(closeDialog(dialogName));
 	}
 
 	return { isDialogOpen, handleOpenDialog, handleCloseDialog };

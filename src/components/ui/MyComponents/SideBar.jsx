@@ -15,6 +15,7 @@ import {
 import { Button } from "../shadcnComponents/button";
 import { ResponsiveDialog } from "./ResponsiveDialog";
 import PostForm from "@/components/forms/postForm";
+import { useDialog } from "@/hooks/responsiveDialog";
 
 const SideBar = ({ className }) => {
 	const links = [
@@ -50,8 +51,8 @@ const SideBar = ({ className }) => {
 		</Link>
 	));
 
-	const [isNewPostDialogueOpen, setIsNewPostDialogueOpen] = useState(false);
-
+	const { isDialogOpen, handleOpenDialog, handleCloseDialog } =
+		useDialog("post");
 	return (
 		<div
 			className={`inline-flex flex-col pt-[1.25rem] pr-[0] pb-[0.75rem] pl-[1.25rem] justify-between items-start shrink-0 gap-[4rem] ${className}`}>
@@ -60,7 +61,7 @@ const SideBar = ({ className }) => {
 				<Button
 					variant="ghost"
 					className="flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem]"
-					onClick={() => setIsNewPostDialogueOpen(true)}>
+					onClick={handleOpenDialog}>
 					<CirclePlus size={18} />
 					<span className="body-md">New Post</span>
 				</Button>
@@ -68,8 +69,8 @@ const SideBar = ({ className }) => {
 			<ResponsiveDialog
 				title={"Create New Post"}
 				className="w-[60rem]"
-				isOpen={isNewPostDialogueOpen}
-				setIsOpen={setIsNewPostDialogueOpen}>
+				isOpen={isDialogOpen}
+				setIsOpen={handleCloseDialog}>
 				<PostForm />
 			</ResponsiveDialog>
 			<div className="w-full">{bottomLinks}</div>
