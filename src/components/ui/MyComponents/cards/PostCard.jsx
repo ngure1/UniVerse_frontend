@@ -16,6 +16,9 @@ import {
 	Globe,
 	MapPin,
 	UserRoundPlus,
+	EllipsisVertical,
+	SquarePen,
+	Trash2,
 } from "lucide-react";
 import Image from "next/image";
 import AvatarProfile from "../profile/AvatarProfile";
@@ -25,11 +28,19 @@ import {
 	useUnlike,
 	useUnbookmark,
 } from "@/hooks/postHooks";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "@/components/ui/shadcnComponents/dropdown-menu";
 import { useFollowToggle } from "@/hooks/profile";
 import thumbsUp from "./thumbs-up.json";
 import Lottie from "react-lottie-player";
 import { LikeSVG, UnLikeSVG } from "@/app/landing/SVGIcon";
 import DOMPurify from "dompurify";
+import Link from "next/link";
 
 const PostCard = ({
 	postId,
@@ -43,6 +54,7 @@ const PostCard = ({
 	postImage,
 	isVerified,
 	forProfile = false,
+	isOwner = true,
 	event_date,
 	isOnline,
 	address,
@@ -107,7 +119,9 @@ const PostCard = ({
 								<p className="text-sm muted">{date}</p>
 							</div>
 						</div>
-						{isFollowingCreator ? (
+						{isOwner ? (
+							<DropDown />
+						) : isFollowingCreator ? (
 							<Button
 								variant="outline"
 								className="gap-2"
@@ -224,3 +238,23 @@ const PostCard = ({
 };
 
 export default PostCard;
+
+const DropDown = () => (
+	<DropdownMenu>
+		<DropdownMenuTrigger asChild>
+			<div className="hover:bg-accent rounded-full p-1">
+				<EllipsisVertical />
+			</div>
+		</DropdownMenuTrigger>
+		<DropdownMenuContent className="w-56">
+			<DropdownMenuItem>
+				<SquarePen className="mr-2 h-4 w-4" />
+				<Link href="">Edit</Link>
+			</DropdownMenuItem>
+			<DropdownMenuItem className="hover:bg-destructive active:bg-destructive focus:bg-destructive hover:text-white active:text-white focus:text-white">
+				<Trash2 className="mr-2 h-4 w-4" />
+				<span>Delete</span>
+			</DropdownMenuItem>
+		</DropdownMenuContent>
+	</DropdownMenu>
+);
