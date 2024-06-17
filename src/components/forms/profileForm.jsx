@@ -48,7 +48,7 @@ const ProfileForm = () => {
 				linked_in_url: profileData.linked_in_url,
 			});
 		}
-	}, [profileData]);
+	}, [profileData, form]);
 	// * initialise dialog close function on successful submition
 	const { handleCloseDialog: closeEditProfileDialog } =
 		useDialog("editProfile");

@@ -47,8 +47,8 @@ const Community = () => {
 						</div>
 
 						<p className="self-stretch body-text">
-							This platform has helped me connect with my fellow
-							alumni and find jobs.
+							The mentorship I've received have greatly enriched
+							my academic journey.
 						</p>
 					</div>
 				</div>

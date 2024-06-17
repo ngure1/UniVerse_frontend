@@ -1,4 +1,5 @@
 import React from "react";
+import { ButtonsAlertDialog } from "@/components/ui/MyComponents/ButtonsAlertDialog";
 
 export default function AboutCard({
 	aboutSVG,
@@ -16,7 +17,11 @@ export default function AboutCard({
 				{aboutContent}
 			</p>
 			<p className="muted body-underline">
-				<a href="./login">{aboutLink} &#x3E;</a>
+				<ButtonsAlertDialog
+					className={"muted body-underline normal-case"}
+					variant={"ghost"}>
+					<p>{aboutLink} &#x3E;</p>
+				</ButtonsAlertDialog>
 			</p>
 		</div>
 	);

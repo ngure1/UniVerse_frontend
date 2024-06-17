@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Element } from "react-scroll";
 import { ButtonsAlertDialog } from "@/components/ui/MyComponents/ButtonsAlertDialog";
 import googleImage from "@/../public/images/googleLogo.png";
+import videoBg from "@/../public/images/videoBg.gif";
 
 const Hero = () => {
 	return (
@@ -11,8 +12,9 @@ const Hero = () => {
 			name="Home"
 			className="relative flex flex-col justify-center items-center w-full h-[46.25rem] py-[3.25rem] pt-[8.75rem] px-0 gap-[3.25rem] border border-black shrink-0">
 			<Image
-				src="/images/HeroBg.gif"
+				src={videoBg}
 				alt="Background Gif"
+				unoptimized
 				layout="fill"
 				priority={true}
 				className="absolute inset-0 w-full h-full object-cover"
