@@ -25,6 +25,7 @@ import {
 	useUnlike,
 	useUnbookmark,
 } from "@/hooks/postHooks";
+import { useFollowToggle } from "@/hooks/profile";
 import thumbsUp from "./thumbs-up.json";
 import Lottie from "react-lottie-player";
 import { LikeSVG, UnLikeSVG } from "@/app/landing/SVGIcon";
@@ -58,6 +59,8 @@ const PostCard = ({
 	const handleUnlike = useUnlike(postId);
 	const handleBookmark = useBookmark(postId);
 	const handleUnbookmark = useUnbookmark(postId);
+
+	const handleFollow = useFollowToggle(1);
 
 	const handleThumbsUp = () => {
 		if (!isLiked) {
@@ -105,11 +108,18 @@ const PostCard = ({
 							</div>
 						</div>
 						{isFollowingCreator ? (
-							<p className="muted">Following</p>
+							<Button
+								variant="outline"
+								className="gap-2"
+								onClick={handleFollow}>
+								<UserRoundPlus />
+								Unfollow
+							</Button>
 						) : (
 							<Button
 								variant="outline"
-								className="gap-2">
+								className="gap-2"
+								onClick={handleFollow}>
 								<UserRoundPlus />
 								Follow
 							</Button>
