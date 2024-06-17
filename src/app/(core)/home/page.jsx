@@ -23,6 +23,7 @@ const Home = () => {
 						pfpImage={post.author.profile_picture}
 						isVerified={post.author.is_verified}
 						isLiked={post.is_liked}
+						isFollowingCreator={post.is_following_creator}
 						likeCount={post.likes_count}
 						isSaved={post.is_bookmarked}
 						bookmarkCount={post.bookmarks_count}

@@ -51,6 +51,7 @@ const PostCard = ({
 	forEvents,
 	isLiked,
 	isSaved,
+	isFollowingCreator,
 	likeCount,
 	bookmarkCount,
 }) => {
@@ -104,12 +105,16 @@ const PostCard = ({
 								<p className="text-sm muted">{date}</p>
 							</div>
 						</div>
-						<Button
-							variant="outline"
-							className="gap-2">
-							<UserRoundPlus />
-							FOLLOW
-						</Button>
+						{isFollowingCreator ? (
+							<p className="muted">Following</p>
+						) : (
+							<Button
+								variant="outline"
+								className="gap-2">
+								<UserRoundPlus />
+								Follow
+							</Button>
+						)}
 					</div>
 				</CardHeader>
 			)}
