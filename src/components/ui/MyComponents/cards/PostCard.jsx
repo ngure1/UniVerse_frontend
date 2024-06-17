@@ -41,6 +41,9 @@ import Lottie from "react-lottie-player";
 import { LikeSVG, UnLikeSVG } from "@/app/landing/SVGIcon";
 import DOMPurify from "dompurify";
 import Link from "next/link";
+import { useDialog } from "@/hooks/responsiveDialog";
+import { ResponsiveDialog } from "../ResponsiveDialog";
+import ConfirmDelete from "../ConfirmDelete";
 
 const PostCard = ({
 	postId,
@@ -87,6 +90,8 @@ const PostCard = ({
 	};
 
 	const sanitizedContent = DOMPurify.sanitize(content);
+
+	const { isDialogOpen, handleCloseDialog } = useDialog("confirmDelete");
 
 	return (
 		<Card className="flex w-[37.5rem] min-w-[21.25rem] py-[0.5rem] px-[1.25rem] flex-col justify-center items-start gap-[0.75rem] rounded-[0.5rem] bg-white dark:bg-muted">
@@ -139,6 +144,11 @@ const PostCard = ({
 							</Button>
 						)}
 					</div>
+					<ResponsiveDialog
+						isOpen={isDialogOpen}
+						setIsOpen={handleCloseDialog}>
+						<ConfirmDelete post_id={19} />
+					</ResponsiveDialog>
 				</CardHeader>
 			)}
 
@@ -239,22 +249,29 @@ const PostCard = ({
 
 export default PostCard;
 
-const DropDown = () => (
-	<DropdownMenu>
-		<DropdownMenuTrigger asChild>
-			<div className="hover:bg-accent rounded-full p-1">
-				<EllipsisVertical />
-			</div>
-		</DropdownMenuTrigger>
-		<DropdownMenuContent className="w-56">
-			<DropdownMenuItem>
-				<SquarePen className="mr-2 h-4 w-4" />
-				<Link href="">Edit</Link>
-			</DropdownMenuItem>
-			<DropdownMenuItem className="hover:bg-destructive active:bg-destructive focus:bg-destructive hover:text-white active:text-white focus:text-white">
-				<Trash2 className="mr-2 h-4 w-4" />
-				<span>Delete</span>
-			</DropdownMenuItem>
-		</DropdownMenuContent>
-	</DropdownMenu>
-);
+const DropDown = () => {
+	const { handleOpenDialog } = useDialog("confirmDelete");
+	return (
+		<div>
+			<DropdownMenu>
+				<DropdownMenuTrigger asChild>
+					<div className="hover:bg-accent rounded-full p-1">
+						<EllipsisVertical />
+					</div>
+				</DropdownMenuTrigger>
+				<DropdownMenuContent className="w-56">
+					<DropdownMenuItem>
+						<SquarePen className="mr-2 h-4 w-4" />
+						<Link href="">Edit</Link>
+					</DropdownMenuItem>
+					<DropdownMenuItem
+						onSelect={handleOpenDialog}
+						className="hover:bg-destructive active:bg-destructive focus:bg-destructive hover:text-white active:text-white focus:text-white">
+						<Trash2 className="mr-2 h-4 w-4" />
+						<span>Delete</span>
+					</DropdownMenuItem>
+				</DropdownMenuContent>
+			</DropdownMenu>
+		</div>
+	);
+};
