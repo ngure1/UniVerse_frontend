@@ -80,6 +80,9 @@ dependencies:
   clsx:
     specifier: ^2.1.1
     version: 2.1.1
+  dompurify:
+    specifier: ^3.1.5
+    version: 3.1.5
   lottie-react:
     specifier: ^2.4.0
     version: 2.4.0(react-dom@18.3.1)(react@18.3.1)
@@ -2183,6 +2186,10 @@ packages:
     dependencies:
       esutils: 2.0.3
     dev: true
+
+  /dompurify@3.1.5:
+    resolution: {integrity: sha512-lwG+n5h8QNpxtyrJW/gJWckL+1/DQiYMX8f7t8Z2AZTPw1esVrqjI63i7Zc2Gz0aKzLVMYC1V1PL/ky+aY/NgA==}
+    dev: false
 
   /eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}

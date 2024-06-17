@@ -3,14 +3,11 @@ import React, { useState } from "react";
 import {
 	Card,
 	CardContent,
-	CardDescription,
 	CardFooter,
 	CardHeader,
-	CardTitle,
 } from "@/components/ui/shadcnComponents/card";
 import { Button } from "../../shadcnComponents/button";
 import {
-	Heart,
 	Send,
 	MessageSquareMore,
 	Bookmark,
@@ -22,7 +19,6 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import AvatarProfile from "../profile/AvatarProfile";
-import { AvatarFallback } from "@radix-ui/react-avatar";
 import {
 	useLike,
 	useBookmark,
@@ -32,6 +28,7 @@ import {
 import thumbsUp from "./thumbs-up.json";
 import Lottie from "react-lottie-player";
 import { LikeSVG, UnLikeSVG } from "@/app/landing/SVGIcon";
+import DOMPurify from "dompurify";
 
 const PostCard = ({
 	postId,
@@ -73,6 +70,8 @@ const PostCard = ({
 			setIsPlaying(false);
 		}, 1000); // Assuming the animation duration is 1 second
 	};
+
+	const sanitizedContent = DOMPurify.sanitize(content);
 
 	return (
 		<Card className="flex w-[37.5rem] min-w-[21.25rem] py-[0.5rem] px-[1.25rem] flex-col justify-center items-start gap-[0.75rem] rounded-[0.5rem] bg-white dark:bg-muted">
@@ -140,7 +139,11 @@ const PostCard = ({
 					)}
 					<div className="self-stretch ">
 						<p className="sub-heading-3 p-1">{title}</p>
-						<p className="body-md">{content}</p>
+						<div
+							dangerouslySetInnerHTML={{
+								__html: sanitizedContent,
+							}}
+						/>
 					</div>
 					<div className="self-stretch rounded-[0.25rem]">
 						<Image
