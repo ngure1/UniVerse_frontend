@@ -65,13 +65,23 @@ const SignUpForm = () => {
 			})
 			.catch((error) => {
 				// Update the toast on signUp failure
-				toast.update(toastId, {
-					render: "Failed to create account. Please try again.",
-					type: "error",
-					isLoading: false,
-					autoClose: 5000,
-					position: "top-center",
-				});
+				if (error.data.password) {
+					toast.update(toastId, {
+						render: `Failed to create account.${error.data.password}`,
+						type: "error",
+						isLoading: false,
+						autoClose: 5000,
+						position: "top-center",
+					});
+				} else {
+					toast.update(toastId, {
+						render: `Failed to create account.Please Try again`,
+						type: "error",
+						isLoading: false,
+						autoClose: 5000,
+						position: "top-center",
+					});
+				}
 			});
 	};
 
@@ -226,14 +236,15 @@ const SignUpForm = () => {
 							disabled={isLoading}>
 							Sign Up
 						</Button>
-						<p>
+						<p className="text-blue-500">
 							Already have an account?{" "}
 							<Link href="/login"> Login</Link>
 						</p>
 
 						<Button
+							variant="outline"
+							className="w-full gap-[1.625rem] uppercase"
 							type="submit"
-							className="flex py-[0.625rem] px-[0.75rem] justify-start items-center w-full gap-[5.625rem] capitalize bg-transparent text-muted border border-solid"
 							disabled={isLoading}>
 							<Image
 								src={GoogleLogo}
