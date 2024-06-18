@@ -12,6 +12,24 @@ const authApiSlice = baseApi.injectEndpoints({
 			}),
 		}),
 
+		// resetPassword
+		resetPassword: builder.mutation({
+			query: (email) => ({
+				url: "auth/users/reset_password/",
+				method: "POST",
+				body: { email },
+			}),
+		}),
+
+		// resetPasswordConfirm
+		resetPasswordConfirm: builder.mutation({
+			query: ({ uid, token, new_password, re_new_password }) => ({
+				url: "auth/users/reset_password_confirm/",
+				method: "POST",
+				body: { uid, token, new_password, re_new_password },
+			}),
+		}),
+
 		jwtCreate: builder.mutation({
 			query: ({ email, password }) => ({
 				url: "/auth/jwt/create/",
@@ -35,5 +53,10 @@ const authApiSlice = baseApi.injectEndpoints({
 	}),
 });
 
-
-export const { useJwtCreateMutation, useUserCreateMutation, useUsersActivationMutation} = authApiSlice;
+export const {
+	useJwtCreateMutation,
+	useUserCreateMutation,
+	useUsersActivationMutation,
+	useResetPasswordMutation,
+	useResetPasswordConfirmMutation,
+} = authApiSlice;
