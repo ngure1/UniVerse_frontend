@@ -13,21 +13,22 @@ const Footer = () => {
 				<div className="flex flex-col gap-[1.5rem] items-start self-stretch">
 					<h3 className="sub-heading-3">Contact us</h3>
 					<div className="flex flex-col items-start gap-[1.25rem]">
-						<p className="body-text">Email: universe@gmail.com </p>
+						<p className="body-text">
+							Email: universe.jhub@gmail.com{" "}
+						</p>
 						<p className="body-text">Phone: 0113021788 </p>
 					</div>
 				</div>
 				<div className="flex flex-col items-start self-stretch gap-[1rem]">
 					<p className="sub-heading-3">Our socials</p>
 					<div className="flex items-center content-center justify-center gap-[2.5rem] flex-wrap">
-						<Link href={"https://instagram.com"}>
+						<Link href={"https://instagram.com/project_uni_verse/"}>
 							<svg
 								width="37"
 								height="38"
 								viewBox="0 0 37 38"
 								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
+								xmlns="http://www.w3.org/2000/svg">
 								<g id="SVGRepo_iconCarrier">
 									<path
 										id="Vector"
@@ -51,7 +52,7 @@ const Footer = () => {
 								</g>
 							</svg>
 						</Link>
-						<Link href={"https://facebook.com"}>
+						{/* <Link href={"https://facebook.com"}>
 							<svg
 								width="41"
 								height="40"
@@ -67,15 +68,14 @@ const Footer = () => {
 									/>
 								</g>
 							</svg>
-						</Link>
-						<Link href={"https://twitter.com"}>
+						</Link> */}
+						<Link href={"https://x.com/UniVersePr75000"}>
 							<svg
 								width="41"
 								height="33"
 								viewBox="0 0 41 33"
 								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
+								xmlns="http://www.w3.org/2000/svg">
 								<g id="SVGRepo_iconCarrier">
 									<g id="Page-1">
 										<g id="Dribbble-Light-Preview">
