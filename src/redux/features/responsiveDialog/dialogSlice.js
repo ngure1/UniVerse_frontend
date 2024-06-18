@@ -4,6 +4,7 @@ const initialState = {
 	isDialogOpen: {
 		editProfile: false,
 		post: false,
+		confirmDelete: false,
 	},
 };
 

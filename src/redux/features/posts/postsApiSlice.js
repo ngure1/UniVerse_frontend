@@ -19,12 +19,22 @@ const postApiSlice = baseApi.injectEndpoints({
 			invalidatesTags: ["POSTS"],
 		}),
 
+		// * listing all posts
 		postList: builder.query({
 			query: ({}) => ({
 				url: "/posts/",
 				method: "GET",
 			}),
 			providesTags: ["POSTS"],
+		}),
+
+		// * deleting a post
+		postDelete: builder.mutation({
+			query: ({ post_id }) => ({
+				url: `/posts/${post_id}/`,
+				method: "DELETE",
+			}),
+			invalidatesTags: ["POSTS"],
 		}),
 
 		// liking a post
@@ -66,10 +76,16 @@ const postApiSlice = baseApi.injectEndpoints({
 });
 
 export const {
+	// * crud on post
 	usePostCreateMutation,
 	usePostListQuery,
+	usePostDeleteMutation,
+
+	// * crud on like
 	usePostsLikesCreateMutation,
-	usePostBookmarkCreateMutation,
 	usePostsUnlikeCreateMutation,
+
+	// * crud on bookmark
+	usePostBookmarkCreateMutation,
 	usePostUnbookmarkCreateMutation,
 } = postApiSlice;

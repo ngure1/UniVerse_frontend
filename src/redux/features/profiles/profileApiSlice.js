@@ -36,7 +36,21 @@ const profileApiSlice = baseApi.injectEndpoints({
 			}),
 			providesTags: ["PROFILE"],
 		}),
+
+		//following and unfollowing a profile/user
+		profileFollowToggle: builder.mutation({
+			query: ({ followed_id }) => ({
+				url: "/follow-toggle/",
+				method: "POST",
+				body: { followed_id },
+			}),
+			providesTags: ["PROFILE", "POSTS"],
+		}),
 	}),
 });
 
-export const { useProfileCreateMutation, useProfileMeQuery } = profileApiSlice;
+export const {
+	useProfileCreateMutation,
+	useProfileMeQuery,
+	useProfileFollowToggleMutation,
+} = profileApiSlice;

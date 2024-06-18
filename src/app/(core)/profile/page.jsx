@@ -2,17 +2,16 @@
 import { ModeToggle } from "@/components/ui/MyComponents/ModeToggle";
 import ProfileCard from "@/components/ui/MyComponents/cards/ProfileCard";
 import ProfileTabs from "@/components/ui/MyComponents/profile/ProfileTabs";
-import { useProfileMeQuery } from "@/redux/features/profiles/profileApiSlice";
 import { toast } from "react-toastify";
+import { useProfile } from "@/hooks/profile";
 
 const ProfilePage = () => {
-	const { data: profileData, isLoading, error } = useProfileMeQuery(null);
-	console.log(profileData);
+	const { data: profileData, isLoading, error } = useProfile();
 
 	if (isLoading) {
 		return (
 			// todo implement profile card skeleton
-			<p>Loading..</p>
+			<p>Loading...</p>
 		);
 	}
 

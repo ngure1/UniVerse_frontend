@@ -3,14 +3,11 @@ import React, { useState } from "react";
 import {
 	Card,
 	CardContent,
-	CardDescription,
 	CardFooter,
 	CardHeader,
-	CardTitle,
 } from "@/components/ui/shadcnComponents/card";
 import { Button } from "../../shadcnComponents/button";
 import {
-	Heart,
 	Send,
 	MessageSquareMore,
 	Bookmark,
@@ -19,19 +16,34 @@ import {
 	Globe,
 	MapPin,
 	UserRoundPlus,
+	EllipsisVertical,
+	SquarePen,
+	Trash2,
 } from "lucide-react";
 import Image from "next/image";
 import AvatarProfile from "../profile/AvatarProfile";
-import { AvatarFallback } from "@radix-ui/react-avatar";
 import {
 	useLike,
 	useBookmark,
 	useUnlike,
 	useUnbookmark,
 } from "@/hooks/postHooks";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "@/components/ui/shadcnComponents/dropdown-menu";
+import { useFollowToggle } from "@/hooks/profile";
 import thumbsUp from "./thumbs-up.json";
 import Lottie from "react-lottie-player";
 import { LikeSVG, UnLikeSVG } from "@/app/landing/SVGIcon";
+import DOMPurify from "dompurify";
+import Link from "next/link";
+import { useDialog } from "@/hooks/responsiveDialog";
+import { ResponsiveDialog } from "../ResponsiveDialog";
+import ConfirmDelete from "../ConfirmDelete";
 
 const PostCard = ({
 	postId,
@@ -45,12 +57,14 @@ const PostCard = ({
 	postImage,
 	isVerified,
 	forProfile = false,
+	isOwner = true,
 	event_date,
 	isOnline,
 	address,
 	forEvents,
 	isLiked,
 	isSaved,
+	isFollowingCreator,
 	likeCount,
 	bookmarkCount,
 }) => {
@@ -60,6 +74,8 @@ const PostCard = ({
 	const handleUnlike = useUnlike(postId);
 	const handleBookmark = useBookmark(postId);
 	const handleUnbookmark = useUnbookmark(postId);
+
+	const handleFollow = useFollowToggle(1);
 
 	const handleThumbsUp = () => {
 		if (!isLiked) {
@@ -72,6 +88,10 @@ const PostCard = ({
 			setIsPlaying(false);
 		}, 1000); // Assuming the animation duration is 1 second
 	};
+
+	const sanitizedContent = DOMPurify.sanitize(content);
+
+	const { isDialogOpen, handleCloseDialog } = useDialog("confirmDelete");
 
 	return (
 		<Card className="flex w-[37.5rem] min-w-[21.25rem] py-[0.5rem] px-[1.25rem] flex-col justify-center items-start gap-[0.75rem] rounded-[0.5rem] bg-white dark:bg-muted">
@@ -104,13 +124,31 @@ const PostCard = ({
 								<p className="text-sm muted">{date}</p>
 							</div>
 						</div>
-						<Button
-							variant="outline"
-							className="gap-2">
-							<UserRoundPlus />
-							FOLLOW
-						</Button>
+						{isOwner ? (
+							<DropDown />
+						) : isFollowingCreator ? (
+							<Button
+								variant="outline"
+								className="gap-2"
+								onClick={handleFollow}>
+								<UserRoundPlus />
+								Unfollow
+							</Button>
+						) : (
+							<Button
+								variant="outline"
+								className="gap-2"
+								onClick={handleFollow}>
+								<UserRoundPlus />
+								Follow
+							</Button>
+						)}
 					</div>
+					<ResponsiveDialog
+						isOpen={isDialogOpen}
+						setIsOpen={handleCloseDialog}>
+						<ConfirmDelete post_id={19} />
+					</ResponsiveDialog>
 				</CardHeader>
 			)}
 
@@ -135,7 +173,11 @@ const PostCard = ({
 					)}
 					<div className="self-stretch ">
 						<p className="sub-heading-3 p-1">{title}</p>
-						<p className="body-md">{content}</p>
+						<div
+							dangerouslySetInnerHTML={{
+								__html: sanitizedContent,
+							}}
+						/>
 					</div>
 					<div className="self-stretch rounded-[0.25rem]">
 						<Image
@@ -206,3 +248,30 @@ const PostCard = ({
 };
 
 export default PostCard;
+
+const DropDown = () => {
+	const { handleOpenDialog } = useDialog("confirmDelete");
+	return (
+		<div>
+			<DropdownMenu>
+				<DropdownMenuTrigger asChild>
+					<div className="hover:bg-accent rounded-full p-1">
+						<EllipsisVertical />
+					</div>
+				</DropdownMenuTrigger>
+				<DropdownMenuContent className="w-56">
+					<DropdownMenuItem>
+						<SquarePen className="mr-2 h-4 w-4" />
+						<Link href="">Edit</Link>
+					</DropdownMenuItem>
+					<DropdownMenuItem
+						onSelect={handleOpenDialog}
+						className="hover:bg-destructive active:bg-destructive focus:bg-destructive hover:text-white active:text-white focus:text-white">
+						<Trash2 className="mr-2 h-4 w-4" />
+						<span>Delete</span>
+					</DropdownMenuItem>
+				</DropdownMenuContent>
+			</DropdownMenu>
+		</div>
+	);
+};
