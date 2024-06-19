@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
 	Card,
 	CardContent,
@@ -69,6 +69,8 @@ const PostCard = ({
 	bookmarkCount,
 }) => {
 	const [isPlaying, setIsPlaying] = useState(false);
+	const [liked, setLiked] = useState(isLiked);
+	const [animationComplete, setAnimationComplete] = useState(false);
 
 	const handleLike = useLike(postId);
 	const handleUnlike = useUnlike(postId);
@@ -78,15 +80,30 @@ const PostCard = ({
 	const handleFollow = useFollowToggle(1);
 
 	const handleThumbsUp = () => {
-		if (!isLiked) {
+		if (!liked) {
 			handleLike();
+			setIsPlaying(true);
+			setAnimationComplete(false);
+			setTimeout(() => {
+				setIsPlaying(false);
+				setAnimationComplete(true);
+			}, 1000); // Assuming the animation duration is 1 second
 		} else {
 			handleUnlike();
-		}
-		setIsPlaying(true);
-		setTimeout(() => {
 			setIsPlaying(false);
-		}, 1000); // Assuming the animation duration is 1 second
+			setAnimationComplete(false);
+		}
+		setLiked(!liked);
+		// 	if (!isLiked) {
+		// 		handleLike();
+		// 	} else {
+		// 		handleUnlike();
+		// 	}
+		// 	setIsPlaying(true);
+		// 	setTimeout(() => {
+		// 		setIsPlaying(false);
+		// 		setAnimationComplete(true);
+		// 	}, 2000); // Assuming the animation duration is 2 seconds
 	};
 
 	const sanitizedContent = DOMPurify.sanitize(content);
@@ -94,7 +111,7 @@ const PostCard = ({
 	const { isDialogOpen, handleCloseDialog } = useDialog("confirmDelete");
 
 	return (
-		<Card className="flex w-[37.5rem] min-w-[21.25rem] py-[0.5rem] px-[1.25rem] flex-col justify-center items-start gap-[0.75rem] rounded-[0.5rem] bg-white dark:bg-muted">
+		<Card className="flex w-[53%] min-w-[21.25rem] py-[0.3rem] px-0 flex-col justify-center items-start gap-[0.75rem] rounded-[0.5rem] bg-white dark:bg-muted">
 			{!forProfile && (
 				<CardHeader className="w-full">
 					<div className="flex items-start justify-between h-[3rem]">
@@ -183,8 +200,8 @@ const PostCard = ({
 						<Image
 							src={postImage}
 							alt="Post Image"
-							width={560}
-							height={400}
+							width={750}
+							height={600}
 						/>
 					</div>
 					{forEvents && (
@@ -196,13 +213,26 @@ const PostCard = ({
 					)}
 				</div>
 			</CardContent>
-			<CardFooter className="flex justify-between items-center self-stretch ">
-				<Button
-					className="flex items-center gap-1 cursor-pointer"
-					variant="ghost"
-					onClick={handleThumbsUp}>
-					{/* <Button variant="ghost" className="relative z-10 gap-1"> */}
-					{isLiked ? (
+			<CardFooter className="flex flex-col relative w-full gap-1">
+				<div className="flex items-start self-stretch border-y-2">
+					<Button
+						className="flex items-center cursor-pointer"
+						variant="ghost"
+						onClick={handleThumbsUp}>
+						{/* <Button variant="ghost" className="relative z-10 gap-1"> */}
+						{liked && animationComplete ? (
+							<LikeSVG />
+						) : liked ? (
+							<Lottie
+								animationData={thumbsUp}
+								loop={false}
+								play={isPlaying}
+								className="w-[2rem] h-[2rem] relative bottom-1"
+							/>
+						) : (
+							<UnLikeSVG />
+						)}
+						{/* {isLiked ? (
 						<Lottie
 							animationData={thumbsUp}
 							loop={false}
@@ -211,37 +241,40 @@ const PostCard = ({
 						/>
 					) : (
 						<UnLikeSVG />
-					)}
-					{likeCount}
-					{/* </Button> */}
-				</Button>
-				<Button
-					variant="ghost"
-					className="gap-1">
-					<MessageSquareMore />
-					Comment
-				</Button>
-				<Button
-					variant="ghost"
-					className="gap-1">
-					<Send />
-					Share
-				</Button>
-				<Button
-					onClick={!isSaved ? handleBookmark : handleUnbookmark}
-					variant="ghost"
-					className="gap-1">
-					{isSaved ? (
-						<Bookmark
-							fill="#00B595"
-							color="#00B595"
-						/>
-					) : (
-						<Bookmark />
-					)}
-					{bookmarkCount}
-				</Button>
-				<br />
+					)} */}
+						{/* </Button> */}
+					</Button>
+					<Button variant="ghost">
+						<MessageSquareMore />
+					</Button>
+					<Button variant="ghost">
+						<Send />
+					</Button>
+					<Button
+						onClick={!isSaved ? handleBookmark : handleUnbookmark}
+						variant="ghost"
+						className="absolute right-3">
+						{isSaved ? (
+							<Bookmark
+								fill="#00B595"
+								color="#00B595"
+							/>
+						) : (
+							<Bookmark />
+						)}
+					</Button>
+				</div>
+
+				<div className="flex border border-black">
+					<p className="absolute left-[2rem]">
+						{" "}
+						{likeCount} {likeCount === 1 ? "Like" : "Likes"}
+					</p>
+					<p className="absolute right-[1rem]">
+						{bookmarkCount}{" "}
+						{bookmarkCount === 1 ? "Bookmark" : "Bookmarks"}
+					</p>
+				</div>
 			</CardFooter>
 		</Card>
 	);

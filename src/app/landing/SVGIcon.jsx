@@ -13,8 +13,8 @@ export const LikeSVG = () => {
 			strokeWidth="2"
 			strokeLinecap="round"
 			strokeLinejoin="round"
-			fill="#ffff"
-			color="#ffff"
+			fill="#00B595"
+			color="#00B595"
 			className="dark:filter dark:invert">
 			<g
 				id="SVGRepo_bgCarrier"
