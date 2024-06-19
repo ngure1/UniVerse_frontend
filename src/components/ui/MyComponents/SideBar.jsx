@@ -36,8 +36,8 @@ const SideBar = ({ className }) => {
 			key={index}
 			href={link.href || "#"}
 			className="flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem] active-sidebar">
-			<link.Icon size={18} />
-			<p className="body-md">{link.text}</p>
+			<link.Icon size={30} />
+			<p className="body-md text-lg">{link.text}</p>
 		</Link>
 	));
 
@@ -46,8 +46,8 @@ const SideBar = ({ className }) => {
 			key={index}
 			href={link.href || "#"}
 			className="flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem] active-sidebar">
-			<link.Icon size={18} />
-			<p className="body-md">{link.text}</p>
+			<link.Icon size={30} />
+			<p className="body-md text-lg">{link.text}</p>
 		</Link>
 	));
 
@@ -56,14 +56,14 @@ const SideBar = ({ className }) => {
 	return (
 		<div
 			className={`inline-flex flex-col pt-[1.25rem] pr-[0] pb-[0.75rem] pl-[1.25rem] justify-between items-start shrink-0 gap-[4rem] ${className}`}>
-			<div>
+			<div className="space-y-4">
 				{topLinks}
 				<Button
 					variant="ghost"
 					className="flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem]"
 					onClick={handleOpenDialog}>
-					<CirclePlus size={18} />
-					<span className="body-md">New Post</span>
+					<CirclePlus size={30} />
+					<span className="body-md text-lg">New Post</span>
 				</Button>
 			</div>
 			<ResponsiveDialog
