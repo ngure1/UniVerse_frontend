@@ -43,7 +43,7 @@ const postApiSlice = baseApi.injectEndpoints({
 				url: `/posts/likes/${post}/`,
 				method: "POST",
 			}),
-			invalidatesTags: ["POSTS", "PROFILE", "LIKE"],
+			invalidatesTags: ["POSTS", "LIKES"],
 		}),
 
 		// unliking a post
@@ -52,7 +52,7 @@ const postApiSlice = baseApi.injectEndpoints({
 				url: `/posts/unlikes/${post}/`,
 				method: "DELETE",
 			}),
-			invalidatesTags: ["POSTS"],
+			invalidatesTags: ["POSTS", "LIKES"],
 		}),
 
 		// saving/bookmarking a post
@@ -61,7 +61,7 @@ const postApiSlice = baseApi.injectEndpoints({
 				url: `/posts/bookmarks/${post}/`,
 				method: "POST",
 			}),
-			invalidatesTags: ["POSTS"],
+			invalidatesTags: ["POSTS", "BOOKMARKS"],
 		}),
 
 		// unsaving/unbookmarking a post
@@ -70,7 +70,7 @@ const postApiSlice = baseApi.injectEndpoints({
 				url: `/posts/unbookmarks/${post}/`,
 				method: "DELETE",
 			}),
-			invalidatesTags: ["POSTS"],
+			invalidatesTags: ["POSTS", "BOOKMARKS"],
 		}),
 	}),
 });

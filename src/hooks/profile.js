@@ -2,6 +2,7 @@ import {
 	useProfileMeQuery,
 	useProfileFollowToggleMutation,
 	usePostsMeQuery,
+	usePostsBookmarksMeQuery,
 } from "@/redux/features/profiles/profileApiSlice";
 import { toast } from "react-toastify";
 
@@ -37,5 +38,10 @@ export const useFollowToggle = (id) => {
 
 export const usePostsMe = () => {
 	const { data, isLoading, error } = usePostsMeQuery(null);
+	return { data, isLoading, error };
+};
+
+export const useBookmarksMe = () => {
+	const { data, isLoading, error } = usePostsBookmarksMeQuery(null);
 	return { data, isLoading, error };
 };

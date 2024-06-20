@@ -45,5 +45,5 @@ export const baseApi = createApi({
 	reducerPath: "api",
 	baseQuery: baseQueryWithReauth,
 	endpoints: (builder) => ({}),
-	tagTypes: ["POSTS", "PROFILE", "LIKE", "UNLIKE", "BOOKMARK"],
+	tagTypes: ["POSTS", "PROFILE", "LIKES", "BOOKMARKS"],
 });

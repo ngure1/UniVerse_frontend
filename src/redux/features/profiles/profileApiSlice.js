@@ -53,15 +53,15 @@ const profileApiSlice = baseApi.injectEndpoints({
 				url: "/posts/me/",
 				method: "GET",
 			}),
-			invalidatesTags: ["POSTS", "PROFILE", "LIKE"],
+			providesTags: ["POSTS"],
 		}),
 
 		postsBookmarksMe: builder.query({
 			query: () => ({
-				url: "/posts/me/",
+				url: "/posts/bookmarks/me/",
 				method: "GET",
 			}),
-			invalidatesTags: ["POSTS", "PROFILE", "LIKE"],
+			providesTags: ["BOOKMARKS"],
 		}),
 	}),
 });
@@ -71,4 +71,5 @@ export const {
 	useProfileMeQuery,
 	useProfileFollowToggleMutation,
 	usePostsMeQuery,
+	usePostsBookmarksMeQuery,
 } = profileApiSlice;
