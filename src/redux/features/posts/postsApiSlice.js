@@ -43,7 +43,7 @@ const postApiSlice = baseApi.injectEndpoints({
 				url: `/posts/likes/${post}/`,
 				method: "POST",
 			}),
-			invalidatesTags: ["POSTS"],
+			invalidatesTags: ["POSTS", "PROFILE", "LIKE"],
 		}),
 
 		// unliking a post
