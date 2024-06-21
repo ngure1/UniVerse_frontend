@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/shadcnComponents/input";
 import AvatarProfile from "./profile/AvatarProfile";
 import { useProfile } from "@/hooks/profile";
 
-const SearchBar = ({ placeholder, onSearch }) => {
+export const SearchBar = ({ placeholder, onSearch }) => {
 	const [query, setQuery] = useState("");
 
 	const handleInputChange = (event) => {
