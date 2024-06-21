@@ -49,19 +49,7 @@ const SideBar = ({ className }) => {
 			key={index}
 			href={link.href || "#"}
 			className="flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem] active-sidebar">
-			{link.text === "Profile" ? (
-				<AvatarProfile
-					size={30}
-					pfpImage={profileData?.profile_picture}
-					first_name={profileData?.user.first_name}
-					last_name={profileData?.user.last_name}
-				/>
-			) : (
-				<link.Icon
-					size={35}
-					className="mx-2"
-				/>
-			)}
+			<link.Icon size={30} />
 			<p className="body-md text-lg">{link.text}</p>
 		</Link>
 	));

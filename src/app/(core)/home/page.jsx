@@ -39,7 +39,7 @@ const Home = () => {
 								className="text-sm"
 								href="#"
 								onClick={handleOpenDialog}>
-								Start a post
+								Create New Post
 							</Link>
 						</Button>
 						<ResponsiveDialog
