@@ -52,11 +52,27 @@ const SideBar = ({ className }) => {
 		</Link>
 	));
 
+	return (
+		<div
+			className={`inline-flex flex-col pt-[1.25rem] pr-[0] pb-[0.75rem] pl-[1.25rem] justify-between items-start shrink-0 gap-[4rem] ${className}`}>
+			<div className="space-y-4">{topLinks}</div>
+			<div className="w-full">
+				{bottomLinks}
+				<Logout iconSize={30} />
+			</div>
+		</div>
+	);
+};
+
+export default SideBar;
+
+export const Logout = ({ className, iconSize, size }) => {
 	// * initialize router
 	const router = useRouter();
 
 	// * initialize dispatch
 	const dispatch = useDispatch();
+	30;
 
 	// * logout functionality
 	const [logout, { isLoading }] = useLogoutMutation();
@@ -105,21 +121,13 @@ const SideBar = ({ className }) => {
 			});
 	}
 	return (
-		<div
-			className={`inline-flex flex-col pt-[1.25rem] pr-[0] pb-[0.75rem] pl-[1.25rem] justify-between items-start shrink-0 gap-[4rem] ${className}`}>
-			<div className="space-y-4">{topLinks}</div>
-			<div className="w-full">
-				{bottomLinks}
-				<Button
-					onClick={handleLogout}
-					variant="ghost"
-					className="flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem] active-sidebar">
-					<LogOut size={30} />
-					<p className="body-md text-lg">Logout</p>
-				</Button>
-			</div>
-		</div>
+		<Button
+			onClick={handleLogout}
+			variant="ghost"
+			size={size}
+			className={`flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem] ${className}`}>
+			<LogOut size={iconSize} />
+			<p className="body-md text-lg">Logout</p>
+		</Button>
 	);
 };
-
-export default SideBar;
