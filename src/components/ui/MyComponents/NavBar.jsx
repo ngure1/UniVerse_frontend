@@ -6,6 +6,40 @@ import { Search } from "lucide-react";
 import { Input } from "@/components/ui/shadcnComponents/input";
 import AvatarProfile from "./profile/AvatarProfile";
 import { useProfile } from "@/hooks/profile";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "@/components/ui/shadcnComponents/dropdown-menu";
+import Link from "next/link";
+import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import { CircleUserRound, LogOut } from "lucide-react";
+import { useTheme } from "next-themes";
+import { Button } from "../shadcnComponents/button";
+
+function ModeToggle() {
+	const { theme, setTheme } = useTheme();
+
+	const toggleTheme = () => {
+		setTheme(theme === "dark" ? "light" : "dark");
+	};
+
+	return (
+		<button
+			variant="ghost"
+			onClick={toggleTheme}
+			className="inline-flex justify-center items-center gap-2 body-md  ">
+			{theme === "dark" ? (
+				<SunIcon className="w-[1.2rem] h-[1.2rem]" />
+			) : (
+				<MoonIcon className="w-[1.2rem] h-[1.2rem]" />
+			)}
+			{theme === "dark" ? "Light" : "Dark"}
+		</button>
+	);
+}
 
 export const SearchBar = ({ placeholder, onSearch }) => {
 	const [query, setQuery] = useState("");
@@ -46,12 +80,39 @@ const NavBar = ({ className }) => {
 				placeholder={`What's on your mind, ${profileData?.user.first_name}?`}
 				onSearch={handleSearch}
 			/>
-			<AvatarProfile
-				className="w-[3rem] h-[3rem]"
-				pfpImage={profileData?.profile_picture}
-				first_name={profileData?.user.first_name}
-				last_name={profileData?.user.last_name}
-			/>
+			<DropdownMenu>
+				<DropdownMenuTrigger>
+					<AvatarProfile
+						className="w-[3rem] h-[3rem]"
+						pfpImage={profileData?.profile_picture}
+						first_name={profileData?.user.first_name}
+						last_name={profileData?.user.last_name}
+					/>
+				</DropdownMenuTrigger>
+				<DropdownMenuContent className="w-56">
+					<DropdownMenuItem>
+						<Link
+							href="/profile"
+							className="flex gap-2 justify-center items-center">
+							<CircleUserRound className="w-[1.2rem] h-[1.2rem]" />
+							View Profile
+						</Link>
+					</DropdownMenuItem>
+					<DropdownMenuSeparator />
+					<DropdownMenuItem as="button">
+						<ModeToggle />
+					</DropdownMenuItem>
+					<DropdownMenuSeparator />
+					<DropdownMenuItem>
+						<Link
+							href="#"
+							className="flex gap-2 justify-center items-center">
+							<LogOut className="w-[1.2rem] h-[1.2rem]" />
+							Logout
+						</Link>
+					</DropdownMenuItem>
+				</DropdownMenuContent>
+			</DropdownMenu>
 		</div>
 	);
 };

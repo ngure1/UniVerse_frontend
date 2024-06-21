@@ -23,7 +23,7 @@ const Home = () => {
 	return (
 		<div>
 			<div className="flex flex-col gap-4">
-				<Card className="flex w-[53%] min-w-[21.25rem] py-[0.3rem] px-0 flex-col justify-center items-start gap-[0.75rem] rounded-[0.5rem] bg-white dark:bg-muted">
+				<Card className="flex w-[58%] min-w-[33.25rem] py-[0.6rem] flex-col items-start rounded-[0.5rem] bg-white dark:bg-muted">
 					<div className="flex w-full m-2">
 						<AvatarProfile
 							className="w-[3rem] h-[3rem]"

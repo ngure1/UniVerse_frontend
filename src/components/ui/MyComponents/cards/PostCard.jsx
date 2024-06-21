@@ -273,7 +273,7 @@ const PostCard = ({
 					</Button>
 				</div>
 
-				<div className="flex border border-black">
+				<div className="flex">
 					<p className="absolute left-[2rem]">
 						{" "}
 						{likeCount} {likeCount === 1 ? "Like" : "Likes"}
