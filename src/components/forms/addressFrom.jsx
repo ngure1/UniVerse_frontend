@@ -19,6 +19,8 @@ import {
 import { Input } from "@/components/ui/shadcnComponents/input";
 import { countries } from "@/constats/countries";
 import { Button } from "../ui/shadcnComponents/button";
+import { useProfileAddressCreateMutation } from "@/redux/features/profiles/profileApiSlice";
+import { toast } from "react-toastify";
 
 const AddressFrom = () => {
 	const form = useForm({
@@ -28,9 +30,22 @@ const AddressFrom = () => {
 			city: "",
 		},
 	});
-
+	// initialise mutation function to create address
+	const [addressCreate, { isLoading, error }] =
+		useProfileAddressCreateMutation();
 	function onSubmit(data) {
-		console.log(data);
+		addressCreate(data)
+			.unwrap()
+			.then(() => {
+				toast.success("Address Updated Successfully", {
+					theme: "colored",
+				});
+			})
+			.catch((err) => {
+				toast.error("Failed to update address", {
+					theme: "colored",
+				});
+			});
 	}
 
 	return (

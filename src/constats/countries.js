@@ -1,5 +1,5 @@
 export const countries = [
-	{ value: "us", label: "United States" },
-	{ value: "ke", label: "Kenya" },
-	{ value: "ca", label: "Canada" },
+	{ value: "United States", label: "United States" },
+	{ value: "Kenya", label: "Kenya" },
+	{ value: "Canada", label: "Canada" },
 ];
