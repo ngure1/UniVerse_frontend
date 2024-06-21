@@ -49,6 +49,7 @@ const ProfileForm = () => {
 			});
 		}
 	}, []);
+  
 	// * initialise dialog close function on successful submition
 	const { handleCloseDialog: closeEditProfileDialog } =
 		useDialog("editProfile");

@@ -21,13 +21,13 @@ const TeamCard = ({
 					/>
 				</div>
 				<div
-					className="flex items-start justify-center gap-[0.75rem] py-[1.625rem] w-[8.2375rem] h-[8.2375rem] rounded-[6.25rem] bg-white dark:bg-black absolute top-[6.25rem] left-[0.325rem]
+					className="flex items-start justify-center gap-[0.75rem] py-[1.625rem] w-[6.2375rem] h-[6.2375rem] rounded-[6.25rem] bg-white dark:bg-black absolute top-[7.25rem] left-[1rem]
                 ">
 					<Link href={linkedInLink}>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
-							width="29"
-							height="28"
+							width="24"
+							height="24"
 							viewBox="0 0 29 28"
 							fill="none"
 							className="hover:w-8 hover:h-7 transition-width transition-height duration-200">
@@ -42,8 +42,8 @@ const TeamCard = ({
 					<Link href={githubLink}>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
-							width="29"
-							height="28"
+							width="24"
+							height="24"
 							viewBox="0 0 29 28"
 							fill="none"
 							className="hover:w-8 hover:h-7 transition-width transition-height duration-200">
