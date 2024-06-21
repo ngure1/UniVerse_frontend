@@ -66,6 +66,7 @@ const PostCard = ({
 	isSaved,
 	isFollowingCreator,
 	likeCount,
+	smallImage,
 	bookmarkCount,
 }) => {
 	const [isPlaying, setIsPlaying] = useState(false);
@@ -111,56 +112,54 @@ const PostCard = ({
 	const { isDialogOpen, handleCloseDialog } = useDialog("confirmDelete");
 
 	return (
-		<Card className="flex w-[53%] min-w-[21.25rem] py-[0.3rem] px-0 flex-col justify-center items-start gap-[0.75rem] rounded-[0.5rem] bg-white dark:bg-muted">
+		<Card className="flex w-[58%] min-w-[33.25rem] py-[0.3rem] flex-col items-start rounded-[0.5rem] bg-white dark:bg-muted">
 			{!forProfile && (
-				<CardHeader className="w-full">
-					<div className="flex items-start justify-between h-[3rem]">
-						<div className="flex items-center self-stretch gap-[0.75rem]">
-							<AvatarProfile
-								pfpImage={pfpImage}
-								first_name={first_name}
-								last_name={last_name}
-								className="w-[4rem] h-[4rem]"
-							/>
-							<div className="flex flex-col justify-center items-start gap-[-0.75rem] w-full">
-								<div className="flex items-center gap-[0.75rem]">
-									<p className="body-text">
-										{first_name} {last_name}
-									</p>
+				<CardHeader className="w-full flex flex-row justify-between items-start">
+					<div className="flex items-center self-stretch gap-[0.75rem]">
+						<AvatarProfile
+							pfpImage={pfpImage}
+							first_name={first_name}
+							last_name={last_name}
+							className="w-[4rem] h-[4rem]"
+						/>
+						<div className="flex flex-col justify-center items-start gap-[-0.75rem] w-full">
+							<div className="flex items-center gap-[0.75rem]">
+								<p className="body-text">
+									{first_name} {last_name}
+								</p>
 
-									{isVerified && (
-										<VerifiedIcon
-											fill="#00B595"
-											color="#ffff"
-											className="dark:filter dark:invert"
-											size={24}
-										/>
-									)}
-								</div>
-								<p className="text-sm muted">{type}</p>
-								<p className="text-sm muted">{date}</p>
+								{isVerified && (
+									<VerifiedIcon
+										fill="#00B595"
+										color="#ffff"
+										className="dark:filter dark:invert"
+										size={24}
+									/>
+								)}
 							</div>
+							<p className="text-sm muted">{type}</p>
+							<p className="text-sm muted">{date}</p>
 						</div>
-						{isOwner ? (
-							<DropDown />
-						) : isFollowingCreator ? (
-							<Button
-								variant="outline"
-								className="gap-2"
-								onClick={handleFollow}>
-								<UserRoundPlus />
-								Unfollow
-							</Button>
-						) : (
-							<Button
-								variant="outline"
-								className="gap-2"
-								onClick={handleFollow}>
-								<UserRoundPlus />
-								Follow
-							</Button>
-						)}
 					</div>
+					{isOwner ? (
+						<DropDown />
+					) : isFollowingCreator ? (
+						<Button
+							variant="outline"
+							className="gap-2"
+							onClick={handleFollow}>
+							<UserRoundPlus />
+							Unfollow
+						</Button>
+					) : (
+						<Button
+							variant="outline"
+							className="gap-2"
+							onClick={handleFollow}>
+							<UserRoundPlus />
+							Follow
+						</Button>
+					)}
 					<ResponsiveDialog
 						isOpen={isDialogOpen}
 						setIsOpen={handleCloseDialog}>
@@ -169,49 +168,58 @@ const PostCard = ({
 				</CardHeader>
 			)}
 
-			<CardContent>
-				<div className="flex flex-col items-start gap-[0.75rem] self-stretch ">
-					{forEvents && (
-						<div className="">
-							<p className="inline-flex gap-1">
-								<CalendarX />
-								{event_date}
+			<CardContent className="flex flex-col items-start gap-[0.75rem] self-stretch h-[70%]">
+				{forEvents && (
+					<div className="">
+						<p className="inline-flex gap-1">
+							<CalendarX />
+							{event_date}
+						</p>
+						{isOnline ? (
+							<p className="flex gap-1">
+								<Globe /> ONLINE
 							</p>
-							{isOnline ? (
-								<p className="flex gap-1">
-									<Globe /> ONLINE
-								</p>
-							) : (
-								<p className="flex gap-1">
-									<MapPin /> {address}
-								</p>
-							)}
-						</div>
-					)}
-					<div className="self-stretch ">
-						<p className="sub-heading-3 p-1">{title}</p>
-						<div
-							dangerouslySetInnerHTML={{
-								__html: sanitizedContent,
-							}}
-						/>
+						) : (
+							<p className="flex gap-1">
+								<MapPin /> {address}
+							</p>
+						)}
 					</div>
-					<div className="self-stretch rounded-[0.25rem]">
+				)}
+				<div className="self-stretch min-h-[30%]">
+					<p className="sub-heading-3 p-1">{title}</p>
+					<div
+						dangerouslySetInnerHTML={{
+							__html: sanitizedContent,
+						}}
+					/>
+				</div>
+				{smallImage ? (
+					<div className="rounded-[0.25rem] min-h-[22rem] w-full border border-black relative">
 						<Image
 							src={postImage}
 							alt="Post Image"
-							width={750}
-							height={600}
+							layout="fill"
+							objectFit="cover"
 						/>
 					</div>
-					{forEvents && (
-						<Button
-							className="w-full"
-							variant="secondary">
-							Register
-						</Button>
-					)}
-				</div>
+				) : (
+					<div className="rounded-[0.25rem] min-h-[30rem] w-full border border-black relative">
+						<Image
+							src={postImage}
+							alt="Post Image"
+							layout="fill"
+							objectFit="cover"
+						/>
+					</div>
+				)}
+				{forEvents && (
+					<Button
+						className="w-full"
+						variant="secondary">
+						Register
+					</Button>
+				)}
 			</CardContent>
 			<CardFooter className="flex flex-col relative w-full gap-1">
 				<div className="flex items-start self-stretch border-y-2">
