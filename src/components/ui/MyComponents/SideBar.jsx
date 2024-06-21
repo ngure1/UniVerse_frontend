@@ -9,13 +9,15 @@ import {
 	Newspaper,
 	CodeXml,
 	CirclePlus,
-	Settings,
+	CircleUserRound,
 	LogOut,
 } from "lucide-react";
 import { Button } from "../shadcnComponents/button";
 import { ResponsiveDialog } from "./ResponsiveDialog";
 import PostForm from "@/components/forms/postForm";
 import { useDialog } from "@/hooks/responsiveDialog";
+import AvatarProfile from "./profile/AvatarProfile";
+import { useProfile } from "@/hooks/profile";
 
 const SideBar = ({ className }) => {
 	const links = [
@@ -25,9 +27,10 @@ const SideBar = ({ className }) => {
 		{ Icon: Handshake, text: "Giving Back", href: "/support" },
 		{ Icon: Newspaper, text: "News & Announcements", href: "/news" },
 		{ Icon: CodeXml, text: "Department Stars", href: "/dpt-stars" },
-		{ Icon: Settings, text: "Settings", href: "/profile" },
+		{ Icon: CircleUserRound, text: "Profile", href: "/profile" },
 		{ Icon: LogOut, text: "Logout" },
 	];
+	const { data: profileData, isLoading, error } = useProfile();
 
 	const lastTwoLinks = links.slice(-2);
 
@@ -36,8 +39,8 @@ const SideBar = ({ className }) => {
 			key={index}
 			href={link.href || "#"}
 			className="flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem] active-sidebar">
-			<link.Icon size={18} />
-			<p className="body-md">{link.text}</p>
+			<link.Icon size={30} />
+			<p className="body-md text-lg">{link.text}</p>
 		</Link>
 	));
 
@@ -46,8 +49,20 @@ const SideBar = ({ className }) => {
 			key={index}
 			href={link.href || "#"}
 			className="flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem] active-sidebar">
-			<link.Icon size={18} />
-			<p className="body-md">{link.text}</p>
+			{link.text === "Profile" ? (
+				<AvatarProfile
+					size={30}
+					pfpImage={profileData?.profile_picture}
+					first_name={profileData?.user.first_name}
+					last_name={profileData?.user.last_name}
+				/>
+			) : (
+				<link.Icon
+					size={35}
+					className="mx-2"
+				/>
+			)}
+			<p className="body-md text-lg">{link.text}</p>
 		</Link>
 	));
 
@@ -56,23 +71,23 @@ const SideBar = ({ className }) => {
 	return (
 		<div
 			className={`inline-flex flex-col pt-[1.25rem] pr-[0] pb-[0.75rem] pl-[1.25rem] justify-between items-start shrink-0 gap-[4rem] ${className}`}>
-			<div>
+			<div className="space-y-4">
 				{topLinks}
-				<Button
+				{/* <Button
 					variant="ghost"
 					className="flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem]"
 					onClick={handleOpenDialog}>
-					<CirclePlus size={18} />
-					<span className="body-md">New Post</span>
-				</Button>
+					<CirclePlus size={30} />
+					<span className="body-md text-lg">New Post</span>
+				</Button> */}
 			</div>
-			<ResponsiveDialog
+			{/* <ResponsiveDialog
 				title={"Create New Post"}
 				className="w-[60rem]"
 				isOpen={isDialogOpen}
 				setIsOpen={handleCloseDialog}>
 				<PostForm />
-			</ResponsiveDialog>
+			</ResponsiveDialog> */}
 			<div className="w-full">{bottomLinks}</div>
 		</div>
 	);

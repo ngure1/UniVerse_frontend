@@ -36,7 +36,40 @@ const profileApiSlice = baseApi.injectEndpoints({
 			}),
 			providesTags: ["PROFILE"],
 		}),
+
+		//following and unfollowing a profile/user
+		profileFollowToggle: builder.mutation({
+			query: ({ followed_id }) => ({
+				url: "/follow-toggle/",
+				method: "POST",
+				body: { followed_id },
+			}),
+			providesTags: ["PROFILE", "POSTS"],
+		}),
+
+		// * fetch posts for the logged in user
+		postsMe: builder.query({
+			query: () => ({
+				url: "/posts/me/",
+				method: "GET",
+			}),
+			providesTags: ["POSTS"],
+		}),
+
+		postsBookmarksMe: builder.query({
+			query: () => ({
+				url: "/posts/bookmarks/me/",
+				method: "GET",
+			}),
+			providesTags: ["BOOKMARKS"],
+		}),
 	}),
 });
 
-export const { useProfileCreateMutation, useProfileMeQuery } = profileApiSlice;
+export const {
+	useProfileCreateMutation,
+	useProfileMeQuery,
+	useProfileFollowToggleMutation,
+	usePostsMeQuery,
+	usePostsBookmarksMeQuery,
+} = profileApiSlice;

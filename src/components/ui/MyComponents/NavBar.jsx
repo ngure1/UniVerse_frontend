@@ -5,8 +5,9 @@ import Logo from "@/../public/images/logo.png";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/shadcnComponents/input";
 import AvatarProfile from "./profile/AvatarProfile";
+import { useProfile } from "@/hooks/profile";
 
-const SearchBar = ({ placeholder, onSearch }) => {
+export const SearchBar = ({ placeholder, onSearch }) => {
 	const [query, setQuery] = useState("");
 
 	const handleInputChange = (event) => {
@@ -31,6 +32,8 @@ const NavBar = ({ className }) => {
 		console.log("Search query:", query);
 	};
 
+	const { data: profileData, isLoading, error } = useProfile();
+
 	return (
 		<div
 			className={`flex justify-between items-center w-full pt-[1.75rem] pr-[1.25rem] h-[6rem] pb-[0.5rem] pl-[1.25rem] ${className}`}>
@@ -40,12 +43,14 @@ const NavBar = ({ className }) => {
 				className="cursor-pointer max-sm:w-[150px] sm:w-[250px] dark:filter dark:invert"
 			/>
 			<SearchBar
-				placeholder="What's on your mind, Jane?"
+				placeholder={`What's on your mind, ${profileData?.user.first_name}?`}
 				onSearch={handleSearch}
 			/>
 			<AvatarProfile
 				className="w-[3rem] h-[3rem]"
-				pfpImage={"https://github.com/shadcn.png"}
+				pfpImage={profileData?.profile_picture}
+				first_name={profileData?.user.first_name}
+				last_name={profileData?.user.last_name}
 			/>
 		</div>
 	);

@@ -10,19 +10,19 @@ export const LikeSVG = () => {
 			xmlns="http://www.w3.org/2000/svg"
 			aria-labelledby="thumbUpIconTitle"
 			stroke="#00B595"
-			stroke-width="2"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-			fill="#ffff"
-			color="#ffff"
+			strokeWidth="2"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			fill="#00B595"
+			color="#00B595"
 			className="dark:filter dark:invert">
 			<g
 				id="SVGRepo_bgCarrier"
-				stroke-width="0"></g>
+				strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"></g>
+				strokeLinecap="round"
+				strokeLinejoin="round"></g>
 			<g id="SVGRepo_iconCarrier">
 				{" "}
 				<title id="thumbUpIconTitle">Thumb Up</title>{" "}
@@ -42,19 +42,19 @@ export const UnLikeSVG = () => {
 			xmlns="http://www.w3.org/2000/svg"
 			aria-labelledby="thumbUpIconTitle"
 			stroke="#000000"
-			stroke-width="2"
-			stroke-linecap="round"
-			stroke-linejoin="round"
+			strokeWidth="2"
+			strokeLinecap="round"
+			strokeLinejoin="round"
 			fill="none"
 			color="#000000"
 			className="dark:filter dark:invert">
 			<g
 				id="SVGRepo_bgCarrier"
-				stroke-width="0"></g>
+				strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"></g>
+				strokeLinecap="round"
+				strokeLinejoin="round"></g>
 			<g id="SVGRepo_iconCarrier">
 				{" "}
 				<title id="thumbUpIconTitle">Thumb Up</title>{" "}
@@ -124,25 +124,25 @@ export const SupportSVG = () => {
 			<path
 				d="M38 2.00003C38.4732 2.45008 38.8485 2.98453 39.1046 3.57283C39.3607 4.16114 39.4925 4.79175 39.4925 5.4286C39.4925 6.06546 39.3607 6.69607 39.1046 7.28437C38.8485 7.87267 38.4732 8.40713 38 8.85717L4.40002 40.8572L9.20002 45.4286L14 50L48.296 17.3372C48.8366 16.8248 49.2654 16.2157 49.5579 15.545C49.8503 14.8742 50.0006 14.1549 50 13.4286C50 10.3976 48.7357 7.49065 46.4853 5.34738C44.2349 3.20411 41.1826 2.00003 38 2.00003Z"
 				stroke="#EEB902"
-				stroke-width="3"
+				strokeWidth="3"
 				stroke-miterlimit="10"
 			/>
 			<path
 				d="M35.6 29.4286L47.6 40.8572L38 50L26 38.5715"
 				stroke="#EEB902"
-				stroke-width="3"
+				strokeWidth="3"
 				stroke-miterlimit="10"
 			/>
 			<path
 				d="M26 20.2857L14 8.85717C13.5269 8.40713 13.1515 7.87267 12.8954 7.28437C12.6393 6.69607 12.5075 6.06546 12.5075 5.4286C12.5075 4.79175 12.6393 4.16114 12.8954 3.57283C13.1515 2.98453 13.5269 2.45008 14 2.00003C10.8174 2.00003 7.76516 3.20411 5.51472 5.34738C3.26428 7.49065 2 10.3976 2 13.4286C1.99945 14.1549 2.14971 14.8742 2.44215 15.545C2.7346 16.2157 3.16344 16.8248 3.704 17.3372L16.4 29.4286"
 				stroke="#EEB902"
-				stroke-width="3"
-				stroke-linejoin="bevel"
+				strokeWidth="3"
+				strokeLinejoin="bevel"
 			/>
 			<path
 				d="M14 2.00003H16.4H26.048H38"
 				stroke="#EEB902"
-				stroke-width="3"
+				strokeWidth="3"
 				stroke-miterlimit="10"
 			/>
 		</svg>

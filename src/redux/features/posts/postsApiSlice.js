@@ -19,6 +19,7 @@ const postApiSlice = baseApi.injectEndpoints({
 			invalidatesTags: ["POSTS"],
 		}),
 
+		// * listing all posts
 		postList: builder.query({
 			query: ({}) => ({
 				url: "/posts/",
@@ -27,13 +28,22 @@ const postApiSlice = baseApi.injectEndpoints({
 			providesTags: ["POSTS"],
 		}),
 
+		// * deleting a post
+		postDelete: builder.mutation({
+			query: ({ post_id }) => ({
+				url: `/posts/${post_id}/`,
+				method: "DELETE",
+			}),
+			invalidatesTags: ["POSTS"],
+		}),
+
 		// liking a post
 		postsLikesCreate: builder.mutation({
 			query: ({ post }) => ({
 				url: `/posts/likes/${post}/`,
 				method: "POST",
 			}),
-			invalidatesTags: ["POSTS"],
+			invalidatesTags: ["POSTS", "LIKES"],
 		}),
 
 		// unliking a post
@@ -42,7 +52,7 @@ const postApiSlice = baseApi.injectEndpoints({
 				url: `/posts/unlikes/${post}/`,
 				method: "DELETE",
 			}),
-			invalidatesTags: ["POSTS"],
+			invalidatesTags: ["POSTS", "LIKES"],
 		}),
 
 		// saving/bookmarking a post
@@ -51,7 +61,7 @@ const postApiSlice = baseApi.injectEndpoints({
 				url: `/posts/bookmarks/${post}/`,
 				method: "POST",
 			}),
-			invalidatesTags: ["POSTS"],
+			invalidatesTags: ["POSTS", "BOOKMARKS"],
 		}),
 
 		// unsaving/unbookmarking a post
@@ -60,16 +70,22 @@ const postApiSlice = baseApi.injectEndpoints({
 				url: `/posts/unbookmarks/${post}/`,
 				method: "DELETE",
 			}),
-			invalidatesTags: ["POSTS"],
+			invalidatesTags: ["POSTS", "BOOKMARKS"],
 		}),
 	}),
 });
 
 export const {
+	// * crud on post
 	usePostCreateMutation,
 	usePostListQuery,
+	usePostDeleteMutation,
+
+	// * crud on like
 	usePostsLikesCreateMutation,
-	usePostBookmarkCreateMutation,
 	usePostsUnlikeCreateMutation,
+
+	// * crud on bookmark
+	usePostBookmarkCreateMutation,
 	usePostUnbookmarkCreateMutation,
 } = postApiSlice;
