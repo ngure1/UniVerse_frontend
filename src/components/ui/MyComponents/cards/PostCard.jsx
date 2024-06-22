@@ -265,7 +265,7 @@ const PostCard = ({
 						)}
 					</div>
 				)}
-				<div className="self-stretch min-h-[30%]">
+				<div className="self-stretch h-[30%]">
 					<p className="sub-heading-3 p-1">{title}</p>
 					<div
 						dangerouslySetInnerHTML={{
@@ -274,7 +274,7 @@ const PostCard = ({
 					/>
 				</div>
 				{smallImage ? (
-					<div className="rounded-[0.25rem] min-h-[22rem] w-full border border-black relative">
+					<div className="rounded-[0.25rem] h-[22rem] w-full relative">
 						<Image
 							src={postImage}
 							alt="Post Image"
@@ -283,7 +283,7 @@ const PostCard = ({
 						/>
 					</div>
 				) : (
-					<div className="rounded-[0.25rem] min-h-[30rem] w-full border border-black relative">
+					<div className="rounded-[0.25rem] min-h-[30rem] w-full relative">
 						<Image
 							src={postImage}
 							alt="Post Image"
