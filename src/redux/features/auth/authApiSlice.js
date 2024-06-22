@@ -50,6 +50,14 @@ const authApiSlice = baseApi.injectEndpoints({
 				body: { first_name, last_name, email, password, re_password },
 			}),
 		}),
+
+		// logout
+		logout: builder.mutation({
+			query: () => ({
+				url: "/auth/logout/",
+				method: "POST",
+			}),
+		}),
 	}),
 });
 
@@ -59,4 +67,5 @@ export const {
 	useUsersActivationMutation,
 	useResetPasswordMutation,
 	useResetPasswordConfirmMutation,
+	useLogoutMutation,
 } = authApiSlice;

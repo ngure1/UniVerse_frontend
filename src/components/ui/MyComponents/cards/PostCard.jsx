@@ -20,7 +20,7 @@ import {
 	SquarePen,
 	Trash2,
 } from "lucide-react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import AvatarProfile from "../profile/AvatarProfile";
 import {
 	useLike,
@@ -35,15 +35,23 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/shadcnComponents/dropdown-menu";
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+} from "@/components/ui/shadcnComponents/alert-dialog";
 import { useFollowToggle } from "@/hooks/profile";
 import thumbsUp from "./thumbs-up.json";
 import Lottie from "react-lottie-player";
 import { LikeSVG, UnLikeSVG } from "@/app/landing/SVGIcon";
 import DOMPurify from "dompurify";
 import Link from "next/link";
-import { useDialog } from "@/hooks/responsiveDialog";
-import { ResponsiveDialog } from "../ResponsiveDialog";
-import ConfirmDelete from "../ConfirmDelete";
+import { usePostDeleteMutation } from "@/redux/features/posts/postsApiSlice";
+import { toast } from "react-toastify";
 
 const PostCard = ({
 	postId,
@@ -95,26 +103,47 @@ const PostCard = ({
 			setAnimationComplete(false);
 		}
 		setLiked(!liked);
-		// 	if (!isLiked) {
-		// 		handleLike();
-		// 	} else {
-		// 		handleUnlike();
-		// 	}
-		// 	setIsPlaying(true);
-		// 	setTimeout(() => {
-		// 		setIsPlaying(false);
-		// 		setAnimationComplete(true);
-		// 	}, 2000); // Assuming the animation duration is 2 seconds
 	};
 
 	const sanitizedContent = DOMPurify.sanitize(content);
 
-	const { isDialogOpen, handleCloseDialog } = useDialog("confirmDelete");
+	// * deleting a post
+	const [deletePost] = usePostDeleteMutation();
+
+	// show delete dialog state
+	const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+
+	// * opening delete dialog
+	function handleShowDialog() {
+		setShowDeleteDialog(true);
+	}
+
+	// * closing delete dialog
+	function handleCloseDeleteDialog() {
+		setShowDeleteDialog(false);
+	}
+
+	// * confirm delete dialog
+	function handleConfirmDelete() {
+		deletePost({ post_id: postId })
+			.uContentnwrap()
+			.then(() => {
+				toast.success("Post deleted successfully", {
+					theme: "colored",
+				});
+			})
+			.catch((err) => {
+				toast.error("Failed to delete the post", {
+					theme: "colored",
+				});
+			});
+	}
 
 	return (
 		<Card className="flex w-[58%] min-w-[33.25rem] py-[0.3rem] flex-col items-start rounded-[0.5rem] bg-white dark:bg-muted">
 			{!forProfile && (
 				<CardHeader className="w-full flex flex-row justify-between items-start">
+					{/* // * container for post creator details */}
 					<div className="flex items-center self-stretch gap-[0.75rem]">
 						<AvatarProfile
 							pfpImage={pfpImage}
@@ -141,9 +170,32 @@ const PostCard = ({
 							<p className="text-sm muted">{date}</p>
 						</div>
 					</div>
+					{/* // * dropdown menu for edit & deleting a post */}
 					{isOwner ? (
-						<DropDown />
-					) : isFollowingCreator ? (
+						<DropdownMenu>
+							<DropdownMenuTrigger asChild>
+								<div className="hover:bg-accent rounded-full p-1">
+									<EllipsisVertical />
+								</div>
+							</DropdownMenuTrigger>
+							<DropdownMenuContent className="w-56">
+								<DropdownMenuItem>
+									<SquarePen className="mr-2 h-4 w-4" />
+									<Link href="">Edit</Link>
+								</DropdownMenuItem>
+								<DropdownMenuItem
+									onSelect={handleShowDialog}
+									className="hover:bg-destructive active:bg-destructive focus:bg-destructive hover:text-white active:text-white focus:text-white">
+									<Trash2 className="mr-2 h-4 w-4" />
+									<span>Delete</span>
+								</DropdownMenuItem>
+							</DropdownMenuContent>
+						</DropdownMenu>
+					) : // * show confirm delete dialog
+
+					// * is following creator for follow/followign functionality
+
+					isFollowingCreator ? (
 						<Button
 							variant="outline"
 							className="gap-2"
@@ -160,11 +212,38 @@ const PostCard = ({
 							Follow
 						</Button>
 					)}
-					<ResponsiveDialog
-						isOpen={isDialogOpen}
-						setIsOpen={handleCloseDialog}>
-						<ConfirmDelete post_id={19} />
-					</ResponsiveDialog>
+					{showDeleteDialog && (
+						<AlertDialog
+							open={showDeleteDialog}
+							onOpenChange={handleCloseDeleteDialog}>
+							<AlertDialogContent>
+								<AlertDialogHeader>
+									<AlertDialogTitle>
+										Are you sure you want to delete this
+										post
+									</AlertDialogTitle>
+									<AlertDialogDescription>
+										This action cannot be undone and your
+										post will permanently deleted
+									</AlertDialogDescription>
+								</AlertDialogHeader>
+								<AlertDialogFooter>
+									<Button
+										variant="outline"
+										onClick={handleCloseDeleteDialog}>
+										Cancel
+									</Button>
+									<AlertDialogAction className="bg-inherit hover:bg-inherit">
+										<Button
+											variant="destructive"
+											onClick={handleConfirmDelete}>
+											Continue
+										</Button>
+									</AlertDialogAction>
+								</AlertDialogFooter>
+							</AlertDialogContent>
+						</AlertDialog>
+					)}
 				</CardHeader>
 			)}
 
@@ -186,7 +265,7 @@ const PostCard = ({
 						)}
 					</div>
 				)}
-				<div className="self-stretch min-h-[30%]">
+				<div className="self-stretch h-[30%]">
 					<p className="sub-heading-3 p-1">{title}</p>
 					<div
 						dangerouslySetInnerHTML={{
@@ -195,7 +274,7 @@ const PostCard = ({
 					/>
 				</div>
 				{smallImage ? (
-					<div className="rounded-[0.25rem] min-h-[22rem] w-full border border-black relative">
+					<div className="rounded-[0.25rem] h-[22rem] w-full relative">
 						<Image
 							src={postImage}
 							alt="Post Image"
@@ -204,7 +283,7 @@ const PostCard = ({
 						/>
 					</div>
 				) : (
-					<div className="rounded-[0.25rem] min-h-[30rem] w-full border border-black relative">
+					<div className="rounded-[0.25rem] min-h-[30rem] w-full relative">
 						<Image
 							src={postImage}
 							alt="Post Image"
@@ -227,7 +306,6 @@ const PostCard = ({
 						className="flex items-center cursor-pointer"
 						variant="ghost"
 						onClick={handleThumbsUp}>
-						{/* <Button variant="ghost" className="relative z-10 gap-1"> */}
 						{liked && animationComplete ? (
 							<LikeSVG />
 						) : liked ? (
@@ -240,17 +318,6 @@ const PostCard = ({
 						) : (
 							<UnLikeSVG />
 						)}
-						{/* {isLiked ? (
-						<Lottie
-							animationData={thumbsUp}
-							loop={false}
-							play={isPlaying}
-							className="w-[2.5rem] h-[2.5rem] relative bottom-1"
-						/>
-					) : (
-						<UnLikeSVG />
-					)} */}
-						{/* </Button> */}
 					</Button>
 					<Button variant="ghost">
 						<MessageSquareMore />
@@ -289,30 +356,3 @@ const PostCard = ({
 };
 
 export default PostCard;
-
-const DropDown = () => {
-	const { handleOpenDialog } = useDialog("confirmDelete");
-	return (
-		<div>
-			<DropdownMenu>
-				<DropdownMenuTrigger asChild>
-					<div className="hover:bg-accent rounded-full p-1">
-						<EllipsisVertical />
-					</div>
-				</DropdownMenuTrigger>
-				<DropdownMenuContent className="w-56">
-					<DropdownMenuItem>
-						<SquarePen className="mr-2 h-4 w-4" />
-						<Link href="">Edit</Link>
-					</DropdownMenuItem>
-					<DropdownMenuItem
-						onSelect={handleOpenDialog}
-						className="hover:bg-destructive active:bg-destructive focus:bg-destructive hover:text-white active:text-white focus:text-white">
-						<Trash2 className="mr-2 h-4 w-4" />
-						<span>Delete</span>
-					</DropdownMenuItem>
-				</DropdownMenuContent>
-			</DropdownMenu>
-		</div>
-	);
-};

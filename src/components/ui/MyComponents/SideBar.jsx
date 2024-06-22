@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import {
 	Home,
@@ -8,16 +8,15 @@ import {
 	Handshake,
 	Newspaper,
 	CodeXml,
-	CirclePlus,
 	CircleUserRound,
 	LogOut,
 } from "lucide-react";
 import { Button } from "../shadcnComponents/button";
-import { ResponsiveDialog } from "./ResponsiveDialog";
-import PostForm from "@/components/forms/postForm";
-import { useDialog } from "@/hooks/responsiveDialog";
-import AvatarProfile from "./profile/AvatarProfile";
-import { useProfile } from "@/hooks/profile";
+import { useLogoutMutation } from "@/redux/features/auth/authApiSlice";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setAuth } from "@/redux/features/auth/authSlice";
 
 const SideBar = ({ className }) => {
 	const links = [
@@ -28,13 +27,12 @@ const SideBar = ({ className }) => {
 		{ Icon: Newspaper, text: "News & Announcements", href: "/news" },
 		{ Icon: CodeXml, text: "Department Stars", href: "/dpt-stars" },
 		{ Icon: CircleUserRound, text: "Profile", href: "/profile" },
-		{ Icon: LogOut, text: "Logout" },
+		// { Icon: LogOut, text: "Logout" },
 	];
-	const { data: profileData, isLoading, error } = useProfile();
 
-	const lastTwoLinks = links.slice(-2);
+	const lastTwoLinks = links.slice(-1);
 
-	const topLinks = links.slice(0, -2).map((link, index) => (
+	const topLinks = links.slice(0, -1).map((link, index) => (
 		<Link
 			key={index}
 			href={link.href || "#"}
@@ -54,15 +52,82 @@ const SideBar = ({ className }) => {
 		</Link>
 	));
 
-	const { isDialogOpen, handleOpenDialog, handleCloseDialog } =
-		useDialog("post");
 	return (
 		<div
 			className={`inline-flex flex-col pt-[1.25rem] pr-[0] pb-[0.75rem] pl-[1.25rem] justify-between items-start shrink-0 gap-[4rem] ${className}`}>
 			<div className="space-y-4">{topLinks}</div>
-			<div className="w-full">{bottomLinks}</div>
+			<div className="w-full">
+				{bottomLinks}
+				<Logout iconSize={30} />
+			</div>
 		</div>
 	);
 };
 
 export default SideBar;
+
+export const Logout = ({ className, iconSize, size }) => {
+	// * initialize router
+	const router = useRouter();
+
+	// * initialize dispatch
+	const dispatch = useDispatch();
+	30;
+
+	// * logout functionality
+	const [logout, { isLoading }] = useLogoutMutation();
+
+	function handleLogout() {
+		const toastId = toast.loading("Wait while logging you out...", {
+			theme: "colored",
+			autoClose: false,
+			position: "top-center",
+		});
+
+		// * Update the toast on successful logout
+		toast.update(toastId, {
+			render: "Login successful! Redirecting you to the login page...",
+			type: "success",
+			isLoading: false,
+			autoClose: 5000,
+			position: "top-center",
+		});
+
+		dispatch(setAuth(false));
+		logout()
+			.unwrap()
+			.then(() => {
+				// * Update the toast on successful logout
+				toast.update(toastId, {
+					render: "Logout successful! Redirecting you to the login page...",
+					type: "success",
+					isLoading: false,
+					autoClose: 5000,
+					position: "top-center",
+				});
+
+				// * redirect to the login page
+				router.push("/login");
+			})
+			.catch(() => {
+				//* Update the toast on login failure
+				toast.update(toastId, {
+					render: "Failed to logout.",
+					type: "error",
+					isLoading: false,
+					autoClose: 5000,
+					position: "top-center",
+				});
+			});
+	}
+	return (
+		<Button
+			onClick={handleLogout}
+			variant="ghost"
+			size={size}
+			className={`flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem] ${className}`}>
+			<LogOut size={iconSize} />
+			<p className="body-md text-lg">Logout</p>
+		</Button>
+	);
+};

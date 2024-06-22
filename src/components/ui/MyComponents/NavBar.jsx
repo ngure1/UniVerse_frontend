@@ -18,6 +18,7 @@ import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { CircleUserRound, LogOut } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "../shadcnComponents/button";
+import { Logout } from "./SideBar";
 
 function ModeToggle() {
 	const { theme, setTheme } = useTheme();
@@ -27,17 +28,18 @@ function ModeToggle() {
 	};
 
 	return (
-		<button
+		<Button
+			size="xsm"
 			variant="ghost"
 			onClick={toggleTheme}
-			className="inline-flex justify-center items-center gap-2 body-md  ">
+			className="inline-flex justify-start text-base font-normal items-center gap-2 p-0 w-full">
 			{theme === "dark" ? (
 				<SunIcon className="w-[1.2rem] h-[1.2rem]" />
 			) : (
 				<MoonIcon className="w-[1.2rem] h-[1.2rem]" />
 			)}
 			{theme === "dark" ? "Light" : "Dark"}
-		</button>
+		</Button>
 	);
 }
 
@@ -94,7 +96,7 @@ const NavBar = ({ className }) => {
 						<Link
 							href="/profile"
 							className="flex gap-2 justify-center items-center">
-							<CircleUserRound className="w-[1.2rem] h-[1.2rem]" />
+							<CircleUserRound size={20} />
 							View Profile
 						</Link>
 					</DropdownMenuItem>
@@ -104,12 +106,11 @@ const NavBar = ({ className }) => {
 					</DropdownMenuItem>
 					<DropdownMenuSeparator />
 					<DropdownMenuItem>
-						<Link
-							href="#"
-							className="flex gap-2 justify-center items-center">
-							<LogOut className="w-[1.2rem] h-[1.2rem]" />
-							Logout
-						</Link>
+						<Logout
+							iconSize={20}
+							size={"xsm"}
+							className={"p-0 gap-2"}
+						/>
 					</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>
