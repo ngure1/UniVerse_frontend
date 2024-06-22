@@ -1,7 +1,7 @@
 "use client";
 import useGoogleAuth from "@/hooks/continue-with-google-hook";
 
-function page() {
+function Page() {
 	useGoogleAuth();
 
 	return (
@@ -11,4 +11,4 @@ function page() {
 	);
 }
 
-export default page;
+export default Page;

@@ -13,7 +13,7 @@ import {
 	Undo,
 	Redo,
 	Code,
-	Image,
+	ImageIcon,
 } from "lucide-react";
 
 const Toolbar = ({ editor }) => {
@@ -181,7 +181,7 @@ const Toolbar = ({ editor }) => {
 						document.getElementById("imageUpload").click()
 					}
 					className="text-sky-400 hover:bg-sky-700 hover:text-white p-1 hover:rounded-lg">
-					<Image className="w-5 h-5" />
+					<ImageIcon className="w-5 h-5" />
 				</button>
 				<input
 					type="file"
