@@ -10,23 +10,34 @@ const profileApiSlice = baseApi.injectEndpoints({
 				is_lecturer,
 				bio,
 				phone_number,
-				linked_in_url,
-			}) => {
-				const formData = new FormData();
-				formData.append("is_student", is_student);
-				formData.append("is_alumni", is_alumni);
-				formData.append("is_lecturer", is_lecturer);
-				formData.append("bio", bio);
-				formData.append("phone_number", phone_number);
-				formData.append("linked_in_url", linked_in_url);
+				// linked_in_url,
+			}) => ({
+				url: "/profile/",
+				method: "PATCH",
+				body: {
+					is_student,
+					is_alumni,
+					is_lecturer,
+					bio,
+					phone_number,
+					// linked_in_url,
+				},
+			}),
+			invalidatesTags: ["PROFILE"],
+		}),
 
+		// profilePucture
+		profilePictureUpdate: builder.mutation({
+			query: ({ profile_picture }) => {
+				const formData = new FormData();
+				formData.append("profile_picture", profile_picture[0]);
 				return {
 					url: "/profile/",
 					method: "PATCH",
 					body: formData,
 				};
 			},
-			invalidatesTags: ["PROFILE"],
+			invalidatesTags: ["PROFILE", "POSTS", "BOOKMARKS"],
 		}),
 
 		//add an address to the profile
@@ -78,6 +89,7 @@ const profileApiSlice = baseApi.injectEndpoints({
 
 export const {
 	useProfileCreateMutation,
+	useProfilePictureUpdateMutation,
 	useProfileMeQuery,
 	useProfileFollowToggleMutation,
 

@@ -14,7 +14,10 @@ const AvatarProfile = ({
 }) => {
 	return (
 		<Avatar className={`${className}`}>
-			<AvatarImage src={pfpImage} />
+			<AvatarImage
+				src={pfpImage}
+				className="object-cover"
+			/>
 			<AvatarFallback>
 				{get_fallback_name(first_name, last_name)}
 			</AvatarFallback>
