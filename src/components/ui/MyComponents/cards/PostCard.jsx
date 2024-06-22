@@ -20,7 +20,7 @@ import {
 	SquarePen,
 	Trash2,
 } from "lucide-react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import AvatarProfile from "../profile/AvatarProfile";
 import {
 	useLike,

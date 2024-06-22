@@ -17,7 +17,7 @@ import { usePostCreateMutation } from "@/redux/features/posts/postsApiSlice";
 import { toast } from "react-toastify";
 import Tiptap from "../ui/MyComponents/RichTextEditor/TipTap";
 import { useDialog } from "@/hooks/responsiveDialog";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 const PostForm = () => {
 	// handling form default values and media upload
