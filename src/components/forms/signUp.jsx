@@ -4,6 +4,7 @@ import SignUpFormSchema from "@/schema/signUpSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/shadcnComponents/button";
+import GoogleBtn from "../ui/MyComponents/googlebtn";
 import {
 	Form,
 	FormControl,
@@ -16,8 +17,6 @@ import { Input } from "@/components/ui/shadcnComponents/input";
 import { Eye, EyeOff } from "lucide-react";
 import { useUserCreateMutation } from "@/redux/features/auth/authApiSlice";
 import { Card, CardHeader } from "@/components/ui/shadcnComponents/card";
-import GoogleLogo from "@/../public/images/googleLogo.png";
-import Image from "next/image";
 import Link from "next/link";
 import { toast } from "react-toastify";
 
@@ -240,20 +239,8 @@ const SignUpForm = () => {
 							Already have an account?{" "}
 							<Link href="/login"> Login</Link>
 						</p>
-
-						<Button
-							variant="outline"
-							className="w-full gap-[1.625rem] uppercase"
-							type="submit"
-							disabled={isLoading}>
-							<Image
-								src={GoogleLogo}
-								alt="Google Logo"
-								className="w-[1.875rem] h-[1.875rem]"
-							/>
-							Continue with Google
-						</Button>
 					</form>
+					<GoogleBtn />
 				</Form>
 			</Card>
 		</div>
