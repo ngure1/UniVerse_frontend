@@ -6,6 +6,7 @@ import { ButtonsAlertDialog } from "@/components/ui/MyComponents/ButtonsAlertDia
 import googleImage from "@/../public/images/googleLogo.png";
 import videoBg from "@/../public/images/jkuat.JPG";
 import Jkuat from "@/../public/images/image 1.png";
+import { ContinueWithGoogle } from "../../../utils/continue-with-google";
 
 const Hero = () => {
 	return (
@@ -45,7 +46,8 @@ const Hero = () => {
 				<ButtonsAlertDialog
 					className="z-[1] flex justify-center items-center gap-[0.5rem] bg-transparent"
 					variant="outline"
-					size="lg">
+					size="lg"
+					onClick={ContinueWithGoogle}>
 					<Image
 						src={googleImage}
 						alt="Google Logo"

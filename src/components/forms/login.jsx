@@ -4,6 +4,7 @@ import { loginFormSchema } from "@/schema/loginShema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/shadcnComponents/button";
+import GoogleBtn from "../ui/MyComponents/googlebtn";
 import {
 	Form,
 	FormControl,
@@ -167,6 +168,7 @@ const LoginPage = () => {
 							<Link href="/signup">Sign Up</Link>
 						</p>
 					</form>
+					<GoogleBtn />
 				</Form>
 			</Card>
 		</div>
