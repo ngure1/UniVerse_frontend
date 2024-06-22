@@ -10,7 +10,7 @@ import AvatarProfile from "@/components/ui/MyComponents/profile/AvatarProfile";
 import { useProfile } from "@/hooks/profile";
 import Link from "next/link";
 import PostForm from "@/components/forms/postForm";
-import { Image, CalendarFold, NotepadText } from "lucide-react";
+import { ImageIcon, CalendarFold, NotepadText } from "lucide-react";
 import { useDialog } from "@/hooks/responsiveDialog";
 import { ResponsiveDialog } from "@/components/ui/MyComponents/ResponsiveDialog";
 
@@ -55,7 +55,7 @@ const Home = () => {
 							variant="ghost"
 							onClick={handleOpenDialog}
 							className="flex gap-1 mx-4">
-							<Image color="#4392F1" />
+							<ImageIcon color="#4392F1" />
 							<Link
 								href="#"
 								onClick={handleOpenDialog}>

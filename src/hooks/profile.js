@@ -7,13 +7,8 @@ import {
 import { toast } from "react-toastify";
 
 export const useProfile = (userId) => {
-	if (userId) {
-		const { data, isLoading, error } = useProfileMeQuery(userId);
-		return { data, isLoading, error };
-	} else {
-		const { data, isLoading, error } = useProfileMeQuery(null);
-		return { data, isLoading, error };
-	}
+	const { data, isLoading, error } = useProfileMeQuery(userId || null);
+	return { data, isLoading, error };
 };
 
 export const useFollowToggle = (id) => {
@@ -27,7 +22,7 @@ export const useFollowToggle = (id) => {
 					theme: "colored",
 				});
 			})
-			.catch((err) => {
+			.catch(() => {
 				toast.error("Failed to follow user", {
 					theme: "colored",
 				});
