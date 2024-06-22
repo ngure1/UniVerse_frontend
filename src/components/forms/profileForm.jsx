@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { editProfileSchema } from "@/schema/editProfileSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -32,7 +32,7 @@ const ProfileForm = () => {
 			is_lecturer: false,
 			bio: "",
 			phone_number: "",
-			linked_in_url: "",
+			linked_in_url: "http://127.0.0.1:3000/profile",
 		},
 	});
 
@@ -45,7 +45,7 @@ const ProfileForm = () => {
 				is_lecturer: profileData.is_lecturer,
 				bio: profileData.bio,
 				phone_number: profileData.phone_number,
-				linked_in_url: profileData.linked_in_url,
+				// linked_in_url: profileData.linked_in_url,
 			});
 		}
 	}, [profileData]);
@@ -58,6 +58,8 @@ const ProfileForm = () => {
 	const [profile, { isLoading, error }] = useProfileCreateMutation();
 
 	const onSubmit = (data) => {
+		console.log(form.formState.errors);
+		console.log("submitted");
 		// * create promise toast for updating the profile
 		const toastId = toast.loading("Updating your profile", {
 			theme: "colored",
@@ -74,6 +76,8 @@ const ProfileForm = () => {
 					isLoading: false,
 					autoClose: 5000, // Close after 5 seconds
 				});
+				// Close the dialog on success
+				closeEditProfileDialog();
 			})
 			.catch(() => {
 				// Update the toast on failure
@@ -89,6 +93,7 @@ const ProfileForm = () => {
 	return (
 		<Form {...form}>
 			<form
+				id="edit-profile-form"
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="space-y-6 max-w-[600px]">
 				<div className="space-y-4">
@@ -188,15 +193,15 @@ const ProfileForm = () => {
 						)}
 					/>
 				</div>
-
-				<Button
-					type="submit"
-					variant="secondary"
-					onClick={closeEditProfileDialog}
-					className="uppercase w-full">
-					Save
-				</Button>
 			</form>
+			<Button
+				type="submit"
+				// onClick={ha}
+				form="edit-profile-form"
+				variant="secondary"
+				className="uppercase w-full">
+				Save
+			</Button>
 		</Form>
 	);
 };

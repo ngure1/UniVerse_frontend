@@ -14,6 +14,14 @@ import AvatarProfile from "../profile/AvatarProfile";
 import Link from "next/link";
 import EditProfileTabs from "../profile/edit/EditProfileTabs";
 import { useDialog } from "@/hooks/responsiveDialog";
+import { CameraIcon } from "lucide-react";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "@/components/ui/shadcnComponents/tooltip";
+import EditAvatar from "../profile/edit/EditAvatar";
 
 const ProfileCard = ({
 	first_name,
@@ -40,6 +48,12 @@ const ProfileCard = ({
 		handleCloseDialog: closeEditProfileDialogOpen,
 	} = useDialog("editProfile");
 
+	const {
+		isDialogOpen: isEditProfilePhotoDialogOpen,
+		handleOpenDialog: openEditProfilePhotoDialog,
+		handleCloseDialog: closeEditProfilePhotoDialogOpen,
+	} = useDialog("editProfilePicture");
+
 	return (
 		<div>
 			<div className="flex gap-[6.25rem] items-center border-black">
@@ -50,26 +64,23 @@ const ProfileCard = ({
 						pfpImage={profile_picture}
 						className="w-[9rem] h-[9rem]"
 					/>
-					{linked_in_url && (
-						<Link
-							href={linked_in_url}
-							className="absolute right-0 bottom-1 rounded-full bg-white dark:bg-muted p-2">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="22"
-								height="22"
-								viewBox="0 0 29 28"
-								fill="none"
-								className="hover:w-6 hover:h-6 transition-width transition-height duration-200">
-								<path
-									fillRule="evenodd"
-									clipRule="evenodd"
-									d="M28.4497 28H22.6478V18.9051C22.6478 16.7361 22.6111 13.9461 19.6331 13.9461C16.6147 13.9461 16.1539 16.3099 16.1539 18.7495V28H10.358V9.297H15.9204V11.8543H15.9998C16.7737 10.3833 18.6661 8.83282 21.4888 8.83282C27.3641 8.83282 28.4497 12.7055 28.4497 17.7428V28ZM3.81646 6.74219C1.95215 6.74219 0.449707 5.23209 0.449707 3.37048C0.449707 1.5101 1.95215 0 3.81646 0C5.6722 0 7.17954 1.5101 7.17954 3.37048C7.17954 5.23209 5.6722 6.74219 3.81646 6.74219ZM6.71866 28H0.910587V9.297H6.71866V28Z"
-									fill="#0077B5"
-								/>
-							</svg>
-						</Link>
-					)}
+
+					<TooltipProvider>
+						<Tooltip delayDuration={200}>
+							<TooltipTrigger
+								className="absolute right-0 bottom-1 rounded-full bg-white dark:bg-muted p-2"
+								onClick={openEditProfilePhotoDialog}>
+								<CameraIcon className="bg-inherit" />
+							</TooltipTrigger>
+							<TooltipContent side="bottom">
+								<p>Change profile photo</p>
+							</TooltipContent>
+						</Tooltip>
+					</TooltipProvider>
+
+					{/* <Button
+						variant="ghost"
+						className="absolute right-0 bottom-1 rounded-full bg-white dark:bg-muted p-2"></Button> */}
 				</div>
 				<div className="flex flex-col w- items-start gap-[1.5rem]">
 					<div className="max-w-[31.25rem]">
@@ -150,6 +161,15 @@ const ProfileCard = ({
 				setIsOpen={closeEditProfileDialogOpen}>
 				{/* <EditProfileForm /> */}
 				<EditProfileTabs />
+			</ResponsiveDialog>
+
+			{/* change profile picture */}
+			<ResponsiveDialog
+				title={"Edit Profile picture"}
+				description={"Edit your profile picture"}
+				isOpen={isEditProfilePhotoDialogOpen}
+				setIsOpen={closeEditProfilePhotoDialogOpen}>
+				<EditAvatar />
 			</ResponsiveDialog>
 		</div>
 	);
