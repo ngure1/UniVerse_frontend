@@ -50,6 +50,18 @@ const authApiSlice = baseApi.injectEndpoints({
 				body: { first_name, last_name, email, password, re_password },
 			}),
 		}),
+
+		// googleAuthenticate
+		googleAuthenticate: builder.mutation({
+			query: ({ state, code }) => ({
+				url: `auth/o/google-oauth2/?state=${state}&code=${code}`,
+				method: "POST",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/x-www-form-urlencoded",
+				},
+			}),
+		}),
 	}),
 });
 
@@ -59,4 +71,5 @@ export const {
 	useUsersActivationMutation,
 	useResetPasswordMutation,
 	useResetPasswordConfirmMutation,
+	useGoogleAuthenticateMutation,
 } = authApiSlice;
