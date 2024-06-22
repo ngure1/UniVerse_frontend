@@ -61,11 +61,13 @@ const authApiSlice = baseApi.injectEndpoints({
 					"Content-Type": "application/x-www-form-urlencoded",
 				},
 
-		// logout
-		logout: builder.mutation({
-			query: () => ({
-				url: "/auth/logout/",
-				method: "POST",
+				// logout
+				logout: builder.mutation({
+					query: () => ({
+						url: "/auth/logout/",
+						method: "POST",
+					}),
+				}),
 			}),
 		}),
 	}),
