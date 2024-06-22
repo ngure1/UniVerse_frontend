@@ -60,6 +60,12 @@ const authApiSlice = baseApi.injectEndpoints({
 					Accept: "application/json",
 					"Content-Type": "application/x-www-form-urlencoded",
 				},
+
+		// logout
+		logout: builder.mutation({
+			query: () => ({
+				url: "/auth/logout/",
+				method: "POST",
 			}),
 		}),
 	}),
@@ -72,4 +78,5 @@ export const {
 	useResetPasswordMutation,
 	useResetPasswordConfirmMutation,
 	useGoogleAuthenticateMutation,
+	useLogoutMutation,
 } = authApiSlice;

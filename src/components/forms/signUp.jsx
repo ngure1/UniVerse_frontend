@@ -17,6 +17,8 @@ import { Input } from "@/components/ui/shadcnComponents/input";
 import { Eye, EyeOff } from "lucide-react";
 import { useUserCreateMutation } from "@/redux/features/auth/authApiSlice";
 import { Card, CardHeader } from "@/components/ui/shadcnComponents/card";
+import GoogleLogo from "@/../public/images/googleLogo.png";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import { toast } from "react-toastify";
 
