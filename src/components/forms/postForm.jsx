@@ -11,6 +11,7 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
+	FormDescription,
 } from "@/components/ui/shadcnComponents/form";
 import { Input } from "@/components/ui/shadcnComponents/input";
 import { usePostCreateMutation } from "@/redux/features/posts/postsApiSlice";
@@ -18,8 +19,10 @@ import { toast } from "react-toastify";
 import Tiptap from "../ui/MyComponents/RichTextEditor/TipTap";
 import { useDialog } from "@/hooks/responsiveDialog";
 import Image from "next/legacy/image";
+import { ImageIcon } from "lucide-react";
+import { Textarea } from "@/components/ui/shadcnComponents/textarea";
 
-const PostForm = () => {
+const PostForm = ({ article }) => {
 	// handling form default values and media upload
 	const form = useForm({
 		resolver: zodResolver(postFormSchema),
@@ -51,6 +54,7 @@ const PostForm = () => {
 					isLoading: false,
 					autoClose: 5000, // Close after 5 seconds
 				});
+				closePostDialog();
 			})
 			.catch(() => {
 				// Update the toast on failure
@@ -72,57 +76,90 @@ const PostForm = () => {
 				action=""
 				encType="multipart/form-data"
 				className="space-y-[1.5rem]">
-				<FormField
-					control={form.control}
-					name="title"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Title</FormLabel>
-							<FormControl>
-								<Input
-									placeholder="Your Post Title Goes Here"
-									type="text"
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
+				{article && (
+					<FormField
+						control={form.control}
+						name="title"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel className="required">
+									Title
+								</FormLabel>
+								<FormControl>
+									<Input
+										placeholder="Your Post Title Goes Here"
+										type="text"
+										{...field}
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+				)}
 				<FormField
 					control={form.control}
 					name="content"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Content</FormLabel>
+							<FormLabel className="required">Content</FormLabel>
 							<FormControl>
-								{/* <Input
-										placeholder="Type here..."
-										type="text"
+								{article ? (
+									<Tiptap
+										onChange={field.onChange}
+										content={field.name}
+									/>
+								) : (
+									<Textarea
+										placeholder="What do you want to talk about"
+										className="resize-none min-w-fit text-[1rem] min-h-32"
 										{...field}
-									/> */}
-								<Tiptap
-									onChange={field.onChange}
-									content={field.name}
-								/>
+									/>
+								)}
 							</FormControl>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
-				{previewUrl && (
-					<div className="rounded-[0.25rem] min-h-[30rem] w-[80%] relative">
-						<Image
-							src={previewUrl}
-							alt="Preview Image"
-							layout="fill"
-							objectFit="cover"
-						/>
-						{/* <video
+				{previewUrl ? (
+					article ? (
+						<div className="min-h-[32rem] w-[80%] relative">
+							<Image
+								src={previewUrl}
+								alt="Preview Image"
+								layout="fill"
+								objectFit="contain"
+								className="rounded-md"
+							/>
+							{/* <video
 							src={previewUrl}
 							width="320"
 							height="240"
 							controls></video> */}
+						</div>
+					) : (
+						<div className="min-h-[15rem] w-full relative">
+							<Image
+								src={previewUrl}
+								alt="Preview Image"
+								layout="fill"
+								objectFit="contain"
+								className="rounded-md"
+							/>
+							{/* <video
+							src={previewUrl}
+							width="320"
+							height="240"
+							controls></video> */}
+						</div>
+					)
+				) : (
+					<div className="min-h-[15rem] w-full relative bg-slate-200 rounded-sm flex flex-col gap-2 items-center justify-center">
+						<ImageIcon
+							size={100}
+							color="#4392F1"
+						/>
+						<p>Your image will be displayed here</p>
 					</div>
 				)}
 
@@ -135,6 +172,7 @@ const PostForm = () => {
 							<FormControl>
 								<Input
 									type="file"
+									{...mediaRef}
 									onChange={(event) => {
 										const file = event.target.files?.[0];
 										if (file) {
@@ -149,6 +187,10 @@ const PostForm = () => {
 									}}
 								/>
 							</FormControl>
+							<FormDescription>
+								We recommend adding a photo relevant to your
+								post.
+							</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}
@@ -158,7 +200,7 @@ const PostForm = () => {
 					variant="secondary"
 					type="submit"
 					className="w-full"
-					onClick={closePostDialog}
+					// onClick={}
 					disabled={isLoading}>
 					Post
 				</Button>

@@ -126,7 +126,7 @@ const PostCard = ({
 	// * confirm delete dialog
 	function handleConfirmDelete() {
 		deletePost({ post_id: postId })
-			.uContentnwrap()
+			.unwrap()
 			.then(() => {
 				toast.success("Post deleted successfully", {
 					theme: "colored",
@@ -266,31 +266,35 @@ const PostCard = ({
 					</div>
 				)}
 				<div className="self-stretch h-[30%]">
-					<p className="sub-heading-3 p-1">{title}</p>
+					{title && <p className="sub-heading-3 p-1">{title}</p>}
 					<div
 						dangerouslySetInnerHTML={{
 							__html: sanitizedContent,
 						}}
 					/>
 				</div>
-				{smallImage ? (
-					<div className="rounded-[0.25rem] h-[22rem] w-full relative">
-						<Image
-							src={postImage}
-							alt="Post Image"
-							layout="fill"
-							objectFit="cover"
-						/>
-					</div>
+				{postImage ? (
+					smallImage ? (
+						<div className="rounded-[0.25rem] h-[22rem] w-full relative">
+							<Image
+								src={postImage}
+								alt="Post Image"
+								layout="fill"
+								objectFit="cover"
+							/>
+						</div>
+					) : (
+						<div className="rounded-[0.25rem] min-h-[30rem] w-full relative">
+							<Image
+								src={postImage}
+								alt="Post Image"
+								layout="fill"
+								objectFit="cover"
+							/>
+						</div>
+					)
 				) : (
-					<div className="rounded-[0.25rem] min-h-[30rem] w-full relative">
-						<Image
-							src={postImage}
-							alt="Post Image"
-							layout="fill"
-							objectFit="cover"
-						/>
-					</div>
+					<></>
 				)}
 				{forEvents && (
 					<Button
