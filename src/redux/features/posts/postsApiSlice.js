@@ -8,7 +8,9 @@ const postApiSlice = baseApi.injectEndpoints({
 				const formData = new FormData();
 				formData.append("title", title);
 				formData.append("content", content);
-				formData.append("media", media[0]);
+				if (media && media.length > 0) {
+					formData.append("media", media[0]);
+				}
 
 				return {
 					url: "/posts/",

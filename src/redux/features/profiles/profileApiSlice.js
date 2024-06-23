@@ -82,7 +82,7 @@ const profileApiSlice = baseApi.injectEndpoints({
 				url: "/posts/bookmarks/me/",
 				method: "GET",
 			}),
-			providesTags: ["BOOKMARKS"],
+			providesTags: ["POSTS"],
 		}),
 	}),
 });
