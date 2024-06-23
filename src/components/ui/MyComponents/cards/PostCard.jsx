@@ -19,6 +19,7 @@ import {
 	EllipsisVertical,
 	SquarePen,
 	Trash2,
+	SendHorizonalIcon,
 } from "lucide-react";
 import Image from "next/legacy/image";
 import AvatarProfile from "../profile/AvatarProfile";
@@ -27,6 +28,7 @@ import {
 	useBookmark,
 	useUnlike,
 	useUnbookmark,
+	useComment,
 } from "@/hooks/postHooks";
 import {
 	DropdownMenu,
@@ -35,6 +37,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/shadcnComponents/dropdown-menu";
+import { Input } from "@/components/ui/shadcnComponents/input";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -137,6 +140,24 @@ const PostCard = ({
 					theme: "colored",
 				});
 			});
+	}
+
+	// * comment
+	//* show comment state
+	const [showComment, setShowComment] = useState(false);
+	function toggleComments() {
+		setShowComment(!showComment);
+	}
+	//* comment text
+	const [comment, setComment] = useState("");
+	function handleCommentChange(e) {
+		setComment(e.target.value);
+	}
+	// * comment submission
+	const handleComment = useComment(postId, comment);
+	function commentSubmit() {
+		handleComment();
+		setComment("");
 	}
 
 	return (
@@ -304,7 +325,7 @@ const PostCard = ({
 					</Button>
 				)}
 			</CardContent>
-			<CardFooter className="flex flex-col relative w-full gap-1">
+			<CardFooter className="flex flex-col w-full gap-1">
 				<div className="flex items-start self-stretch border-y-2">
 					<Button
 						className="flex items-center cursor-pointer"
@@ -323,7 +344,9 @@ const PostCard = ({
 							<UnLikeSVG />
 						)}
 					</Button>
-					<Button variant="ghost">
+					<Button
+						variant="ghost"
+						onClick={toggleComments}>
 						<MessageSquareMore />
 					</Button>
 					<Button variant="ghost">
@@ -344,16 +367,33 @@ const PostCard = ({
 					</Button>
 				</div>
 
-				<div className="flex">
-					<p className="absolute left-[2rem]">
+				<div className="flex justify-between w-full">
+					<p className="">
 						{" "}
 						{likeCount} {likeCount === 1 ? "Like" : "Likes"}
 					</p>
-					<p className="absolute right-[1rem]">
+					<p className="">
 						{bookmarkCount}{" "}
 						{bookmarkCount === 1 ? "Bookmark" : "Bookmarks"}
 					</p>
 				</div>
+				{showComment && (
+					<div className="w-full pt-3">
+						<Input
+							type="text"
+							value={comment}
+							onChange={handleCommentChange}
+							placeholder="Write your comment here "
+							suffix={
+								<SendHorizonalIcon
+									className="hover:text-blue-700"
+									onClick={commentSubmit}
+								/>
+							}
+							className="rounded-[6.25rem] border border-[#11294D]"
+						/>
+					</div>
+				)}
 			</CardFooter>
 		</Card>
 	);
