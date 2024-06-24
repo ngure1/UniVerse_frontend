@@ -17,6 +17,7 @@ import { ResponsiveDialog } from "@/components/ui/MyComponents/ResponsiveDialog"
 const Home = () => {
 	const { data, isLoading } = usePostListQuery(1);
 	const { data: profileData } = useProfile();
+	console.log(data);
 	const { isDialogOpen, handleOpenDialog, handleCloseDialog } =
 		useDialog("post");
 
@@ -86,6 +87,7 @@ const Home = () => {
 						<PostCard
 							key={index}
 							postId={post.id}
+							profileId={post.author.id}
 							first_name={post.author.user.first_name}
 							last_name={post.author.user.last_name}
 							pfpImage={post.author.profile_picture}

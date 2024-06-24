@@ -84,6 +84,15 @@ const profileApiSlice = baseApi.injectEndpoints({
 			}),
 			providesTags: ["POSTS"],
 		}),
+
+		// * profile details
+		profileDetail: builder.query({
+			query: ({ profile_id }) => ({
+				url: `/user/profiles/${profile_id}/`,
+				method: "GET",
+			}),
+			providesTags: ["PROFILE"],
+		}),
 	}),
 });
 
@@ -97,4 +106,7 @@ export const {
 	useProfileAddressCreateMutation,
 	usePostsMeQuery,
 	usePostsBookmarksMeQuery,
+
+	//profile detail
+	useProfileDetailQuery,
 } = profileApiSlice;

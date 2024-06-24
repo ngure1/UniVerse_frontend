@@ -93,6 +93,13 @@ const postApiSlice = baseApi.injectEndpoints({
 			}),
 			providesTags: ["POSTS"],
 		}),
+		postDetail: builder.query({
+			query: ({ post_id }) => ({
+				url: `/posts/${post_id}/`,
+				method: "GET",
+			}),
+			providesTags: ["POSTS"],
+		}),
 	}),
 });
 
@@ -101,6 +108,9 @@ export const {
 	usePostCreateMutation,
 	usePostListQuery,
 	usePostDeleteMutation,
+
+	// * crud on post detail
+	usePostDetailQuery,
 
 	// * crud on like
 	usePostsLikesCreateMutation,
