@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { Element } from "react-scroll";
 import { ButtonsAlertDialog } from "@/components/ui/MyComponents/ButtonsAlertDialog";
 import googleImage from "@/../public/images/googleLogo.png";

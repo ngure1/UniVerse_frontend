@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-scroll";
 import HeaderDropdown from "@/components/ui/MyComponents/HeaderDropdown";
 import { ButtonsAlertDialog } from "@/components/ui/MyComponents/ButtonsAlertDialog";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { default as NextLink } from "next/link";
 import Logo from "@/../public/images/logo.png";
 
