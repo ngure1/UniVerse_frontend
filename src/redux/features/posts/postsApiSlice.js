@@ -84,6 +84,15 @@ const postApiSlice = baseApi.injectEndpoints({
 			}),
 			invalidatesTags: ["POSTS"],
 		}),
+
+		// * listing a posts comments
+		postsCommentList: builder.query({
+			query: ({ post }) => ({
+				url: `/posts/comments/post/${post}/`,
+				method: "GET",
+			}),
+			providesTags: ["POSTS"],
+		}),
 	}),
 });
 
@@ -103,4 +112,5 @@ export const {
 
 	// * comments
 	usePostsCommentCreateMutation,
+	usePostsCommentListQuery,
 } = postApiSlice;

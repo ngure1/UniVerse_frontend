@@ -53,8 +53,12 @@ import Lottie from "react-lottie-player";
 import { LikeSVG, UnLikeSVG } from "@/app/landing/SVGIcon";
 import DOMPurify from "dompurify";
 import Link from "next/link";
-import { usePostDeleteMutation } from "@/redux/features/posts/postsApiSlice";
+import {
+	usePostDeleteMutation,
+	usePostsCommentListQuery,
+} from "@/redux/features/posts/postsApiSlice";
 import { toast } from "react-toastify";
+import { usePostListQuery } from "@/redux/features/posts/postsApiSlice";
 
 const PostCard = ({
 	postId,
@@ -378,7 +382,7 @@ const PostCard = ({
 					</p>
 				</div>
 				{showComment && (
-					<div className="w-full pt-3">
+					<div className="w-full pt-3 flex flex-col gap-4">
 						<Input
 							type="text"
 							value={comment}
@@ -392,6 +396,7 @@ const PostCard = ({
 							}
 							className="rounded-[6.25rem] border border-[#11294D]"
 						/>
+						<CommentsComponent postId={postId} />
 					</div>
 				)}
 			</CardFooter>
@@ -400,3 +405,41 @@ const PostCard = ({
 };
 
 export default PostCard;
+
+function CommentsComponent({ postId }) {
+	const { data: commentsList, isLoading } = usePostsCommentListQuery({
+		post: postId,
+	});
+	if (commentsList) {
+		console.log(commentsList);
+	}
+	return (
+		<div className="max-h-[20rem] flex flex-col gap-6 overflow-y-scroll">
+			{commentsList?.results?.map((comment, index) => (
+				<div className="flex gap-6 items-start">
+					<AvatarProfile
+						pfpImage={comment.author.profile_picture}
+						first_name={comment.author.user.first_name}
+						last_name={comment.author.user.last_name}
+						className="w-[3.2rem] h-[3.2rem]"
+					/>
+					<div className="flex gap-1 flex-col w-full">
+						<p className="muted text-sm flex gap-2">
+							<span>
+								{comment.author.user.first_name}{" "}
+								{comment.author.user.last_name}{" "}
+							</span>
+							<VerifiedIcon
+								fill="#00B595"
+								color="#ffff"
+								className="dark:filter dark:invert"
+								size={20}
+							/>
+						</p>
+						<p className="text-wrap ">{comment.text}</p>
+					</div>
+				</div>
+			))}
+		</div>
+	);
+}
