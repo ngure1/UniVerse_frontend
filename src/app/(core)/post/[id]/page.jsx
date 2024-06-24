@@ -5,7 +5,7 @@ import PostCard from "@/components/ui/MyComponents/cards/PostCard";
 import PostSkeleton from "@/components/ui/MyComponents/cards/skeletons/Skeleton";
 import RightSidebar from "@/components/ui/MyComponents/RightSidebar";
 
-const page = ({ params }) => {
+const Page = ({ params }) => {
 	const {
 		data: post,
 		error,
@@ -46,4 +46,4 @@ const page = ({ params }) => {
 	);
 };
 
-export default page;
+export default Page;

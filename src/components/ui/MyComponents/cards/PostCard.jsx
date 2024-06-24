@@ -506,7 +506,9 @@ function CommentsComponent({ postId }) {
 	return (
 		<div className="max-h-[20rem] flex flex-col gap-6 overflow-y-scroll">
 			{commentsList?.results?.map((comment, index) => (
-				<div className="flex gap-6 items-start">
+				<div
+					className="flex gap-6 items-start"
+					key={index}>
 					<AvatarProfile
 						pfpImage={comment.author.profile_picture}
 						first_name={comment.author.user.first_name}
