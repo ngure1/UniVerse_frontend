@@ -1,12 +1,16 @@
 "use client";
-import { ModeToggle } from "@/components/ui/MyComponents/ModeToggle";
+import React from "react";
+import { useProfileDetailQuery } from "@/redux/features/profiles/profileApiSlice";
 import ProfileCard from "@/components/ui/MyComponents/cards/ProfileCard";
 import ProfileTabs from "@/components/ui/MyComponents/profile/ProfileTabs";
-import { toast } from "react-toastify";
-import { useProfile } from "@/hooks/profile";
 
-const ProfilePage = () => {
-	const { data: profileData, isLoading, error } = useProfile();
+const page = ({ params }) => {
+	const {
+		data: profileData,
+		error,
+		isLoading,
+	} = useProfileDetailQuery({ profile_id: params.id });
+	console.log(profileData);
 
 	if (isLoading) {
 		return (
@@ -26,7 +30,6 @@ const ProfilePage = () => {
 				{profileData && (
 					<ProfileCard
 						first_name={profileData.user.first_name}
-						withEdit
 						last_name={profileData.user.last_name}
 						profile_picture={profileData.profile_picture}
 						email={profileData.user.email}
@@ -43,10 +46,10 @@ const ProfilePage = () => {
 					/>
 				)}
 			</div>
-			<ModeToggle />
+
 			<ProfileTabs />
 		</div>
 	);
 };
 
-export default ProfilePage;
+export default page;

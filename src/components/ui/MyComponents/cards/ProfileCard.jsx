@@ -24,11 +24,13 @@ import {
 import EditAvatar from "../profile/edit/EditAvatar";
 
 const ProfileCard = ({
+	profileId,
 	first_name,
 	last_name,
 	profile_picture,
 	email,
 	address,
+	withEdit = false,
 	is_verified,
 	is_student,
 	is_alumni,
@@ -65,18 +67,20 @@ const ProfileCard = ({
 						className="w-[9rem] h-[9rem]"
 					/>
 
-					<TooltipProvider>
-						<Tooltip delayDuration={200}>
-							<TooltipTrigger
-								className="absolute right-0 bottom-1 rounded-full bg-white dark:bg-muted p-2"
-								onClick={openEditProfilePhotoDialog}>
-								<CameraIcon className="bg-inherit" />
-							</TooltipTrigger>
-							<TooltipContent side="bottom">
-								<p>Change profile photo</p>
-							</TooltipContent>
-						</Tooltip>
-					</TooltipProvider>
+					{withEdit && (
+						<TooltipProvider>
+							<Tooltip delayDuration={200}>
+								<TooltipTrigger
+									className="absolute right-0 bottom-1 rounded-full bg-white dark:bg-muted p-2"
+									onClick={openEditProfilePhotoDialog}>
+									<CameraIcon className="bg-inherit" />
+								</TooltipTrigger>
+								<TooltipContent side="bottom">
+									<p>Change profile photo</p>
+								</TooltipContent>
+							</Tooltip>
+						</TooltipProvider>
+					)}
 
 					{/* <Button
 						variant="ghost"
@@ -147,13 +151,15 @@ const ProfileCard = ({
 					</div>
 				</div>
 			</div>
-			<Button
-				variant="ghost"
-				onClick={openEditProfileDialog}
-				className="flex gap-3">
-				<PencilLine size={18} />
-				<span className="text-sm">Edit Profile</span>
-			</Button>
+			{withEdit && (
+				<Button
+					variant="ghost"
+					onClick={openEditProfileDialog}
+					className="flex gap-3">
+					<PencilLine size={18} />
+					<span className="text-sm">Edit Profile</span>
+				</Button>
+			)}
 			<ResponsiveDialog
 				title={"Edit Profile"}
 				description={"Edit your profile"}

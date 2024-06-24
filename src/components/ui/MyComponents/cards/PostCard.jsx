@@ -62,6 +62,7 @@ import { usePostListQuery } from "@/redux/features/posts/postsApiSlice";
 
 const PostCard = ({
 	postId,
+	profileId,
 	pfpImage,
 	first_name,
 	last_name,
@@ -72,7 +73,7 @@ const PostCard = ({
 	postImage,
 	isVerified,
 	forProfile = false,
-	isOwner = true,
+	isOwner = false,
 	event_date,
 	isOnline,
 	address,
@@ -167,168 +168,174 @@ const PostCard = ({
 	return (
 		<Card className="flex w-[58%] min-w-[33.25rem] py-[0.3rem] flex-col items-start rounded-[0.5rem] bg-white dark:bg-muted">
 			{!forProfile && (
-				<CardHeader className="w-full flex flex-row justify-between items-start">
-					{/* // * container for post creator details */}
-					<div className="flex items-center self-stretch gap-[0.75rem]">
-						<AvatarProfile
-							pfpImage={pfpImage}
-							first_name={first_name}
-							last_name={last_name}
-							className="w-[4rem] h-[4rem]"
-						/>
-						<div className="flex flex-col justify-center items-start gap-[-0.75rem] w-full">
-							<div className="flex items-center gap-[0.75rem]">
-								<p className="body-text">
-									{first_name} {last_name}
-								</p>
+				<Link
+					href={`profile/${profileId}`}
+					className="w-full">
+					<CardHeader className="w-full flex flex-row justify-between items-start">
+						{/* // * container for post creator details */}
+						<div className="flex items-center self-stretch gap-[0.75rem]">
+							<AvatarProfile
+								pfpImage={pfpImage}
+								first_name={first_name}
+								last_name={last_name}
+								className="w-[4rem] h-[4rem]"
+							/>
+							<div className="flex flex-col justify-center items-start gap-[-0.75rem] w-full">
+								<div className="flex items-center gap-[0.75rem]">
+									<p className="body-text">
+										{first_name} {last_name}
+									</p>
 
-								{isVerified && (
-									<VerifiedIcon
-										fill="#00B595"
-										color="#ffff"
-										className="dark:filter dark:invert"
-										size={24}
-									/>
-								)}
-							</div>
-							<p className="text-sm muted">{type}</p>
-							<p className="text-sm muted">{date}</p>
-						</div>
-					</div>
-					{/* // * dropdown menu for edit & deleting a post */}
-					{isOwner ? (
-						<DropdownMenu>
-							<DropdownMenuTrigger asChild>
-								<div className="hover:bg-accent rounded-full p-1">
-									<EllipsisVertical />
+									{isVerified && (
+										<VerifiedIcon
+											fill="#00B595"
+											color="#ffff"
+											className="dark:filter dark:invert"
+											size={24}
+										/>
+									)}
 								</div>
-							</DropdownMenuTrigger>
-							<DropdownMenuContent className="w-56">
-								<DropdownMenuItem>
-									<SquarePen className="mr-2 h-4 w-4" />
-									<Link href="">Edit</Link>
-								</DropdownMenuItem>
-								<DropdownMenuItem
-									onSelect={handleShowDialog}
-									className="hover:bg-destructive active:bg-destructive focus:bg-destructive hover:text-white active:text-white focus:text-white">
-									<Trash2 className="mr-2 h-4 w-4" />
-									<span>Delete</span>
-								</DropdownMenuItem>
-							</DropdownMenuContent>
-						</DropdownMenu>
-					) : // * show confirm delete dialog
+								<p className="text-sm muted">{type}</p>
+								<p className="text-sm muted">{date}</p>
+							</div>
+						</div>
+						{/* // * dropdown menu for edit & deleting a post */}
+						{isOwner ? (
+							<DropdownMenu>
+								<DropdownMenuTrigger asChild>
+									<div className="hover:bg-accent rounded-full p-1">
+										<EllipsisVertical />
+									</div>
+								</DropdownMenuTrigger>
+								<DropdownMenuContent className="w-56">
+									<DropdownMenuItem>
+										<SquarePen className="mr-2 h-4 w-4" />
+										<Link href="">Edit</Link>
+									</DropdownMenuItem>
+									<DropdownMenuItem
+										onSelect={handleShowDialog}
+										className="hover:bg-destructive active:bg-destructive focus:bg-destructive hover:text-white active:text-white focus:text-white">
+										<Trash2 className="mr-2 h-4 w-4" />
+										<span>Delete</span>
+									</DropdownMenuItem>
+								</DropdownMenuContent>
+							</DropdownMenu>
+						) : // * show confirm delete dialog
 
-					// * is following creator for follow/followign functionality
+						// * is following creator for follow/followign functionality
 
-					isFollowingCreator ? (
-						<Button
-							variant="outline"
-							className="gap-2"
-							onClick={handleFollow}>
-							<UserRoundPlus />
-							Unfollow
-						</Button>
-					) : (
-						<Button
-							variant="outline"
-							className="gap-2"
-							onClick={handleFollow}>
-							<UserRoundPlus />
-							Follow
-						</Button>
-					)}
-					{showDeleteDialog && (
-						<AlertDialog
-							open={showDeleteDialog}
-							onOpenChange={handleCloseDeleteDialog}>
-							<AlertDialogContent>
-								<AlertDialogHeader>
-									<AlertDialogTitle>
-										Are you sure you want to delete this
-										post
-									</AlertDialogTitle>
-									<AlertDialogDescription>
-										This action cannot be undone and your
-										post will permanently deleted
-									</AlertDialogDescription>
-								</AlertDialogHeader>
-								<AlertDialogFooter>
-									<Button
-										variant="outline"
-										onClick={handleCloseDeleteDialog}>
-										Cancel
-									</Button>
-									<AlertDialogAction className="bg-inherit hover:bg-inherit">
+						isFollowingCreator ? (
+							<Button
+								variant="outline"
+								className="gap-2"
+								onClick={handleFollow}>
+								<UserRoundPlus />
+								Unfollow
+							</Button>
+						) : (
+							<Button
+								variant="outline"
+								className="gap-2"
+								onClick={handleFollow}>
+								<UserRoundPlus />
+								Follow
+							</Button>
+						)}
+						{showDeleteDialog && (
+							<AlertDialog
+								open={showDeleteDialog}
+								onOpenChange={handleCloseDeleteDialog}>
+								<AlertDialogContent>
+									<AlertDialogHeader>
+										<AlertDialogTitle>
+											Are you sure you want to delete this
+											post
+										</AlertDialogTitle>
+										<AlertDialogDescription>
+											This action cannot be undone and
+											your post will permanently deleted
+										</AlertDialogDescription>
+									</AlertDialogHeader>
+									<AlertDialogFooter>
 										<Button
-											variant="destructive"
-											onClick={handleConfirmDelete}>
-											Continue
+											variant="outline"
+											onClick={handleCloseDeleteDialog}>
+											Cancel
 										</Button>
-									</AlertDialogAction>
-								</AlertDialogFooter>
-							</AlertDialogContent>
-						</AlertDialog>
-					)}
-				</CardHeader>
+										<AlertDialogAction className="bg-inherit hover:bg-inherit">
+											<Button
+												variant="destructive"
+												onClick={handleConfirmDelete}>
+												Continue
+											</Button>
+										</AlertDialogAction>
+									</AlertDialogFooter>
+								</AlertDialogContent>
+							</AlertDialog>
+						)}
+					</CardHeader>
+				</Link>
 			)}
 
-			<CardContent className="flex flex-col items-start gap-[0.75rem] self-stretch h-[70%]">
-				{forEvents && (
-					<div className="">
-						<p className="inline-flex gap-1">
-							<CalendarX />
-							{event_date}
-						</p>
-						{isOnline ? (
-							<p className="flex gap-1">
-								<Globe /> ONLINE
+			<Link href={`post/${postId}`}>
+				<CardContent className="flex flex-col items-start gap-[0.75rem] self-stretch h-[70%]">
+					{forEvents && (
+						<div className="">
+							<p className="inline-flex gap-1">
+								<CalendarX />
+								{event_date}
 							</p>
-						) : (
-							<p className="flex gap-1">
-								<MapPin /> {address}
-							</p>
-						)}
+							{isOnline ? (
+								<p className="flex gap-1">
+									<Globe /> ONLINE
+								</p>
+							) : (
+								<p className="flex gap-1">
+									<MapPin /> {address}
+								</p>
+							)}
+						</div>
+					)}
+					<div className="self-stretch h-[30%]">
+						{title && <p className="sub-heading-3 p-1">{title}</p>}
+						<div
+							dangerouslySetInnerHTML={{
+								__html: sanitizedContent,
+							}}
+						/>
 					</div>
-				)}
-				<div className="self-stretch h-[30%]">
-					{title && <p className="sub-heading-3 p-1">{title}</p>}
-					<div
-						dangerouslySetInnerHTML={{
-							__html: sanitizedContent,
-						}}
-					/>
-				</div>
-				{postImage ? (
-					smallImage ? (
-						<div className="rounded-[0.25rem] h-[22rem] w-full relative">
-							<Image
-								src={postImage}
-								alt="Post Image"
-								layout="fill"
-								objectFit="cover"
-							/>
-						</div>
+					{postImage ? (
+						smallImage ? (
+							<div className="rounded-[0.25rem] h-[22rem] w-full relative">
+								<Image
+									src={postImage}
+									alt="Post Image"
+									layout="fill"
+									objectFit="cover"
+								/>
+							</div>
+						) : (
+							<div className="rounded-[0.25rem] min-h-[30rem] w-full relative">
+								<Image
+									src={postImage}
+									alt="Post Image"
+									layout="fill"
+									objectFit="cover"
+								/>
+							</div>
+						)
 					) : (
-						<div className="rounded-[0.25rem] min-h-[30rem] w-full relative">
-							<Image
-								src={postImage}
-								alt="Post Image"
-								layout="fill"
-								objectFit="cover"
-							/>
-						</div>
-					)
-				) : (
-					<></>
-				)}
-				{forEvents && (
-					<Button
-						className="w-full"
-						variant="secondary">
-						Register
-					</Button>
-				)}
-			</CardContent>
+						<></>
+					)}
+					{forEvents && (
+						<Button
+							className="w-full"
+							variant="secondary">
+							Register
+						</Button>
+					)}
+				</CardContent>
+			</Link>
 			<CardFooter className="flex flex-col w-full gap-1 relative">
 				<div className="flex items-start self-stretch border-y-2">
 					<Button
