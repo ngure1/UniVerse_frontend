@@ -26,6 +26,7 @@ import Link from "next/link";
 import { setAuth } from "@/redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { Separator } from "@/components/ui/shadcnComponents/separator";
 
 const LoginPage = () => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -167,7 +168,13 @@ const LoginPage = () => {
 							Don&#39;t have an account?{" "}
 							<Link href="/signup">Sign Up</Link>
 						</p>
+						<div className="flex items-center justify-center">
+							<Separator />
+							<p>or</p>
+							<Separator />
+						</div>
 					</form>
+
 					<GoogleBtn />
 				</Form>
 			</Card>

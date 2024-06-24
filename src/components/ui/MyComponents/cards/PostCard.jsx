@@ -72,6 +72,7 @@ const PostCard = ({
 	content,
 	postImage,
 	isVerified,
+	isPostDetails = false,
 	forProfile = false,
 	isOwner = false,
 	event_date,
@@ -168,11 +169,11 @@ const PostCard = ({
 	return (
 		<Card className="flex w-[58%] min-w-[33.25rem] py-[0.3rem] flex-col items-start rounded-[0.5rem] bg-white dark:bg-muted">
 			{!forProfile && (
-				<Link
-					href={`profile/${profileId}`}
-					className="w-full">
-					<CardHeader className="w-full flex flex-row justify-between items-start">
-						{/* // * container for post creator details */}
+				<CardHeader className="w-full flex flex-row justify-between items-start">
+					{/* // * container for post creator details */}
+					<Link
+						href={`/profile/${profileId}`}
+						className="w-full">
 						<div className="flex items-center self-stretch gap-[0.75rem]">
 							<AvatarProfile
 								pfpImage={pfpImage}
@@ -199,85 +200,85 @@ const PostCard = ({
 								<p className="text-sm muted">{date}</p>
 							</div>
 						</div>
-						{/* // * dropdown menu for edit & deleting a post */}
-						{isOwner ? (
-							<DropdownMenu>
-								<DropdownMenuTrigger asChild>
-									<div className="hover:bg-accent rounded-full p-1">
-										<EllipsisVertical />
-									</div>
-								</DropdownMenuTrigger>
-								<DropdownMenuContent className="w-56">
-									<DropdownMenuItem>
-										<SquarePen className="mr-2 h-4 w-4" />
-										<Link href="">Edit</Link>
-									</DropdownMenuItem>
-									<DropdownMenuItem
-										onSelect={handleShowDialog}
-										className="hover:bg-destructive active:bg-destructive focus:bg-destructive hover:text-white active:text-white focus:text-white">
-										<Trash2 className="mr-2 h-4 w-4" />
-										<span>Delete</span>
-									</DropdownMenuItem>
-								</DropdownMenuContent>
-							</DropdownMenu>
-						) : // * show confirm delete dialog
+					</Link>
+					{/* // * dropdown menu for edit & deleting a post */}
+					{isOwner ? (
+						<DropdownMenu>
+							<DropdownMenuTrigger asChild>
+								<div className="hover:bg-accent rounded-full p-1">
+									<EllipsisVertical />
+								</div>
+							</DropdownMenuTrigger>
+							<DropdownMenuContent className="w-56">
+								<DropdownMenuItem>
+									<SquarePen className="mr-2 h-4 w-4" />
+									<Link href="">Edit</Link>
+								</DropdownMenuItem>
+								<DropdownMenuItem
+									onSelect={handleShowDialog}
+									className="hover:bg-destructive active:bg-destructive focus:bg-destructive hover:text-white active:text-white focus:text-white">
+									<Trash2 className="mr-2 h-4 w-4" />
+									<span>Delete</span>
+								</DropdownMenuItem>
+							</DropdownMenuContent>
+						</DropdownMenu>
+					) : // * show confirm delete dialog
 
-						// * is following creator for follow/followign functionality
+					// * is following creator for follow/followign functionality
 
-						isFollowingCreator ? (
-							<Button
-								variant="outline"
-								className="gap-2"
-								onClick={handleFollow}>
-								<UserRoundPlus />
-								Unfollow
-							</Button>
-						) : (
-							<Button
-								variant="outline"
-								className="gap-2"
-								onClick={handleFollow}>
-								<UserRoundPlus />
-								Follow
-							</Button>
-						)}
-						{showDeleteDialog && (
-							<AlertDialog
-								open={showDeleteDialog}
-								onOpenChange={handleCloseDeleteDialog}>
-								<AlertDialogContent>
-									<AlertDialogHeader>
-										<AlertDialogTitle>
-											Are you sure you want to delete this
-											post
-										</AlertDialogTitle>
-										<AlertDialogDescription>
-											This action cannot be undone and
-											your post will permanently deleted
-										</AlertDialogDescription>
-									</AlertDialogHeader>
-									<AlertDialogFooter>
+					isFollowingCreator ? (
+						<Button
+							variant="outline"
+							className="gap-2"
+							onClick={handleFollow}>
+							<UserRoundPlus />
+							Unfollow
+						</Button>
+					) : (
+						<Button
+							variant="outline"
+							className="gap-2"
+							onClick={handleFollow}>
+							<UserRoundPlus />
+							Follow
+						</Button>
+					)}
+					{showDeleteDialog && (
+						<AlertDialog
+							open={showDeleteDialog}
+							onOpenChange={handleCloseDeleteDialog}>
+							<AlertDialogContent>
+								<AlertDialogHeader>
+									<AlertDialogTitle>
+										Are you sure you want to delete this
+										post
+									</AlertDialogTitle>
+									<AlertDialogDescription>
+										This action cannot be undone and your
+										post will permanently deleted
+									</AlertDialogDescription>
+								</AlertDialogHeader>
+								<AlertDialogFooter>
+									<Button
+										variant="outline"
+										onClick={handleCloseDeleteDialog}>
+										Cancel
+									</Button>
+									<AlertDialogAction className="bg-inherit hover:bg-inherit">
 										<Button
-											variant="outline"
-											onClick={handleCloseDeleteDialog}>
-											Cancel
+											variant="destructive"
+											onClick={handleConfirmDelete}>
+											Continue
 										</Button>
-										<AlertDialogAction className="bg-inherit hover:bg-inherit">
-											<Button
-												variant="destructive"
-												onClick={handleConfirmDelete}>
-												Continue
-											</Button>
-										</AlertDialogAction>
-									</AlertDialogFooter>
-								</AlertDialogContent>
-							</AlertDialog>
-						)}
-					</CardHeader>
-				</Link>
+									</AlertDialogAction>
+								</AlertDialogFooter>
+							</AlertDialogContent>
+						</AlertDialog>
+					)}
+				</CardHeader>
 			)}
 
-			<Link href={`post/${postId}`}>
+			{isPostDetails ? (
 				<CardContent className="flex flex-col items-start gap-[0.75rem] self-stretch h-[70%]">
 					{forEvents && (
 						<div className="">
@@ -335,7 +336,70 @@ const PostCard = ({
 						</Button>
 					)}
 				</CardContent>
-			</Link>
+			) : (
+				<Link href={`/post/${postId}`}>
+					<CardContent className="flex flex-col items-start gap-[0.75rem] self-stretch h-[70%]">
+						{forEvents && (
+							<div className="">
+								<p className="inline-flex gap-1">
+									<CalendarX />
+									{event_date}
+								</p>
+								{isOnline ? (
+									<p className="flex gap-1">
+										<Globe /> ONLINE
+									</p>
+								) : (
+									<p className="flex gap-1">
+										<MapPin /> {address}
+									</p>
+								)}
+							</div>
+						)}
+						<div className="self-stretch h-[30%]">
+							{title && (
+								<p className="sub-heading-3 p-1">{title}</p>
+							)}
+							<div
+								dangerouslySetInnerHTML={{
+									__html: sanitizedContent,
+								}}
+							/>
+						</div>
+						{postImage ? (
+							smallImage ? (
+								<div className="rounded-[0.25rem] h-[22rem] w-full relative">
+									<Image
+										src={postImage}
+										alt="Post Image"
+										layout="fill"
+										objectFit="cover"
+									/>
+								</div>
+							) : (
+								<div className="rounded-[0.25rem] min-h-[30rem] w-full relative">
+									<Image
+										src={postImage}
+										alt="Post Image"
+										layout="fill"
+										objectFit="cover"
+									/>
+								</div>
+							)
+						) : (
+							<></>
+						)}
+						{forEvents && (
+							<Button
+								className="w-full"
+								variant="secondary">
+								Register
+							</Button>
+						)}
+					</CardContent>
+				</Link>
+			)}
+
 			<CardFooter className="flex flex-col w-full gap-1 relative">
 				<div className="flex items-start self-stretch border-y-2">
 					<Button
@@ -388,7 +452,7 @@ const PostCard = ({
 						{bookmarkCount === 1 ? "Bookmark" : "Bookmarks"}
 					</p>
 				</div>
-				{showComment && (
+				{isPostDetails ? (
 					<div className="w-full pt-3 flex flex-col gap-4">
 						<Input
 							type="text"
@@ -405,6 +469,25 @@ const PostCard = ({
 						/>
 						<CommentsComponent postId={postId} />
 					</div>
+				) : (
+					showComment && (
+						<div className="w-full pt-3 flex flex-col gap-4">
+							<Input
+								type="text"
+								value={comment}
+								onChange={handleCommentChange}
+								placeholder="Write your comment here "
+								suffix={
+									<SendHorizonalIcon
+										className="hover:text-blue-700"
+										onClick={commentSubmit}
+									/>
+								}
+								className="rounded-[6.25rem] border border-[#11294D]"
+							/>
+							<CommentsComponent postId={postId} />
+						</div>
+					)
 				)}
 			</CardFooter>
 		</Card>
