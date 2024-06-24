@@ -329,7 +329,7 @@ const PostCard = ({
 					</Button>
 				)}
 			</CardContent>
-			<CardFooter className="flex flex-col w-full gap-1">
+			<CardFooter className="flex flex-col w-full gap-1 relative">
 				<div className="flex items-start self-stretch border-y-2">
 					<Button
 						className="flex items-center cursor-pointer"
