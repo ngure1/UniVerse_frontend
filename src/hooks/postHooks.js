@@ -3,6 +3,7 @@ import {
 	usePostBookmarkCreateMutation,
 	usePostsUnlikeCreateMutation,
 	usePostUnbookmarkCreateMutation,
+	usePostsCommentCreateMutation,
 } from "@/redux/features/posts/postsApiSlice";
 import { toast } from "react-toastify";
 
@@ -72,4 +73,19 @@ export const useUnbookmark = (post) => {
 			});
 	};
 	return handleUnbookmark;
+};
+
+export const useComment = (postId, text) => {
+	const [comment] = usePostsCommentCreateMutation();
+	const handleComment = () => {
+		comment({ post: postId, text: text })
+			.unwrap()
+			.then(() => {
+				toast.success("Comment added successfully!");
+			})
+			.catch((err) => {
+				toast.error("Failed to add your comment.");
+			});
+	};
+	return handleComment;
 };

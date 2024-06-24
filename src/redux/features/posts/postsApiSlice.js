@@ -74,6 +74,25 @@ const postApiSlice = baseApi.injectEndpoints({
 			}),
 			invalidatesTags: ["POSTS", "BOOKMARKS"],
 		}),
+
+		//* creating a comment
+		postsCommentCreate: builder.mutation({
+			query: ({ post, text }) => ({
+				url: `/posts/comments/${post}/`,
+				method: "POST",
+				body: { text },
+			}),
+			invalidatesTags: ["POSTS"],
+		}),
+
+		// * listing a posts comments
+		postsCommentList: builder.query({
+			query: ({ post }) => ({
+				url: `/posts/comments/post/${post}/`,
+				method: "GET",
+			}),
+			providesTags: ["POSTS"],
+		}),
 	}),
 });
 
@@ -90,4 +109,8 @@ export const {
 	// * crud on bookmark
 	usePostBookmarkCreateMutation,
 	usePostUnbookmarkCreateMutation,
+
+	// * comments
+	usePostsCommentCreateMutation,
+	usePostsCommentListQuery,
 } = postApiSlice;
