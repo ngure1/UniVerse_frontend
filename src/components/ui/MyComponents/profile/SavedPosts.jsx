@@ -14,21 +14,21 @@ const SavedPosts = () => {
 				data?.results.map((post, index) => (
 					<PostCard
 						key={index}
-						postId={post.post.id}
-						first_name={post.post.author.user.first_name}
-						last_name={post.post.author.user.last_name}
-						pfpImage={post.post.author.profile_picture}
-						isVerified={post.post.author.is_verified}
-						isLiked={post.post.is_liked}
-						isFollowingCreator={post.post.is_following_creator}
-						likeCount={post.post.likes_count}
-						isSaved={post.post.is_bookmarked}
-						bookmarkCount={post.post.bookmarks_count}
+						postId={post.id}
+						first_name={post.author.user.first_name}
+						last_name={post.author.user.last_name}
+						pfpImage={post.author.profile_picture}
+						isVerified={post.author.is_verified}
+						isLiked={post.is_liked}
+						isFollowingCreator={post.is_following_creator}
+						likeCount={post.likes_count}
+						isSaved={post.is_bookmarked}
+						bookmarkCount={post.bookmarks_count}
 						type="Student"
 						date="1 Month Ago"
-						title={post.post.title}
-						content={post.post.content}
-						postImage={post.post.media}
+						title={post.title}
+						content={post.content}
+						postImage={post.media}
 						smallImage
 					/>
 				))
