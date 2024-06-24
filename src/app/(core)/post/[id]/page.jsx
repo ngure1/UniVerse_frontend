@@ -22,6 +22,7 @@ const page = ({ params }) => {
 			) : (
 				<PostCard
 					postId={post.id}
+					profileId={post.author.id}
 					first_name={post.author.user.first_name}
 					last_name={post.author.user.last_name}
 					pfpImage={post.author.profile_picture}
@@ -37,6 +38,7 @@ const page = ({ params }) => {
 					content={post.content}
 					postImage={post.media}
 					size="large"
+					isPostDetails
 				/>
 			)}
 			<RightSidebar className="fixed top-[6rem] bottom-0 right-0 bg-gray-200 z-30 " />
