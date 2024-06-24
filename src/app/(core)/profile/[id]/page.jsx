@@ -4,7 +4,7 @@ import { useProfileDetailQuery } from "@/redux/features/profiles/profileApiSlice
 import ProfileCard from "@/components/ui/MyComponents/cards/ProfileCard";
 import ProfileTabs from "@/components/ui/MyComponents/profile/ProfileTabs";
 
-const page = ({ params }) => {
+const Page = ({ params }) => {
 	const {
 		data: profileData,
 		error,
@@ -52,4 +52,4 @@ const page = ({ params }) => {
 	);
 };
 
-export default page;
+export default Page;
