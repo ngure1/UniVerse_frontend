@@ -44,7 +44,7 @@ const ProfilePage = () => {
 				)}
 			</div>
 			<ModeToggle />
-			<ProfileTabs />
+			<ProfileTabs is_owner={true} />
 		</div>
 	);
 };
