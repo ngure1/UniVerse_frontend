@@ -1,10 +1,11 @@
 import React from "react";
 import PostCard from "@/components/ui/MyComponents/cards/PostCard";
 import PostImage from "@/../public/images/postImage.png";
+import EventForm from "@/components/forms/eventForm";
 const Events = () => {
 	return (
 		<div>
-			<PostCard
+			{/* <PostCard
 				first_name="Jane"
 				last_name="Doe"
 				forEvents
@@ -17,7 +18,8 @@ const Events = () => {
 				content="Exploring the intersection of technology, design, and innovation, our blog offers insights, tips, and  .....Read More"
 				postImage={PostImage}
 				size="small"
-			/>
+			/> */}
+			<EventForm />
 		</div>
 	);
 };
