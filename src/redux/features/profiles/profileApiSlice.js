@@ -43,8 +43,8 @@ const profileApiSlice = baseApi.injectEndpoints({
 		//add an address to the profile
 		profileAddressCreate: builder.mutation({
 			query: ({ city, country }) => ({
-				url: "/address/create/",
-				method: "POST",
+				url: "/address/",
+				method: "PATCH",
 				body: { city, country },
 			}),
 			invalidatesTags: ["PROFILE"],
