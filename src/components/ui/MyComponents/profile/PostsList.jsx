@@ -1,17 +1,17 @@
-import PostImage from "@/../public/images/postImage.png";
+import React from "react";
 import PostCard from "@/components/ui/MyComponents/cards/PostCard";
-import { usePostsMe } from "@/hooks/profile";
 import PostSkeleton from "../cards/skeletons/Skeleton";
+import { useProfilePosts } from "@/hooks/profile";
 
-const PostsList = () => {
-	const { data, isLoading, error } = usePostsMe();
-	console.log(data);
+const PostsList = ({ id, is_owner }) => {
+	const { data: postData, isLoading, error } = useProfilePosts(id);
+	console.log(postData);
 	return (
 		<div className="grid grid-cols-2 w-full gap-y-3 gap-x-4">
 			{isLoading ? (
 				<PostSkeleton />
 			) : (
-				data?.map((post, index) => (
+				postData?.results?.map((post, index) => (
 					<PostCard
 						key={index}
 						postId={post.id}
@@ -30,6 +30,8 @@ const PostsList = () => {
 						content={post.content}
 						postImage={post.media}
 						smallImage
+						forProfile
+						isOwner={is_owner}
 					/>
 				))
 			)}

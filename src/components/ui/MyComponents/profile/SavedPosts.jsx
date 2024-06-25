@@ -15,6 +15,7 @@ const SavedPosts = () => {
 					<PostCard
 						key={index}
 						postId={post.id}
+						profileId={post.author.id}
 						first_name={post.author.user.first_name}
 						last_name={post.author.user.last_name}
 						pfpImage={post.author.profile_picture}
