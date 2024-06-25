@@ -1,29 +1,15 @@
-"use client";
-
-import { date, z } from "zod";
+import { z } from "zod";
 
 const eventFormSchema = z.object({
-	title: z.string(),
-	description: z.string(),
-	date: date(),
-	time: z.string().time(),
-	address: z.string(),
+	title: z.string().nonempty("Title is required"),
+	description: z.string().nonempty("Description is required"),
+	date: z.string().nonempty("Date is required"),
+	time: z.string().nonempty("Time is required"),
+	address: z.string().optional(),
 	isOnline: z.boolean(),
 	isPhysical: z.boolean(),
 	media: typeof window === "undefined" ? z.any() : z.instanceof(FileList),
-	event_link: z
-		.string()
-		.refine((val) => val === "" || urlValidationFunction(val), {
-			message: "Invalid URL",
-		}),
+	event_link: z.string().url("Invalid URL").optional(),
 });
-function urlValidationFunction(url) {
-	// Example validation logic for URL
-	try {
-		new URL(url);
-		return true;
-	} catch (e) {
-		return false;
-	}
-}
+
 export default eventFormSchema;
