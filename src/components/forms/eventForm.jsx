@@ -29,8 +29,8 @@ const EventForm = ({ article }) => {
 		defaultValues: {
 			title: "",
 			description: "",
-			date: "",
-			time: "",
+			event_start_date: "",
+			event_start_time: "",
 			address: "",
 			isOnline: false,
 			isPhysical: false,
@@ -155,7 +155,7 @@ const EventForm = ({ article }) => {
 						)}
 						<FormField
 							control={form.control}
-							name="date"
+							name="event_start_date"
 							render={({ field }) => (
 								<FormItem>
 									<FormLabel>Event Date</FormLabel>
@@ -172,7 +172,7 @@ const EventForm = ({ article }) => {
 						/>
 						<FormField
 							control={form.control}
-							name="time"
+							name="event_start_time"
 							render={({ field }) => (
 								<FormItem>
 									<FormLabel>Event Time</FormLabel>

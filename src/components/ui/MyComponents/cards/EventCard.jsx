@@ -21,13 +21,13 @@ const EventCard = ({
 	last_name,
 	type,
 	date,
-	time,
+	event_start_time,
 	title,
 	event_link,
 	description,
 	postImage,
 	isVerified,
-	event_date,
+	event_start_date,
 	isOnline,
 	isPhysical,
 	address,
@@ -39,7 +39,6 @@ const EventCard = ({
 
 	return (
 		<Card className="flex w-[58%] min-w-[33.25rem] py-[0.3rem] flex-col items-start rounded-[0.5rem] bg-white dark:bg-muted">
-			{" "}
 			<CardHeader className="w-full flex flex-row justify-between items-start">
 				<Link
 					href={`/profile/${profileId}`}
@@ -144,9 +143,9 @@ const EventCard = ({
 					<div></div>
 					<p className="flex gap-1 ">
 						<CalendarX />
-						{event_date}
+						{event_start_date}
 						{", "}
-						{time}
+						{event_start_time}
 					</p>
 				</div>
 				<div class="space-y-4">
