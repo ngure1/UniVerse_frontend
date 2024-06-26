@@ -1,29 +1,39 @@
 "use client";
 import React from "react";
-import PostCard from "@/components/ui/MyComponents/cards/PostCard";
-import PostImage from "@/../public/images/postImage.png";
-import EventForm from "@/components/forms/eventForm";
 import EventCard from "@/components/ui/MyComponents/cards/EventCard";
+import { useEventsListQuery } from "@/redux/features/events/eventsApiSlice";
+import RightSidebar from "@/components/ui/MyComponents/RightSidebar";
 const Events = () => {
+	const { data: eventData, isLoading } = useEventsListQuery(1);
+	console.log(eventData);
 	return (
-		<div>
-			<EventForm article />
-			{/* <EventCard
-				first_name="Jane"
-				last_name="Doe"
-				title = "JKUAT Tech Expo"
-				isOnline={false}
-				address="JKUAT"
-				event_link="https://www.jkuat.ac.ke/"
-				event_date="10th June 2024"
-				type="Student"
-				time="10:00 AM"
-				pfpImage={"images/ProfilePic.jpeg"}
-				date="1 Month Ago"
-				description="Exploring the intersection of technology, design, and innovation, our blog offers insights, tips, and  .....Read More"
-				postImage={PostImage}
-				size="small"
-			/> */}
+		<div className="flex flex-col gap-y-4">
+			{isLoading ? (
+				<p>Loading</p>
+			) : (
+				eventData?.results?.map((event, index) => (
+					<EventCard
+						key={index}
+						first_name={event.author.user.first_name}
+						last_name={event.author.user.last_name}
+						isVerified={event.author.is_verified}
+						title={event.title}
+						isOnline={true}
+						isPhysical={event.is_physical}
+						address={event.address}
+						event_link="https://www.example.com"
+						event_start_date="12th October 2021"
+						event_start_time="12:00 PM"
+						pfpImage={event.profile_picture}
+						description={event.description}
+						postImage={event.media}
+						size={"large"}
+						type={"Student"}
+						date={"1 Month Ago"}
+					/>
+				))
+			)}
+			<RightSidebar className="fixed top-[6rem] bottom-0 right-0 bg-gray-200 z-30 " />
 		</div>
 	);
 };

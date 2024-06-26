@@ -7,7 +7,8 @@ const eventApiSlice = baseApi.injectEndpoints({
 			query: ({
 				title,
 				description,
-				time,
+				event_start_time,
+				event_start_date,
 				address,
 				event_link,
 				media,
@@ -15,7 +16,8 @@ const eventApiSlice = baseApi.injectEndpoints({
 				const formData = new FormData();
 				formData.append("title", title);
 				formData.append("description", description);
-				formData.append("time", time);
+				formData.append("event_start_time", event_start_time);
+				formData.append("event_start_date", event_start_date);
 				formData.append("address", address);
 				formData.append("event_link", event_link);
 				if (media && media.length > 0) {
@@ -23,14 +25,22 @@ const eventApiSlice = baseApi.injectEndpoints({
 				}
 
 				return {
-					url: "/events/listcreate/",
+					url: "/events/",
 					method: "POST",
 					body: formData,
 				};
 			},
 			// invalidatesTags: ["EVENTS"],
 		}),
+		//listing events
+		eventsList: builder.query({
+			query: ({}) => ({
+				url: "/events/",
+				method: "GET",
+			}),
+			// providesTags: ["EVENTS"],
+		}),
 	}),
 });
 
-export const { useEventsCreateMutation } = eventApiSlice;
+export const { useEventsCreateMutation, useEventsListQuery } = eventApiSlice;

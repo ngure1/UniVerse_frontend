@@ -3,8 +3,8 @@ import { z } from "zod";
 const eventFormSchema = z.object({
 	title: z.string().nonempty("Title is required"),
 	description: z.string().nonempty("Description is required"),
-	date: z.string().nonempty("Date is required"),
-	time: z.string().nonempty("Time is required"),
+	event_start_date: z.string().nonempty("Date is required"),
+	event_start_time: z.string().nonempty("Time is required"),
 	address: z.string().optional(),
 	isOnline: z.boolean(),
 	isPhysical: z.boolean(),
