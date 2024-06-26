@@ -23,14 +23,22 @@ const eventApiSlice = baseApi.injectEndpoints({
 				}
 
 				return {
-					url: "/events/listcreate/",
+					url: "/events/",
 					method: "POST",
 					body: formData,
 				};
 			},
 			// invalidatesTags: ["EVENTS"],
 		}),
+		//listing events
+		eventsList: builder.query({
+			query: ({}) => ({
+				url: "/events/",
+				method: "GET",
+			}),
+			// providesTags: ["EVENTS"],
+		}),
 	}),
 });
 
-export const { useEventsCreateMutation } = eventApiSlice;
+export const { useEventsCreateMutation, useEventsListQuery } = eventApiSlice;

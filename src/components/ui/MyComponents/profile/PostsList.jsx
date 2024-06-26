@@ -11,7 +11,7 @@ const PostsList = () => {
 			{isLoading ? (
 				<PostSkeleton />
 			) : (
-				data?.map((post, index) => (
+				data?.results?.map((post, index) => (
 					<PostCard
 						key={index}
 						postId={post.id}

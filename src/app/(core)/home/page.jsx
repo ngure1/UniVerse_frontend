@@ -13,6 +13,14 @@ import PostForm from "@/components/forms/postForm";
 import { ImageIcon, CalendarFold, NotepadText } from "lucide-react";
 import { useDialog } from "@/hooks/responsiveDialog";
 import { ResponsiveDialog } from "@/components/ui/MyComponents/ResponsiveDialog";
+import {
+	Dialog,
+	DialogContent,
+	DialogTitle,
+	DialogTrigger,
+} from "@/components/ui/shadcnComponents/dialog";
+import EventForm from "@/components/forms/eventForm";
+// import {Dialog } from "@radix-ui/react-dialog";
 
 const Home = () => {
 	const { data, isLoading } = usePostListQuery(1);
@@ -63,12 +71,21 @@ const Home = () => {
 								Media
 							</Link>
 						</Button>
-						<Button
-							variant="ghost"
-							className="gap-1">
-							<CalendarFold color="#90B494" />
-							<Link href="/events">Events</Link>
-						</Button>
+						<Dialog className="">
+							<DialogTrigger asChild>
+								<Button
+									variant="ghost"
+									className="gap-1">
+									<CalendarFold color="#90B494" />
+									Events
+								</Button>
+							</DialogTrigger>
+							<DialogContent className="sm-max w-md">
+								<DialogTitle>Events</DialogTitle>
+								<EventForm article />
+							</DialogContent>
+						</Dialog>
+
 						<Link href="./new-post">
 							<Button
 								variant="ghost"
@@ -107,6 +124,7 @@ const Home = () => {
 					))
 				)}
 			</div>
+
 			<RightSidebar className="fixed top-[6rem] bottom-0 right-0 bg-gray-200 z-30 " />
 		</div>
 	);

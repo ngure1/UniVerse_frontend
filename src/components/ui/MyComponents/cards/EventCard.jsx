@@ -11,6 +11,7 @@ import AvatarProfile from "../profile/AvatarProfile";
 import { Button } from "../../shadcnComponents/button";
 import { VerifiedIcon, UserRoundPlus, Globe, Link2 } from "lucide-react";
 import Image from "next/legacy/image";
+import { useProfile } from "@/hooks/profile";
 
 const EventCard = ({
 	postId,
@@ -26,22 +27,22 @@ const EventCard = ({
 	description,
 	postImage,
 	isVerified,
-	forProfile = false,
-	isOwner = false,
 	event_date,
 	isOnline,
+	isPhysical,
 	address,
-	forEvents,
 	isFollowingCreator,
 	smallImage,
 }) => {
+	const { data: profileData } = useProfile();
+	console.log("Event Link:", event_link);
+
 	return (
 		<Card className="flex w-[58%] min-w-[33.25rem] py-[0.3rem] flex-col items-start rounded-[0.5rem] bg-white dark:bg-muted">
 			{" "}
 			<CardHeader className="w-full flex flex-row justify-between items-start">
 				<Link
-					href="#"
-					// {`/profile/${profileId}`}
+					href={`/profile/${profileId}`}
 					className="w-full">
 					<div className="flex items-center self-stretch gap-[0.75rem]">
 						<AvatarProfile
@@ -52,9 +53,9 @@ const EventCard = ({
 						/>
 						<div className="flex flex-col justify-center items-start gap-[-0.75rem] w-full">
 							<div className="flex items-center gap-[0.75rem]">
-								<div className="body-text">
-									<p>{first_name}</p> <p>{last_name}</p>
-								</div>
+								<p className="body-text">
+									{first_name} {last_name}
+								</p>
 
 								{isVerified && (
 									<VerifiedIcon
@@ -119,22 +120,28 @@ const EventCard = ({
 						{title && <p className="sub-heading-3">{title}</p>}
 					</div>
 					{isOnline ? (
-						<div>
+						<>
 							<p className="flex gap-1">
 								<Globe /> ONLINE
 							</p>
-							<Link href={event_link}>
-								<p className="flex gap-1">
-									<Link2 />
-									{event_link}
-								</p>{" "}
-							</Link>
-						</div>
+							{event_link && (
+								<Link href={event_link}>
+									<p className="flex gap-1">
+										<Link2 />
+										{event_link}
+									</p>
+								</Link>
+							)}
+						</>
 					) : (
-						<p className="flex gap-1 ">
-							<MapPin /> {address}
-						</p>
+						isPhysical &&
+						address && (
+							<p className="flex gap-1">
+								<MapPin /> {address}
+							</p>
+						)
 					)}
+					<div></div>
 					<p className="flex gap-1 ">
 						<CalendarX />
 						{event_date}

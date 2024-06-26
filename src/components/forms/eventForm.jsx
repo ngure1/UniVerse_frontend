@@ -60,7 +60,7 @@ const EventForm = ({ article }) => {
 			})
 			.catch(() => {
 				toast.update(toastId, {
-					render: "Something went wrong with your event",
+					render: "Something went wrong with your request",
 					type: "error",
 					isLoading: false,
 					autoClose: 5000,
@@ -71,106 +71,80 @@ const EventForm = ({ article }) => {
 	const mediaRef = form.register("media");
 
 	return (
-		<Card className="xl:w-[60%] md:w-[90%] h-[50rem] shadow-md p-[2rem] ">
-			<CardHeader className="pt-0">
-				<p className="sub-heading-3 text-center">Create Event</p>
-			</CardHeader>
-			<Form {...form}>
-				{article && (
-					<form
-						onSubmit={form.handleSubmit(onSubmit)}
-						encType="multipart/form-data"
-						className="space-y-[1.5rem]">
-						<div className="space-y-4 h-[100%]">
-							<FormField
-								control={form.control}
-								name="media"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Media Upload</FormLabel>
-										<FormControl>
-											<Input
-												type="file"
-												{...mediaRef}
-											/>
-										</FormControl>
-									</FormItem>
-								)}
-							/>
-							<FormField
-								control={form.control}
-								name="isOnline"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Event Type</FormLabel>
-										<FormControl>
-											<RadioGroup
-												className="flex space-x-4"
-												onValueChange={(value) => {
-													setEventType(value);
-													form.setValue(
-														"isOnline",
-														value === "isOnline",
-													);
-													form.setValue(
-														"isPhysical",
-														value === "isPhysical",
-													);
-												}}
-												defaultValue={field.value}>
-												<FormItem className="space-x-1">
-													<FormControl>
-														<RadioGroupItem value="isOnline">
-															Online
-														</RadioGroupItem>
-													</FormControl>
-													<FormLabel>
-														Online
-													</FormLabel>
-												</FormItem>
-												<FormItem className="space-x-1">
-													<FormControl>
-														<RadioGroupItem value="isPhysical">
-															Physical
-														</RadioGroupItem>
-													</FormControl>
-													<FormLabel>
-														Physical
-													</FormLabel>
-												</FormItem>
-											</RadioGroup>
-										</FormControl>
-									</FormItem>
-								)}
-							/>
-							{eventType === "isPhysical" && (
-								<FormField
-									control={form.control}
-									name="address"
-									render={({ field }) => (
-										<FormItem>
-											<FormLabel>Event Address</FormLabel>
-											<FormControl>
-												<Input
-													placeholder="Event Address"
-													{...field}
-												/>
-											</FormControl>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
+		<Form {...form}>
+			{article && (
+				<form
+					onSubmit={form.handleSubmit(onSubmit)}
+					encType="multipart/form-data"
+					className="space-y-[1.5rem]">
+					<div className="space-y-4 h-[100%]">
+						<FormField
+							control={form.control}
+							name="media"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Media Upload</FormLabel>
+									<FormControl>
+										<Input
+											type="file"
+											{...mediaRef}
+										/>
+									</FormControl>
+								</FormItem>
 							)}
+						/>
+						<FormField
+							control={form.control}
+							name="isOnline"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Event Type</FormLabel>
+									<FormControl>
+										<RadioGroup
+											className="flex space-x-4"
+											onValueChange={(value) => {
+												setEventType(value);
+												form.setValue(
+													"isOnline",
+													value === "isOnline",
+												);
+												form.setValue(
+													"isPhysical",
+													value === "isPhysical",
+												);
+											}}
+											defaultValue={field.value}>
+											<FormItem className="space-x-1">
+												<FormControl>
+													<RadioGroupItem value="isOnline">
+														Online
+													</RadioGroupItem>
+												</FormControl>
+												<FormLabel>Online</FormLabel>
+											</FormItem>
+											<FormItem className="space-x-1">
+												<FormControl>
+													<RadioGroupItem value="isPhysical">
+														Physical
+													</RadioGroupItem>
+												</FormControl>
+												<FormLabel>Physical</FormLabel>
+											</FormItem>
+										</RadioGroup>
+									</FormControl>
+								</FormItem>
+							)}
+						/>
+						{eventType === "isPhysical" && (
 							<FormField
 								control={form.control}
-								name="date"
+								name="address"
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel>Event Date</FormLabel>
+										<FormLabel>Event Address</FormLabel>
 										<FormControl>
 											<Input
-												type="date"
-												placeholder="Date"
+												placeholder="Event Address"
 												{...field}
 											/>
 										</FormControl>
@@ -178,85 +152,102 @@ const EventForm = ({ article }) => {
 									</FormItem>
 								)}
 							/>
-							<FormField
-								control={form.control}
-								name="time"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Event Time</FormLabel>
-										<FormControl>
-											<Input
-												type="time"
-												placeholder="Time"
-												{...field}
-											/>
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-							<FormField
-								control={form.control}
-								name="title"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Title</FormLabel>
-										<FormControl>
-											<Input
-												placeholder="Title"
-												{...field}
-											/>
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-							<FormField
-								control={form.control}
-								name="description"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Description</FormLabel>
-										<FormControl>
-											<Textarea
-												placeholder="Event Description"
-												className="resize-none min-w-fit text-[1rem] min-h-28"
-												{...field}
-											/>
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-							<FormField
-								control={form.control}
-								name="event_link"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Event Link</FormLabel>
-										<FormControl>
-											<Input
-												type="url"
-												placeholder="http://example.com"
-												{...field}
-											/>
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-							<Button
-								variant="secondary"
-								type="submit"
-								className="w-full"
-								disabled={isLoading}>
-								Post
-							</Button>
-						</div>
-					</form>
-				)}
-			</Form>
-		</Card>
+						)}
+						<FormField
+							control={form.control}
+							name="date"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Event Date</FormLabel>
+									<FormControl>
+										<Input
+											type="date"
+											placeholder="Date"
+											{...field}
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name="time"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Event Time</FormLabel>
+									<FormControl>
+										<Input
+											type="time"
+											placeholder="Time"
+											{...field}
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name="title"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Title</FormLabel>
+									<FormControl>
+										<Input
+											placeholder="Title"
+											{...field}
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name="description"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Description</FormLabel>
+									<FormControl>
+										<Textarea
+											placeholder="Event Description"
+											className="resize-none min-w-fit text-[1rem] min-h-28"
+											{...field}
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name="event_link"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Event Link</FormLabel>
+									<FormControl>
+										<Input
+											type="url"
+											placeholder="http://example.com"
+											{...field}
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<Button
+							variant="secondary"
+							type="submit"
+							className="w-full"
+							disabled={isLoading}>
+							Post
+						</Button>
+					</div>
+				</form>
+			)}
+		</Form>
 	);
 };
 
