@@ -67,7 +67,7 @@ const Home = () => {
 							variant="ghost"
 							className="gap-1">
 							<CalendarFold color="#90B494" />
-							<Link href="#">Events</Link>
+							<Link href="/events">Events</Link>
 						</Button>
 						<Link href="./new-post">
 							<Button

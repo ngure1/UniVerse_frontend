@@ -75,10 +75,8 @@ const PostCard = ({
 	isPostDetails = false,
 	forProfile = false,
 	isOwner = false,
-	event_date,
 	isOnline,
 	address,
-	forEvents,
 	isLiked,
 	isSaved,
 	isFollowingCreator,
@@ -307,23 +305,6 @@ const PostCard = ({
 
 			{isPostDetails ? (
 				<CardContent className="flex flex-col items-start gap-[0.75rem] self-stretch h-[70%]">
-					{forEvents && (
-						<div className="">
-							<p className="inline-flex gap-1">
-								<CalendarX />
-								{event_date}
-							</p>
-							{isOnline ? (
-								<p className="flex gap-1">
-									<Globe /> ONLINE
-								</p>
-							) : (
-								<p className="flex gap-1">
-									<MapPin /> {address}
-								</p>
-							)}
-						</div>
-					)}
 					<div className="self-stretch h-[30%]">
 						{title && <p className="sub-heading-3 p-1">{title}</p>}
 						<div
@@ -366,23 +347,6 @@ const PostCard = ({
 			) : (
 				<Link href={`/post/${postId}`}>
 					<CardContent className="flex flex-col items-start gap-[0.75rem] self-stretch h-[70%]">
-						{forEvents && (
-							<div className="">
-								<p className="inline-flex gap-1">
-									<CalendarX />
-									{event_date}
-								</p>
-								{isOnline ? (
-									<p className="flex gap-1">
-										<Globe /> ONLINE
-									</p>
-								) : (
-									<p className="flex gap-1">
-										<MapPin /> {address}
-									</p>
-								)}
-							</div>
-						)}
 						<div className="self-stretch h-[30%]">
 							{title && (
 								<p className="sub-heading-3 p-1">{title}</p>
@@ -415,13 +379,6 @@ const PostCard = ({
 							)
 						) : (
 							<></>
-						)}
-						{forEvents && (
-							<Button
-								className="w-full"
-								variant="secondary">
-								Register
-							</Button>
 						)}
 					</CardContent>
 				</Link>
