@@ -12,7 +12,7 @@ import {
 	Grid3X3,
 } from "lucide-react";
 
-const ProfileTabs = () => {
+const ProfileTabs = ({ user_id, is_owner }) => {
 	return (
 		<Tabs
 			defaultValue="posts"
@@ -45,7 +45,10 @@ const ProfileTabs = () => {
 			</TabsList>
 			<div className="p-3">
 				<TabsContent value="posts">
-					<PostsList />
+					<PostsList
+						id={user_id}
+						is_owner={is_owner}
+					/>
 				</TabsContent>
 				<TabsContent value="work">
 					<WorkList />

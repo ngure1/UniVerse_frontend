@@ -166,9 +166,36 @@ const PostCard = ({
 
 	return (
 		<Card className="flex w-[58%] min-w-[33.25rem] py-[0.3rem] flex-col items-start rounded-[0.5rem] bg-white dark:bg-muted">
-			{!forProfile && (
-				<CardHeader className="w-full flex flex-row justify-between items-start">
-					{/* // * container for post creator details */}
+			<CardHeader className="w-full flex flex-row justify-between items-start">
+				{/* // * container for post creator details */}
+				{forProfile ? (
+					<div className="flex items-center self-stretch gap-[0.75rem]">
+						<AvatarProfile
+							pfpImage={pfpImage}
+							first_name={first_name}
+							last_name={last_name}
+							className="w-[4rem] h-[4rem]"
+						/>
+						<div className="flex flex-col justify-center items-start gap-[-0.75rem] w-full">
+							<div className="flex items-center gap-[0.75rem]">
+								<p className="body-text">
+									{first_name} {last_name}
+								</p>
+
+								{isVerified && (
+									<VerifiedIcon
+										fill="#00B595"
+										color="#ffff"
+										className="dark:filter dark:invert"
+										size={24}
+									/>
+								)}
+							</div>
+							<p className="text-sm muted">{type}</p>
+							<p className="text-sm muted">{date}</p>
+						</div>
+					</div>
+				) : (
 					<Link
 						href={`/profile/${profileId}`}
 						className="w-full">
@@ -199,82 +226,82 @@ const PostCard = ({
 							</div>
 						</div>
 					</Link>
-					{/* // * dropdown menu for edit & deleting a post */}
-					{isOwner ? (
-						<DropdownMenu>
-							<DropdownMenuTrigger asChild>
-								<div className="hover:bg-accent rounded-full p-1">
-									<EllipsisVertical />
-								</div>
-							</DropdownMenuTrigger>
-							<DropdownMenuContent className="w-56">
-								<DropdownMenuItem>
-									<SquarePen className="mr-2 h-4 w-4" />
-									<Link href="">Edit</Link>
-								</DropdownMenuItem>
-								<DropdownMenuItem
-									onSelect={handleShowDialog}
-									className="hover:bg-destructive active:bg-destructive focus:bg-destructive hover:text-white active:text-white focus:text-white">
-									<Trash2 className="mr-2 h-4 w-4" />
-									<span>Delete</span>
-								</DropdownMenuItem>
-							</DropdownMenuContent>
-						</DropdownMenu>
-					) : // * show confirm delete dialog
+				)}
 
-					// * is following creator for follow/followign functionality
+				{/* // * dropdown menu for edit & deleting a post */}
+				{isOwner ? (
+					<DropdownMenu>
+						<DropdownMenuTrigger asChild>
+							<div className="hover:bg-accent rounded-full p-1">
+								<EllipsisVertical />
+							</div>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent className="w-56">
+							<DropdownMenuItem>
+								<SquarePen className="mr-2 h-4 w-4" />
+								<Link href="">Edit</Link>
+							</DropdownMenuItem>
+							<DropdownMenuItem
+								onSelect={handleShowDialog}
+								className="hover:bg-destructive active:bg-destructive focus:bg-destructive hover:text-white active:text-white focus:text-white">
+								<Trash2 className="mr-2 h-4 w-4" />
+								<span>Delete</span>
+							</DropdownMenuItem>
+						</DropdownMenuContent>
+					</DropdownMenu>
+				) : // * show confirm delete dialog
 
-					isFollowingCreator ? (
-						<Button
-							variant="outline"
-							className="gap-2"
-							onClick={handleFollow}>
-							<UserRoundPlus />
-							Unfollow
-						</Button>
-					) : (
-						<Button
-							variant="outline"
-							className="gap-2"
-							onClick={handleFollow}>
-							<UserRoundPlus />
-							Follow
-						</Button>
-					)}
-					{showDeleteDialog && (
-						<AlertDialog
-							open={showDeleteDialog}
-							onOpenChange={handleCloseDeleteDialog}>
-							<AlertDialogContent>
-								<AlertDialogHeader>
-									<AlertDialogTitle>
-										Are you sure you want to delete this
-										post
-									</AlertDialogTitle>
-									<AlertDialogDescription>
-										This action cannot be undone and your
-										post will permanently deleted
-									</AlertDialogDescription>
-								</AlertDialogHeader>
-								<AlertDialogFooter>
+				// * is following creator for follow/followign functionality
+
+				isFollowingCreator ? (
+					<Button
+						variant="outline"
+						className="gap-2"
+						onClick={handleFollow}>
+						<UserRoundPlus />
+						Unfollow
+					</Button>
+				) : (
+					<Button
+						variant="outline"
+						className="gap-2"
+						onClick={handleFollow}>
+						<UserRoundPlus />
+						Follow
+					</Button>
+				)}
+				{showDeleteDialog && (
+					<AlertDialog
+						open={showDeleteDialog}
+						onOpenChange={handleCloseDeleteDialog}>
+						<AlertDialogContent>
+							<AlertDialogHeader>
+								<AlertDialogTitle>
+									Are you sure you want to delete this post
+								</AlertDialogTitle>
+								<AlertDialogDescription>
+									This action cannot be undone and your post
+									will permanently deleted
+								</AlertDialogDescription>
+							</AlertDialogHeader>
+							<AlertDialogFooter>
+								<Button
+									variant="outline"
+									onClick={handleCloseDeleteDialog}>
+									Cancel
+								</Button>
+								<AlertDialogAction className="bg-inherit hover:bg-inherit">
 									<Button
-										variant="outline"
-										onClick={handleCloseDeleteDialog}>
-										Cancel
+										variant="destructive"
+										onClick={handleConfirmDelete}>
+										Continue
 									</Button>
-									<AlertDialogAction className="bg-inherit hover:bg-inherit">
-										<Button
-											variant="destructive"
-											onClick={handleConfirmDelete}>
-											Continue
-										</Button>
-									</AlertDialogAction>
-								</AlertDialogFooter>
-							</AlertDialogContent>
-						</AlertDialog>
-					)}
-				</CardHeader>
-			)}
+								</AlertDialogAction>
+							</AlertDialogFooter>
+						</AlertDialogContent>
+					</AlertDialog>
+				)}
+			</CardHeader>
 
 			{isPostDetails ? (
 				<CardContent className="flex flex-col items-start gap-[0.75rem] self-stretch h-[70%]">

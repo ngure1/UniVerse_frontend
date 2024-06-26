@@ -3,6 +3,7 @@ import React from "react";
 import { useProfileDetailQuery } from "@/redux/features/profiles/profileApiSlice";
 import ProfileCard from "@/components/ui/MyComponents/cards/ProfileCard";
 import ProfileTabs from "@/components/ui/MyComponents/profile/ProfileTabs";
+import { toast } from "react-toastify";
 
 const Page = ({ params }) => {
 	const {
@@ -10,7 +11,6 @@ const Page = ({ params }) => {
 		error,
 		isLoading,
 	} = useProfileDetailQuery({ profile_id: params.id });
-	console.log(profileData);
 
 	if (isLoading) {
 		return (
@@ -47,7 +47,7 @@ const Page = ({ params }) => {
 				)}
 			</div>
 
-			<ProfileTabs />
+			<ProfileTabs user_id={params.id} />
 		</div>
 	);
 };
