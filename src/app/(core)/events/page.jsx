@@ -3,6 +3,8 @@ import React from "react";
 import EventCard from "@/components/ui/MyComponents/cards/EventCard";
 import { useEventsListQuery } from "@/redux/features/events/eventsApiSlice";
 import RightSidebar from "@/components/ui/MyComponents/RightSidebar";
+import { formatCreatedAt } from "@/lib/utils";
+
 const Events = () => {
 	const { data: eventData, isLoading } = useEventsListQuery(1);
 	console.log(eventData);
@@ -29,7 +31,7 @@ const Events = () => {
 						postImage={event.media}
 						size={"large"}
 						type={"Student"}
-						date={"1 Month Ago"}
+						date={formatCreatedAt(event.created_at)}
 					/>
 				))
 			)}

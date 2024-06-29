@@ -4,6 +4,7 @@ import { usePostDetailQuery } from "@/redux/features/posts/postsApiSlice";
 import PostCard from "@/components/ui/MyComponents/cards/PostCard";
 import PostSkeleton from "@/components/ui/MyComponents/cards/skeletons/Skeleton";
 import RightSidebar from "@/components/ui/MyComponents/RightSidebar";
+import { formatCreatedAt } from "@/lib/utils";
 
 const Page = ({ params }) => {
 	const {
@@ -33,7 +34,7 @@ const Page = ({ params }) => {
 					isSaved={post.is_bookmarked}
 					bookmarkCount={post.bookmarks_count}
 					type="Student"
-					date="1 Month Ago"
+					date={formatCreatedAt(post.created_at)}
 					title={post.title}
 					content={post.content}
 					postImage={post.media}
