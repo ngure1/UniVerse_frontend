@@ -1,3 +1,5 @@
+"use client";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addressSchema } from "@/schema/editProfileSchema";
@@ -19,10 +21,13 @@ import {
 import { Input } from "@/components/ui/shadcnComponents/input";
 import { countries } from "@/constats/countries";
 import { Button } from "../ui/shadcnComponents/button";
-import { useProfileAddressCreateMutation } from "@/redux/features/profiles/profileApiSlice";
+import {
+	useProfileAddressCreateMutation,
+	useProfileAddressRetrieveQuery,
+} from "@/redux/features/profiles/profileApiSlice";
 import { toast } from "react-toastify";
 
-const AddressFrom = () => {
+const AddressForm = () => {
 	const form = useForm({
 		resolver: zodResolver(addressSchema),
 		defaultValues: {
@@ -30,10 +35,21 @@ const AddressFrom = () => {
 			city: "",
 		},
 	});
-	// initialise mutation function to create address
-	const [addressCreate, { isLoading, error }] =
-		useProfileAddressCreateMutation();
-	function onSubmit(data) {
+
+	const { data: addressData, isLoading } =
+		useProfileAddressRetrieveQuery(null);
+
+	useEffect(() => {
+		if (!isLoading && addressData) {
+			console.log("Fetched address data:", addressData);
+			form.setValue("country", addressData.country);
+			form.setValue("city", addressData.city);
+		}
+	}, [isLoading, addressData, form]);
+
+	const [addressCreate, { error }] = useProfileAddressCreateMutation();
+
+	const onSubmit = (data) => {
 		addressCreate(data)
 			.unwrap()
 			.then(() => {
@@ -41,12 +57,10 @@ const AddressFrom = () => {
 					theme: "colored",
 				});
 			})
-			.catch((err) => {
-				toast.error("Failed to update address", {
-					theme: "colored",
-				});
+			.catch(() => {
+				toast.error("Failed to update address", { theme: "colored" });
 			});
-	}
+	};
 
 	return (
 		<Form {...form}>
@@ -59,10 +73,12 @@ const AddressFrom = () => {
 						name="country"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Country</FormLabel>
+								<FormLabel className="required">
+									Country
+								</FormLabel>
 								<Select
 									onValueChange={field.onChange}
-									defaultValue={field.value}>
+									value={field.value}>
 									<FormControl>
 										<SelectTrigger>
 											<SelectValue placeholder="Select a Country" />
@@ -107,4 +123,5 @@ const AddressFrom = () => {
 		</Form>
 	);
 };
-export default AddressFrom;
+
+export default AddressForm;

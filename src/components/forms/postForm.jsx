@@ -141,7 +141,7 @@ const PostForm = ({ id, article }) => {
 								) : (
 									<Textarea
 										placeholder="What do you want to talk about"
-										className="resize-none min-w-fit text-[1rem] min-h-32"
+										className="resize-none min-w-fit text-[1rem] min-h-[14rem]"
 										{...field}
 									/>
 								)}
