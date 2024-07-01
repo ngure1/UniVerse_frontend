@@ -13,7 +13,7 @@ const Events = () => {
 			{isLoading ? (
 				<p>Loading</p>
 			) : (
-				eventData?.results?.map((event, post, index) => (
+				eventData?.results?.map((event, index) => (
 					<EventCard
 						key={index}
 						eventId={event.id}
