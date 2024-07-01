@@ -1,5 +1,6 @@
 "use client";
 // Import necessary extensions
+import { useEffect, useRef } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Toolbar from "./Toolbar";
@@ -7,9 +8,6 @@ import Underline from "@tiptap/extension-underline";
 import Image from "@tiptap/extension-image";
 
 const Tiptap = ({ onChange, content }) => {
-	const handleChange = (newContent) => {
-		onChange(newContent);
-	};
 	const editor = useEditor({
 		extensions: [StarterKit, Underline, Image],
 		editorProps: {
@@ -18,16 +16,22 @@ const Tiptap = ({ onChange, content }) => {
 			},
 		},
 		onUpdate: ({ editor }) => {
-			handleChange(editor.getHTML());
+			onChange(editor.getHTML());
 		},
 	});
 
+	const isContentSet = useRef(false); // Use a ref to track if the content has been set
+
+	useEffect(() => {
+		if (editor && content && !isContentSet.current) {
+			editor.commands.setContent(content);
+			isContentSet.current = true; // Mark content as set
+		}
+	}, [editor, content]);
+
 	return (
 		<div className="w-full px-4">
-			<Toolbar
-				editor={editor}
-				content={content}
-			/>
+			<Toolbar editor={editor} />
 			<EditorContent
 				style={{ whiteSpace: "pre-line" }}
 				editor={editor}

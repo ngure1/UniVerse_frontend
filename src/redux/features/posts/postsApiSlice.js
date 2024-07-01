@@ -102,6 +102,24 @@ const postApiSlice = baseApi.injectEndpoints({
 			providesTags: ["POSTS"],
 		}),
 
+		postUpdate: builder.mutation({
+			query: ({ post_id, title, content, media }) => {
+				const formData = new FormData();
+				formData.append("title", title);
+				formData.append("content", content);
+				if (media && media.length > 0) {
+					formData.append("media", media[0]);
+				}
+
+				return {
+					url: `/posts/${post_id}/`,
+					method: "PATCH",
+					body: formData,
+				};
+			},
+			invalidatesTags: ["POSTS"],
+		}),
+
 		// users post listing
 		postsUserList: builder.query({
 			query: ({ user_id }) => ({
@@ -121,6 +139,7 @@ export const {
 
 	// * crud on post detail
 	usePostDetailQuery,
+	usePostUpdateMutation,
 
 	// * crud on like
 	usePostsLikesCreateMutation,

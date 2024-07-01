@@ -14,8 +14,6 @@ const Page = ({ params }) => {
 	} = usePostDetailQuery({ post_id: params.id });
 	console.log(post);
 	const id = params.id;
-	console.log(id);
-	console.log(params.id);
 	return (
 		<div>
 			{isLoading ? (
