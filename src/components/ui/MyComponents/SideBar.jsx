@@ -38,7 +38,7 @@ const SideBar = ({ className }) => {
 		<Link
 			key={index}
 			href={link.href || "#"}
-			className={`flex items-center self-stretch gap-[1rem] py-[0.75rem] w-full px-[0.5rem] hover:text-accent-foreground rounded-sm ${pathname.startsWith(link.href) ? "bg-gray-200" : ""}`}>
+			className={`flex items-center self-stretch gap-[1rem] py-[0.75rem] w-full px-[0.5rem] hover:text-accent-foreground rounded-sm ${pathname.startsWith(link.href) ? "border border-ring" : ""}`}>
 			<link.Icon size={30} />
 			<p className="body-md text-lg">{link.text}</p>
 		</Link>
@@ -48,7 +48,7 @@ const SideBar = ({ className }) => {
 		<Link
 			key={index}
 			href={link.href || "#"}
-			className="flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem] active-sidebar">
+			className={`flex items-center self-stretch gap-[1rem] py-[0.75rem] w-full px-[0.5rem] hover:text-accent-foreground rounded-sm ${pathname.startsWith(link.href) ? "border border-ring" : ""}`}>
 			<link.Icon size={30} />
 			<p className="body-md text-lg">{link.text}</p>
 		</Link>
@@ -60,7 +60,10 @@ const SideBar = ({ className }) => {
 			<div className="space-y-4 w-full">{topLinks}</div>
 			<div className="w-full">
 				{bottomLinks}
-				<Logout iconSize={30} />
+				<Logout
+					iconSize={30}
+					className={"w-full justify-start"}
+				/>
 			</div>
 		</div>
 	);
