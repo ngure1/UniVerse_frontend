@@ -30,7 +30,7 @@ const eventApiSlice = baseApi.injectEndpoints({
 					body: formData,
 				};
 			},
-			// invalidatesTags: ["EVENTS"],
+			invalidatesTags: ["EVENTS"],
 		}),
 		//listing events
 		eventsList: builder.query({
@@ -38,9 +38,72 @@ const eventApiSlice = baseApi.injectEndpoints({
 				url: "/events/",
 				method: "GET",
 			}),
-			// providesTags: ["EVENTS"],
+			providesTags: ["EVENTS"],
+		}),
+
+		// liking an event
+		eventsLikesCreate: builder.mutation({
+			query: ({ event }) => ({
+				url: `/events/likes/${event}/`,
+				method: "POST",
+			}),
+			invalidatesTags: ["EVENTS", "LIKES"],
+		}),
+
+		// unliking an event
+		eventsUnlikeCreate: builder.mutation({
+			query: ({ event }) => ({
+				url: `/events/unlikes/${event}/`,
+				method: "DELETE",
+			}),
+			invalidatesTags: ["EVENTS", "LIKES"],
+		}),
+
+		// saving/bookmarking a post
+		eventBookmarkCreate: builder.mutation({
+			query: ({ event }) => ({
+				url: `/events/bookmarks/${event}/`,
+				method: "POST",
+			}),
+			invalidatesTags: ["EVENTS", "BOOKMARKS"],
+		}),
+
+		// unsaving/unbookmarking an event
+		eventUnbookmarkCreate: builder.mutation({
+			query: ({ event }) => ({
+				url: `/events/unbookmarks/${event}/`,
+				method: "DELETE",
+			}),
+			invalidatesTags: ["EVENTS", "BOOKMARKS"],
+		}),
+
+		// creating comments
+		eventsCommentCreate: builder.mutation({
+			query: ({ event, text }) => ({
+				url: `/events/comments/${event}/`,
+				method: "POST",
+				body: { text },
+			}),
+			invalidatesTags: ["EVENTS"],
+		}),
+
+		//events comments
+		eventsCommentsList: builder.query({
+			query: ({ event }) => ({
+				url: `/events/comments/event/${event}/`,
+				method: "GET",
+			}),
 		}),
 	}),
 });
 
-export const { useEventsCreateMutation, useEventsListQuery } = eventApiSlice;
+export const {
+	useEventsCreateMutation,
+	useEventsListQuery,
+	useEventsLikesCreateMutation,
+	useEventsUnlikeCreateMutation,
+	useEventBookmarkCreateMutation,
+	useEventUnbookmarkCreateMutation,
+	useEventsCommentCreateMutation,
+	useEventsCommentsListQuery,
+} = eventApiSlice;
