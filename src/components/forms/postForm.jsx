@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import postFormSchema from "@/schema/postFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -13,17 +13,28 @@ import {
 	FormMessage,
 	FormDescription,
 } from "@/components/ui/shadcnComponents/form";
+import { Card } from "../ui/shadcnComponents/card";
 import { Input } from "@/components/ui/shadcnComponents/input";
-import { usePostCreateMutation } from "@/redux/features/posts/postsApiSlice";
+import { Textarea } from "@/components/ui/shadcnComponents/textarea";
 import { toast } from "react-toastify";
-import Tiptap from "../ui/MyComponents/RichTextEditor/TipTap";
+import Tiptap from "../ui/MyComponents/RichTextEditor/TipTap"; // Ensure the path is correct
 import { useDialog } from "@/hooks/responsiveDialog";
 import Image from "next/legacy/image";
 import { ImageIcon } from "lucide-react";
-import { Textarea } from "@/components/ui/shadcnComponents/textarea";
+import {
+	usePostDetailQuery,
+	usePostUpdateMutation,
+	usePostCreateMutation,
+} from "@/redux/features/posts/postsApiSlice";
 
-const PostForm = ({ article }) => {
-	// handling form default values and media upload
+const PostForm = ({ id, article }) => {
+	const isEditMode = !!id;
+	const { data: post } = usePostDetailQuery(
+		{ post_id: id },
+		{ skip: !isEditMode },
+	);
+	const [previewUrl, setPreviewUrl] = useState(null);
+
 	const form = useForm({
 		resolver: zodResolver(postFormSchema),
 		defaultValues: {
@@ -34,41 +45,59 @@ const PostForm = ({ article }) => {
 	});
 	const mediaRef = form.register("media");
 
-	// * initializing the create post mutation
-	const [post, { isLoading, error }] = usePostCreateMutation();
+	useEffect(() => {
+		if (post) {
+			form.reset({
+				title: post.title,
+				content: post.content,
+			});
+			setPreviewUrl(post.media);
+		}
+	}, [post, form]);
+
+	const [createPost, { isLoading: isCreating }] = usePostCreateMutation();
+	const [updatePost, { isLoading: isUpdating }] = usePostUpdateMutation();
+
+	const isLoading = isCreating || isUpdating;
 
 	const onSubmit = (data) => {
-		// * create promise toast for creating the post
-		const toastId = toast.loading("Creating your post", {
-			theme: "colored",
-			autoClose: false, // Disable autoClose to manually control the toast
-		});
+		const toastId = toast.loading(
+			isEditMode ? "Updating your post" : "Creating your post",
+			{
+				theme: "colored",
+				autoClose: false,
+			},
+		);
 
-		post(data)
+		const submitAction = isEditMode
+			? updatePost({ post_id: id, ...data })
+			: createPost(data);
+
+		submitAction
 			.unwrap()
 			.then(() => {
-				// Update the toast on success
 				toast.update(toastId, {
-					render: "Post created successfully",
+					render: isEditMode
+						? "Post updated successfully"
+						: "Post created successfully",
 					type: "success",
 					isLoading: false,
-					autoClose: 5000, // Close after 5 seconds
+					autoClose: 5000,
 				});
 				closePostDialog();
 			})
 			.catch(() => {
-				// Update the toast on failure
 				toast.update(toastId, {
 					render: "Something went wrong with your post",
 					type: "error",
 					isLoading: false,
-					autoClose: 5000, // Close after 5 seconds
+					autoClose: 5000,
 				});
 			});
 	};
 
 	const { handleCloseDialog: closePostDialog } = useDialog("post");
-	const [previewUrl, setPreviewUrl] = useState(null);
+
 	return (
 		<Form {...form}>
 			<form
@@ -106,8 +135,8 @@ const PostForm = ({ article }) => {
 							<FormControl>
 								{article ? (
 									<Tiptap
+										content={field.value}
 										onChange={field.onChange}
-										content={field.name}
 									/>
 								) : (
 									<Textarea
@@ -131,11 +160,6 @@ const PostForm = ({ article }) => {
 								objectFit="contain"
 								className="rounded-md"
 							/>
-							{/* <video
-							src={previewUrl}
-							width="320"
-							height="240"
-							controls></video> */}
 						</div>
 					) : (
 						<div className="min-h-[15rem] w-full relative">
@@ -146,11 +170,6 @@ const PostForm = ({ article }) => {
 								objectFit="contain"
 								className="rounded-md"
 							/>
-							{/* <video
-							src={previewUrl}
-							width="320"
-							height="240"
-							controls></video> */}
 						</div>
 					)
 				) : (
@@ -162,12 +181,11 @@ const PostForm = ({ article }) => {
 						<p>Your image will be displayed here</p>
 					</div>
 				)}
-
 				<FormField
 					control={form.control}
 					name="media"
 					render={({ field }) => (
-						<FormItem className>
+						<FormItem>
 							<FormLabel>Media Upload</FormLabel>
 							<FormControl>
 								<Input
@@ -176,12 +194,11 @@ const PostForm = ({ article }) => {
 									onChange={(event) => {
 										const file = event.target.files?.[0];
 										if (file) {
-											// Create a URL for the file
 											const url =
 												URL.createObjectURL(file);
-											setPreviewUrl(url); // Update state with the new URL
+											setPreviewUrl(url);
 										} else {
-											setPreviewUrl(null); // Reset preview URL if no file is selected
+											setPreviewUrl(null);
 										}
 										field.onChange(file ?? undefined);
 									}}
@@ -195,14 +212,12 @@ const PostForm = ({ article }) => {
 						</FormItem>
 					)}
 				/>
-
 				<Button
 					variant="secondary"
 					type="submit"
 					className="w-full"
-					// onClick={}
 					disabled={isLoading}>
-					Post
+					{isEditMode ? "Update Post" : "Create Post"}
 				</Button>
 			</form>
 		</Form>

@@ -2,6 +2,7 @@ import React from "react";
 import PostCard from "@/components/ui/MyComponents/cards/PostCard";
 import PostSkeleton from "../cards/skeletons/Skeleton";
 import { useProfilePosts } from "@/hooks/profile";
+import { formatCreatedAt } from "@/lib/utils";
 
 const PostsList = ({ id, is_owner }) => {
 	const { data: postData, isLoading, error } = useProfilePosts(id);
@@ -25,7 +26,7 @@ const PostsList = ({ id, is_owner }) => {
 						isSaved={post.is_bookmarked}
 						bookmarkCount={post.bookmarks_count}
 						type="Student"
-						date="1 Month Ago"
+						date={formatCreatedAt(post.created_at)}
 						title={post.title}
 						content={post.content}
 						postImage={post.media}

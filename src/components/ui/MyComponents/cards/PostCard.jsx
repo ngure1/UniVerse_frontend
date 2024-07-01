@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
 	Card,
 	CardContent,
@@ -12,9 +12,6 @@ import {
 	MessageSquareMore,
 	Bookmark,
 	VerifiedIcon,
-	CalendarX,
-	Globe,
-	MapPin,
 	UserRoundPlus,
 	EllipsisVertical,
 	SquarePen,
@@ -34,7 +31,6 @@ import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
-	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/shadcnComponents/dropdown-menu";
 import { Input } from "@/components/ui/shadcnComponents/input";
@@ -58,7 +54,6 @@ import {
 	usePostsCommentListQuery,
 } from "@/redux/features/posts/postsApiSlice";
 import { toast } from "react-toastify";
-import { usePostListQuery } from "@/redux/features/posts/postsApiSlice";
 
 const PostCard = ({
 	postId,
@@ -75,8 +70,6 @@ const PostCard = ({
 	isPostDetails = false,
 	forProfile = false,
 	isOwner = false,
-	isOnline,
-	address,
 	isLiked,
 	isSaved,
 	isFollowingCreator,
@@ -335,13 +328,6 @@ const PostCard = ({
 						)
 					) : (
 						<></>
-					)}
-					{forEvents && (
-						<Button
-							className="w-full"
-							variant="secondary">
-							Register
-						</Button>
 					)}
 				</CardContent>
 			) : (

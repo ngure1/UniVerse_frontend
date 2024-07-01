@@ -17,8 +17,10 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setAuth } from "@/redux/features/auth/authSlice";
+import { usePathname } from "next/navigation";
 
 const SideBar = ({ className }) => {
+	const pathname = usePathname();
 	const links = [
 		{ Icon: Home, text: "Home", href: "/home" },
 		{ Icon: CalendarFold, text: "Events", href: "/events" },
@@ -36,7 +38,7 @@ const SideBar = ({ className }) => {
 		<Link
 			key={index}
 			href={link.href || "#"}
-			className="flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem] active-sidebar">
+			className={`flex items-center self-stretch gap-[1rem] py-[0.75rem] w-full px-[0.5rem] hover:text-accent-foreground rounded-sm ${pathname.startsWith(link.href) ? "bg-gray-200" : ""}`}>
 			<link.Icon size={30} />
 			<p className="body-md text-lg">{link.text}</p>
 		</Link>
@@ -55,7 +57,7 @@ const SideBar = ({ className }) => {
 	return (
 		<div
 			className={`inline-flex flex-col pt-[1.25rem] pr-[0] pb-[0.75rem] pl-[1.25rem] justify-between items-start shrink-0 gap-[4rem] ${className}`}>
-			<div className="space-y-4">{topLinks}</div>
+			<div className="space-y-4 w-full">{topLinks}</div>
 			<div className="w-full">
 				{bottomLinks}
 				<Logout iconSize={30} />

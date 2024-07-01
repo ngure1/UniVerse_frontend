@@ -21,7 +21,9 @@ import {
 } from "@/components/ui/shadcnComponents/radio-group";
 import { Button } from "../ui/shadcnComponents/button";
 import { useEventsCreateMutation } from "@/redux/features/events/eventsApiSlice";
+import { ImageIcon } from "lucide-react";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 const EventForm = ({ article }) => {
 	const form = useForm({
@@ -56,7 +58,7 @@ const EventForm = ({ article }) => {
 					isLoading: false,
 					autoClose: 5000,
 				});
-				closePostDialog();
+				// closePostDialog();
 			})
 			.catch(() => {
 				toast.update(toastId, {
@@ -70,26 +72,69 @@ const EventForm = ({ article }) => {
 
 	const mediaRef = form.register("media");
 
+	const [previewUrl, setPreviewUrl] = useState(null);
+
 	return (
 		<Form {...form}>
 			{article && (
 				<form
 					onSubmit={form.handleSubmit(onSubmit)}
 					encType="multipart/form-data"
-					className="space-y-[1.5rem]">
+					className="space-y-[1.5rem] max-h-[37rem] overflow-auto pr-5">
 					<div className="space-y-4 h-[100%]">
+						{previewUrl ? (
+							<div className="min-h-[15rem] w-full relative">
+								<Image
+									src={previewUrl}
+									alt="Preview Image"
+									layout="fill"
+									objectFit="contain"
+									className="rounded-md"
+								/>
+							</div>
+						) : (
+							<div className="min-h-[15rem] w-full relative bg-slate-200 rounded-sm flex flex-col gap-2 items-center justify-center">
+								<ImageIcon
+									size={100}
+									color="#4392F1"
+								/>
+								<p>Your image will be displayed here</p>
+							</div>
+						)}
 						<FormField
 							control={form.control}
 							name="media"
 							render={({ field }) => (
-								<FormItem>
+								<FormItem className>
 									<FormLabel>Media Upload</FormLabel>
 									<FormControl>
 										<Input
 											type="file"
 											{...mediaRef}
+											onChange={(event) => {
+												const file =
+													event.target.files?.[0];
+												if (file) {
+													// Create a URL for the file
+													const url =
+														URL.createObjectURL(
+															file,
+														);
+													setPreviewUrl(url); // Update state with the new URL
+												} else {
+													setPreviewUrl(null); // Reset preview URL if no file is selected
+												}
+												field.onChange(
+													file ?? undefined,
+												);
+											}}
 										/>
 									</FormControl>
+									<FormDescription>
+										We recommend adding a photo relevant to
+										your event.
+									</FormDescription>
+									<FormMessage />
 								</FormItem>
 							)}
 						/>

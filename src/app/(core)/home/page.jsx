@@ -20,7 +20,7 @@ import {
 	DialogTrigger,
 } from "@/components/ui/shadcnComponents/dialog";
 import EventForm from "@/components/forms/eventForm";
-// import {Dialog } from "@radix-ui/react-dialog";
+import { formatCreatedAt } from "@/lib/utils";
 
 const Home = () => {
 	const { data, isLoading } = usePostListQuery(1);
@@ -115,7 +115,7 @@ const Home = () => {
 							isSaved={post.is_bookmarked}
 							bookmarkCount={post.bookmarks_count}
 							type="Student"
-							date="1 Month Ago"
+							date={formatCreatedAt(post.created_at)}
 							title={post.title}
 							content={post.content}
 							postImage={post.media}

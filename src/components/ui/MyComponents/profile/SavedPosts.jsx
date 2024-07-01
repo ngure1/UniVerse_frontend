@@ -2,6 +2,7 @@ import PostImage from "@/../public/images/postImage.png";
 import PostCard from "@/components/ui/MyComponents/cards/PostCard";
 import { useBookmarksMe } from "@/hooks/profile";
 import PostSkeleton from "../cards/skeletons/Skeleton";
+import { formatCreatedAt } from "@/lib/utils";
 
 const SavedPosts = () => {
 	const { data, isLoading, error } = useBookmarksMe();
@@ -26,7 +27,7 @@ const SavedPosts = () => {
 						isSaved={post.is_bookmarked}
 						bookmarkCount={post.bookmarks_count}
 						type="Student"
-						date="1 Month Ago"
+						date={formatCreatedAt(post.created_at)}
 						title={post.title}
 						content={post.content}
 						postImage={post.media}
