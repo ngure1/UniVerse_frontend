@@ -43,6 +43,7 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 } from "@/components/ui/shadcnComponents/alert-dialog";
+import { Dialog, DialogContent } from "@/components/ui/shadcnComponents/dialog";
 import { useFollowToggle } from "@/hooks/profile";
 import thumbsUp from "./thumbs-up.json";
 import Lottie from "react-lottie-player";
@@ -54,6 +55,8 @@ import {
 	usePostsCommentListQuery,
 } from "@/redux/features/posts/postsApiSlice";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import PostForm from "@/components/forms/postForm";
 
 const PostCard = ({
 	postId,
@@ -107,6 +110,7 @@ const PostCard = ({
 
 	const sanitizedContent = DOMPurify.sanitize(content);
 
+	const router = useRouter();
 	// * deleting a post
 	const [deletePost] = usePostDeleteMutation();
 
@@ -155,6 +159,24 @@ const PostCard = ({
 	function commentSubmit() {
 		handleComment();
 		setComment("");
+	}
+
+	//* edit post dialog
+	const [showEditDialog, setShowEditDialog] = useState(false);
+
+	// * opening delete dialog
+	function handleOpenEditDialog() {
+		const containsHtml = /<\/?[a-z][\s\S]*>/i.test(content);
+		if (containsHtml) {
+			router.push(`/new-post/${postId}`);
+		} else {
+			setShowEditDialog(true);
+		}
+	}
+
+	// * closing delete dialog
+	function handleCloseEditDialog() {
+		setShowEditDialog(false);
 	}
 
 	return (
@@ -230,9 +252,9 @@ const PostCard = ({
 							</div>
 						</DropdownMenuTrigger>
 						<DropdownMenuContent className="w-56">
-							<DropdownMenuItem>
+							<DropdownMenuItem onSelect={handleOpenEditDialog}>
 								<SquarePen className="mr-2 h-4 w-4" />
-								<Link href="">Edit</Link>
+								<span>Edit</span>
 							</DropdownMenuItem>
 							<DropdownMenuItem
 								onSelect={handleShowDialog}
@@ -293,6 +315,15 @@ const PostCard = ({
 							</AlertDialogFooter>
 						</AlertDialogContent>
 					</AlertDialog>
+				)}
+				{showEditDialog && (
+					<Dialog
+						open={showEditDialog}
+						onOpenChange={handleCloseEditDialog}>
+						<DialogContent>
+							<PostForm id={postId} />
+						</DialogContent>
+					</Dialog>
 				)}
 			</CardHeader>
 
