@@ -4,6 +4,7 @@ import EventCard from "@/components/ui/MyComponents/cards/EventCard";
 import { useEventsListQuery } from "@/redux/features/events/eventsApiSlice";
 import RightSidebar from "@/components/ui/MyComponents/RightSidebar";
 import { formatCreatedAt } from "@/lib/utils";
+import EventSkeleton from "@/components/ui/MyComponents/cards/skeletons/EventSkeleton";
 
 const Events = () => {
 	const { data: eventData, isLoading } = useEventsListQuery(1);
@@ -11,7 +12,7 @@ const Events = () => {
 	return (
 		<div className="flex flex-col gap-y-4">
 			{isLoading ? (
-				<p>Loading</p>
+				<EventSkeleton />
 			) : (
 				eventData?.results?.map((event, index) => (
 					<EventCard
