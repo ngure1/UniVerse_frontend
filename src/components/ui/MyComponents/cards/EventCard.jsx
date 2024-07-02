@@ -187,14 +187,6 @@ const EventCard = ({
 							<p className="flex gap-1">
 								<Globe /> ONLINE
 							</p>
-							{event_link && (
-								<Link href={event_link}>
-									<p className="flex gap-1">
-										<Link2 />
-										{event_link}
-									</p>
-								</Link>
-							)}
 						</>
 					) : (
 						isPhysical &&
@@ -218,11 +210,15 @@ const EventCard = ({
 					{description}
 				</div>
 
-				<Button
-					className="w-full"
-					variant="secondary">
-					Register
-				</Button>
+				{event_link && (
+					<Link href={event_link}>
+						<Button
+							className="w-full"
+							variant="secondary">
+							Register
+						</Button>
+					</Link>
+				)}
 			</CardContent>
 			<CardFooter className="flex flex-col w-full gap-1 relative">
 				<div className="flex items-start self-stretch border-y-2">

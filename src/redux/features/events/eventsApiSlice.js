@@ -10,7 +10,7 @@ const eventApiSlice = baseApi.injectEndpoints({
 				event_start_time,
 				event_start_date,
 				address,
-				event_link,
+				event_form_url,
 				media,
 			}) => {
 				const formData = new FormData();
@@ -19,7 +19,7 @@ const eventApiSlice = baseApi.injectEndpoints({
 				formData.append("event_start_time", event_start_time);
 				formData.append("event_start_date", event_start_date);
 				formData.append("address", address);
-				formData.append("event_link", event_link);
+				formData.append("event_form_url", event_form_url);
 				if (media && media.length > 0) {
 					formData.append("media", media[0]);
 				}

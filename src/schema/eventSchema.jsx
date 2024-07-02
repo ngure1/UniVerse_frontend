@@ -9,7 +9,7 @@ const eventFormSchema = z.object({
 	isOnline: z.boolean(),
 	isPhysical: z.boolean(),
 	media: typeof window === "undefined" ? z.any() : z.instanceof(FileList),
-	event_link: z.string().url("Invalid URL").optional(),
+	event_form_url: z.string().url("Invalid URL").optional(),
 });
 
 export default eventFormSchema;

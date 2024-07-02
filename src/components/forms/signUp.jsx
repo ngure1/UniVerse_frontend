@@ -13,6 +13,7 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/shadcnComponents/form";
+import { Separator } from "@/components/ui/shadcnComponents/separator";
 import { Input } from "@/components/ui/shadcnComponents/input";
 import { Eye, EyeOff } from "lucide-react";
 import { useUserCreateMutation } from "@/redux/features/auth/authApiSlice";
@@ -237,12 +238,17 @@ const SignUpForm = () => {
 							disabled={isLoading}>
 							Sign Up
 						</Button>
+						<div className="flex items-center justify-center">
+							<Separator className="w-[45%]" />
+							<p className="px-2">or</p>
+							<Separator className="w-[45%]" />
+						</div>
+						<GoogleBtn />
 						<p className="text-blue-500">
 							Already have an account?{" "}
 							<Link href="/login"> Login</Link>
 						</p>
 					</form>
-					<GoogleBtn />
 				</Form>
 			</Card>
 		</div>

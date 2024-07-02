@@ -36,7 +36,7 @@ const EventForm = ({ article }) => {
 			address: "",
 			isOnline: false,
 			isPhysical: false,
-			event_link: "",
+			event_form_url: "",
 			media: undefined,
 		},
 	});
@@ -267,7 +267,7 @@ const EventForm = ({ article }) => {
 						/>
 						<FormField
 							control={form.control}
-							name="event_link"
+							name="event_form_url"
 							render={({ field }) => (
 								<FormItem>
 									<FormLabel>Event Link</FormLabel>
