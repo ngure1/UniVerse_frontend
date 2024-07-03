@@ -9,8 +9,6 @@ import {
 	VerifiedIcon,
 } from "lucide-react";
 import { Input } from "@/components/ui/shadcnComponents/input";
-import thumbsUp from "./thumbs-up.json";
-import Lottie from "react-lottie-player";
 import { LikeSVG, UnLikeSVG } from "@/app/landing/SVGIcon";
 import { usePostsCommentListQuery } from "@/redux/features/posts/postsApiSlice";
 import {
@@ -30,9 +28,7 @@ const MyCardFooter = ({
 	isLiked,
 	isPostDetails = false,
 }) => {
-	const [isPlaying, setIsPlaying] = useState(false);
 	const [liked, setLiked] = useState(isLiked);
-	const [animationComplete, setAnimationComplete] = useState(false);
 
 	const handleLike = useLike(postId);
 	const handleUnlike = useUnlike(postId);
@@ -43,16 +39,8 @@ const MyCardFooter = ({
 	const handleThumbsUp = () => {
 		if (!liked) {
 			handleLike();
-			setIsPlaying(true);
-			setAnimationComplete(false);
-			setTimeout(() => {
-				setIsPlaying(false);
-				setAnimationComplete(true);
-			}, 1000); // Assuming the animation duration is 1 second
 		} else {
 			handleUnlike();
-			setIsPlaying(false);
-			setAnimationComplete(false);
 		}
 		setLiked(!liked);
 	};
@@ -81,18 +69,7 @@ const MyCardFooter = ({
 					className="flex items-center cursor-pointer"
 					variant="ghost"
 					onClick={handleThumbsUp}>
-					{liked && animationComplete ? (
-						<LikeSVG />
-					) : liked ? (
-						<Lottie
-							animationData={thumbsUp}
-							loop={false}
-							play={isPlaying}
-							className="w-[2rem] h-[2rem] relative bottom-1"
-						/>
-					) : (
-						<UnLikeSVG />
-					)}
+					{liked ? <LikeSVG /> : <UnLikeSVG />}
 				</Button>
 				<Button
 					variant="ghost"
