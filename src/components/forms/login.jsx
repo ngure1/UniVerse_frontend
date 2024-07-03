@@ -169,9 +169,9 @@ const LoginPage = () => {
 							<Link href="/signup">Sign Up</Link>
 						</p>
 						<div className="flex items-center justify-center">
-							<Separator />
-							<p>or</p>
-							<Separator />
+							<Separator className="w-[45%]" />
+							<p className="px-2">or</p>
+							<Separator className="w-[45%]" />
 						</div>
 					</form>
 

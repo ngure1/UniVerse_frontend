@@ -24,9 +24,9 @@ const Events = () => {
 						isOnline={true}
 						isPhysical={event.is_physical}
 						address={event.address}
-						event_link="https://www.example.com"
-						event_start_date="12th October 2021"
-						event_start_time="12:00 PM"
+						event_link={event.event_form_url}
+						event_start_date={event.event_start_date}
+						event_start_time={event.event_start_time}
 						pfpImage={event.author.profile_picture}
 						description={event.description}
 						postImage={event.media}
