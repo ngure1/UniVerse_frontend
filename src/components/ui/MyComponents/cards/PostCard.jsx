@@ -31,17 +31,27 @@ const PostCard = ({
 	//* edit post dialog
 
 	const [isExpanded, setIsExpanded] = useState(false);
-	const toggleContent = () => {
-		setIsExpanded(!isExpanded);
-	};
-	const [isShort, setIsShort] = useState(false);
-	const getTruncatedContent = (text, max_length) => {
+	const max_length = 250;
+
+	const getTruncatedContent = (text) => {
+		if (typeof text !== "string") {
+			text = String(text); // Ensure text is a string
+		}
 		if (text.length <= max_length) {
-			// setIsShort(true);
 			return text;
 		}
 		return text.substring(0, max_length) + "...";
 	};
+
+	const truncatedContent = getTruncatedContent(sanitizedContent);
+
+	// const getTruncatedContent = (text, max_length) => {
+	// 	if (text.length <= max_length && typeof text === "string") {
+	// 		// setIsShort(true);
+	// 		return text;
+	// 	}
+	// 	return text.substring(0, max_length) + "...";
+	// };
 
 	return (
 		<Card className="flex w-[58%] min-w-[33.25rem] py-[0.3rem] flex-col items-start rounded-[0.5rem] bg-white dark:bg-muted">
@@ -101,13 +111,18 @@ const PostCard = ({
 									dangerouslySetInnerHTML={{
 										__html: isExpanded
 											? sanitizedContent
-											: getTruncatedContent(
-													sanitizedContent,
-													250,
-												),
+											: truncatedContent,
 									}}
 								/>
-								<p>{isExpanded ? "Show Less" : "Read More"} </p>
+								{sanitizedContent.length > max_length && (
+									<p
+										className="text-blue-500 cursor-pointer"
+										onClick={() =>
+											setIsExpanded(!isExpanded)
+										}>
+										{isExpanded ? "Show Less" : "Read More"}
+									</p>
+								)}
 							</Link>
 						) : (
 							<div>
@@ -118,15 +133,16 @@ const PostCard = ({
 									dangerouslySetInnerHTML={{
 										__html: isExpanded
 											? sanitizedContent
-											: getTruncatedContent(
-													sanitizedContent,
-													250,
-												),
+											: truncatedContent,
 									}}
 								/>
-								{!isShort && (
-									<p onClick={toggleContent}>
-										{isExpanded ? "Show Less" : "Read More"}{" "}
+								{sanitizedContent.length > max_length && (
+									<p
+										className="text-blue-500 cursor-pointer"
+										onClick={() =>
+											setIsExpanded(!isExpanded)
+										}>
+										{isExpanded ? "Show Less" : "Read More"}
 									</p>
 								)}
 							</div>
