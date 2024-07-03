@@ -21,7 +21,6 @@ import {
 	useUnbookmark,
 	useComment,
 } from "@/hooks/eventsHooks";
-import Lottie from "react-lottie-player";
 import { LikeSVG, UnLikeSVG } from "@/app/landing/SVGIcon";
 import Link from "next/link";
 import AvatarProfile from "../profile/AvatarProfile";
@@ -30,7 +29,6 @@ import { VerifiedIcon, UserRoundPlus, Globe, Link2 } from "lucide-react";
 import Image from "next/legacy/image";
 import { useProfile } from "@/hooks/profile";
 import { useFollowToggle } from "@/hooks/profile";
-import thumbsUp from "./thumbs-up.json";
 import { useEventsCommentsListQuery } from "@/redux/features/events/eventsApiSlice";
 
 const EventCard = ({
@@ -59,9 +57,7 @@ const EventCard = ({
 	smallImage,
 }) => {
 	const { data: profileData } = useProfile();
-	const [isPlaying, setIsPlaying] = useState(false);
 	const [liked, setLiked] = useState(isLiked);
-	const [animationComplete, setAnimationComplete] = useState(false);
 
 	const handleLike = useLike(eventId);
 	const handleUnlike = useUnlike(eventId);
@@ -73,16 +69,8 @@ const EventCard = ({
 	const handleThumbsUp = () => {
 		if (!liked) {
 			handleLike();
-			setIsPlaying(true);
-			setAnimationComplete(false);
-			setTimeout(() => {
-				setIsPlaying(false);
-				setAnimationComplete(true);
-			}, 1000); // Assuming the animation duration is 1 second
 		} else {
 			handleUnlike();
-			setIsPlaying(false);
-			setAnimationComplete(false);
 		}
 		setLiked(!liked);
 	};
@@ -226,18 +214,7 @@ const EventCard = ({
 						className="flex items-center cursor-pointer"
 						variant="ghost"
 						onClick={handleThumbsUp}>
-						{liked && animationComplete ? (
-							<LikeSVG />
-						) : liked ? (
-							<Lottie
-								animationData={thumbsUp}
-								loop={false}
-								play={isPlaying}
-								className="w-[2rem] h-[2rem] relative bottom-1"
-							/>
-						) : (
-							<UnLikeSVG />
-						)}
+						{liked ? <LikeSVG /> : <UnLikeSVG />}
 					</Button>
 					<Button
 						variant="ghost"
