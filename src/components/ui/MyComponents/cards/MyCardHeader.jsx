@@ -160,7 +160,7 @@ const MyCardHeader = ({
 			)}
 
 			{/* // * dropdown menu for edit & deleting a post */}
-			{isOwner ? (
+			{!isOwner ? (
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
 						<div className="hover:bg-accent rounded-full p-1">
