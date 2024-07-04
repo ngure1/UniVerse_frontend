@@ -56,7 +56,7 @@ const Home = () => {
 							className="w-[60rem]"
 							isOpen={isDialogOpen}
 							setIsOpen={handleCloseDialog}>
-							<PostForm />
+							<PostForm article />
 						</ResponsiveDialog>
 					</div>
 					<div className="flex justify-evenly items-start self-stretch">
@@ -119,6 +119,7 @@ const Home = () => {
 							title={post.title}
 							content={post.content}
 							postImage={post.media}
+							isOwner
 							size="large"
 						/>
 					))

@@ -182,7 +182,7 @@ const MyCardHeader = ({
 				</DropdownMenu>
 			) : // * show confirm delete dialog
 
-			// * is following creator for follow/followign functionality
+			// * is following creator for follow/following functionality
 
 			isFollowingCreator ? (
 				<Button
