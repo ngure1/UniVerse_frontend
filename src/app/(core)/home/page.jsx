@@ -56,7 +56,7 @@ const Home = () => {
 							className="w-[60rem]"
 							isOpen={isDialogOpen}
 							setIsOpen={handleCloseDialog}>
-							<PostForm article />
+							<PostForm />
 						</ResponsiveDialog>
 					</div>
 					<div className="flex justify-evenly items-start self-stretch">

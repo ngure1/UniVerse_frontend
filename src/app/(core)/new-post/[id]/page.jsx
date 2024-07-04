@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/shadcnComponents/card";
 const page = ({ params }) => {
 	const { id } = params;
 	return (
-		<Card className="min-h-screen p-5">
+		<Card className="min-h-screen p-5 bg-gray-800">
 			<PostForm
 				article
 				id={id}
