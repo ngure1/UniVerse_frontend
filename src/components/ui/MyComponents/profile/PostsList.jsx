@@ -8,7 +8,7 @@ const PostsList = ({ id, is_owner }) => {
 	const { data: postData, isLoading, error } = useProfilePosts(id);
 	console.log(postData);
 	return (
-		<div className="grid grid-cols-2 w-full gap-y-3 gap-x-4">
+		<div className="flex flex-col w-full gap-y-3">
 			{isLoading ? (
 				<PostSkeleton />
 			) : (
@@ -32,7 +32,7 @@ const PostsList = ({ id, is_owner }) => {
 						postImage={post.media}
 						smallImage
 						forProfile
-						isOwner={is_owner}
+						isOwner={true}
 					/>
 				))
 			)}
