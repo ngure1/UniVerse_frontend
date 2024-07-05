@@ -169,6 +169,10 @@ const EventCard = ({
 		setShowEditDialog(false);
 	}
 
+	if (address) {
+		isOnline = false;
+		isPhysical = true;
+	}
 	return (
 		<Card className="flex w-[58%] min-w-[33.25rem] py-[0.3rem] flex-col items-start rounded-[0.5rem] bg-white dark:bg-muted">
 			<CardHeader className="w-full flex flex-row justify-between items-start">
@@ -203,7 +207,7 @@ const EventCard = ({
 					</div>
 				</Link>
 
-				{!isOwner ? (
+				{isOwner ? (
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
 							<div className="hover:bg-accent rounded-full p-1">
@@ -338,7 +342,7 @@ const EventCard = ({
 						{event_start_time}
 					</p>
 				</div>
-				<div class="space-y-4">
+				<div className="space-y-4">
 					<p className="sub-heading-3">About</p>
 
 					{description}

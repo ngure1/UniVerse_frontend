@@ -23,6 +23,7 @@ const PostCard = ({
 	first_name,
 	last_name,
 	isVerified,
+	isFollowingCreator,
 	type,
 	date,
 }) => {
@@ -66,6 +67,7 @@ const PostCard = ({
 				content={content}
 				type={type}
 				isOwner={isOwner}
+				isFollowingCreator={isFollowingCreator}
 				date={date}
 			/>
 

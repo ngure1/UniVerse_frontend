@@ -46,7 +46,7 @@ const MyCardHeader = ({
 	isOwner = false,
 	content,
 }) => {
-	const handleFollow = useFollowToggle(1);
+	const handleFollow = useFollowToggle(1, isFollowingCreator);
 
 	const router = useRouter();
 	// * deleting a post

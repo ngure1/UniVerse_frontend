@@ -71,11 +71,11 @@ const JobCard = ({
 			<CardContent>
 				<div>
 					<p className="sub-heading-3 m-[1rem]">About The Job</p>
-					<div class="border shadow-md p-[1rem] space-y-4">
+					<div className="border shadow-md p-[1rem] space-y-4">
 						<p className="sub-heading-3">Description</p>
 						<p>{jobDescription}</p>
 
-						{/* <div class="border shadow-md p-[1rem]"> */}
+						{/* <div className="border shadow-md p-[1rem]"> */}
 						<p className="sub-heading-3">Responsibilities</p>
 						<p>{responsibilities}</p>
 						{/* </div> */}
@@ -101,7 +101,7 @@ const JobCard = ({
 				</div>
 			</CardContent>
 			<CardFooter>
-				<div class="border shadow-md p-[1rem]">
+				<div className="border shadow-md p-[1rem]">
 					<p className="sub-heading-3 mb-[0.75rem]">
 						About The Company
 					</p>
