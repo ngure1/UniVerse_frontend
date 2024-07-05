@@ -119,7 +119,7 @@ const Home = () => {
 							title={post.title}
 							content={post.content}
 							postImage={post.media}
-							isOwner
+							// isOwner
 							size="large"
 						/>
 					))

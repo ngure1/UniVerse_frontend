@@ -13,6 +13,7 @@ const PostCard = ({
 	postImage,
 	isPostDetails = false,
 	isLiked,
+	isOwner,
 	isSaved,
 	likeCount,
 	smallImage,
@@ -64,6 +65,7 @@ const PostCard = ({
 				isVerified={isVerified}
 				content={content}
 				type={type}
+				isOwner={isOwner}
 				date={date}
 			/>
 
