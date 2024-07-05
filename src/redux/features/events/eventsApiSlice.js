@@ -94,6 +94,47 @@ const eventApiSlice = baseApi.injectEndpoints({
 				method: "GET",
 			}),
 		}),
+
+		//deleting an event
+		eventDelete: builder.mutation({
+			query: ({ event_id }) => ({
+				url: `/events/${event_id}/`,
+				method: "DELETE",
+			}),
+			invalidatesTags: ["EVENTS"],
+		}),
+
+		//editing an event
+		eventUpdate: builder.mutation({
+			query: ({
+				event_id,
+				title,
+				description,
+				event_start_time,
+				event_start_date,
+				address,
+				event_form_url,
+				media,
+			}) => {
+				const formData = new FormData();
+				formData.append("title", title);
+				formData.append("description", description);
+				formData.append("event_start_time", event_start_time);
+				formData.append("event_start_date", event_start_date);
+				formData.append("address", address);
+				formData.append("event_form_url", event_form_url);
+				if (media && media.length > 0) {
+					formData.append("media", media[0]);
+				}
+
+				return {
+					url: `/events/${event_id}`,
+					method: "PATCH",
+					body: formData,
+				};
+			},
+			invalidatesTags: ["EVENTS"],
+		}),
 	}),
 });
 
@@ -106,4 +147,6 @@ export const {
 	useEventUnbookmarkCreateMutation,
 	useEventsCommentCreateMutation,
 	useEventsCommentsListQuery,
+	useEventDeleteMutation,
+	useEventUpdateMutation,
 } = eventApiSlice;
