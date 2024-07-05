@@ -20,12 +20,22 @@ import {
 	RadioGroupItem,
 } from "@/components/ui/shadcnComponents/radio-group";
 import { Button } from "../ui/shadcnComponents/button";
-import { useEventsCreateMutation } from "@/redux/features/events/eventsApiSlice";
+import {
+	useEventsCreateMutation,
+	useEventUpdateMutation,
+} from "@/redux/features/events/eventsApiSlice";
 import { ImageIcon } from "lucide-react";
 import { toast } from "react-toastify";
 import Image from "next/image";
 
-const EventForm = ({ article }) => {
+const EventForm = ({ id, article }) => {
+	const isEditMode = !!id;
+	const { data: event } = usePostDetailQuery(
+		{ event_id: id },
+		{ skip: !isEditMode },
+	);
+	const [previewUrl, setPreviewUrl] = useState(null);
+
 	const form = useForm({
 		resolver: zodResolver(eventFormSchema),
 		defaultValues: {
@@ -40,29 +50,58 @@ const EventForm = ({ article }) => {
 			media: undefined,
 		},
 	});
+	const mediaRef = form.register("media");
 
-	const [event, { isLoading }] = useEventsCreateMutation();
-	const [eventType, setEventType] = useState("");
+	useEffect(() => {
+		if (event) {
+			form.reset({
+				title: event.title,
+				description: event.description,
+				event_start_date: event.event_start_date,
+				event_start_time: event.event_start_time,
+				address: event.address,
+				isOnline: event.isOnline,
+				isPhysical: event.isPhysical,
+				event_form_url: event.event_form_url,
+			});
+			setPreviewUrl(event.media);
+		}
+	}, [event, form]);
+
+	const [createEvent, { isLoading: isCreating }] = useEventsCreateMutation();
+	const [updateEvent, { isLoading: isUpdating }] = useEventUpdateMutation();
+
+	const isLoading = isCreating || isUpdating;
+
 	const onSubmit = (data) => {
-		const toastId = toast.loading("Creating your event", {
-			theme: "colored",
-			autoClose: false,
-		});
+		const toastId = toast.loading(
+			isEditMode ? "Updating your event" : "Creating your event",
+			{
+				theme: "colored",
+				autoClose: false,
+			},
+		);
 
-		event(data)
+		const submitAction = isEditMode
+			? updateEvent({ event_id: id, ...data })
+			: createEvent(data);
+
+		submitAction
 			.unwrap()
 			.then(() => {
 				toast.update(toastId, {
-					render: "Event created successfully",
+					render: isEditMode
+						? "Event updated successfully"
+						: "Event created successfully",
 					type: "success",
 					isLoading: false,
 					autoClose: 5000,
 				});
-				// closePostDialog();
+				closePostDialog();
 			})
 			.catch(() => {
 				toast.update(toastId, {
-					render: "Something went wrong with your request",
+					render: "Something went wrong with your event",
 					type: "error",
 					isLoading: false,
 					autoClose: 5000,
@@ -70,9 +109,7 @@ const EventForm = ({ article }) => {
 			});
 	};
 
-	const mediaRef = form.register("media");
-
-	const [previewUrl, setPreviewUrl] = useState(null);
+	const { handleCloseDialog: closePostDialog } = useDialog("event");
 
 	return (
 		<Form {...form}>
@@ -287,7 +324,7 @@ const EventForm = ({ article }) => {
 							type="submit"
 							className="w-full"
 							disabled={isLoading}>
-							Post
+							{isEditMode ? "Update Event" : "Create Event"}
 						</Button>
 					</div>
 				</form>
