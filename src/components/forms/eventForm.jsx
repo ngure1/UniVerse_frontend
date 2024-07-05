@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
 	Form,
@@ -23,14 +23,16 @@ import { Button } from "../ui/shadcnComponents/button";
 import {
 	useEventsCreateMutation,
 	useEventUpdateMutation,
+	useEventsListQuery,
 } from "@/redux/features/events/eventsApiSlice";
 import { ImageIcon } from "lucide-react";
 import { toast } from "react-toastify";
 import Image from "next/image";
+import { useDialog } from "@/hooks/responsiveDialog";
 
 const EventForm = ({ id, article }) => {
-	const isEditMode = !!id;
-	const { data: event } = usePostDetailQuery(
+	const isEditMode = true;
+	const { data: event } = useEventsListQuery(
 		{ event_id: id },
 		{ skip: !isEditMode },
 	);
@@ -70,6 +72,7 @@ const EventForm = ({ id, article }) => {
 
 	const [createEvent, { isLoading: isCreating }] = useEventsCreateMutation();
 	const [updateEvent, { isLoading: isUpdating }] = useEventUpdateMutation();
+	const [eventType, setEventType] = useState("isOnline");
 
 	const isLoading = isCreating || isUpdating;
 

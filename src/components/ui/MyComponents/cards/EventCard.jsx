@@ -59,6 +59,7 @@ import {
 	AlertDialogTitle,
 } from "@/components/ui/shadcnComponents/alert-dialog";
 import { Dialog, DialogContent } from "@/components/ui/shadcnComponents/dialog";
+import EventForm from "@/components/forms/eventForm";
 
 const EventCard = ({
 	eventId,
@@ -138,7 +139,7 @@ const EventCard = ({
 
 	// * confirm delete dialog
 	function handleConfirmDelete() {
-		deletePost({ event_id: eventId })
+		deleteEvent({ event_id: eventId })
 			.unwrap()
 			.then(() => {
 				toast.success("Event deleted successfully", {
@@ -279,7 +280,10 @@ const EventCard = ({
 						open={showEditDialog}
 						onOpenChange={handleCloseEditDialog}>
 						<DialogContent>
-							<PostForm id={postId} />
+							<EventForm
+								article
+								id={eventId}
+							/>
 						</DialogContent>
 					</Dialog>
 				)}
