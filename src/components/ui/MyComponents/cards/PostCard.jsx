@@ -56,11 +56,13 @@ const PostCard = ({
 	return (
 		<Card className="flex w-[58%] min-w-[33.25rem] py-[0.3rem] flex-col items-start rounded-[0.5rem] bg-white dark:bg-muted">
 			<MyCardHeader
+				postId={postId}
 				profileId={profileId}
 				pfpImage={pfpImage}
 				first_name={first_name}
 				last_name={last_name}
 				isVerified={isVerified}
+				content={content}
 				type={type}
 				date={date}
 			/>

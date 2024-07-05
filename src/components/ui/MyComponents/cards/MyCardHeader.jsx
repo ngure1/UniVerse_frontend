@@ -33,6 +33,7 @@ import { useRouter } from "next/navigation";
 import { usePostDeleteMutation } from "@/redux/features/posts/postsApiSlice";
 
 const MyCardHeader = ({
+	postId,
 	profileId,
 	pfpImage,
 	first_name,
