@@ -24,7 +24,7 @@ const ProfileTabs = ({ user_id, is_owner }) => {
 		<Tabs
 			defaultValue="posts"
 			className="w-[89%] min-h-screen">
-			<TabsList className="justify-around w-full bg-inherit">
+			<TabsList className="justify-start gap-6 w-full bg-inherit">
 				<TabsTrigger
 					value="posts"
 					className="flex gap-3 font-semibold">

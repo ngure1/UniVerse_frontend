@@ -184,6 +184,7 @@ const EventCard = ({
 							pfpImage={pfpImage}
 							first_name={first_name}
 							last_name={last_name}
+							email={profileData?.user.email}
 							className="w-[4rem] h-[4rem]"
 						/>
 						<div className="flex flex-col justify-center items-start gap-[-0.75rem] w-full">
@@ -442,6 +443,7 @@ function CommentsComponent({ eventId }) {
 						pfpImage={comment.author.profile_picture}
 						first_name={comment.author.user.first_name}
 						last_name={comment.author.user.last_name}
+						email={profileData?.user.email}
 						className="w-[3.2rem] h-[3.2rem]"
 					/>
 					<div className="flex gap-1 flex-col w-full">
