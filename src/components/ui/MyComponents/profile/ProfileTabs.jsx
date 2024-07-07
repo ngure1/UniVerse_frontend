@@ -4,12 +4,19 @@ import {
 	TabsList,
 	TabsTrigger,
 } from "@/components/ui/shadcnComponents/tabs";
-import { EducationList, PostsList, SavedPosts, WorkList } from "./index";
+import {
+	EducationList,
+	PostsList,
+	SavedPosts,
+	WorkList,
+	EventsList,
+} from "./index";
 import {
 	GraduationCap,
 	BriefcaseBusiness,
 	BookMarked,
 	Grid3X3,
+	CalendarRange,
 } from "lucide-react";
 
 const ProfileTabs = ({ user_id, is_owner }) => {
@@ -17,12 +24,18 @@ const ProfileTabs = ({ user_id, is_owner }) => {
 		<Tabs
 			defaultValue="posts"
 			className="w-[89%] min-h-screen">
-			<TabsList className="justify-around w-full bg-inherit">
+			<TabsList className="justify-start gap-6 w-full bg-inherit">
 				<TabsTrigger
 					value="posts"
 					className="flex gap-3 font-semibold">
 					<Grid3X3 className="text-gray-500" />
 					Posts
+				</TabsTrigger>
+				<TabsTrigger
+					value="events"
+					className="flex gap-3 font-semibold">
+					<CalendarRange className="text-gray-500" />
+					Events
 				</TabsTrigger>
 				<TabsTrigger
 					value="work"
@@ -48,6 +61,12 @@ const ProfileTabs = ({ user_id, is_owner }) => {
 					<PostsList
 						id={user_id}
 						// is_owner={is_owner}
+					/>
+				</TabsContent>
+				<TabsContent value="events">
+					<EventsList
+					// id={user_id}
+					// is_owner={is_owner}
 					/>
 				</TabsContent>
 				<TabsContent value="work">

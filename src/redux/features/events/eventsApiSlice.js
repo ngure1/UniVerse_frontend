@@ -128,11 +128,28 @@ const eventApiSlice = baseApi.injectEndpoints({
 				}
 
 				return {
-					url: `/events/${event_id}`,
+					url: `/events/${event_id}/`,
 					method: "PATCH",
 					body: formData,
 				};
 			},
+			invalidatesTags: ["EVENTS"],
+		}),
+
+		//events detail
+		eventsDetail: builder.query({
+			query: ({ event_id }) => ({
+				url: `/events/${event_id}/`,
+				method: "GET",
+			}),
+			providesTags: ["EVENTS"],
+		}),
+
+		eventsMe: builder.query({
+			query: () => ({
+				url: "/events/me/",
+				method: "GET",
+			}),
 			invalidatesTags: ["EVENTS"],
 		}),
 	}),
@@ -149,4 +166,6 @@ export const {
 	useEventsCommentsListQuery,
 	useEventDeleteMutation,
 	useEventUpdateMutation,
+	useEventsDetailQuery,
+	useEventsMeQuery,
 } = eventApiSlice;

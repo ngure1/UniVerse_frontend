@@ -169,6 +169,10 @@ const EventCard = ({
 		setShowEditDialog(false);
 	}
 
+	if (address) {
+		isOnline = false;
+		isPhysical = true;
+	}
 	return (
 		<Card className="flex w-[58%] min-w-[33.25rem] py-[0.3rem] flex-col items-start rounded-[0.5rem] bg-white dark:bg-muted">
 			<CardHeader className="w-full flex flex-row justify-between items-start">
@@ -180,6 +184,7 @@ const EventCard = ({
 							pfpImage={pfpImage}
 							first_name={first_name}
 							last_name={last_name}
+							email={profileData?.user.email}
 							className="w-[4rem] h-[4rem]"
 						/>
 						<div className="flex flex-col justify-center items-start gap-[-0.75rem] w-full">
@@ -203,7 +208,7 @@ const EventCard = ({
 					</div>
 				</Link>
 
-				{!isOwner ? (
+				{isOwner ? (
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
 							<div className="hover:bg-accent rounded-full p-1">
@@ -338,7 +343,7 @@ const EventCard = ({
 						{event_start_time}
 					</p>
 				</div>
-				<div class="space-y-4">
+				<div className="space-y-4">
 					<p className="sub-heading-3">About</p>
 
 					{description}
@@ -438,6 +443,7 @@ function CommentsComponent({ eventId }) {
 						pfpImage={comment.author.profile_picture}
 						first_name={comment.author.user.first_name}
 						last_name={comment.author.user.last_name}
+						email={profileData?.user.email}
 						className="w-[3.2rem] h-[3.2rem]"
 					/>
 					<div className="flex gap-1 flex-col w-full">

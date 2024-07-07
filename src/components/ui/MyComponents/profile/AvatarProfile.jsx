@@ -11,6 +11,7 @@ const AvatarProfile = ({
 	pfpImage,
 	first_name = "c",
 	last_name = "n",
+	email = "example@gmail.com",
 }) => {
 	return (
 		<Avatar className={`${className}`}>
@@ -19,7 +20,7 @@ const AvatarProfile = ({
 				className="object-cover"
 			/>
 			<AvatarFallback>
-				{get_fallback_name(first_name, last_name)}
+				{get_fallback_name(first_name, last_name, email)}
 			</AvatarFallback>
 		</Avatar>
 	);

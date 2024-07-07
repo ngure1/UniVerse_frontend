@@ -39,6 +39,7 @@ const Home = () => {
 							pfpImage={profileData?.profile_picture}
 							first_name={profileData?.user.first_name}
 							last_name={profileData?.user.last_name}
+							email={profileData?.user.email}
 						/>
 						<Button
 							variant="outline"

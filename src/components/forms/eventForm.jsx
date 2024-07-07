@@ -23,7 +23,7 @@ import { Button } from "../ui/shadcnComponents/button";
 import {
 	useEventsCreateMutation,
 	useEventUpdateMutation,
-	useEventsListQuery,
+	useEventsDetailQuery,
 } from "@/redux/features/events/eventsApiSlice";
 import { ImageIcon } from "lucide-react";
 import { toast } from "react-toastify";
@@ -31,8 +31,8 @@ import Image from "next/image";
 import { useDialog } from "@/hooks/responsiveDialog";
 
 const EventForm = ({ id, article }) => {
-	const isEditMode = true;
-	const { data: event } = useEventsListQuery(
+	const isEditMode = !!id;
+	const { data: event } = useEventsDetailQuery(
 		{ event_id: id },
 		{ skip: !isEditMode },
 	);

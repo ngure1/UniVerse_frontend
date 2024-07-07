@@ -164,6 +164,7 @@ function CommentsComponent({ postId }) {
 						pfpImage={comment.author.profile_picture}
 						first_name={comment.author.user.first_name}
 						last_name={comment.author.user.last_name}
+						email={comment.author.user.email}
 						className="w-[3.2rem] h-[3.2rem]"
 					/>
 					<div className="flex gap-1 flex-col w-full">

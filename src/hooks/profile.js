@@ -13,14 +13,14 @@ export const useProfile = (userId) => {
 	return { data, isLoading, error };
 };
 
-export const useFollowToggle = (id) => {
+export const useFollowToggle = (id, following) => {
 	const [followToggle, { isLoading, isError }] =
 		useProfileFollowToggleMutation();
 	const handleFollow = () => {
 		followToggle({ followed_id: id })
 			.unwrap()
 			.then(() => {
-				toast.success("Followed", {
+				toast.success(!following ? "Followed" : "Unfollowed user", {
 					theme: "colored",
 				});
 			})
