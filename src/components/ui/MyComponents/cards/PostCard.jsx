@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/shadcnComponents/card";
 import Image from "next/legacy/image";
@@ -6,6 +6,7 @@ import Link from "next/link";
 import DOMPurify from "dompurify";
 import MyCardHeader from "./MyCardHeader";
 import MyCardFooter from "./MyCardFooter";
+
 const PostCard = ({
 	postId,
 	title,
@@ -42,18 +43,10 @@ const PostCard = ({
 		if (text.length <= max_length) {
 			return text;
 		}
-		return text.substring(0, max_length) + "...";
+		return text.substring(0, max_length) + ".... ";
 	};
 
 	const truncatedContent = getTruncatedContent(sanitizedContent);
-
-	// const getTruncatedContent = (text, max_length) => {
-	// 	if (text.length <= max_length && typeof text === "string") {
-	// 		// setIsShort(true);
-	// 		return text;
-	// 	}
-	// 	return text.substring(0, max_length) + "...";
-	// };
 
 	return (
 		<Card className="flex w-[58%] min-w-[33.25rem] py-[0.3rem] flex-col items-start rounded-[0.5rem] bg-white dark:bg-muted">
@@ -73,37 +66,25 @@ const PostCard = ({
 
 			{isPostDetails ? (
 				<CardContent className="flex flex-col items-start gap-[0.75rem] self-stretch h-[70%]">
-					<div className="self-stretch h-[30%]">
-						{title && <p className="sub-heading-3 p-1">{title}</p>}
-						<div
-							dangerouslySetInnerHTML={{
-								__html: sanitizedContent,
-							}}
-						/>
-					</div>
+					{title && <p className="sub-heading-3 p-1">{title}</p>}
 					{postImage ? (
-						smallImage ? (
-							<div className="rounded-[0.25rem] h-[22rem] w-full relative">
-								<Image
-									src={postImage}
-									alt="Post Image"
-									layout="fill"
-									objectFit="cover"
-								/>
-							</div>
-						) : (
-							<div className="rounded-[0.25rem] min-h-[30rem] w-full relative">
-								<Image
-									src={postImage}
-									alt="Post Image"
-									layout="fill"
-									objectFit="cover"
-								/>
-							</div>
-						)
+						<div className="rounded-[0.25rem] min-h-[30rem] w-full relative">
+							<Image
+								src={postImage}
+								alt="Post Image"
+								layout="fill"
+								objectFit="cover"
+							/>
+						</div>
 					) : (
 						<></>
 					)}
+					<div
+						dangerouslySetInnerHTML={{
+							__html: sanitizedContent,
+						}}
+						className="whitespace-pre-wrap"
+					/>
 				</CardContent>
 			) : (
 				<CardContent className="flex flex-col items-start gap-[0.75rem] self-stretch h-[70%]">
@@ -113,20 +94,40 @@ const PostCard = ({
 								{title && (
 									<p className="sub-heading-3 p-1">{title}</p>
 								)}
+								{postImage ? (
+									smallImage ? (
+										<div className="rounded-[0.25rem] h-[22rem] w-full relative">
+											<Image
+												src={postImage}
+												alt="Post Image"
+												layout="fill"
+												objectFit="cover"
+											/>
+										</div>
+									) : (
+										<div className="rounded-[0.25rem] min-h-[30rem] w-full relative">
+											<Image
+												src={postImage}
+												alt="Post Image"
+												layout="fill"
+												objectFit="cover"
+											/>
+										</div>
+									)
+								) : (
+									<></>
+								)}
 								<div
 									dangerouslySetInnerHTML={{
 										__html: isExpanded
 											? sanitizedContent
 											: truncatedContent,
 									}}
+									className="inline whitespace-pre-wrap"
 								/>
 								{sanitizedContent.length > max_length && (
-									<p
-										className="text-blue-500 cursor-pointer"
-										onClick={() =>
-											setIsExpanded(!isExpanded)
-										}>
-										{isExpanded ? "Show Less" : "Read More"}
+									<p className="text-blue-500 cursor-pointer inline">
+										Read More
 									</p>
 								)}
 							</Link>
@@ -141,42 +142,43 @@ const PostCard = ({
 											? sanitizedContent
 											: truncatedContent,
 									}}
+									className="whitespace-pre-wrap inline"
 								/>
 								{sanitizedContent.length > max_length && (
 									<p
-										className="text-blue-500 cursor-pointer"
+										className="text-blue-500 cursor-pointer inline"
 										onClick={() =>
 											setIsExpanded(!isExpanded)
 										}>
 										{isExpanded ? "Show Less" : "Read More"}
 									</p>
 								)}
+								{postImage ? (
+									smallImage ? (
+										<div className="rounded-[0.25rem] h-[22rem] w-full relative">
+											<Image
+												src={postImage}
+												alt="Post Image"
+												layout="fill"
+												objectFit="cover"
+											/>
+										</div>
+									) : (
+										<div className="rounded-[0.25rem] min-h-[30rem] w-full relative">
+											<Image
+												src={postImage}
+												alt="Post Image"
+												layout="fill"
+												objectFit="cover"
+											/>
+										</div>
+									)
+								) : (
+									<></>
+								)}
 							</div>
 						)}
 					</div>
-					{postImage ? (
-						smallImage ? (
-							<div className="rounded-[0.25rem] h-[22rem] w-full relative">
-								<Image
-									src={postImage}
-									alt="Post Image"
-									layout="fill"
-									objectFit="cover"
-								/>
-							</div>
-						) : (
-							<div className="rounded-[0.25rem] min-h-[30rem] w-full relative">
-								<Image
-									src={postImage}
-									alt="Post Image"
-									layout="fill"
-									objectFit="cover"
-								/>
-							</div>
-						)
-					) : (
-						<></>
-					)}
 				</CardContent>
 			)}
 			<MyCardFooter
