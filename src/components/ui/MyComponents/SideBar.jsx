@@ -7,7 +7,7 @@ import {
 	BriefcaseBusiness,
 	Handshake,
 	Newspaper,
-	CodeXml,
+	Users,
 	CircleUserRound,
 	LogOut,
 } from "lucide-react";
@@ -27,8 +27,8 @@ const SideBar = ({ className }) => {
 		{ Icon: BriefcaseBusiness, text: "Jobs", href: "/jobs" },
 		{ Icon: Handshake, text: "Giving Back", href: "/support" },
 		{ Icon: Newspaper, text: "News & Announcements", href: "/news" },
-		{ Icon: CodeXml, text: "Department Stars", href: "/dpt-stars" },
-		{ Icon: CircleUserRound, text: "Profile", href: "/profile" },
+		{ Icon: Users, text: "Profiles", href: "/profiles" },
+		{ Icon: CircleUserRound, text: "User Profile", href: "/profile" },
 		// { Icon: LogOut, text: "Logout" },
 	];
 
