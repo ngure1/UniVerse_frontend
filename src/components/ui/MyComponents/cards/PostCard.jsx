@@ -21,6 +21,7 @@ const PostCard = ({
 	bookmarkCount,
 	profileId,
 	pfpImage,
+	forProfile = false,
 	first_name,
 	last_name,
 	isVerified,
@@ -60,6 +61,7 @@ const PostCard = ({
 				content={content}
 				type={type}
 				isOwner={isOwner}
+				forProfile={forProfile}
 				isFollowingCreator={isFollowingCreator}
 				date={date}
 			/>
