@@ -45,19 +45,17 @@ export const useBookmarksMe = () => {
 
 // Custom hook to abstract the conditional fetching logic
 export const useProfilePosts = (id) => {
+	const myPosts = usePostsMe();
+	const userPost = usePostsUserListQuery({ user_id: id });
+
 	const [userPosts, setUserPosts] = useState({
 		data: null,
 		isLoading: true,
 		error: null,
 	});
 
-	const myPosts = usePostsMe();
-	const userPost = id
-		? usePostsUserListQuery({ user_id: id })
-		: { data: null, isLoading: false, error: null };
-
 	useEffect(() => {
-		if (id && userPost) {
+		if (id) {
 			setUserPosts({
 				data: userPost.data,
 				isLoading: userPost.isLoading,
