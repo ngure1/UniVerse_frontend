@@ -202,8 +202,12 @@ const EventCard = ({
 									/>
 								)}
 							</div>
-							<p className="text-sm muted">{type}</p>
-							<p className="text-sm muted">{date}</p>
+							<p className="text-sm muted dark:invert dark:filter">
+								{type}
+							</p>
+							<p className="text-sm muted dark:invert dark:filter">
+								{date}
+							</p>
 						</div>
 					</div>
 				</Link>
