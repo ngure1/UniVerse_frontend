@@ -95,7 +95,7 @@ const EventCard = ({
 	const handleBookmark = useBookmark(eventId);
 	const handleUnbookmark = useUnbookmark(eventId);
 
-	const handleFollow = useFollowToggle(1);
+	const handleFollow = useFollowToggle(profileId, isFollowingCreator);
 
 	const handleThumbsUp = () => {
 		if (!liked) {
@@ -202,8 +202,12 @@ const EventCard = ({
 									/>
 								)}
 							</div>
-							<p className="text-sm muted">{type}</p>
-							<p className="text-sm muted">{date}</p>
+							<p className="text-sm muted dark:invert dark:filter">
+								{type}
+							</p>
+							<p className="text-sm muted dark:invert dark:filter">
+								{date}
+							</p>
 						</div>
 					</div>
 				</Link>

@@ -8,8 +8,8 @@ import { Button } from "../shadcnComponents/button";
 const RightSidebar = ({ className }) => {
 	return (
 		<div
-			className={`${className} min-h-screen w-[25%] gap-5 flex flex-col p-5`}>
-			<div className="flex flex-col gap-2 bg-white p-5 rounded-lg">
+			className={`${className} min-h-screen w-[25%] gap-5 flex flex-col p-5 bg-inherit`}>
+			<div className="flex flex-col gap-2 bg-white p-5 rounded-lg dark:bg-muted">
 				<div className="flex justify-between ">
 					<div className="flex gap-2">
 						<UserRoundCheck />
@@ -37,7 +37,7 @@ const RightSidebar = ({ className }) => {
 				</div>
 			</div>
 
-			<div className="flex flex-col gap-2 bg-white p-5 rounded-lg">
+			<div className="flex flex-col gap-2 bg-white p-5 rounded-lg dark:bg-muted">
 				<div className="flex justify-between ">
 					<div className="flex gap-2">
 						<CalendarDays />
@@ -66,7 +66,9 @@ const HomeEventCard = () => {
 			<div className=" w-[85%]  bg-slate-800 rounded"></div>
 
 			<div>
-				<p className="text-sm muted">12 Oct,1300GMT</p>
+				<p className="text-sm muted dark:filter dark:invert">
+					12 Oct,1300GMT
+				</p>
 				<p className="text-xl font-semibold ">Design Talk Event</p>
 				<p className="text-sm ">Joseph Ngure</p>
 			</div>
@@ -85,7 +87,9 @@ const HomeProfilesCard = ({ firstName, lastName, postCount }) => {
 				<span className="">
 					{firstName} {lastName}{" "}
 				</span>
-				<span className="muted text-sm">{postCount}k followers</span>
+				<span className="muted dark:filter dark:invert text-sm">
+					{postCount}k followers
+				</span>
 			</p>
 			<VerifiedIcon
 				fill="#00B595"

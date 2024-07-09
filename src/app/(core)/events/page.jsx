@@ -59,6 +59,7 @@ const Events = () => {
 						eventId={event.id}
 						first_name={event.author.user.first_name}
 						last_name={event.author.user.last_name}
+						profileId={event.author.id}
 						isVerified={event.author.is_verified}
 						title={event.title}
 						isOnline={true}

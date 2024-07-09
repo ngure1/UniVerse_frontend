@@ -46,7 +46,7 @@ const MyCardHeader = ({
 	isOwner = false,
 	content,
 }) => {
-	const handleFollow = useFollowToggle(1, isFollowingCreator);
+	const handleFollow = useFollowToggle(profileId, isFollowingCreator);
 
 	const router = useRouter();
 	// * deleting a post
@@ -117,14 +117,18 @@ const MyCardHeader = ({
 							{isVerified && (
 								<VerifiedIcon
 									fill="#00B595"
-									color="#ffff"
-									className="dark:filter dark:invert"
+									// color="#ffff"
+									className="text-inherit"
 									size={24}
 								/>
 							)}
 						</div>
-						<p className="text-sm muted">{type}</p>
-						<p className="text-sm muted">{date}</p>
+						<p className="text-sm muted dark:filter dark:invert">
+							{type}
+						</p>
+						<p className="text-sm muted dark:filter dark:invert">
+							{date}
+						</p>
 					</div>
 				</div>
 			) : (
@@ -147,14 +151,17 @@ const MyCardHeader = ({
 								{isVerified && (
 									<VerifiedIcon
 										fill="#00B595"
-										color="#ffff"
-										className="dark:filter dark:invert"
+										// color="#ffff"
 										size={24}
 									/>
 								)}
 							</div>
-							<p className="text-sm muted">{type}</p>
-							<p className="text-sm muted">{date}</p>
+							<p className="text-sm muted dark:filter dark:invert">
+								{type}
+							</p>
+							<p className="text-sm muted dark:filter dark:invert">
+								{date}
+							</p>
 						</div>
 					</div>
 				</Link>
