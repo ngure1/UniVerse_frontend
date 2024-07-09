@@ -129,7 +129,7 @@ const MyCardHeader = ({
 				</div>
 			) : (
 				<Link
-					href={`/profile/${profileId}`}
+					href={`/userprofile/${profileId}`}
 					className="w-full">
 					<div className="flex items-center self-stretch gap-[0.75rem]">
 						<AvatarProfile

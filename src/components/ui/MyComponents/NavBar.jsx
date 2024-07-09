@@ -95,7 +95,7 @@ const NavBar = ({ className }) => {
 				<DropdownMenuContent className="w-56">
 					<DropdownMenuItem>
 						<Link
-							href="/profile"
+							href="/userprofile"
 							className="flex gap-2 justify-center items-center">
 							<CircleUserRound size={20} />
 							View Profile
