@@ -1,7 +1,27 @@
+"use client";
 import React from "react";
+import { useStudentListQuery } from "@/redux/features/profileTabs/profilesApiSlice";
+import ProfilesCard from "../cards/ProfilesCard";
 
 const StudentsList = () => {
-	return <div>StudentsList</div>;
+	const { data: studentsData, isLoading } = useStudentListQuery(null);
+
+	return (
+		<div className="grid grid-cols-4 bg-white space-y-2 py-4 justify-items-center justify-evenly">
+			{isLoading ? (
+				<p>Loading...</p>
+			) : (
+				studentsData?.results?.map((profiles, index) => (
+					<ProfilesCard
+						key={index}
+						firstName={profiles.user.first_name}
+						lastName={profiles.user.last_name}
+						pfpImage={profiles.profile_picture}
+					/>
+				))
+			)}
+		</div>
+	);
 };
 
 export default StudentsList;
