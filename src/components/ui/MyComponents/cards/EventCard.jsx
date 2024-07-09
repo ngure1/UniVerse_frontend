@@ -95,7 +95,7 @@ const EventCard = ({
 	const handleBookmark = useBookmark(eventId);
 	const handleUnbookmark = useUnbookmark(eventId);
 
-	const handleFollow = useFollowToggle(1);
+	const handleFollow = useFollowToggle(profileId, isFollowingCreator);
 
 	const handleThumbsUp = () => {
 		if (!liked) {

@@ -74,7 +74,7 @@ const profileApiSlice = baseApi.injectEndpoints({
 				method: "POST",
 				body: { followed_id },
 			}),
-			invalidatesTags: ["PROFILE", "POSTS"],
+			invalidatesTags: ["PROFILE", "POSTS", "EVENTS"],
 		}),
 
 		// * fetch posts for the logged in user
