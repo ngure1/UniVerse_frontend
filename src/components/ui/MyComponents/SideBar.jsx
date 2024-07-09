@@ -28,7 +28,7 @@ const SideBar = ({ className }) => {
 		{ Icon: Handshake, text: "Giving Back", href: "/support" },
 		{ Icon: Newspaper, text: "News & Announcements", href: "/news" },
 		{ Icon: Users, text: "Profiles", href: "/profiles" },
-		{ Icon: CircleUserRound, text: "User Profile", href: "/profile" },
+		{ Icon: CircleUserRound, text: "User Profile", href: "/userprofile" },
 		// { Icon: LogOut, text: "Logout" },
 	];
 
