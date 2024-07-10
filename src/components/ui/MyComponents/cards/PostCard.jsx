@@ -198,4 +198,6 @@ const PostCard = React.forwardRef(
 	},
 );
 
+PostCard.displayName = "PostCard";
+
 export default PostCard;
