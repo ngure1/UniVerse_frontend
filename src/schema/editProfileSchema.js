@@ -6,6 +6,9 @@ export const editProfileSchema = z.object({
 	is_alumni: z.boolean(),
 	is_lecturer: z.boolean(),
 	bio: z.string().optional(),
+	course: z.string().optional(),
+	job_role: z.string().optional(),
+	organization: z.string().optional(),
 	phone_number: z
 		.string()
 		.refine((val) => val === "" || phoneNumberValidationFunction(val), {

@@ -17,6 +17,8 @@ const StudentsList = () => {
 						firstName={profiles.user.first_name}
 						lastName={profiles.user.last_name}
 						pfpImage={profiles.profile_picture}
+						jobDescription={profiles.course}
+						company={profiles.organization}
 					/>
 				))
 			)}
