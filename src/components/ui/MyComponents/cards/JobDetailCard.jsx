@@ -19,7 +19,7 @@ import {
 	SquareArrowOutUpRight,
 } from "lucide-react";
 
-const JobCard = ({
+const JobDetailCard = ({
 	companyLogo,
 	companyName,
 	jobTitle,
@@ -130,4 +130,4 @@ const JobCard = ({
 	);
 };
 
-export default JobCard;
+export default JobDetailCard;
