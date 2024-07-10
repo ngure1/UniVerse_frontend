@@ -1,7 +1,7 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { editProfileSchema } from "@/schema/editProfileSchema";
-import { useForm } from "react-hook-form";
+import { useForm, watch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
 	Form,
@@ -31,6 +31,9 @@ const ProfileForm = () => {
 			is_alumni: false,
 			is_lecturer: false,
 			bio: "",
+			course: "",
+			job_role: "",
+			organization: "",
 			phone_number: "",
 			linked_in_url: "http://127.0.0.1:3000/profile",
 		},
@@ -45,6 +48,9 @@ const ProfileForm = () => {
 				is_lecturer: profileData.is_lecturer,
 				bio: profileData.bio,
 				phone_number: profileData.phone_number,
+				course: profileData.course,
+				job_role: profileData.job_role,
+				organization: profileData.organization,
 				// linked_in_url: profileData.linked_in_url,
 			});
 		}
@@ -56,6 +62,7 @@ const ProfileForm = () => {
 
 	// * create profile mutation
 	const [profile, { isLoading, error }] = useProfileCreateMutation();
+	const isStudentChecked = form.watch("is_student");
 
 	const onSubmit = (data) => {
 		console.log(form.formState.errors);
@@ -159,6 +166,56 @@ const ProfileForm = () => {
 						/>
 					</div>
 
+					{isStudentChecked && (
+						<FormField
+							control={form.control}
+							name="course"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Course</FormLabel>
+									<FormControl>
+										<Input
+											placeholder="BSc. Computer Science\ Msc....\ PhD..."
+											{...field}
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+					)}
+					<FormField
+						control={form.control}
+						name="organization"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Organization</FormLabel>
+								<FormControl>
+									<Input
+										placeholder="Place of work"
+										{...field}
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="job_role"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Job Role</FormLabel>
+								<FormControl>
+									<Input
+										placeholder="Job Role"
+										{...field}
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
 					<FormField
 						control={form.control}
 						name="bio"
