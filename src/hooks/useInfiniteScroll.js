@@ -1,4 +1,3 @@
-// useInfiniteScroll.js
 import { useState, useEffect, useRef, useCallback } from "react";
 
 const useInfiniteScroll = (query, queryArgs = {}) => {
@@ -9,16 +8,18 @@ const useInfiniteScroll = (query, queryArgs = {}) => {
 	});
 	const [items, setItems] = useState([]);
 	const observer = useRef();
+	const [hasNextPage, setHasNextPage] = useState(true);
 
 	useEffect(() => {
 		if (data) {
 			setItems((prevItems) => [...prevItems, ...data.results]);
+			setHasNextPage(data.hasNextPage);
 		}
 	}, [data]);
 
 	const lastItemRef = useCallback(
 		(node) => {
-			if (isFetching) return;
+			if (isFetching || !hasNextPage) return;
 			if (observer.current) observer.current.disconnect();
 
 			observer.current = new IntersectionObserver((entries) => {
@@ -30,7 +31,7 @@ const useInfiniteScroll = (query, queryArgs = {}) => {
 
 			if (node) observer.current.observe(node);
 		},
-		[isFetching],
+		[isFetching, hasNextPage],
 	);
 
 	return {
