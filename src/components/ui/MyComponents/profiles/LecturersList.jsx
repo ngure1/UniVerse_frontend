@@ -17,6 +17,8 @@ const LecturersList = () => {
 						firstName={profiles.user.first_name}
 						lastName={profiles.user.last_name}
 						pfpImage={profiles.profile_picture}
+						jobDescription={profiles.job_role}
+						company={profiles.organization}
 					/>
 				))
 			)}
