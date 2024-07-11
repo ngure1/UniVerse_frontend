@@ -11,7 +11,7 @@ import { GraduationCap, CodeXml, Library, Briefcase } from "lucide-react";
 const ProfilesTabs = () => {
 	return (
 		<Tabs
-			defaultValue="profiles"
+			defaultValue="dptStars"
 			className="w-[89%] min-h-screen">
 			<TabsList className="justify-start gap-6 w-full bg-inherit">
 				<TabsTrigger

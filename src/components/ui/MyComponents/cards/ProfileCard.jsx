@@ -88,7 +88,7 @@ const ProfileCard = ({
 				</div>
 				<div className="flex flex-col w- items-start gap-[1.5rem]">
 					<div className="max-w-[31.25rem]">
-						<div className="flex gap-[1.75rem] items-center">
+						<div className="flex gap-2 items-center">
 							<p>
 								{first_name} {last_name}
 							</p>
