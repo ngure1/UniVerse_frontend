@@ -3,10 +3,12 @@ import React from "react";
 import Image from "next/image";
 import { Element } from "react-scroll";
 import { ButtonsAlertDialog } from "@/components/ui/MyComponents/ButtonsAlertDialog";
-import googleImage from "@/../public/images/googleLogo.png";
-import videoBg from "@/../public/images/jkuat.JPG";
-import Jkuat from "@/../public/images/image 1.png";
 import { ContinueWithGoogle } from "../../../utils/continue-with-google";
+
+// Using require to import images
+const googleImage = require("/public/images/googleLogo.png");
+const videoBg = require("/public/images/jkuat.JPG");
+const Jkuat = require("/public/images/image 1.png");
 
 const Hero = () => {
 	return (
@@ -29,7 +31,7 @@ const Hero = () => {
 
 			<div className="backdrop-blur-sm gap-5 flex flex-col p-5 rounded-sm border-2 border-white">
 				<div className="z-[1] heading-1 text-white text-center">
-					<h1 className="heading-1  text-center self-stretch text-[#00BD9D]">
+					<h1 className="heading-1 text-center self-stretch text-[#00BD9D]">
 						UniVerse
 					</h1>
 

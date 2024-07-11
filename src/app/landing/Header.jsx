@@ -5,7 +5,8 @@ import HeaderDropdown from "@/components/ui/MyComponents/HeaderDropdown";
 import { ButtonsAlertDialog } from "@/components/ui/MyComponents/ButtonsAlertDialog";
 import Image from "next/image";
 import { default as NextLink } from "next/link";
-import Logo from "@/../public/images/logo.png";
+
+const Logo = require("/public/images/logo.png");
 
 const Header = () => {
 	return (
