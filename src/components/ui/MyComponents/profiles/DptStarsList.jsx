@@ -20,6 +20,7 @@ const DptStarsList = () => {
 						lastName={profiles.user.last_name}
 						email={profiles.user.email}
 						bio={profiles.bio}
+						isVerified={profiles.is_verified}
 						isAlumni={profiles.is_alumni}
 						isLecturer={profiles.is_lecturer}
 						isStudent={profiles.is_student}

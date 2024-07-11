@@ -16,6 +16,7 @@ const ProfilesCard = ({
 	isStudent,
 	isAlumni,
 	isLecturer,
+	isVerified,
 	profilesId,
 }) => {
 	return (
@@ -34,21 +35,31 @@ const ProfilesCard = ({
 					<p className="body-md no-underline hover:underline">
 						{firstName} {lastName}
 					</p>
-
-					<VerifiedIcon
-						fill="#00B595"
-						color="#ffff"
-						size={24}
-					/>
+					{isVerified && (
+						<VerifiedIcon
+							fill="#00B595"
+							color="#ffff"
+							size={24}
+						/>
+					)}
 				</div>
 			</Link>
 			<p className="text-sm muted">{email}</p>
-			{isAlumni && <p className="text-sm muted">Alumni</p>}
-			{isStudent && <p className="text-sm muted">Student</p>}
-			{isLecturer && <p className="text-sm muted">Lecturer</p>}
-			<p className="text-sm">{jobDescription}</p>
-			<p className="text-sm">{company}</p>
-			<p className="text-sm muted">{bio}</p>
+			{company && jobDescription ? (
+				<>
+					<p className="text-sm">{jobDescription}</p>
+					<p className="text-sm">{company}</p>
+				</>
+			) : bio ? (
+				<p className="text-sm muted overflow-auto h-[25%]">{bio}</p>
+			) : (
+				<>
+					{isAlumni && <p className="text-sm muted">Alumni</p>}
+					{isStudent && <p className="text-sm muted">Student</p>}
+					{isLecturer && <p className="text-sm muted">Lecturer</p>}
+				</>
+			)}
+
 			<Button
 				variant="outline"
 				className="gap-2 rounded-[2rem] absolute bottom-3">
