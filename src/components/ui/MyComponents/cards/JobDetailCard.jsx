@@ -18,41 +18,30 @@ import {
 	ListChecks,
 	SquareArrowOutUpRight,
 } from "lucide-react";
+import { formatCreatedAt } from "@/lib/utils";
+import AvatarProfile from "../profile/AvatarProfile";
 
 const JobDetailCard = ({
-	companyLogo,
+	className,
 	companyName,
 	jobTitle,
 	jobLocation,
 	date,
 	jobType,
-	employeeNo,
 	skillSet,
 	companyDescription,
 	jobDescription,
-	responsibilities,
 	qualifications,
 	applicationProcess,
+	pfpImage,
+	media,
 }) => {
 	return (
-		<Card className="xl:w-1/2 md:w-3/4 shadow-md p-[2rem]]">
+		<Card className={`${className} w-full shadow-md p-[2rem]]`}>
 			<CardHeader>
-				<div className="flex items-center">
-					<Image
-						src={companyLogo}
-						alt="Post Image"
-						width={150}
-						height={150}
-						className="cursor-pointer max-sm:w-[100px] sm:w-[150px]"
-					/>
-					<p className="sub-heading-3">{companyName}</p>
-				</div>
 				<CardTitle>{jobTitle}</CardTitle>
-				<div className="flex gap-[0.5rem]">
-					<p className="text-sm">{jobLocation}</p>
-					<p>.</p>
-					<p className="text-sm">{date}</p>
-				</div>
+				<p className="sub-heading-4">{companyName}</p>
+				<p className="text-sm">{date}</p>
 				<CardDescription>
 					<div className="flex gap-1">
 						<BriefcaseBusiness />
@@ -60,7 +49,7 @@ const JobDetailCard = ({
 					</div>
 					<div className="flex gap-1">
 						<Building />
-						<p className="inline-flex gap-1">{employeeNo}</p>
+						<p className="inline-flex gap-1">{jobLocation}</p>
 					</div>
 					<div className="flex gap-1">
 						<ListChecks />
@@ -74,15 +63,18 @@ const JobDetailCard = ({
 					<div className="border shadow-md p-[1rem] space-y-4">
 						<p className="sub-heading-3">Description</p>
 						<p>{jobDescription}</p>
-
-						{/* <div className="border shadow-md p-[1rem]"> */}
-						<p className="sub-heading-3">Responsibilities</p>
-						<p>{responsibilities}</p>
-						{/* </div> */}
 						<p className="sub-heading-3">Qualifications</p>
 						<p>{qualifications}</p>
 						<p className="sub-heading-3">How to Apply</p>
 						<p>{applicationProcess}</p>
+						<div className="rounded-[0.25rem] h-[20rem] w-full relative">
+							<Image
+								src={media}
+								alt="Post Image"
+								layout="fill"
+								objectFit="cover"
+							/>
+						</div>
 					</div>
 				</div>
 				<div className="mt-[0.75rem] flex gap-[2rem]">
@@ -106,13 +98,10 @@ const JobDetailCard = ({
 						About The Company
 					</p>
 					<div className="flex justify-between items-center">
-						<div className="flex items-center">
-							<Image
-								src={companyLogo}
-								alt="Post Image"
-								width={150}
-								height={150}
-								className="cursor-pointer max-sm:w-[100px] sm:w-[150px]"
+						<div className="flex items-center gap-2">
+							<AvatarProfile
+								className="w-[5rem] h-[5rem]"
+								pfpImage={pfpImage}
 							/>
 							<p className="sub-heading-3">{companyName}</p>
 						</div>
@@ -123,7 +112,7 @@ const JobDetailCard = ({
 							FOLLOW
 						</Button>
 					</div>
-					<p>{companyDescription}</p>
+					<p className="mt-[0.5rem]">{companyDescription}</p>
 				</div>
 			</CardFooter>
 		</Card>

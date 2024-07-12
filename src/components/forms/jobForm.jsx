@@ -10,6 +10,13 @@ import {
 	FormMessage,
 	FormDescription,
 } from "@/components/ui/shadcnComponents/form";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/shadcnComponents/select";
 import { zodResolver } from "@hookform/resolvers/zod";
 import jobFormSchema from "@/schema/jobSchema";
 import { Input } from "@/components/ui/shadcnComponents/input";
@@ -19,8 +26,18 @@ import { toast } from "react-toastify";
 import { useDialog } from "@/hooks/responsiveDialog";
 import Image from "next/image";
 import { ImageIcon } from "lucide-react";
+import {
+	useJobCreateMutation,
+	useJobDetailsQuery,
+	useJobUpdateMutation,
+} from "@/redux/features/jobs/jobsApiSlice";
 
-const JobForm = () => {
+const JobForm = ({ id }) => {
+	const isEditMode = !!id;
+	const { data: job } = useJobDetailsQuery(
+		{ job_id: id },
+		{ skip: !isEditMode },
+	);
 	const [previewUrl, setPreviewUrl] = useState(null);
 
 	const form = useForm({
@@ -40,10 +57,72 @@ const JobForm = () => {
 		},
 	});
 	const mediaRef = form.register("media");
+
+	useEffect(() => {
+		if (job) {
+			form.reset({
+				job_title: job.job_title,
+				job_description: job.job_description,
+				job_skills: job.job_skills,
+				company: job.company,
+				job_qualifications: job.job_qualifications,
+				job_type: job.job_type,
+				application_deadline: job.application_deadline,
+				application_procedure: job.application_procedure,
+				address: job.address,
+				application_link: job.application_link,
+			});
+			setPreviewUrl(job.media);
+		}
+	}, [event, form]);
+
+	const [createJob, { isLoading: isCreating }] = useJobCreateMutation();
+	const [updateJob, { isLoading: isUpdating }] = useJobUpdateMutation();
+
+	const isLoading = isCreating || isUpdating;
+
+	const onSubmit = (data) => {
+		const toastId = toast.loading(
+			isEditMode ? "Updating your job" : "Creating your job",
+			{
+				theme: "colored",
+				autoClose: false,
+			},
+		);
+
+		const submitAction = isEditMode
+			? updateJob({ job_id: id, ...data })
+			: createJob(data);
+
+		submitAction
+			.unwrap()
+			.then(() => {
+				toast.update(toastId, {
+					render: isEditMode
+						? "Job updated successfully"
+						: "Job created successfully",
+					type: "success",
+					isLoading: false,
+					autoClose: 5000,
+				});
+				closePostDialog();
+			})
+			.catch(() => {
+				toast.update(toastId, {
+					render: "Something went wrong with your job",
+					type: "error",
+					isLoading: false,
+					autoClose: 5000,
+				});
+			});
+	};
+
+	const { handleCloseDialog: closePostDialog } = useDialog("job");
+
 	return (
 		<Form {...form}>
 			<form
-				// onSubmit={form.handleSubmit(onSubmit)}
+				onSubmit={form.handleSubmit(onSubmit)}
 				encType="multipart/form-data"
 				className="space-y-[1.5rem] max-h-[37rem] overflow-auto pr-5">
 				<div className="space-y-4 h-[100%]">
@@ -155,13 +234,29 @@ const JobForm = () => {
 						name="job_type"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Job Type</FormLabel>
-								<FormControl>
-									<Input
-										placeholder="Remote/ On-site"
-										{...field}
-									/>
-								</FormControl>
+								<FormLabel className="required">
+									Job Type
+								</FormLabel>
+								<Select
+									onValueChange={field.onChange}
+									value={field.value}>
+									<FormControl>
+										<SelectTrigger>
+											<SelectValue placeholder="Select a job type" />
+										</SelectTrigger>
+									</FormControl>
+									<SelectContent>
+										<SelectItem value="online">
+											Online
+										</SelectItem>
+										<SelectItem value="physical">
+											Physical
+										</SelectItem>
+										<SelectItem value="both">
+											Online/ Physical
+										</SelectItem>
+									</SelectContent>
+								</Select>
 								<FormMessage />
 							</FormItem>
 						)}
@@ -272,11 +367,9 @@ const JobForm = () => {
 						variant="secondary"
 						type="submit"
 						className="w-full"
-						// disabled={isLoading}
-					>
+						disabled={isLoading}>
 						{" "}
-						Post
-						{/* {isEditMode ? "Update Event" : "Create Event"} */}
+						{isEditMode ? "Update Job" : "Create Job"}
 					</Button>
 				</div>
 			</form>
