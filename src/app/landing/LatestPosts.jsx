@@ -1,11 +1,13 @@
 "use client";
 import React from "react";
 import PostCard from "./PostCard";
-import Card1 from "@/../public/images/Card1.png";
-import Card2 from "@/../public/images/Card2.png";
-import Card3 from "@/../public/images/Card3.png";
-import Card4 from "@/../public/images/Card4.png";
 import { Element } from "react-scroll";
+
+const Card1 = require("@/../public/images/Card1.png");
+const Card2 = require("@/../public/images/Card2.png");
+const Card3 = require("@/../public/images/Card3.png");
+const Card4 = require("@/../public/images/Card4.png");
+
 const LatestPosts = () => {
 	return (
 		<Element

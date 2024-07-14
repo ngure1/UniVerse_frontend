@@ -2,9 +2,10 @@
 import React from "react";
 import Image from "next/legacy/image";
 import Link from "next/link";
-import Jhub from "@/../public/images/JHUB Africa 1.png";
-import Jkuat from "@/../public/images/image 1.png";
 import { Element } from "react-scroll";
+
+const Jhub = require("@/../public/images/JHUB Africa 1.png");
+const Jkuat = require("@/../public/images/image 1.png");
 
 const Partners = () => {
 	return (

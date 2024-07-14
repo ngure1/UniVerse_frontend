@@ -21,13 +21,19 @@ import {
 } from "@/components/ui/shadcnComponents/dialog";
 import EventForm from "@/components/forms/eventForm";
 import { formatCreatedAt } from "@/lib/utils";
+import useInfiniteScroll from "@/hooks/useInfiniteScroll";
 
 const Home = () => {
-	const { data, isLoading } = usePostListQuery(1);
 	const { data: profileData } = useProfile();
-	console.log(data);
 	const { isDialogOpen, handleOpenDialog, handleCloseDialog } =
 		useDialog("post");
+	const {
+		items: posts,
+		isLoading,
+		error,
+		lastItemRef,
+		isFetchingNextPage,
+	} = useInfiniteScroll(usePostListQuery);
 
 	return (
 		<div>
@@ -101,9 +107,12 @@ const Home = () => {
 				{isLoading ? (
 					<PostSkeleton />
 				) : (
-					data?.results?.map((post, index) => (
+					posts.map((post, index) => (
 						<PostCard
-							key={index}
+							key={post.id}
+							ref={
+								index === posts.length - 1 ? lastItemRef : null
+							}
 							postId={post.id}
 							profileId={post.author.id}
 							first_name={post.author.user.first_name}
@@ -120,11 +129,11 @@ const Home = () => {
 							title={post.title}
 							content={post.content}
 							postImage={post.media}
-							// isOwner
 							size="large"
 						/>
 					))
 				)}
+				{isFetchingNextPage && <PostSkeleton />}
 			</div>
 
 			<RightSidebar className="fixed top-[6rem] bottom-0 right-0 bg-gray-200 z-30 " />

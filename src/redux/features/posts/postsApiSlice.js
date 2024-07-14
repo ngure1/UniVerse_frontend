@@ -23,10 +23,16 @@ const postApiSlice = baseApi.injectEndpoints({
 
 		// * listing all posts
 		postList: builder.query({
-			query: ({}) => ({
-				url: "/posts/",
+			query: ({ page }) => ({
+				url: `/posts/?page=${page}`,
 				method: "GET",
 			}),
+			transformResponse: (response) => {
+				return {
+					results: response.results,
+					hasNextPage: !!response.next,
+				};
+			},
 			providesTags: ["POSTS"],
 		}),
 

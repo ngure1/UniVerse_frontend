@@ -18,6 +18,7 @@ const PostsList = ({ id, is_owner }) => {
 						postId={post.id}
 						first_name={post.author.user.first_name}
 						last_name={post.author.user.last_name}
+						profileId={post.author.id}
 						pfpImage={post.author.profile_picture}
 						isVerified={post.author.is_verified}
 						isLiked={post.is_liked}
@@ -32,7 +33,7 @@ const PostsList = ({ id, is_owner }) => {
 						postImage={post.media}
 						smallImage
 						forProfile
-						isOwner={true}
+						isOwner={is_owner}
 					/>
 				))
 			)}

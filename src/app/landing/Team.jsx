@@ -1,13 +1,14 @@
 "use client";
 import React from "react";
 import TeamCard from "./TeamCard";
-import Nderu from "@/../public/images/profiles/Nderu.jpeg";
-import Jose from "@/../public/images/profiles/Jose.jpeg";
-import Maurice from "@/../public/images/profiles/Maurice.jpeg";
-import Hilda from "@/../public/images/profiles/Hilda.jpeg";
-import Florence from "@/../public/images/profiles/Florence.jpeg";
-import Boni from "@/../public/images/profiles/Boni.jpeg";
 import { Element } from "react-scroll";
+
+const Nderu = require("@/../public/images/profiles/Nderu.jpeg");
+const Jose = require("@/../public/images/profiles/Jose.jpeg");
+const Maurice = require("@/../public/images/profiles/Maurice.jpeg");
+const Hilda = require("@/../public/images/profiles/Hilda.jpeg");
+const Florence = require("@/../public/images/profiles/Florence.jpeg");
+const Boni = require("@/../public/images/profiles/Boni.jpeg");
 
 const Team = () => {
 	const teamMembers = [
