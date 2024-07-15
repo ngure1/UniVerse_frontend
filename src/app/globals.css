@@ -214,6 +214,14 @@
 	.active-sidebar {
 		@apply hover:bg-accent hover:text-accent-foreground focus:bg-blue-950 focus:rounded-2xl focus:text-gray-200;
 	}
+
+	.hashtag {
+		@apply text-blue-500;
+	}
+
+	.link {
+		@apply text-blue-500 cursor-pointer underline;
+	}
 }
 @media (max-width: 640px) {
 	* {
