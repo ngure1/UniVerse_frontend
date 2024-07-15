@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import JobDetailCard from "@/components/ui/MyComponents/cards/JobDetailCard";
 import Logo from "@/../public/images/logo.png";
 import JobForm from "@/components/forms/jobForm";
@@ -22,6 +22,9 @@ const Jobs = () => {
 	const { data: jobData, isLoading } = useJobsListQuery(1);
 	console.log(jobData);
 	const { data: profileData } = useProfile();
+
+	const [showDetail, setShowDetail] = useState(false);
+	const [jobId, setJobId] = useState(null);
 
 	return (
 		<div>
@@ -51,7 +54,7 @@ const Jobs = () => {
 			</Card>
 
 			<div className="flex gap-2">
-				<div className="w-[40%]">
+				<div className="w-[40%] flex flex-col gap-2 border-r-4 border-black">
 					{isLoading ? (
 						<p>Loading...</p>
 					) : (
@@ -64,36 +67,16 @@ const Jobs = () => {
 								company={job.company}
 								address={job.address}
 								job_type={job.job_type}
+								onClick={() => {
+									setShowDetail(true);
+									setJobId(job.id);
+								}}
 							/>
 						))
 					)}
 				</div>
 
-				<div className="w-[50%]">
-					{isLoading ? (
-						<p>Loading...</p>
-					) : (
-						jobData?.results?.map((job, index) => (
-							<JobDetailCard
-								key={index}
-								className=""
-								companyName={job.company}
-								jobTitle={job.job_title}
-								jobLocation={job.address}
-								date={formatCreatedAt(job.created_at)}
-								jobType={job.job_type}
-								skillSet={job.job_skills}
-								jobDescription={job.job_description}
-								qualifications={job.job_qualifications}
-								applicationProcess={job.application_procedure}
-								pfpImage={job.author.profile_picture}
-								media={job.media}
-								companyDescription="IntelliDJEA is a forward-thinking technology company specializing in innovative solutions and cutting-edge software development. 
-								Our mission is to transform industries by delivering high-quality, impactful technology products that drive efficiency and growth."
-							/>
-						))
-					)}
-				</div>
+				{showDetail && <JobDetailCard id={jobId} />}
 			</div>
 		</div>
 	);
