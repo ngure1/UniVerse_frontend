@@ -17,11 +17,19 @@ import {
 } from "@/components/ui/shadcnComponents/dialog";
 import EventForm from "@/components/forms/eventForm";
 import { Button } from "@/components/ui/shadcnComponents/button";
+import useInfiniteScroll from "@/hooks/useInfiniteScroll";
 
 const Events = () => {
-	const { data: eventData, isLoading } = useEventsListQuery(1);
+	const { data: eventData } = useEventsListQuery(1);
 	console.log(eventData);
 	const { data: profileData } = useProfile();
+	const {
+		items: events,
+		isLoading,
+		error,
+		lastItemRef,
+		isFetchingNextPage,
+	} = useInfiniteScroll(useEventsListQuery);
 
 	return (
 		<div className="flex flex-col gap-y-4">
@@ -55,7 +63,8 @@ const Events = () => {
 			) : (
 				eventData?.results?.map((event, index) => (
 					<EventCard
-						key={index}
+						key={event.id}
+						ref={index === events.length - 1 ? lastItemRef : null}
 						eventId={event.id}
 						first_name={event.author.user.first_name}
 						last_name={event.author.user.last_name}
@@ -82,6 +91,8 @@ const Events = () => {
 					/>
 				))
 			)}
+			{isFetchingNextPage && <EventSkeleton />}
+
 			<RightSidebar className="fixed top-[6rem] bottom-0 right-0 bg-gray-200 z-30 " />
 		</div>
 	);
