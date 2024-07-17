@@ -32,7 +32,21 @@ const PostCard = React.forwardRef(
 		},
 		ref,
 	) => {
+		const highlightHashtags = (text) => {
+			return text.replace(/(#\w+)/g, '<span class="hashtag">$1</span>');
+		};
+
+		const highlightLinks = (text) => {
+			return text.replace(
+				/(\bhttps?:\/\/[^\s]+)/g,
+				'<span class="link">$1</span>',
+			);
+		};
+
 		const sanitizedContent = DOMPurify.sanitize(content);
+		const highlightedContent = highlightLinks(
+			highlightHashtags(sanitizedContent),
+		);
 		const containsHtml = /<\/?[a-z][\s\S]*>/i.test(content);
 
 		const [isExpanded, setIsExpanded] = useState(false);
@@ -48,7 +62,7 @@ const PostCard = React.forwardRef(
 			return text.substring(0, max_length) + ".... ";
 		};
 
-		const truncatedContent = getTruncatedContent(sanitizedContent);
+		const truncatedContent = getTruncatedContent(highlightedContent);
 
 		return (
 			<Card
@@ -84,7 +98,7 @@ const PostCard = React.forwardRef(
 						) : null}
 						<div
 							dangerouslySetInnerHTML={{
-								__html: sanitizedContent,
+								__html: highlightedContent,
 							}}
 							className="whitespace-pre-wrap"
 						/>
@@ -123,7 +137,7 @@ const PostCard = React.forwardRef(
 									<div
 										dangerouslySetInnerHTML={{
 											__html: isExpanded
-												? sanitizedContent
+												? highlightedContent
 												: truncatedContent,
 										}}
 										className="inline whitespace-pre-wrap"
@@ -144,7 +158,7 @@ const PostCard = React.forwardRef(
 									<div
 										dangerouslySetInnerHTML={{
 											__html: isExpanded
-												? sanitizedContent
+												? highlightedContent
 												: truncatedContent,
 										}}
 										className="whitespace-pre-wrap inline"
