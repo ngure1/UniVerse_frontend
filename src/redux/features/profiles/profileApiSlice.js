@@ -85,10 +85,31 @@ const profileApiSlice = baseApi.injectEndpoints({
 
 		// * fetch posts for the logged in user
 		postsMe: builder.query({
-			query: () => ({
-				url: "/posts/me/",
+			query: ({ page }) => ({
+				url: `/posts/me/?page=${page}`,
 				method: "GET",
 			}),
+			transformResponse: (response) => {
+				return {
+					results: response.results,
+					hasNextPage: !!response.next,
+				};
+			},
+			providesTags: ["POSTS"],
+		}),
+
+		// users post listing
+		postsUserList: builder.query({
+			query: ({ user_id, page }) => ({
+				url: `/posts/user/${user_id}/?page=${page}`,
+				method: "GET",
+			}),
+			transformResponse: (response) => {
+				return {
+					results: response.results,
+					hasNextPage: !!response.next,
+				};
+			},
 			providesTags: ["POSTS"],
 		}),
 

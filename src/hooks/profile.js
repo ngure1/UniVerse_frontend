@@ -44,39 +44,45 @@ export const useBookmarksMe = () => {
 };
 
 // Custom hook to abstract the conditional fetching logic
-export const useProfilePosts = (id) => {
-	const myPosts = usePostsMe();
-	const userPost = usePostsUserListQuery({ user_id: id });
+export const useProfilePosts = ({ id, page }) => {
+	const myPosts = usePostsMeQuery({ page });
+	const userPosts = usePostsUserListQuery({ user_id: id, page });
 
-	const [userPosts, setUserPosts] = useState({
+	const [userPostsState, setUserPostsState] = useState({
 		data: null,
 		isLoading: true,
 		error: null,
+		isFetching: false,
 	});
 
 	useEffect(() => {
 		if (id) {
-			setUserPosts({
-				data: userPost.data,
-				isLoading: userPost.isLoading,
-				error: userPost.error,
+			setUserPostsState({
+				data: userPosts.data,
+				isLoading: userPosts.isLoading,
+				error: userPosts.error,
+				isFetching: userPosts.isFetching,
 			});
 		} else {
-			setUserPosts({
+			setUserPostsState({
 				data: myPosts.data,
 				isLoading: myPosts.isLoading,
 				error: myPosts.error,
+				isFetching: myPosts.isFetching,
 			});
 		}
 	}, [
 		id,
-		userPost.data,
-		userPost.isLoading,
-		userPost.error,
+		page,
+		userPosts.data,
+		userPosts.isLoading,
+		userPosts.error,
+		userPosts.isFetching,
 		myPosts.data,
 		myPosts.isLoading,
 		myPosts.error,
+		myPosts.isFetching,
 	]);
 
-	return userPosts;
+	return userPostsState;
 };

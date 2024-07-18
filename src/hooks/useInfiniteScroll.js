@@ -3,9 +3,9 @@ import { useState, useEffect, useRef, useCallback } from "react";
 const useInfiniteScroll = (query, queryArgs = {}) => {
 	const [page, setPage] = useState(1);
 	const { data, error, isLoading, isFetching } = query({
-		page,
 		...queryArgs,
-	});
+		page,
+	}); // Pass id and page
 	const [items, setItems] = useState([]);
 	const observer = useRef();
 	const [hasNextPage, setHasNextPage] = useState(true);
@@ -24,7 +24,6 @@ const useInfiniteScroll = (query, queryArgs = {}) => {
 
 			observer.current = new IntersectionObserver((entries) => {
 				if (entries[0].isIntersecting) {
-					console.log("fetching next page");
 					setPage((prevPage) => prevPage + 1);
 				}
 			});

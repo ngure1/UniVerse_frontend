@@ -125,15 +125,6 @@ const postApiSlice = baseApi.injectEndpoints({
 			},
 			invalidatesTags: ["POSTS"],
 		}),
-
-		// users post listing
-		postsUserList: builder.query({
-			query: ({ user_id }) => ({
-				url: `/posts/user/${user_id}/`,
-				method: "GET",
-			}),
-			providesTags: ["POSTS"],
-		}),
 	}),
 });
 
