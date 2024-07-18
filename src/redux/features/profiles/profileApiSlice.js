@@ -114,10 +114,30 @@ const profileApiSlice = baseApi.injectEndpoints({
 		}),
 
 		postsBookmarksMe: builder.query({
-			query: () => ({
-				url: "/posts/bookmarks/me/",
+			query: ({ page }) => ({
+				url: `/posts/bookmarks/me/?page=${page}`,
 				method: "GET",
 			}),
+			transformResponse: (response) => {
+				return {
+					results: response.results,
+					hasNextPage: !!response.next,
+				};
+			},
+			providesTags: ["POSTS"],
+		}),
+
+		postsBookmarksUser: builder.query({
+			query: ({ page, user_id }) => ({
+				url: `/posts/bookmarks/user/${user_id}/?page=${page}`,
+				method: "GET",
+			}),
+			transformResponse: (response) => {
+				return {
+					results: response.results,
+					hasNextPage: !!response.next,
+				};
+			},
 			providesTags: ["POSTS"],
 		}),
 
@@ -142,6 +162,7 @@ export const {
 	useProfileAddressCreateMutation,
 	usePostsMeQuery,
 	usePostsBookmarksMeQuery,
+	usePostsBookmarksUserQuery,
 	useProfileAddressRetrieveQuery,
 
 	//profile detail

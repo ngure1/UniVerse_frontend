@@ -76,7 +76,10 @@ const ProfileTabs = ({ user_id, is_owner }) => {
 					<EducationList />
 				</TabsContent>
 				<TabsContent value="savedPosts">
-					<SavedPosts />
+					<SavedPosts
+						id={user_id}
+						is_owner={is_owner}
+					/>
 				</TabsContent>
 			</div>
 		</Tabs>
