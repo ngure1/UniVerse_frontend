@@ -120,7 +120,7 @@ const EventForm = ({ id, article }) => {
 				<form
 					onSubmit={form.handleSubmit(onSubmit)}
 					encType="multipart/form-data"
-					className="space-y-[1.5rem] max-h-[37rem] overflow-auto pr-5">
+					className="space-y-[1.5rem] max-h-[37rem] overflow-auto pr-5 pl-1">
 					<div className="space-y-4 h-[100%]">
 						{previewUrl ? (
 							<div className="min-h-[15rem] w-full relative">
