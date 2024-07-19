@@ -38,8 +38,8 @@ const Home = () => {
 	return (
 		<div>
 			<div className="flex flex-col gap-4">
-				<Card className="flex w-[58%] min-w-[33.25rem] py-[0.6rem] flex-col items-start rounded-[0.5rem] bg-white dark:bg-muted">
-					<div className="flex w-full m-2">
+				<Card className="flex xl:w-[58%] w-full xl:min-w-[33.25rem] py-[0.6rem] flex-col items-start rounded-[0.5rem] bg-white dark:bg-muted top-[7rem]">
+					<div className="flex w-full m-2 ">
 						<AvatarProfile
 							className="w-[3rem] h-[3rem]"
 							pfpImage={profileData?.profile_picture}
@@ -98,7 +98,7 @@ const Home = () => {
 								variant="ghost"
 								className="gap-1">
 								<NotepadText color="#855e1d" />
-								Write an article
+								Article
 							</Button>
 						</Link>
 					</div>
@@ -136,7 +136,7 @@ const Home = () => {
 				{isFetchingNextPage && <PostSkeleton />}
 			</div>
 
-			<RightSidebar className="fixed top-[6rem] bottom-0 right-0 bg-gray-200 z-30 " />
+			<RightSidebar className=" fixed top-[6rem] bottom-0 right-0 bg-gray-200 z-30 " />
 		</div>
 	);
 };
