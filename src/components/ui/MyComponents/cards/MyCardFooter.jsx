@@ -175,8 +175,6 @@ function CommentsComponent({ postId }) {
 							</span>
 							<VerifiedIcon
 								fill="#00B595"
-								color="#ffff"
-								className="dark:filter dark:invert"
 								size={20}
 							/>
 						</p>
