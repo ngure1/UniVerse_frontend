@@ -65,8 +65,8 @@ const ProfileTabs = ({ user_id, is_owner }) => {
 				</TabsContent>
 				<TabsContent value="events">
 					<EventsList
-					// id={user_id}
-					// is_owner={is_owner}
+						id={user_id}
+						is_owner={is_owner}
 					/>
 				</TabsContent>
 				<TabsContent value="work">

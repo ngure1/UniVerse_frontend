@@ -146,10 +146,30 @@ const eventApiSlice = baseApi.injectEndpoints({
 		}),
 
 		eventsMe: builder.query({
-			query: () => ({
-				url: "/events/me/",
+			query: ({ page }) => ({
+				url: `/events/me/?page=${page}`,
 				method: "GET",
 			}),
+			transformResponse: (response) => {
+				return {
+					results: response.results,
+					hasNextPage: !!response.next,
+				};
+			},
+			invalidatesTags: ["EVENTS"],
+		}),
+
+		eventsUserList: builder.query({
+			query: ({ user_id, page }) => ({
+				url: `/events/user/${user_id}/?page=${page}`,
+				method: "GET",
+			}),
+			transformResponse: (response) => {
+				return {
+					results: response.results,
+					hasNextPage: !!response.next,
+				};
+			},
 			invalidatesTags: ["EVENTS"],
 		}),
 	}),
@@ -168,4 +188,5 @@ export const {
 	useEventUpdateMutation,
 	useEventsDetailQuery,
 	useEventsMeQuery,
+	useEventsUserListQuery,
 } = eventApiSlice;
