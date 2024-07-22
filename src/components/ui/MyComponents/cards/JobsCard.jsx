@@ -3,15 +3,22 @@ import AvatarProfile from "../profile/AvatarProfile";
 import Link from "next/link";
 import { Separator } from "../../shadcnComponents/separator";
 
-const JobsCard = ({ job_title, company, address, job_type, pfpImage }) => {
+const JobsCard = ({
+	job_title,
+	company,
+	address,
+	job_type,
+	pfpImage,
+	onClick,
+}) => {
 	return (
 		<div>
-			<div className="flex gap-3  bg-white p-2 w-full">
+			<div className="flex gap-3  bg-white p-2 w-full rounded-sm">
 				<AvatarProfile
 					className="w-[5rem] h-[5rem]"
 					pfpImage={pfpImage}
 				/>
-				<div>
+				<div onClick={onClick}>
 					<p className="text-lg">{job_title}</p>
 					<p className="body-md">{company}</p>
 					<p className="text-sm">

@@ -4,6 +4,7 @@ import {
 	useProfileFollowToggleMutation,
 	usePostsMeQuery,
 	usePostsBookmarksMeQuery,
+	usePostsBookmarksUserQuery,
 } from "@/redux/features/profiles/profileApiSlice";
 import { toast } from "react-toastify";
 import { usePostsUserListQuery } from "@/redux/features/posts/postsApiSlice";
@@ -44,39 +45,92 @@ export const useBookmarksMe = () => {
 };
 
 // Custom hook to abstract the conditional fetching logic
-export const useProfilePosts = (id) => {
-	const myPosts = usePostsMe();
-	const userPost = usePostsUserListQuery({ user_id: id });
+export const useProfilePosts = ({ id, page }) => {
+	const myPosts = usePostsMeQuery({ page });
+	const userPosts = usePostsUserListQuery({ user_id: id, page });
 
-	const [userPosts, setUserPosts] = useState({
+	const [userPostsState, setUserPostsState] = useState({
 		data: null,
 		isLoading: true,
 		error: null,
+		isFetching: false,
 	});
 
 	useEffect(() => {
 		if (id) {
-			setUserPosts({
-				data: userPost.data,
-				isLoading: userPost.isLoading,
-				error: userPost.error,
+			setUserPostsState({
+				data: userPosts.data,
+				isLoading: userPosts.isLoading,
+				error: userPosts.error,
+				isFetching: userPosts.isFetching,
 			});
 		} else {
-			setUserPosts({
+			setUserPostsState({
 				data: myPosts.data,
 				isLoading: myPosts.isLoading,
 				error: myPosts.error,
+				isFetching: myPosts.isFetching,
 			});
 		}
 	}, [
 		id,
-		userPost.data,
-		userPost.isLoading,
-		userPost.error,
+		page,
+		userPosts.data,
+		userPosts.isLoading,
+		userPosts.error,
+		userPosts.isFetching,
 		myPosts.data,
 		myPosts.isLoading,
 		myPosts.error,
+		myPosts.isFetching,
 	]);
 
-	return userPosts;
+	return userPostsState;
+};
+
+// Custom hook to abstract the conditional fetching logic for bookmarked posts
+export const useBookmarkedPosts = ({ id, page }) => {
+	const myBookmarkedPosts = usePostsBookmarksMeQuery({ page });
+	const userBookmarkedPosts = usePostsBookmarksUserQuery({
+		user_id: id,
+		page,
+	});
+
+	const [bookmarkedPostsState, setBookmarkedPostsState] = useState({
+		data: null,
+		isLoading: true,
+		error: null,
+		isFetching: false,
+	});
+
+	useEffect(() => {
+		if (id) {
+			setBookmarkedPostsState({
+				data: userBookmarkedPosts.data,
+				isLoading: userBookmarkedPosts.isLoading,
+				error: userBookmarkedPosts.error,
+				isFetching: userBookmarkedPosts.isFetching,
+			});
+		} else {
+			setBookmarkedPostsState({
+				data: myBookmarkedPosts.data,
+				isLoading: myBookmarkedPosts.isLoading,
+				error: myBookmarkedPosts.error,
+				isFetching: myBookmarkedPosts.isFetching,
+			});
+		}
+	}, [
+		id,
+		page,
+		userBookmarkedPosts.data,
+		userBookmarkedPosts.isLoading,
+		userBookmarkedPosts.error,
+		userBookmarkedPosts.isFetching,
+		myBookmarkedPosts.data,
+		myBookmarkedPosts.isLoading,
+		myBookmarkedPosts.error,
+		myBookmarkedPosts.isFetching,
+	]);
+
+	return bookmarkedPostsState;
 };
