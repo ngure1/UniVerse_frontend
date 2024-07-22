@@ -95,7 +95,6 @@ const ProfileCard = ({
 							{is_verified && (
 								<VerifiedIcon
 									fill="#00B595"
-									color="#ffff"
 									size={24}
 								/>
 							)}

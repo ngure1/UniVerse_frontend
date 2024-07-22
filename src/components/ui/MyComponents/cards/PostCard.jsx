@@ -67,7 +67,7 @@ const PostCard = React.forwardRef(
 		return (
 			<Card
 				ref={ref}
-				className="flex w-[58%] min-w-[33.25rem] py-[0.3rem] flex-col items-start rounded-[0.5rem] bg-white dark:bg-muted">
+				className="flex xl:w-[58%] w-full xl:min-w-[33.25rem] py-[0.3rem] flex-col items-start rounded-[0.5rem] bg-white dark:bg-muted">
 				<MyCardHeader
 					postId={postId}
 					profileId={profileId}

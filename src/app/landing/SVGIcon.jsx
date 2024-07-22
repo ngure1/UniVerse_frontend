@@ -14,8 +14,7 @@ export const LikeSVG = () => {
 			strokeLinecap="round"
 			strokeLinejoin="round"
 			fill="#00B595"
-			color="#00B595"
-			className="dark:filter dark:invert">
+			color="#00B595">
 			<g
 				id="SVGRepo_bgCarrier"
 				strokeWidth="0"></g>
@@ -46,8 +45,7 @@ export const UnLikeSVG = () => {
 			strokeLinecap="round"
 			strokeLinejoin="round"
 			fill="none"
-			color="#000000"
-			className="dark:filter dark:invert">
+			color="#000000">
 			<g
 				id="SVGRepo_bgCarrier"
 				strokeWidth="0"></g>
