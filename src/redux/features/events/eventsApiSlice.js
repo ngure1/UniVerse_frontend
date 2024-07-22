@@ -38,6 +38,12 @@ const eventApiSlice = baseApi.injectEndpoints({
 				url: "/events/",
 				method: "GET",
 			}),
+			transformResponse: (response) => {
+				return {
+					results: response.results,
+					hasNextPage: !!response.next,
+				};
+			},
 			providesTags: ["EVENTS"],
 		}),
 

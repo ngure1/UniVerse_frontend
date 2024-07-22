@@ -4,11 +4,15 @@ import { CalendarDays, UserRoundCheck, VerifiedIcon, Plus } from "lucide-react";
 import AvatarProfile from "./profile/AvatarProfile";
 import { Separator } from "../shadcnComponents/separator";
 import { Button } from "../shadcnComponents/button";
+import { useDptStarsListQuery } from "@/redux/features/profileTabs/profilesApiSlice";
+import { useFollowToggle } from "@/hooks/profile";
 
 const RightSidebar = ({ className }) => {
+	const { data: dptStarsData, isLoading } = useDptStarsListQuery(1);
+
 	return (
 		<div
-			className={`${className} min-h-screen w-[25%] gap-5 flex flex-col p-5 bg-inherit`}>
+			className={`${className} min-h-screen w-[25%] gap-5 xl:flex flex-col p-5 bg-inherit hidden sm:hidden`}>
 			<div className="flex flex-col gap-2 bg-white p-5 rounded-lg dark:bg-muted">
 				<div className="flex justify-between ">
 					<div className="flex gap-2">
@@ -16,7 +20,7 @@ const RightSidebar = ({ className }) => {
 						<h3>People To Follow</h3>
 					</div>
 					<Link
-						href="/dpt-stars"
+						href="/profiles"
 						className="text-blue-500 ">
 						See More
 					</Link>
@@ -24,16 +28,28 @@ const RightSidebar = ({ className }) => {
 				<Separator />
 
 				<div className="flex flex-col gap-3">
-					<HomeProfilesCard
-						firstName={"Joseph"}
-						lastName={"Ngure"}
-						postCount={300}
-					/>
-					<HomeProfilesCard
+					{isLoading ? (
+						<p>Loading...</p>
+					) : (
+						dptStarsData?.results
+							?.slice(0, 2)
+							.map((profiles, index) => (
+								<HomeProfilesCard
+									key={index}
+									profilesId={profiles.id}
+									pfpImage={profiles.profile_picture}
+									firstName={profiles.user.first_name}
+									lastName={profiles.user.last_name}
+									postCount={profiles.followers_count}
+								/>
+							))
+					)}
+
+					{/* <HomeProfilesCard
 						firstName={"Bonface"}
 						lastName={"Theuri"}
 						postCount={300}
-					/>
+					/> */}
 				</div>
 			</div>
 
@@ -76,10 +92,20 @@ const HomeEventCard = () => {
 	);
 };
 
-const HomeProfilesCard = ({ firstName, lastName, postCount }) => {
+const HomeProfilesCard = ({
+	profileId,
+	firstName,
+	lastName,
+	postCount,
+	pfpImage,
+	isFollowing,
+}) => {
+	const handleFollow = useFollowToggle(profileId, isFollowing);
+
 	return (
 		<div className="flex items-start gap-2 justify-between ">
 			<AvatarProfile
+				pfpImage={pfpImage}
 				first_name={firstName}
 				last_name={lastName}
 			/>
@@ -88,16 +114,16 @@ const HomeProfilesCard = ({ firstName, lastName, postCount }) => {
 					{firstName} {lastName}{" "}
 				</span>
 				<span className="muted dark:filter dark:invert text-sm">
-					{postCount}k followers
+					{postCount} {postCount === 1 ? "Follower" : "Followers"}
 				</span>
 			</p>
 			<VerifiedIcon
 				fill="#00B595"
-				color="#ffff"
 				size={24}
 			/>
 			<Button
 				// variant="ghost"
+				onClick={handleFollow}
 				size="sm"
 				className="gap-2">
 				<Plus />

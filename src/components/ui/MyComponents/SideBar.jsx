@@ -25,8 +25,8 @@ const SideBar = ({ className }) => {
 		{ Icon: Home, text: "Home", href: "/home" },
 		{ Icon: CalendarFold, text: "Events", href: "/events" },
 		{ Icon: BriefcaseBusiness, text: "Jobs", href: "/jobs" },
-		{ Icon: Handshake, text: "Giving Back", href: "/support" },
-		{ Icon: Newspaper, text: "News & Announcements", href: "/news" },
+		{ Icon: Handshake, text: "Support", href: "/support" },
+		{ Icon: Newspaper, text: "News", href: "/news" },
 		{ Icon: Users, text: "Profiles", href: "/profiles" },
 		{ Icon: CircleUserRound, text: "User Profile", href: "/userprofile" },
 		// { Icon: LogOut, text: "Logout" },
@@ -38,9 +38,14 @@ const SideBar = ({ className }) => {
 		<Link
 			key={index}
 			href={link.href || "#"}
-			className={`flex items-center self-stretch gap-[1rem] py-[0.75rem] w-full px-[0.5rem] hover:text-accent-foreground rounded-sm ${pathname.startsWith(link.href) ? "border border-ring" : ""}`}>
-			<link.Icon size={30} />
-			<p className="body-md text-lg">{link.text}</p>
+			className={`flex items-center self-stretch gap-[1rem] py-[0.75rem] w-full px-[0.5rem] hover:text-accent-foreground rounded-sm ${pathname.startsWith(link.href) ? "border border-ring" : ""} relative`}>
+			<link.Icon
+				size={30}
+				className="sm:w-[1.25rem] sm:h-[1.25rem]  xl:w-[2rem] xl:h-[2rem]"
+			/>
+			<p className="xl:body-text text-sm text-ellipsis overflow-hidden truncate">
+				{link.text}
+			</p>
 		</Link>
 	));
 
@@ -49,20 +54,25 @@ const SideBar = ({ className }) => {
 			key={index}
 			href={link.href || "#"}
 			className={`flex items-center self-stretch gap-[1rem] py-[0.75rem] w-full px-[0.5rem] hover:text-accent-foreground rounded-sm ${pathname.startsWith(link.href) ? "border border-ring" : ""}`}>
-			<link.Icon size={30} />
-			<p className="body-md text-lg">{link.text}</p>
+			<link.Icon
+				size={30}
+				className="sm:w-[1.25rem] sm:h-[1.25rem] xl:w-[2rem] xl:h-[2rem]"
+			/>
+			<p className="xl:body-text text-sm truncate">{link.text}</p>
 		</Link>
 	));
 
 	return (
 		<div
 			className={`inline-flex flex-col pt-[1.25rem] pr-[0] pb-[0.75rem] pl-[1.25rem] justify-between items-start shrink-0 gap-[4rem] ${className}`}>
-			<div className="space-y-4 w-full">{topLinks}</div>
-			<div className="w-full">
+			<div className="space-y-[0.5rem] xl:space-y-5 w-full flex-grow mt-4">
+				{topLinks}
+			</div>
+			<div className="space-y-1 xl:space-y-4 w-full flex-col mt-auto">
 				{bottomLinks}
 				<Logout
 					iconSize={30}
-					className={"w-full justify-start"}
+					className={"w-full justify-start [1.25rem]"}
 				/>
 			</div>
 		</div>
@@ -131,8 +141,11 @@ export const Logout = ({ className, iconSize, size }) => {
 			variant="ghost"
 			size={size}
 			className={`flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem] ${className}`}>
-			<LogOut size={iconSize} />
-			<p className="body-md text-lg">Logout</p>
+			<LogOut
+				size={iconSize}
+				className="sm:w-[1.25rem] sm:h-[1.25rem] xl:w-[2rem] xl:h-[2rem]"
+			/>
+			<p className="xl:body-text text-sm body-md ">Logout</p>
 		</Button>
 	);
 };

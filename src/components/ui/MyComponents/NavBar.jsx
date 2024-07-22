@@ -18,7 +18,12 @@ import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { CircleUserRound, LogOut } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "../shadcnComponents/button";
-import { Logout } from "./SideBar";
+import NavbarDropdown from "./NavbarDropdown";
+import { useLogoutMutation } from "@/redux/features/auth/authApiSlice";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setAuth } from "@/redux/features/auth/authSlice";
 
 function ModeToggle() {
 	const { theme, setTheme } = useTheme();
@@ -58,7 +63,7 @@ export const SearchBar = ({ placeholder, onSearch }) => {
 			onChange={handleInputChange}
 			placeholder={placeholder}
 			suffix={<Search />}
-			className="w-[31.25rem] rounded-[6.25rem] border border-solid border-[#11294D]"
+			className="rounded-[6.25rem] border border-solid border-[#11294D] w-[20rem] xl:w-[31.25rem]"
 		/>
 	);
 };
@@ -76,8 +81,9 @@ const NavBar = ({ className }) => {
 			<Image
 				src={Logo}
 				alt="Universe Logo"
-				className="cursor-pointer max-sm:w-[150px] sm:w-[250px] dark:filter dark:invert"
+				className="hidden sm:block cursor-pointer max-sm:w-[150px] sm:w-[250px] dark:filter dark:invert"
 			/>
+			<NavbarDropdown className="sm:hidden" />
 			<SearchBar
 				placeholder={`What's on your mind, ${profileData?.user.first_name}?`}
 				onSearch={handleSearch}
@@ -85,7 +91,7 @@ const NavBar = ({ className }) => {
 			<DropdownMenu>
 				<DropdownMenuTrigger>
 					<AvatarProfile
-						className="w-[3rem] h-[3rem]"
+						className="w-[3rem] h-[3rem] hidden sm:block"
 						pfpImage={profileData?.profile_picture}
 						first_name={profileData?.user.first_name}
 						last_name={profileData?.user.last_name}
@@ -108,14 +114,78 @@ const NavBar = ({ className }) => {
 					<DropdownMenuSeparator />
 					<DropdownMenuItem>
 						<Logout
-							iconSize={20}
-							size={"xsm"}
-							className={"p-0 gap-2"}
+							iconSize={24}
+							className={"w-full justify-start"}
 						/>
 					</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>
 		</div>
+	);
+};
+export const Logout = ({ className, iconSize, size }) => {
+	// * initialize router
+	const router = useRouter();
+
+	// * initialize dispatch
+	const dispatch = useDispatch();
+	30;
+
+	// * logout functionality
+	const [logout, { isLoading }] = useLogoutMutation();
+
+	function handleLogout() {
+		const toastId = toast.loading("Wait while logging you out...", {
+			theme: "colored",
+			autoClose: false,
+			position: "top-center",
+		});
+
+		// * Update the toast on successful logout
+		toast.update(toastId, {
+			render: "Login successful! Redirecting you to the login page...",
+			type: "success",
+			isLoading: false,
+			autoClose: 5000,
+			position: "top-center",
+		});
+
+		dispatch(setAuth(false));
+		logout()
+			.unwrap()
+			.then(() => {
+				// * Update the toast on successful logout
+				toast.update(toastId, {
+					render: "Logout successful! Redirecting you to the login page...",
+					type: "success",
+					isLoading: false,
+					autoClose: 5000,
+					position: "top-center",
+				});
+
+				// * redirect to the login page
+				router.push("/login");
+			})
+			.catch(() => {
+				//* Update the toast on login failure
+				toast.update(toastId, {
+					render: "Failed to logout.",
+					type: "error",
+					isLoading: false,
+					autoClose: 5000,
+					position: "top-center",
+				});
+			});
+	}
+	return (
+		<Button
+			onClick={handleLogout}
+			variant="ghost"
+			size={size}
+			className={`flex items-center self-stretch gap-[0.4rem] py-[0.75rem] px-[0rem] ${className}`}>
+			<LogOut size={iconSize} />
+			<p className=" body-md ">Logout</p>
+		</Button>
 	);
 };
 
