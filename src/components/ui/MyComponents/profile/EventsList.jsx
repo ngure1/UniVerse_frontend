@@ -1,13 +1,20 @@
 "use client";
 import React from "react";
 import EventCard from "@/components/ui/MyComponents/cards/EventCard";
-import { useEventsMeQuery } from "@/redux/features/events/eventsApiSlice";
 import { formatCreatedAt } from "@/lib/utils";
 import EventSkeleton from "@/components/ui/MyComponents/cards/skeletons/EventSkeleton";
+import { useEvents } from "@/hooks/profile";
+import useInfiniteScroll from "@/hooks/useInfiniteScroll";
 
-const Events = () => {
-	const { data: eventData, isLoading } = useEventsMeQuery(null);
-	console.log(eventData);
+const Events = ({ id }) => {
+	const events = (queryArgs) => useEvents(queryArgs);
+	const {
+		items: eventData,
+		isLoading,
+		error,
+		lastItemRef,
+		isFetchingNextPage,
+	} = useInfiniteScroll(events, { id });
 
 	return (
 		<div className="flex flex-col gap-y-4">
@@ -40,9 +47,12 @@ const Events = () => {
 						isSaved={event.is_bookmarked}
 						isLiked={event.is_liked}
 						isFollowingCreator={event.is_following_creator}
+						ref={index === postData.length - 1 ? lastItemRef : null}
 					/>
 				))
 			)}
+			{isFetchingNextPage && <EventSkeleton />}
+			{error && <div>Error loading events</div>}
 		</div>
 	);
 };

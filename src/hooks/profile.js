@@ -8,6 +8,10 @@ import {
 } from "@/redux/features/profiles/profileApiSlice";
 import { toast } from "react-toastify";
 import { usePostsUserListQuery } from "@/redux/features/posts/postsApiSlice";
+import {
+	useEventsMeQuery,
+	useEventsUserListQuery,
+} from "@/redux/features/events/eventsApiSlice";
 
 export const useProfile = (userId) => {
 	const { data, isLoading, error } = useProfileMeQuery(userId || null);
@@ -133,4 +137,52 @@ export const useBookmarkedPosts = ({ id, page }) => {
 	]);
 
 	return bookmarkedPostsState;
+};
+
+// Custom hook to abstract the conditional fetching logic for events
+export const useEvents = ({ id, page }) => {
+	const myEvents = useEventsMeQuery();
+	const userEvents = useEventsUserListQuery({ user_id: id, page });
+
+	const [events, setEvents] = useState({
+		data: null,
+		isLoading: true,
+		error: null,
+		isFetching: false,
+	});
+
+	useEffect(() => {
+		if (id) {
+			if (userEvents.data) {
+				setEvents({
+					data: userEvents.data,
+					isLoading: userEvents.isLoading,
+					error: userEvents.error,
+					isFetching: userEvents.isFetching,
+				});
+			}
+		} else {
+			if (myEvents.data) {
+				setEvents({
+					data: myEvents.data,
+					isLoading: myEvents.isLoading,
+					error: myEvents.error,
+					isFetching: myEvents.isFetching,
+				});
+			}
+		}
+	}, [
+		id,
+		page,
+		myEvents.data,
+		myEvents.isLoading,
+		myEvents.error,
+		myEvents.isFetching,
+		userEvents.data,
+		userEvents.isLoading,
+		userEvents.error,
+		userEvents.isFetching,
+	]);
+
+	return events;
 };
