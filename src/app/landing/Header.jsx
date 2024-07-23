@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-scroll";
 import HeaderDropdown from "@/components/ui/MyComponents/HeaderDropdown";
 import { ButtonsAlertDialog } from "@/components/ui/MyComponents/ButtonsAlertDialog";
@@ -9,8 +9,27 @@ import { default as NextLink } from "next/link";
 const Logo = require("/public/images/logo.png");
 
 const Header = () => {
+	const [isScrolled, setIsScrolled] = useState(false);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			const heroSection = document.getElementById("Home");
+			const heroHeight = heroSection ? heroSection.offsetHeight : 0;
+			const scrollTop = window.scrollY;
+			setIsScrolled(scrollTop > heroHeight);
+		};
+
+		window.addEventListener("scroll", handleScroll);
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, []);
+
 	return (
-		<header className="flex justify-between items-center w-full h-[7.25rem] py-[1.75rem] px-[1.25rem] shrink-0 fixed bg-white dark:bg-zinc-500 z-20 shadow-md pb-3 ">
+		<header
+			className={`flex justify-between items-center w-full h-[7.25rem] py-[1.75rem] px-[1.25rem] shrink-0 fixed z-20 pb-3 transition-colors duration-500 ${
+				isScrolled ? "bg-white shadow-md" : "bg-transparent"
+			}`}>
 			<NextLink href="">
 				<Image
 					src={Logo}
@@ -56,8 +75,7 @@ const Header = () => {
 					Latest posts
 				</Link>
 				<Link
-					The
-					TeamactiveClass="active"
+					activeClass="active"
 					to="theTeam"
 					spy={true}
 					smooth={true}
@@ -76,7 +94,11 @@ const Header = () => {
 				</Link>
 			</nav>
 			<div className="flex justify-end items-center gap-[1.8125rem] max-sm:hidden">
-				<ButtonsAlertDialog variant="outline">Login</ButtonsAlertDialog>
+				<ButtonsAlertDialog
+					variant="outline"
+					className={"bg-inherit"}>
+					Login
+				</ButtonsAlertDialog>
 				<ButtonsAlertDialog>Signup</ButtonsAlertDialog>
 			</div>
 			<HeaderDropdown className="sm:hidden" />

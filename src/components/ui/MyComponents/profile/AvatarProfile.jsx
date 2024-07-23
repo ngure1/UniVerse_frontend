@@ -19,7 +19,7 @@ const AvatarProfile = ({
 				src={pfpImage}
 				className="object-cover"
 			/>
-			<AvatarFallback>
+			<AvatarFallback className="bg-[#F1FAFF]">
 				{get_fallback_name(first_name, last_name, email)}
 			</AvatarFallback>
 		</Avatar>

@@ -119,6 +119,7 @@ const HomeProfilesCard = ({
 			</p>
 			<VerifiedIcon
 				fill="#00B595"
+				color="#fff"
 				size={24}
 			/>
 			<Button

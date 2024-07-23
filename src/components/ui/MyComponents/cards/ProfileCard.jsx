@@ -58,7 +58,7 @@ const ProfileCard = ({
 
 	return (
 		<div>
-			<div className="flex gap-[6.25rem] items-center border-black">
+			<div className="flex gap-[6.25rem] items-center">
 				<div className="relative">
 					<AvatarProfile
 						first_name={first_name}
@@ -95,6 +95,7 @@ const ProfileCard = ({
 							{is_verified && (
 								<VerifiedIcon
 									fill="#00B595"
+									color="#fff"
 									size={24}
 								/>
 							)}

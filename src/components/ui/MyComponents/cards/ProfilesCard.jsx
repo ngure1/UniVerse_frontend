@@ -38,6 +38,7 @@ const ProfilesCard = ({
 					{isVerified && (
 						<VerifiedIcon
 							fill="#00B595"
+							color="#fff"
 							size={24}
 						/>
 					)}

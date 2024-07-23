@@ -63,7 +63,7 @@ export const SearchBar = ({ placeholder, onSearch }) => {
 			onChange={handleInputChange}
 			placeholder={placeholder}
 			suffix={<Search />}
-			className="rounded-[6.25rem] border border-solid border-[#11294D] w-[20rem] xl:w-[31.25rem]"
+			className="rounded-[6.25rem]  w-[20rem] xl:w-[31.25rem] bg-[#F8F7F4]"
 		/>
 	);
 };
@@ -77,7 +77,7 @@ const NavBar = ({ className }) => {
 
 	return (
 		<div
-			className={`flex justify-between items-center w-full pt-[1.75rem] pr-[1.25rem] h-[6rem] pb-[0.5rem] pl-[1.25rem] ${className}`}>
+			className={`flex justify-between items-center w-full pt-[1.75rem] pr-[1.25rem] h-[6rem] border-b pb-[0.5rem] pl-[1.25rem] dark:bg-muted ${className}`}>
 			<Image
 				src={Logo}
 				alt="Universe Logo"

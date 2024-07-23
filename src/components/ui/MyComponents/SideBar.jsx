@@ -10,6 +10,8 @@ import {
 	Users,
 	CircleUserRound,
 	LogOut,
+	Compass,
+	Cog,
 } from "lucide-react";
 import { Button } from "../shadcnComponents/button";
 import { useLogoutMutation } from "@/redux/features/auth/authApiSlice";
@@ -38,10 +40,10 @@ const SideBar = ({ className }) => {
 		<Link
 			key={index}
 			href={link.href || "#"}
-			className={`flex items-center self-stretch gap-[1rem] py-[0.75rem] w-full px-[0.5rem] hover:text-accent-foreground rounded-sm ${pathname.startsWith(link.href) ? "border border-ring" : ""} relative`}>
+			className={`flex items-center justify-start gap-[1rem] py-[0.75rem] w-[70%] pl-[18%] hover:pl-6 transition-all duration-300 rounded-sm ${pathname.startsWith(link.href) ? "bg-slate-200 text-slate-700 transition-all duration-300" : ""} relative`}>
 			<link.Icon
 				size={30}
-				className="sm:w-[1.25rem] sm:h-[1.25rem]  xl:w-[2rem] xl:h-[2rem]"
+				className="sm:w-[1.25rem] sm:h-[1.25rem]  xl:w-[1.4rem] xl:h-[1.4rem]"
 			/>
 			<p className="xl:body-text text-sm text-ellipsis overflow-hidden truncate">
 				{link.text}
@@ -53,27 +55,51 @@ const SideBar = ({ className }) => {
 		<Link
 			key={index}
 			href={link.href || "#"}
-			className={`flex items-center self-stretch gap-[1rem] py-[0.75rem] w-full px-[0.5rem] hover:text-accent-foreground rounded-sm ${pathname.startsWith(link.href) ? "border border-ring" : ""}`}>
+			className={`flex items-center justify-start gap-[1rem] py-[0.75rem] w-[70%] pl-[18%] hover:pl-6 transition-all duration-300 rounded-sm ${pathname.startsWith(link.href) ? "bg-slate-200 text-slate-700 transition-all duration-300" : ""} relative`}>
 			<link.Icon
 				size={30}
-				className="sm:w-[1.25rem] sm:h-[1.25rem] xl:w-[2rem] xl:h-[2rem]"
+				className="sm:w-[1.25rem] sm:h-[1.25rem]  xl:w-[1.8rem] xl:h-[1.8rem]"
 			/>
-			<p className="xl:body-text text-sm truncate">{link.text}</p>
+			<p className="xl:body-text text-sm text-ellipsis overflow-hidden truncate">
+				{link.text}
+			</p>
 		</Link>
 	));
 
 	return (
-		<div
-			className={`inline-flex flex-col pt-[1.25rem] pr-[0] pb-[0.75rem] pl-[1.25rem] justify-between items-start shrink-0 gap-[4rem] ${className}`}>
-			<div className="space-y-[0.5rem] xl:space-y-5 w-full flex-grow mt-4">
-				{topLinks}
+		<div className={` flex flex-col justify-around px-5 ${className}`}>
+			{/* Top links */}
+			<div className="w-full pt-6 flex flex-col gap-3">
+				<div className="flex gap-2 items-center">
+					<span className="muted">Explore</span>
+					<Compass
+						size={18}
+						className="muted"
+					/>
+				</div>
+				<div className="flex flex-col w-full justify-center items-center gap-4">
+					{topLinks}
+				</div>
 			</div>
-			<div className="space-y-1 xl:space-y-4 w-full flex-col mt-auto">
-				{bottomLinks}
-				<Logout
-					iconSize={30}
-					className={"w-full justify-start [1.25rem]"}
-				/>
+
+			{/* Bottom links */}
+			<div className="space-y-1 xl:space-y-4 w-full flex-col">
+				<div className="flex gap-2 items-center">
+					<span className="muted">Account</span>
+					<Cog
+						size={18}
+						className="muted"
+					/>
+				</div>
+				<div className="w-full flex flex-col items-center justify-center gap-3">
+					{bottomLinks}
+					<Logout
+						iconSize={30}
+						className={
+							"justify-start gap-[1rem] py-6 w-[70%] pl-[10%] hover:bg-red-500 hover:text-white transition-all duration-300"
+						}
+					/>
+				</div>
 			</div>
 		</div>
 	);
@@ -140,12 +166,12 @@ export const Logout = ({ className, iconSize, size }) => {
 			onClick={handleLogout}
 			variant="ghost"
 			size={size}
-			className={`flex items-center self-stretch gap-[1rem] py-[0.75rem] px-[0.5rem] ${className}`}>
+			className={`flex items-center gap-[1rem]${className}`}>
 			<LogOut
 				size={iconSize}
-				className="sm:w-[1.25rem] sm:h-[1.25rem] xl:w-[2rem] xl:h-[2rem]"
+				className="sm:w-[1.25rem] sm:h-[1.25rem] xl:w-[1.8rem] xl:h-[1.8rem]"
 			/>
-			<p className="xl:body-text text-sm body-md ">Logout</p>
+			<p className="xl:body-text text-sm body-md">Logout</p>
 		</Button>
 	);
 };
