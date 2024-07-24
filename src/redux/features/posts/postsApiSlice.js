@@ -125,6 +125,14 @@ const postApiSlice = baseApi.injectEndpoints({
 			},
 			invalidatesTags: ["POSTS"],
 		}),
+
+		//news list
+		newsList: builder.query({
+			query: () => ({
+				url: `/posts/news-announcements/`,
+				method: "GET",
+			}),
+		}),
 	}),
 });
 
@@ -152,4 +160,6 @@ export const {
 
 	// * user specific posts
 	usePostsUserListQuery,
+	//admin news announcements
+	useNewsListQuery,
 } = postApiSlice;
