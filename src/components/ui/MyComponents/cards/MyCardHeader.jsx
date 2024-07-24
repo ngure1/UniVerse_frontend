@@ -117,7 +117,7 @@ const MyCardHeader = ({
 							{isVerified && (
 								<VerifiedIcon
 									fill="#00B595"
-									// color="#ffff"
+									color="#ffff"
 									className="text-inherit"
 									size={24}
 								/>
@@ -151,7 +151,7 @@ const MyCardHeader = ({
 								{isVerified && (
 									<VerifiedIcon
 										fill="#00B595"
-										// color="#ffff"
+										color="#ffff"
 										size={24}
 									/>
 								)}
