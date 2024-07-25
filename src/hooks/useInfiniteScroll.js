@@ -12,10 +12,14 @@ const useInfiniteScroll = (query, queryArgs = {}) => {
 
 	useEffect(() => {
 		if (data) {
-			setItems((prevItems) => [...prevItems, ...data.results]);
+			if (page === 1) {
+				setItems(data.results);
+			} else {
+				setItems((prevItems) => [...prevItems, ...data.results]);
+			}
 			setHasNextPage(data.hasNextPage);
 		}
-	}, [data]);
+	}, [data, page]);
 
 	const lastItemRef = useCallback(
 		(node) => {

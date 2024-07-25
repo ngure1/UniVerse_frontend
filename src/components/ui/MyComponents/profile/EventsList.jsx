@@ -21,7 +21,7 @@ const Events = ({ id }) => {
 			{isLoading ? (
 				<EventSkeleton />
 			) : (
-				eventData?.results?.map((event, index) => (
+				eventData?.map((event, index) => (
 					<EventCard
 						key={index}
 						eventId={event.id}
@@ -47,7 +47,9 @@ const Events = ({ id }) => {
 						isSaved={event.is_bookmarked}
 						isLiked={event.is_liked}
 						isFollowingCreator={event.is_following_creator}
-						ref={index === postData.length - 1 ? lastItemRef : null}
+						ref={
+							index === eventData.length - 1 ? lastItemRef : null
+						}
 					/>
 				))
 			)}

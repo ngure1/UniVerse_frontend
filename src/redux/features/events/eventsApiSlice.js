@@ -167,7 +167,7 @@ const eventApiSlice = baseApi.injectEndpoints({
 
 		eventsUserList: builder.query({
 			query: ({ user_id, page }) => ({
-				url: `/events/user/${user_id}/?page=${page}`,
+				url: `/events/users/${user_id}/?page=${page}`,
 				method: "GET",
 			}),
 			transformResponse: (response) => {
