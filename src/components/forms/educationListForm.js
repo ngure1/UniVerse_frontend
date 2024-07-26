@@ -17,16 +17,22 @@ import {
 } from "@/redux/features/educationList/educationApiSlice";
 import { toast } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useDialog } from "@/hooks/responsiveDialog";
 import { Button } from "@/components/ui/shadcnComponents/button";
 
 const EducationListForm = ({ id }) => {
 	const isEditMode = !!id;
-	const { data: education } = useEducationDetailQuery(
-		{ education_id: id },
-		{ skip: !isEditMode },
-	);
+	console.log("Edit Mode:", isEditMode, "ID:", id); // Debug log
 
+	const {
+		data: education,
+		isFetching,
+		error,
+	} = useEducationDetailQuery({ education_id: id }, { skip: !isEditMode });
+	useEffect(() => {
+		if (error) {
+			console.error("Error fetching education details:", error);
+		}
+	}, [error]);
 	const form = useForm({
 		resolver: zodResolver(educationListSchema),
 		defaultValues: {
@@ -36,6 +42,7 @@ const EducationListForm = ({ id }) => {
 			end_date: "",
 		},
 	});
+
 	useEffect(() => {
 		if (education) {
 			form.reset({
@@ -57,11 +64,9 @@ const EducationListForm = ({ id }) => {
 	const onSubmit = (data) => {
 		const toastId = toast.loading(
 			isEditMode ? "Updating your education" : "Creating your education",
-			{
-				theme: "colored",
-				autoClose: false,
-			},
+			{ theme: "colored", autoClose: false },
 		);
+		console.log("Submitting data: ", data);
 
 		const submitAction = isEditMode
 			? updateEducation({ education_id: id, ...data })
@@ -78,9 +83,9 @@ const EducationListForm = ({ id }) => {
 					isLoading: false,
 					autoClose: 5000,
 				});
-				closePostDialog();
 			})
-			.catch(() => {
+			.catch(({ error }) => {
+				console.error("Error creating/updating education: ", error);
 				toast.update(toastId, {
 					render: "Something went wrong",
 					type: "error",
@@ -90,12 +95,9 @@ const EducationListForm = ({ id }) => {
 			});
 	};
 
-	const { handleCloseDialog: closePostDialog } = useDialog("education");
-
 	return (
 		<Form {...form}>
 			<form
-				id="education-form"
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="space-y-6 max-w-[600px]">
 				<div className="space-y-4">
@@ -104,7 +106,7 @@ const EducationListForm = ({ id }) => {
 						name="institution_name"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Instituition</FormLabel>
+								<FormLabel>Institution</FormLabel>
 								<FormControl>
 									<Input
 										placeholder="Institution"
@@ -157,8 +159,8 @@ const EducationListForm = ({ id }) => {
 								<FormLabel>Field of Study</FormLabel>
 								<FormControl>
 									<Input
+										placeholder="Field of Study"
 										{...field}
-										placeholder="PhD/MSc/BSc..."
 									/>
 								</FormControl>
 								<FormMessage />
@@ -166,15 +168,12 @@ const EducationListForm = ({ id }) => {
 						)}
 					/>
 				</div>
+				<Button
+					type="submit"
+					disabled={isLoading}>
+					{isEditMode ? "Update" : "Create"}
+				</Button>
 			</form>
-			<Button
-				variant="secondary"
-				type="submit"
-				className="w-full"
-				form="education-form"
-				disabled={isLoading}>
-				{isEditMode ? "Update " : "Create"}
-			</Button>
 		</Form>
 	);
 };
