@@ -38,7 +38,7 @@ const educationApiSlice = baseApi.injectEndpoints({
 		//delete education post
 		educationDelete: builder.mutation({
 			query: ({ education_id }) => ({
-				url: `/education/create/${education_id}/`,
+				url: `/education/${education_id}/`,
 				method: "DELETE",
 			}),
 			invalidatesTags: ["EDUCATION"],
@@ -60,7 +60,7 @@ const educationApiSlice = baseApi.injectEndpoints({
 				formData.append("field_of_study", field_of_study);
 
 				return {
-					url: `/education/create/${education_id}/`,
+					url: `/education/${education_id}/`,
 					method: "PATCH",
 					body: formData,
 				};
@@ -70,7 +70,7 @@ const educationApiSlice = baseApi.injectEndpoints({
 		//education deetails
 		educationDetail: builder.query({
 			query: ({ education_id }) => ({
-				url: `/education/create/${education_id}/`,
+				url: `/education/${education_id}/`,
 				method: "GET",
 			}),
 			providesTags: ["EDUCATION"],
