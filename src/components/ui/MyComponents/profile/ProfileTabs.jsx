@@ -18,7 +18,6 @@ import {
 	Grid3X3,
 	CalendarRange,
 } from "lucide-react";
-import { useEducationListQuery } from "@/redux/features/educationList/educationApiSlice";
 import {
 	Dialog,
 	DialogContent,
@@ -30,9 +29,6 @@ import { Button } from "@/components/ui/shadcnComponents/button";
 import { Plus } from "lucide-react";
 
 const ProfileTabs = ({ user_id, is_owner }) => {
-	const { data: educationData, isLoading } = useEducationListQuery(1);
-	console.log(educationData);
-
 	return (
 		<Tabs
 			defaultValue="posts"
@@ -101,22 +97,7 @@ const ProfileTabs = ({ user_id, is_owner }) => {
 								<EducationListForm />
 							</DialogContent>
 						</Dialog>
-						{isLoading ? (
-							<p>Loading...</p>
-						) : (
-							educationData?.results?.map((education, index) => (
-								<div>
-									<EducationList
-										institution_name={
-											education.institution_name
-										}
-										fieldOfStudy={education.field_of_study}
-										startDate={education.start_date}
-										endDate={education.end_date}
-									/>
-								</div>
-							))
-						)}
+						<EducationList />
 					</div>
 				</TabsContent>
 				<TabsContent value="savedPosts">
