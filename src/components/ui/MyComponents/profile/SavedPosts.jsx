@@ -1,19 +1,31 @@
+"use client";
 import PostCard from "@/components/ui/MyComponents/cards/PostCard";
 import { useBookmarkedPosts } from "@/hooks/profile";
 import PostSkeleton from "../cards/skeletons/Skeleton";
 import { formatCreatedAt } from "@/lib/utils";
 import useInfiniteScroll from "@/hooks/useInfiniteScroll";
+import { useEffect, useState } from "react";
 
 const SavedPosts = ({ id, is_owner }) => {
-	const bookmarkedPosts = (queryArgs) => useBookmarkedPosts(queryArgs);
-
 	const {
 		items: postData,
 		isLoading,
 		error,
 		lastItemRef,
 		isFetchingNextPage,
-	} = useInfiniteScroll(bookmarkedPosts, { id });
+	} = useInfiniteScroll(useBookmarkedPosts, { id });
+
+	const [hasNoContent, setHasContent] = useState(false);
+	useEffect(() => {
+		if (!isLoading && error) {
+			if (
+				error.message ===
+				"Cannot read properties of null (reading 'results')"
+			)
+				setHasContent(true);
+		}
+	}, [isLoading, error]);
+	console.log(error);
 
 	return (
 		<div className="grid grid-cols-2 w-full gap-y-3 gap-x-4">
@@ -43,7 +55,11 @@ const SavedPosts = ({ id, is_owner }) => {
 				/>
 			))}
 			{isFetchingNextPage && <PostSkeleton />}
-			{error && <div>Error loading posts</div>}
+			{error && hasNoContent ? (
+				<p className="muted">User has no bookmarks</p>
+			) : (
+				<p>Error loading bookmarks</p>
+			)}
 		</div>
 	);
 };

@@ -159,7 +159,6 @@ export const useEvents = ({ id, page }) => {
 				error: userEvents.error,
 				isFetching: userEvents.isFetching,
 			});
-			console.log(events.isLoading);
 		} else {
 			setEvents({
 				data: myEvents.data,
