@@ -6,8 +6,6 @@ import { ButtonsAlertDialog } from "@/components/ui/MyComponents/ButtonsAlertDia
 import Image from "next/image";
 import { default as NextLink } from "next/link";
 
-const Logo = require("/public/images/logo.png");
-
 const Header = () => {
 	const [isScrolled, setIsScrolled] = useState(false);
 
@@ -32,9 +30,11 @@ const Header = () => {
 			}`}>
 			<NextLink href="">
 				<Image
-					src={Logo}
+					src="/images/jkanLogo3.png"
+					width={500}
+					height={500}
 					alt="Universe Logo"
-					className="cursor-pointer max-sm:w-[150px] sm:w-[250px]"
+					className="cursor-pointer max-sm:w-[150px] sm:w-[175px]"
 				/>
 			</NextLink>
 			<nav className="flex items-center gap-[3rem] max-sm:hidden">

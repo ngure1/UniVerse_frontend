@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import Logo from "@/../public/images/logo.png";
+import Logo from "@/../public/images/jkanLogo3.png";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/shadcnComponents/input";
 import AvatarProfile from "./profile/AvatarProfile";
@@ -81,7 +81,7 @@ const NavBar = ({ className }) => {
 			<Image
 				src={Logo}
 				alt="Universe Logo"
-				className="hidden sm:block cursor-pointer max-sm:w-[150px] sm:w-[250px] dark:filter dark:invert"
+				className="hidden sm:block cursor-pointer max-sm:w-[150px] sm:w-[175px] dark:filter dark:invert"
 			/>
 			<NavbarDropdown className="sm:hidden" />
 			<SearchBar
