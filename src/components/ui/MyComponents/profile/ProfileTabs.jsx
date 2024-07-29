@@ -18,6 +18,15 @@ import {
 	Grid3X3,
 	CalendarRange,
 } from "lucide-react";
+import {
+	Dialog,
+	DialogContent,
+	DialogTitle,
+	DialogTrigger,
+} from "@/components/ui/shadcnComponents/dialog";
+import EducationListForm from "@/components/forms/educationListForm";
+import { Button } from "@/components/ui/shadcnComponents/button";
+import { Plus } from "lucide-react";
 
 const ProfileTabs = ({ user_id, is_owner }) => {
 	return (
@@ -73,7 +82,23 @@ const ProfileTabs = ({ user_id, is_owner }) => {
 					<WorkList />
 				</TabsContent>
 				<TabsContent value="education">
-					<EducationList />
+					<div className="flex flex-col ">
+						<Dialog className="">
+							<DialogTrigger asChild>
+								<Button
+									variant="outline"
+									className="gap-1 w-[50%] h-[5vh] mb-2 ">
+									<Plus color="#90B494" />
+									Add Education Details
+								</Button>
+							</DialogTrigger>
+							<DialogContent className="sm-max w-md">
+								<DialogTitle>Education</DialogTitle>
+								<EducationListForm />
+							</DialogContent>
+						</Dialog>
+						<EducationList />
+					</div>
 				</TabsContent>
 				<TabsContent value="savedPosts">
 					<SavedPosts

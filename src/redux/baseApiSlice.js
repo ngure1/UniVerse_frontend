@@ -53,5 +53,6 @@ export const baseApi = createApi({
 		"EVENTS",
 		"PROFILES",
 		"JOBS",
+		"EDUCATION",
 	],
 });
