@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { Element } from "react-scroll";
+import Image from "next/image";
 
 const Community = () => {
 	return (
@@ -17,7 +18,13 @@ const Community = () => {
 			<div className="flex w-full sm:px-[6.25rem] justify-center items-center gap-[5.25rem] max-sm:flex-col max-sm:gap-[2rem] pl-[0.5rem]">
 				<div className="flex max-w-[31.25rem] w-full items-center gap-4 flex-shrink-0">
 					{/* image */}
-					<div className="w-[8.25rem] h-[8.25rem]  flex-shrink-0 rounded-[8.25rem]  bg-gradient-to-r from-cyan-500 to-blue-500"></div>
+					<div className=" bg-gradient-to-r from-cyan-500 to-blue-500"></div>
+
+					<Image
+						src="/images/community1.png"
+						height={132}
+						width={132}
+					/>
 
 					<div className="flex flex-col justify-center items-start gap-3 self-stretch flex-1">
 						<div className="flex flex-col items-start">
@@ -36,8 +43,11 @@ const Community = () => {
 
 				<div className="flex max-w-[31.25rem] w-full items-center gap-4 flex-shrink-0">
 					{/* image */}
-					<div className="w-[8.25rem] h-[8.25rem]  flex-shrink-0 rounded-[8.25rem]  bg-gradient-to-r from-cyan-500 to-blue-500"></div>
-
+					<Image
+						src="/images/community2.png"
+						height={132}
+						width={132}
+					/>
 					<div className="flex flex-col justify-center items-start gap-3 self-stretch flex-1">
 						<div className="flex flex-col items-start">
 							<p className="body-text text-center">John Doe</p>
