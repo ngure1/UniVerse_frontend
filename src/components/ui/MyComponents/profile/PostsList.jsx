@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import PostCard from "@/components/ui/MyComponents/cards/PostCard";
 import PostSkeleton from "../cards/skeletons/Skeleton";
 import { useProfilePosts } from "@/hooks/profile";
@@ -6,15 +7,13 @@ import { formatCreatedAt } from "@/lib/utils";
 import useInfiniteScroll from "@/hooks/useInfiniteScroll";
 
 const PostsList = ({ id, is_owner }) => {
-	const profilePosts = (queryArgs) => useProfilePosts(queryArgs);
-
 	const {
 		items: postData,
 		isLoading,
 		error,
 		lastItemRef,
 		isFetchingNextPage,
-	} = useInfiniteScroll(profilePosts, { id });
+	} = useInfiniteScroll(useProfilePosts, { id });
 
 	return (
 		<div className="flex flex-col w-full gap-y-3">
@@ -45,7 +44,11 @@ const PostsList = ({ id, is_owner }) => {
 				/>
 			))}
 			{isFetchingNextPage && <PostSkeleton />}
-			{error && <div>Error loading posts</div>}
+			{error && hasNoContent ? (
+				<p className="muted">User has not posted any events</p>
+			) : (
+				<div>Error loading events</div>
+			)}{" "}
 		</div>
 	);
 };

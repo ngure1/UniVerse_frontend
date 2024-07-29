@@ -103,7 +103,7 @@ const ProfileForm = () => {
 				id="edit-profile-form"
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="space-y-6 max-w-[600px]">
-				<div className="space-y-4">
+				<div className="space-y-4 overflow-auto h-[35rem]">
 					<div className="flex space-x-1">
 						<FormField
 							control={form.control}
@@ -256,7 +256,7 @@ const ProfileForm = () => {
 				// onClick={ha}
 				form="edit-profile-form"
 				variant="secondary"
-				className="uppercase w-full">
+				className="uppercase w-full mt-3">
 				Save
 			</Button>
 		</Form>

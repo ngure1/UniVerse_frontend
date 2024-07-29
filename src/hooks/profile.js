@@ -141,7 +141,7 @@ export const useBookmarkedPosts = ({ id, page }) => {
 
 // Custom hook to abstract the conditional fetching logic for events
 export const useEvents = ({ id, page }) => {
-	const myEvents = useEventsMeQuery();
+	const myEvents = useEventsMeQuery({ page });
 	const userEvents = useEventsUserListQuery({ user_id: id, page });
 
 	const [events, setEvents] = useState({
@@ -153,23 +153,19 @@ export const useEvents = ({ id, page }) => {
 
 	useEffect(() => {
 		if (id) {
-			if (userEvents.data) {
-				setEvents({
-					data: userEvents.data,
-					isLoading: userEvents.isLoading,
-					error: userEvents.error,
-					isFetching: userEvents.isFetching,
-				});
-			}
+			setEvents({
+				data: userEvents.data,
+				isLoading: userEvents.isLoading,
+				error: userEvents.error,
+				isFetching: userEvents.isFetching,
+			});
 		} else {
-			if (myEvents.data) {
-				setEvents({
-					data: myEvents.data,
-					isLoading: myEvents.isLoading,
-					error: myEvents.error,
-					isFetching: myEvents.isFetching,
-				});
-			}
+			setEvents({
+				data: myEvents.data,
+				isLoading: myEvents.isLoading,
+				error: myEvents.error,
+				isFetching: myEvents.isFetching,
+			});
 		}
 	}, [
 		id,

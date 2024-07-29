@@ -315,6 +315,8 @@ const EventCard = React.forwardRef(
 										alt="Post Image"
 										layout="fill"
 										objectFit="cover"
+										priority
+										unoptimized
 									/>
 								</div>
 							) : (
@@ -324,6 +326,8 @@ const EventCard = React.forwardRef(
 										alt="Post Image"
 										layout="fill"
 										objectFit="cover"
+										priority
+										unoptimized
 									/>
 								</div>
 							)
@@ -439,6 +443,7 @@ const EventCard = React.forwardRef(
 	},
 );
 
+EventCard.displayName = "EventCard";
 export default EventCard;
 
 function CommentsComponent({ eventId }) {

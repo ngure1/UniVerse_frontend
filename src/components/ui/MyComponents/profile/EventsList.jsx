@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import EventCard from "@/components/ui/MyComponents/cards/EventCard";
 import { formatCreatedAt } from "@/lib/utils";
 import EventSkeleton from "@/components/ui/MyComponents/cards/skeletons/EventSkeleton";
@@ -7,21 +7,27 @@ import { useEvents } from "@/hooks/profile";
 import useInfiniteScroll from "@/hooks/useInfiniteScroll";
 
 const Events = ({ id }) => {
-	const events = (queryArgs) => useEvents(queryArgs);
 	const {
 		items: eventData,
 		isLoading,
 		error,
 		lastItemRef,
 		isFetchingNextPage,
-	} = useInfiniteScroll(events, { id });
+	} = useInfiniteScroll(useEvents, { id });
+	const [hasNoContent, setHasContent] = useState(false);
+	useEffect(() => {
+		if (!isLoading && error) {
+			if (error.status === 404) setHasContent(true);
+		}
+	}, [isLoading, error]);
+	console.log(error);
 
 	return (
 		<div className="flex flex-col gap-y-4">
 			{isLoading ? (
 				<EventSkeleton />
 			) : (
-				eventData?.results?.map((event, index) => (
+				eventData?.map((event, index) => (
 					<EventCard
 						key={index}
 						eventId={event.id}
@@ -47,12 +53,18 @@ const Events = ({ id }) => {
 						isSaved={event.is_bookmarked}
 						isLiked={event.is_liked}
 						isFollowingCreator={event.is_following_creator}
-						ref={index === postData.length - 1 ? lastItemRef : null}
+						ref={
+							index === eventData.length - 1 ? lastItemRef : null
+						}
 					/>
 				))
 			)}
 			{isFetchingNextPage && <EventSkeleton />}
-			{error && <div>Error loading events</div>}
+			{error && hasNoContent ? (
+				<p className="muted">User has not posted any events</p>
+			) : (
+				<p>Error loading events</p>
+			)}
 		</div>
 	);
 };

@@ -50,14 +50,8 @@ const ProfilesCard = ({
 					<p className="text-sm">{jobDescription}</p>
 					<p className="text-sm">{company}</p>
 				</>
-			) : bio ? (
-				<p className="text-sm muted overflow-auto h-[25%]">{bio}</p>
 			) : (
-				<>
-					{isAlumni && <p className="text-sm muted">Alumni</p>}
-					{isStudent && <p className="text-sm muted">Student</p>}
-					{isLecturer && <p className="text-sm muted">Lecturer</p>}
-				</>
+				<></>
 			)}
 
 			<Button
