@@ -21,79 +21,85 @@ const LatestPosts = () => {
 					</p>
 				</div>
 				<div className="flex flex-col justify-center items-center w-full px-[6.25rem] gap-[2rem] max-sm:px-[4rem]">
-					<div className="flex gap-[1.25rem] items-center px-[1.25rem] py-[2rem] border border-cyan-400 w-full rounded-md max-sm:flex-col">
-						<div className="w-[8.25rem] h-[8.25rem] rounded-full flex items-center justify-center">
-							<Image
-								alt="post card image"
-								src="/images/Card1.png"
-								width="200"
-								height="200"
-							/>
+					<div className="flex gap-[2rem] items-center justify-center w-full max-sm:flex-col">
+						<div className="flex gap-[1.25rem] items-center px-[1.25rem] py-[2rem] border border-cyan-400 w-full rounded-md max-sm:flex-col">
+							<div className="w-[8.25rem] h-[8.25rem] rounded-full flex items-center justify-center">
+								<Image
+									alt="post card image"
+									src="/images/Card1.png"
+									width="200"
+									height="200"
+								/>
+							</div>
+							<div className="flex max-w-[25rem] flex-col gap-[0.75rem] items-start">
+								<p className="sub-heading-4">
+									Alumni Connect:Our Journey So far
+								</p>
+								<p className="body-text muted">
+									A look back at rour jouney and what’s to
+									come
+								</p>
+							</div>
 						</div>
-						<div className="flex max-w-[25rem] flex-col gap-[0.75rem] items-start">
-							<p className="sub-heading-4">
-								Alumni Connect:Our Journey So far
-							</p>
-							<p className="body-text muted">
-								A look back at rour jouney and what’s to come
-							</p>
-						</div>
-					</div>
-					<div className="flex gap-[1.25rem] items-center px-[1.25rem] py-[2rem] border border-cyan-400 w-full rounded-md max-sm:flex-col">
-						<div className="w-[8.25rem] h-[8.25rem] rounded-full flex items-center justify-center">
-							<Image
-								alt="post card image"
-								src="/images/Card2.png"
-								width="200"
-								height="200"
-							/>
-						</div>
-						<div className="flex max-w-[25rem] flex-col gap-[0.75rem] items-start">
-							<p className="sub-heading-4">
-								5 tips for landing your first job after
-								graduation
-							</p>
-							<p className="body-text muted">
-								How to navigate the new job market as a new
-								graduate
-							</p>
-						</div>
-					</div>
-					<div className="flex gap-[1.25rem] items-center px-[1.25rem] py-[2rem] border border-cyan-400 w-full rounded-md max-sm:flex-col">
-						<div className="w-[8.25rem] h-[8.25rem] rounded-full flex items-center justify-center">
-							<Image
-								alt="post card image"
-								src="/images/Card3.png"
-								width="200"
-								height="200"
-							/>
-						</div>
-						<div className="flex max-w-[25rem] flex-col gap-[0.75rem] items-start">
-							<p className="sub-heading-4">
-								How to make the most of your mentorship
-								experience
-							</p>
-							<p className="body-text muted">
-								Tips for a successful mentorship
-							</p>
+						<div className="flex gap-[1.25rem] items-center px-[1.25rem] py-[2rem] border border-cyan-400 w-full rounded-md max-sm:flex-col">
+							<div className="w-[8.25rem] h-[8.25rem] rounded-full flex items-center justify-center">
+								<Image
+									alt="post card image"
+									src="/images/Card2.png"
+									width="200"
+									height="200"
+								/>
+							</div>
+							<div className="flex max-w-[25rem] flex-col gap-[0.75rem] items-start">
+								<p className="sub-heading-4">
+									5 tips for landing your first job after
+									graduation
+								</p>
+								<p className="body-text muted">
+									How to navigate the new job market as a new
+									graduate
+								</p>
+							</div>
 						</div>
 					</div>
-					<div className="flex gap-[1.25rem] items-center px-[1.25rem] py-[2rem] border border-cyan-400 w-full rounded-md max-sm:flex-col">
-						<div className="w-[8.25rem] h-[8.25rem] rounded-full flex items-center justify-center">
-							<Image
-								alt="post card image"
-								src="/images/Card4.png"
-								width="200"
-								height="200"
-							/>
+
+					<div className="flex gap-[2rem] items-center justify-center w-full max-sm:flex-col">
+						<div className="flex gap-[1.25rem] items-center px-[1.25rem] py-[2rem] border border-cyan-400 w-full rounded-md max-sm:flex-col">
+							<div className="w-[8.25rem] h-[8.25rem] rounded-full flex items-center justify-center">
+								<Image
+									alt="post card image"
+									src="/images/Card3.png"
+									width="200"
+									height="200"
+								/>
+							</div>
+							<div className="flex max-w-[25rem] flex-col gap-[0.75rem] items-start">
+								<p className="sub-heading-4">
+									How to make the most of your mentorship
+									experience
+								</p>
+								<p className="body-text muted">
+									Tips for a successful mentorship
+								</p>
+							</div>
 						</div>
-						<div className="flex max-w-[25rem] flex-col gap-[0.75rem] items-start">
-							<p className="sub-heading-4">
-								The importance of networking in college
-							</p>
-							<p className="body-text muted">
-								Why it’s never too early to start networking
-							</p>
+						<div className="flex gap-[1.25rem] items-center px-[1.25rem] py-[2rem] border border-cyan-400 w-full rounded-md max-sm:flex-col">
+							<div className="w-[8.25rem] h-[8.25rem] rounded-full flex items-center justify-center">
+								<Image
+									alt="post card image"
+									src="/images/Card4.png"
+									width="200"
+									height="200"
+								/>
+							</div>
+							<div className="flex max-w-[25rem] flex-col gap-[0.75rem] items-start">
+								<p className="sub-heading-4">
+									The importance of networking in college
+								</p>
+								<p className="body-text muted">
+									Why it’s never too early to start networking
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>

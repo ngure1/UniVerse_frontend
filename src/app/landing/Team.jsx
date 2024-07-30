@@ -277,7 +277,7 @@ const Team = () => {
 							</div>
 							<div className="z-10">
 								<p className="sub-heading-3">
-									Florence King'ori
+									Florence King&#39;ori
 								</p>
 								<p className="muted">Frontend Developer</p>
 							</div>
