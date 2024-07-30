@@ -12,6 +12,7 @@ const EducationList = () => {
 			) : (
 				educationData?.results?.map((education, index) => (
 					<EducationListCard
+						key={index}
 						institution_name={education.institution_name}
 						educationId={education.id}
 						fieldOfStudy={education.field_of_study}
