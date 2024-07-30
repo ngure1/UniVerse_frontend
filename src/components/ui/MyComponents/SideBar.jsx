@@ -40,7 +40,7 @@ const SideBar = ({ className }) => {
 		<Link
 			key={index}
 			href={link.href || "#"}
-			className={`flex items-center justify-start gap-[1rem] py-[0.75rem] w-[70%] pl-[18%] hover:pl-6 transition-all duration-300 rounded-sm ${pathname.startsWith(link.href) ? "bg-slate-200 text-slate-700 transition-all duration-300" : ""} relative`}>
+			className={`flex items-center justify-start gap-[1rem] py-[0.75rem] text-[#F8F7F4] w-[70%] pl-[18%] hover:pl-6 transition-all duration-300 rounded-sm ${pathname.startsWith(link.href) ? "bg-[#d91413] text-[#F8F7F4] transition-all duration-300" : ""} relative`}>
 			<link.Icon
 				size={30}
 				className="sm:w-[1.25rem] sm:h-[1.25rem]  xl:w-[1.4rem] xl:h-[1.4rem]"
@@ -55,7 +55,7 @@ const SideBar = ({ className }) => {
 		<Link
 			key={index}
 			href={link.href || "#"}
-			className={`flex items-center justify-start gap-[1rem] py-[0.75rem] w-[70%] pl-[18%] hover:pl-6 transition-all duration-300 rounded-sm ${pathname.startsWith(link.href) ? "bg-slate-200 text-slate-700 transition-all duration-300" : ""} relative`}>
+			className={`flex items-center justify-start gap-[1rem] py-[0.75rem] w-[70%] pl-[18%] hover:pl-6 text-[#F8F7F4] transition-all duration-300 rounded-sm ${pathname.startsWith(link.href) ? "bg-[#d91413] text-slate-700 transition-all duration-300" : ""} relative`}>
 			<link.Icon
 				size={30}
 				className="sm:w-[1.25rem] sm:h-[1.25rem]  xl:w-[1.8rem] xl:h-[1.8rem]"
@@ -67,14 +67,15 @@ const SideBar = ({ className }) => {
 	));
 
 	return (
-		<div className={` flex flex-col justify-around px-5 ${className}`}>
+		<div
+			className={` flex flex-col justify-around px-5 bg-[#96cb49] ${className}`}>
 			{/* Top links */}
 			<div className="w-full pt-6 flex flex-col gap-3">
 				<div className="flex gap-2 items-center">
-					<span className="muted">Explore</span>
+					<span className="text-[#F8F7F4]">Explore</span>
 					<Compass
 						size={18}
-						className="muted"
+						className="text-[#F8F7F4]"
 					/>
 				</div>
 				<div className="flex flex-col w-full justify-center items-center gap-4">
@@ -84,21 +85,21 @@ const SideBar = ({ className }) => {
 
 			{/* Bottom links */}
 			<div className="space-y-1 xl:space-y-4 w-full flex-col">
-				<div className="flex gap-2 items-center">
-					<span className="muted">Account</span>
+				<div className="flex gap-2 items-center text-[#F8F7F4]">
+					<span className="">Account</span>
 					<Cog
 						size={18}
-						className="muted"
+						className="text-[#F8F7F4]"
 					/>
 				</div>
 				<div className="w-full flex flex-col items-center justify-center gap-3">
 					{bottomLinks}
-					<Logout
+					{/* <Logout
 						iconSize={30}
 						className={
 							"justify-start gap-[1rem] py-6 w-[70%] pl-[10%] hover:bg-red-500 hover:text-white transition-all duration-300"
 						}
-					/>
+					/> */}
 				</div>
 			</div>
 		</div>

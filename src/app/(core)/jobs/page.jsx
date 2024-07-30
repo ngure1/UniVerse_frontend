@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import JobDetailCard from "@/components/ui/MyComponents/cards/JobDetailCard";
-import Logo from "@/../public/images/logo.png";
 import JobForm from "@/components/forms/jobForm";
 import AvatarProfile from "@/components/ui/MyComponents/profile/AvatarProfile";
 import {
