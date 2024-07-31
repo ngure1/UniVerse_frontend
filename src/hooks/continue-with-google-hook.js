@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setAuth } from "@/redux/features/auth/authSlice";
@@ -9,28 +9,35 @@ export default function useGoogleAuth() {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const [googleAuthenticate] = useGoogleAuthenticateMutation();
+	const [loading, setLoading] = useState(true);
 	const effectRan = useRef(false);
 
 	useEffect(() => {
+		if (effectRan.current) return;
+
 		const state = searchParams.get("state");
 		const code = searchParams.get("code");
 
-		if (state && code && !effectRan.current) {
+		if (state && code) {
 			googleAuthenticate({ state, code })
 				.unwrap()
 				.then(() => {
 					dispatch(setAuth());
-					// toast msg
 					router.push("/home");
 				})
-				.catch(() => {
-					// toast msg
+				.catch((error) => {
+					console.error("Authentication error:", error);
 					router.push("/login");
+				})
+				.finally(() => {
+					setLoading(false);
 				});
-		}
 
-		return () => {
 			effectRan.current = true;
-		};
-	}, [googleAuthenticate]);
+		} else {
+			setLoading(false);
+		}
+	}, [googleAuthenticate, searchParams, dispatch, router]);
+
+	return loading;
 }
