@@ -14,6 +14,13 @@ const PostsList = ({ id, is_owner }) => {
 		lastItemRef,
 		isFetchingNextPage,
 	} = useInfiniteScroll(useProfilePosts, { id });
+	const [hasNoContent, setHasContent] = useState(false);
+	useEffect(() => {
+		if (!isLoading && error) {
+			if (error.status === 404 || 204) setHasContent(true);
+		}
+	}, [isLoading, error]);
+	console.log(error);
 
 	return (
 		<div className="flex flex-col w-full gap-y-3">
@@ -45,9 +52,9 @@ const PostsList = ({ id, is_owner }) => {
 			))}
 			{isFetchingNextPage && <PostSkeleton />}
 			{error && hasNoContent ? (
-				<p className="muted">User has not posted any events</p>
+				<p className="muted">User has no posts</p>
 			) : (
-				<div>Error loading events</div>
+				<div>Error loading posts</div>
 			)}{" "}
 		</div>
 	);
