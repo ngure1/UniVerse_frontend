@@ -55,7 +55,7 @@ const SideBar = ({ className }) => {
 		<Link
 			key={index}
 			href={link.href || "#"}
-			className={`flex items-center justify-start gap-[1rem] py-[0.75rem] w-[70%] pl-[18%] hover:pl-6 text-[#F8F7F4] transition-all duration-300 rounded-sm ${pathname.startsWith(link.href) ? "bg-[#d91413] text-slate-700 transition-all duration-300" : ""} relative`}>
+			className={`flex items-center justify-start gap-[1rem] py-[0.75rem] w-[70%] pl-[18%] hover:pl-6 text-[#F8F7F4] transition-all duration-300 rounded-sm ${pathname.startsWith(link.href) ? "bg-[#d91413] text-[#F8F7F4]  transition-all duration-300" : ""} relative`}>
 			<link.Icon
 				size={30}
 				className="sm:w-[1.25rem] sm:h-[1.25rem]  xl:w-[1.8rem] xl:h-[1.8rem]"
